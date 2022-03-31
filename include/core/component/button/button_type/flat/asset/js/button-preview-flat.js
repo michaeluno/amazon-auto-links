@@ -27,15 +27,15 @@
     var styleKeyIconRight      = styleKeyButton + ' .button-icon-right';      // the right icon container
     var styleKeyIconIRight     = styleKeyButton + ' .button-icon-right > i';  // the right icon
     var styleHolder            = getDefaultStyleHolder();
-    var previewFrame           = $( '#button-preview-flat > iframe' ).first();
-    var inputs                 = $( '.dynamic-button-field input, .dynamic-button-field select, .dynamic-button-field textarea' );
+    var jqPreviewFrame         = $( '#button-preview-flat > iframe' ).first();
+    var jqInputs               = $( '.dynamic-button-field input, .dynamic-button-field select, .dynamic-button-field textarea' );
     var debouncers             = {}; // stores setTimeout IDs to debounce function calls
     var inputProcessor         = getInputProcessor();
     var jqTextAreaButtonCSS    = $( '#button_css__0' );
     var jqTextAreaCustomCSS    = $( '#custom_css__0' );
 
     // When the user changes button options,
-    inputs.on( 'change input', function () {
+    jqInputs.on( 'change input', function () {
 
       var _self = $( this );
       
@@ -61,13 +61,13 @@
   
           // Update the framed page stylesheet
           var _style = _getCSSRulesGenerated( _sortObject( styleHolder ) ) + '\n' + jqTextAreaCustomCSS.val();
-          _setStyleSheetInFramedPage( _style, 'button-preview-flat-framed-stylesheet', previewFrame );
+          _setStyleSheetInFramedPage( _style, 'button-preview-flat-framed-stylesheet', jqPreviewFrame );
   
           // Update the Generated CSS field
           jqTextAreaButtonCSS.text( _style );
   
           // Tell the framed window to send back proportional data so that the iframe height will be adjusted with a callback defined in this script
-          previewFrame[ 0 ].contentWindow.postMessage(
+          jqPreviewFrame[ 0 ].contentWindow.postMessage(
             {
               event: 'ReloadButtonPreview',
               nonce: aalFlatButtonPreviewEventBinder.nonce,
@@ -75,14 +75,14 @@
             location.protocol + '//' + location.host
           );
           
-          function _setStyleSheetInFramedPage( style, attributeID, previewFrame ) {
+          function _setStyleSheetInFramedPage( style, attributeID, jqPreviewFrame ) {
             var _styleSheet = $( '<style>', { id: attributeID } );
             _styleSheet.text( style );
-            var _prevSheet = previewFrame.contents().find( '#' + attributeID );
+            var _prevSheet = jqPreviewFrame.contents().find( '#' + attributeID );
             if ( _prevSheet.length > 0 ) {
               _prevSheet.replaceWith( _styleSheet );
             } else {
-              previewFrame.contents().find( 'head' ).first().append( _styleSheet );
+              jqPreviewFrame.contents().find( 'head' ).first().append( _styleSheet );
             }
           }
           
@@ -131,27 +131,27 @@
     } );
 
     // When the preview iframe is loaded, call input change events to update the preview
-    (function( iframe ) { // IIFE for IDE
-      iframe.on( 'load', function() {
+    (function( jqIframe ) { // IIFE for IDE
+      jqIframe.on( 'load', function() {
 
         // Set properties of the input processor that stores jQuery object of iframe elements
-        inputProcessor.jqPreviewButtonIconLeft  = previewFrame.contents().find( 'body .button-icon-left' );
-        inputProcessor.jqPreviewButtonIconRight = previewFrame.contents().find( 'body .button-icon-right' );
-        inputProcessor.jqPreviewButtonLabel     = previewFrame.contents().find( 'body .button-label' ).first();
+        inputProcessor.jqPreviewButtonIconLeft  = $( this ).contents().find( 'body .button-icon-left' );
+        inputProcessor.jqPreviewButtonIconRight = $( this ).contents().find( 'body .button-icon-right' );
+        inputProcessor.jqPreviewButtonLabel     = $( this ).contents().find( 'body .button-label' ).first();
 
         // Using a debouncer as there is are cases like the frame gets loaded multiple times in a short period of time
         // Note that when the preview meta-box visibility is toggled with the screen layout option (top-right corner of the admin screen) or moved its position (sorted),
         // the frame gets reloaded and this function can be called multiple times in a single page load.
         clearTimeout( debouncers[ '_iframe_preview_loaded' ] ); // do not call the function too frequent with the debounce logic
         debouncers[ '_iframe_preview_loaded' ] = setTimeout( function () {
-          triggerInputChanges( inputs );
+          triggerInputChanges( jqInputs );
         }, 2000 );
       });
       /// There is a case that the frame is already loaded before this is called
-      if ( 'complete' === iframe[ 0 ].contentDocument.readyState ) {
-        iframe.trigger( 'load' );
+      if ( 'complete' === jqIframe[ 0 ].contentDocument.readyState ) {
+        jqIframe.trigger( 'load' );
       }
-    })( previewFrame );
+    })( jqPreviewFrame );
 
     // Adjust the iframe height on proportional changes with windows messages from the framed window
     (function( iframe ) { // IIFE for IDE
@@ -167,7 +167,7 @@
         }
         iframe.height( event.data.height ).css( 'height', event.data.height + 'px' );
       }, false );
-    })( previewFrame );
+    })( jqPreviewFrame );
 
     /* Execution ends */
 
