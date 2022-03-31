@@ -104,15 +104,31 @@
               if ( $.isEmptyObject( ruleset ) ) {
                 return '';
               }
-              var _rules = selector + ' {\n';
+              var _rules = '';
+              _rules += selector + ' {\n';
               for ( var prop in ruleset ) {
                 if ( ! ruleset.hasOwnProperty( prop ) ) {
                   continue;
                 }
+                // An array can be given for multiple rules for a same property to support different browsers
+                if ( ruleset[ prop ].constructor === Array ) {
+                  _rules += ___getRulesExtracted( ruleset[ prop ] );
+                  continue;
+                }
                 _rules += '    ' + prop + ': ' + ruleset[ prop ] + ';\n';
               }
-              _rules += '}\n';
-              return _rules;
+              return _rules + '}\n';
+
+              function ___getRulesExtracted( rules ) {
+                if ( ! rules.length ) {
+                  return;
+                }
+                var _rules = '';
+                for( var _i = 0; _i < rules.length; _i++) {
+                  _rules += '    ' + prop + ': ' + rules[ _i ] + ';\n';
+                }
+                return _rules;
+              }
             }
           }
     
@@ -305,6 +321,85 @@
           styleHolder[ styleKeyButton + _suffixSelector ][ self.data( 'property' ) ] = self.val() + _suffixValue;
         }
       };
+      var inputProcessorBackground    = {
+        'jqBackgroundType': $( '.dynamic-button-field input[type=radio][data-property=_background_type]' ), // holds multiple elements as these are radio inputs
+        'jqGradient': $( '.background-gradient' ).first(),
+        '_background_type': function( self ) {
+          var _val = self.val();
+          if ( 'none' === _val ) {
+            delete styleHolder[ styleKeyButton ][ 'background-image' ];
+            delete styleHolder[ styleKeyButton ][ 'background-color' ];
+            return;
+          }
+          if ( 'solid' === _val ) {
+            $( '.dynamic-button-field input[data-property=_background_color]' ).trigger( 'change' );
+            return;
+          }
+          if ( 'gradient' === _val ) {
+            $( '.dynamic-button-field select[data-property=_background_image_gradient_direction]' ).trigger( 'change' );
+          }
+        },
+        'getGradientRule': function( self ) {
+          var _aRules    = [];
+          // background-image: linear-gradient(direction, color-stop1, color-stop2, ...);
+          var _direction = this.jqGradient.find( 'select[data-property=_background_image_gradient_direction]' ).val();
+          _direction     = replaceAll( _direction, '_', ' ' );
+          var _jqColors  = this.jqGradient.find( 'input[data-property=_background_image_gradient_colors]' );
+
+          // Support other browsers
+          var _startPos = _direction
+            .replace( 'to ', '' )
+            .replace( /top|bottom|left|right/gi, function( matched ){
+              var _mapObj = {
+                 bottom: 'top',
+                 top:    'bottom',
+                 left:   'right',
+                 right:  'left',
+              };
+              return _mapObj[ matched ];
+            });
+          _aRules.push( _getGradient( '-webkit-linear-gradient', _startPos, _jqColors ) );  // Safari 5.1, iOS 5.0-6.1, Chrome 10-25, Android 4.0-4.3
+          _aRules.push( _getGradient( '-moz-linear-gradient', _startPos, _jqColors ) );     // Firefox 3.6 - 15
+          _aRules.push( _getGradient( '-o-linear-gradient', _startPos, _jqColors ) );       // Opera 11.1 - 12
+
+          // The main rule
+          _aRules.push( _getGradient( 'linear-gradient', _direction, _jqColors ) );
+
+          return _aRules;
+          function _getGradient( suffix, direction, jqColors ) {
+            var _gradient  = suffix + '(' + direction;
+            jqColors.each( function(){
+              _gradient += ',' + $( this ).val();
+            } );
+            return _gradient + ')';
+          }
+          function replaceAll(str, find, replace) {
+            return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
+            function escapeRegExp(string) {
+              return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+            }
+          }
+        },
+        '_background_color': function( self ) {
+          if ( this.jqBackgroundType.filter( ':checked' ).val() !== 'solid' ) {
+            return;
+          }
+          delete styleHolder[ styleKeyButton ][ 'background-image' ];
+          styleHolder[ styleKeyButton ][ 'background-color' ] = self.val();
+        },
+        '_background_image_gradient_direction': function( self ) {
+          if ( this.jqBackgroundType.filter( ':checked' ).val() !== 'gradient' ) {
+            return;
+          }
+          var _gradientRule = this.getGradientRule( self );
+          styleHolder[ styleKeyButton ][ 'background-color' ] = this.jqGradient.find( 'input[data-property=_background_image_gradient_colors]' ).first().val(); // fallback
+          styleHolder[ styleKeyButton ][ 'background-image' ] = _gradientRule;
+
+        },
+        '_background_image_gradient_colors': function( self ) {
+          this._background_image_gradient_direction( self );
+        },
+      };
       var inputProcessorHover         = {
         '_hover_scale': function( self ) {
           if ( self.is( ':checked' ) ) {
@@ -394,7 +489,7 @@
       };
       var inputProcessorIconLeft      = _getInputProcessorIcon( 'left', inputProcessorBase );
       var inputProcessorIconRight     = _getInputProcessorIcon( 'right', inputProcessorBase );
-      return $.extend( {}, inputProcessorBase, inputProcessorText, inputProcessorIconLeft, inputProcessorIconRight, inputProcessorBox, inputProcessorHover );
+      return $.extend( {}, inputProcessorBase, inputProcessorText, inputProcessorIconLeft, inputProcessorIconRight, inputProcessorBox, inputProcessorHover, inputProcessorBackground );
 
       function _getInputProcessorIcon( position, inputProcessorBase ) {
         var _pos                         = position.toLowerCase();    // left / right

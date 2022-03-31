@@ -22,4 +22,9 @@ class AmazonAutoLinks_Button_Flat_PostMetaBox_Background extends AmazonAutoLinks
         'AmazonAutoLinks_Button_Flat_FormFields_Background',
     );
 
+    public function setUp() {
+        parent::setUp();
+        new AmazonAutoLinks_Select2CustomFieldType( $this->oProp->sClassName );
+    }
+
 }

@@ -27,3 +27,8 @@
 #fieldset-_text_margin_type.nested-depth-2 {
     margin-top: 0;
 }
+
+/* General */
+.rotate-45 {
+    transform: rotate(45deg);
+}
