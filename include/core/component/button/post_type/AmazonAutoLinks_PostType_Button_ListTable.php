@@ -77,11 +77,22 @@ abstract class AmazonAutoLinks_PostType_Button_ListTable extends AmazonAutoLinks
      * @return   string
      */
     public function cell_aal_button_preview( $sCell, $iPostID ) {
-        // Only load the first iframe, and let other frames being loaded by the script to reduce the load
-        $_aFrameAttributes = $this->oUtil->hasBeenCalled( __METHOD__ )
-            ? array( 'src' => null )
-            : array();
+
         $_bsButtonLabel     = get_post_meta( $iPostID, 'button_label', true );
+
+        // Only load the first iframe, and let other frames being loaded by the script to reduce the load
+        $_sLoadOwnStyle     = in_array( $iPostID, AmazonAutoLinks_Button_Utility::getActiveButtonIDs(), true )
+            ? ''
+            : '&load-own-style=1';
+        $_sSRCFrame         = AmazonAutoLinks_Button_Utility::getButtonPreviewURL( $iPostID, '_by_id', $_bsButtonLabel, '' ) . $_sLoadOwnStyle;
+        $_aFrameAttributes  = $this->oUtil->hasBeenCalled( __METHOD__ )
+            ? array(
+                'src'      => null,         // do not load the frame on page load
+                'data-src' => $_sSRCFrame,  // will be loaded after previous one is loaded
+            )
+            : array(
+                'src'      => $_sSRCFrame,  // load the frame on page load
+            );
         $_nsButtonLabel     = false === $_bsButtonLabel ? null : $_bsButtonLabel;
         return $sCell
             . AmazonAutoLinks_Button_Utility::getIframeButtonPreview(
