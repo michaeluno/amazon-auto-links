@@ -24,14 +24,6 @@ If you want to search a specific product, yes, you can do that too. If you are g
 
 Display Amazon affiliate links along with your posts with this plugin to earn commissions with minimal efforts.
 
-= Compatible with PA-API 5! =
-As of 2019/10/31, Amazon ended PA-API (Product Advertising API) v4 and your site may no longer be able to display Amazon products with old API keys. In that case, regenerate keys on the Amazon Associates member's area and you are good to go!
-
-= Migrate from Amazon Associates Link Builder =
-Are you looking for an alternative to the discontinued Amazon Associates Link Builder plugin? If so, this plugin can take care of their shortcodes inserted with their Gutenberg block.
-
-Just enable the option and you don't have to edit thousands of posts to replace the shortcode.
-
 = Display a particular product in a post =
 If you want to simply display your desired specific products in a post, don't worry. You can do that too. Just paste the product URL in the post editor. No shortcode is required.
 
@@ -39,7 +31,7 @@ If you want to simply display your desired specific products in a post, don't wo
 
 [youtube https://www.youtube.com/watch?v=mpDCcp4KBZg]
 
-= Supports All the Amazon Associates Locales =
+= Supporting All the Amazon Associates Locales =
 Includes Australia, Brazil, Canada, China, France, Germany, India, Italy, Japan, Mexico, Netherlands, Poland, Singapore, Saudi Arabia, Spain, Sweden, Turkey, United Arab Emirates, United Kingdom, and United States. China is supported for the category unit type.
 
 = Works without JavaScript =
@@ -51,11 +43,19 @@ Just check where you want the product links to appear with auto-insert.
 - **Static Contents Conversion** - If you want the product link to be static, it is possible. This means if you deactivate the plugin, the converted contents will remain.
 - **Detailed Visibility Criteria** - You can enable/disable product links on the pages you want or do not want by post ID, taxonomy, page type, and post type.
 
-= Geotargeting =
+= Customizable Buttons =
+Your site visitors more likely click buttons than regular text hyper links. Define your custom buttons and insert them to the unit output.
+
+The plugin lets you design buttons through UI and prepares several default buttons for you so that you can modify them rather than creating your own from scratch.
+
+= Geo-targeting =
 You can transform your Amazon affiliate links into the ones of the locale that the site visitor resides, presumed by IP address. So you won't miss commission fees from visitors coming outside of your country.
 
 = Auto Link Conversion =
 Hyper links to Amazon products in posts and comments can be transformed into your associate affiliate links. This is useful if your site allows guests to post contents that include Amazon links.
+
+= Gutenberg Block =
+The plugin has a Gutenberg block that lets you pick units you created, which can save a little time than typing the shortcode.
 
 = Widgets =
 Place the widget in the sidebar and select the unit you created. The product links will appear in where you want.
@@ -66,14 +66,11 @@ Place the widget in the sidebar and select the unit you created. The product lin
 = Shortcode and PHP Function =
 Insert the ads in specific posts and pages with the shortcode. If you want to insert in the theme template, use the PHP code the plugin provides to produce the outputs.
 
-= Filter Products =
+= Filtering Products =
 You can filter out certain products you don't want to display with a black and white list by description, title, and ASIN.
 
-= Custom Buttons =
-Visitors more likely click buttons than regular text hyper links. Define your custom buttons and insert it to the unit output.
-
-= Export Ads into External Sites with Feed =
-By subscribing to the product feed produced with the units you create as RSS or JSON, you can import them from other sites.
+= RSS and JSON Unit Feeds =
+By subscribing to the product RSS/JSON feeds of the units you crate, you can import them from other sites.
 
 If you have a web site that can display RSS feed contents, just create a WordPress site somewhere with this plugin and fetch the feed from the site. If you are an App developer, you can just display the items from the feed without programming an API client.
 
@@ -85,18 +82,16 @@ If you have a web site that can display RSS feed contents, just create a WordPre
 - **Load with Javascript** - Decides whether to display units with JavaScript.
 - and more.
 
-= Customize Outputs =
+= Customizing Outputs =
 Besides the **Item Format** unit option which lets you design the output of a unit, you can create a custom template. This gives you freedom of customization and lets you achieve more advanced and detailed design.
 
 = Unit Types =
-- **Category** - pick your category that matches your site topic.
-- **Product Search** - create a unit of a search result.
-- **Item Look-up** - display specific products.
-- **URL** - list items from an external web source.
-- **ScratchPad Payload** - for more complex PA-API queries.
-
-= Getting Started =
-To get started, create a unit first and display it with widgets, shortcode, or auto-insert.
+- **Category** - picks your category that matches your site topic.
+- **Product Search** - creates a unit by performing product searches.
+- **URL** - lists items from an external web source.
+- **PA-API Product Search** - creates a unit of a search result using PA-API.
+- **PA-API Item Look-up** - displays specific products.
+- **PA-API Custom Payload** - is for more complex PA-API queries.
 
 = Supported Languages =
 - English
@@ -105,16 +100,81 @@ To get started, create a unit first and display it with widgets, shortcode, or a
 - Italian
 - Spanish
 
+= Getting Started =
+Please see the **Installation** section.
+
 == Installation ==
 
 = Install =
-1. Upload **`amazon-auto-links.php`** and other files compressed in the zip folder to the **`/wp-content/plugins/`** directory.
-1. Activate the plugin through the 'Plugins' menu in WordPress.
+<h5>Through the plugin install UI of WordPress</h5>
+1. Navigate to **Dashboard** -> **Plugins** -> **Add New**.
+1. Type "Auto Amazon Links" in the search bar.
+1. Auto Amazon Links should be listed and click on **Install Now**.
+1. The **Activate** button will appear and press it.
+
+<h5>Uploading the zip file</h5>
+1. Download [amazon-auto-links.zip](https://downloads.wordpress.org/plugin/amazon-auto-links.latest-stable.zip).
+1. Navigate to **Dashboard** -> **Plugins** -> **Add New**.
+1. Click on the **Upload Plugin** and upload the zip file.
+1. The **Activate Plugin** button will appear and press it.
+
+<h5>Using FTP or Control Panel File Manager</h5>
+1. Extract the files of [amazon-auto-links.zip](https://downloads.wordpress.org/plugin/amazon-auto-links.latest-stable.zip) to the `wp-content` directory. The plugin directory named `amazon-auto-links` containing files should be placed inside `wp-content`. The structure should look like,
+ - /wp-content/amazon-auto-links/amazon-auto-links.php
+ - /wp-content/amazon-auto-links/readme.txt
+ - continues...
 
 = Getting Started =
-1. Go to **Dashboard** -> **Auto Amazon Links** -> **Add Unit by Category**.
-1. Configure the options and select categories.
-1. After saving the unit option, go to **'Manage Units'** to get the shortcode or if you check one of the insert option, the links will automatically appear in posts or feeds depending on your choice. The widget is available in the **Appearance** -> **Widgets** page as well.
+To get started, set up your Amazon Associates ID and create a unit, then display it.
+
+<h5>Setting up Amazon Associates ID</h5>
+For the very beginning, you need to set-up your Amazon Associates ID (tag).
+
+1. Navigate to **Dashboard** -> **Auto Amazon Links** -> **Settings** -> **Associates**.
+1. There, select your locale and enter your Amazon Associates ID (tag). Then save.
+
+<h5>Creating a Unit</h5>
+There are several ways to display product links. You need to create a unit which defines what kind of products to display first. Then tell the plugin which unit you want to display. It is recommended to create a category unit to understand how it works.
+
+1. Navigate to **Dashboard** -> **Auto Amazon Links** -> **Add Unit by Category**.
+1. It will ask some options and lets you pick some categories. After selecting some categories and proceeding, a category unit will be created.
+1. It will take you to unit editing screen. You'll see lots of options but you can leave them to the default.
+
+<h5>Shortcode</h5>
+1. Navigate to **Dashboard** -> **Auto Amazon Links** -> **Manage Units**.
+1. Copy the shortcode in the list, looking like `[amazon_auto_links id="nnn"]` where _nnn_ is your unit ID.
+1. Paste it in your post.
+
+<h5>Gutenberg Block</h5>
+1. After creating a unit, open the Gutenberg editor, the WordPress default post editor.
+1. Type "Amazon" in the block search bar, then find "**Auto Amazon Links: Unit**".
+1. When selecting it, you'll see a list of units you created. Pick one and that's it.
+
+<h5>Auto-insert</h5>
+Auto-inserts allows you to insert units on your specified area of your site.
+1. After creating a unit, navigate to **Dashboard** -> **Auto Amazon Links** -> **Manage Auto-insert**.
+1. Click on **Add New Auto-insert**.
+1. Pick your units and check **Post / Page Content** in the **Areas** field.
+1. Save and create an auto-insert. Check your site and see at the bottom of your posts whether Amazon product links are displayed.
+
+<h5>Widgets</h5>
+The plugin has two widgets, `Amazon Auto Links by Unit`, which lets you pick your units, and `Amazon Auto Links - Contextual Products` which displays Amazon products related to displayed contents on the page.
+
+In order to use these widgets, you need to install the [Classic Widgets](https://wordpress.org/plugins/classic-widgets/) plugin.
+
+1. After creating a unit, navigate to **Dashboard** -> **Appearance** -> **Widgets**.
+1. From **Available Widgets**, drag the **Amazon Auto Links by Unit** widget and drop it to one of the sidebars.
+1. Pick a unit and save.
+1. Confirm the unit is displayed in the sidebar.
+
+<h5>oEmbed</h5>
+You can display a formatted Amazon product link by pasting a product URL in the post editor.
+
+1. Navigate to **Dashboard** -> **Auto Amazon Links** -> **Settings** -> **Embed**.
+1. Make sure the oEmbed option is enabled there.
+1. Navigate to **Dashboard** -> **Posts** -> **Add New**.
+1. Paste an Amazon product URL in the editor such as `https://www.amazon.com/dp/1118987241`.
+1. You should see formatted product link with a thumbnail.
 
 == Frequently asked questions ==
 
@@ -131,22 +191,22 @@ For that, you need to have an account with [Amazon Product Advertising API](http
 More detailed instruction, please refer to the [To register as a Product Advertising API developer](https://docs.aws.amazon.com/AWSECommerceService/latest/GSG/GettingStarted.html#BecominganAssociate) or [**How to Obtain Access Key and Secret Key**](http://wordpress.org/plugins/amazon-auto-links/other_notes/) section.
 
 = Is the plugin compatible with PA-API 5? =
-Yes. The plugin is compatible with PA-API (Amazon Product Advertising API) 5.0.
+Yes. The plugin is compatible with PA-API (Amazon Product Advertising API) 5.0. The PA-API 4 is no longer available as of 10/31/2019 so if you are still using API keys of the old API, you need to reissue them.
 
 = I'm migrating from Amazon Associates Link Builder (AALB). Can this plugin display products with their shortcodes? =
-Yes, enable the option by going to `Dashboard` -> `Auto Amazon Links` -> `Settings` -> `3rd Party` -> `Amazon Associates Link Builder`.
+Yes, enable the option by navigating to `Dashboard` -> `Auto Amazon Links` -> `Settings` -> `3rd Party` -> `Amazon Associates Link Builder`.
 
-There you also want to set the __Template Conversion__ option. Make sure you enable your desired Auto Amazon Links templates in `Dashboard` -> `Auto Amazon Links` -> `Templates`. Then reload the `3rd Party` screen. There you'll see active templates are listed for the conversion option.
+There you also want to set the __Template Conversion__ option. Make sure you enable your desired Auto Amazon Links templates in `Dashboard` -> `Auto Amazon Links` -> `Templates`. Then reload the `3rd Party` screen. There, you'll see active templates are listed for the conversion option.
 
 = What does a Unit mean? =
 
 A unit is a set of rules that defines how Amazon products should be displayed.
 
-When you display Amazon products, you would specify a unit and the plugin will generate outputs based on the rules defined for the unit.
+When you display Amazon products, you would specify a unit and the plugin will generate outputs based on the rules defined in the unit.
 
-= What would be the benefit to upgrade to the pro version? =
+= What would be the benefit to upgrade to the Pro version? =
 
-With the pro version, unlimited numbers of units can be created. Also the number of categories per unit, the number of items to display per unit are unrestricted as well. Please consider upgrading it. [Auto Amazon Links Pro](https://store.michaeluno.jp/amazon-auto-links-pro/downloads/amazon-auto-links-pro/) As of Pro 2.0.6, links can be displayed in multiple columns.
+With the Pro version, unlimited numbers of units can be created. Also, the number of categories per unit, the number of items to display per unit are unrestricted as well. Please consider upgrading it. [Auto Amazon Links Pro](https://store.michaeluno.jp/amazon-auto-links-pro/downloads/amazon-auto-links-pro/) As of Pro 2.0.6, links can be displayed in multiple columns.
 
 = I get a blank white page after adding a unit to the theme. What is it? What should I do? =
 
@@ -159,7 +219,7 @@ The part, 128M, should be changed accordingly.
 Yes, with [Pro](https://store.michaeluno.jp/amazon-auto-links-pro/downloads/amazon-auto-links-pro/)!
 
 = I have a feature request. Would you implement that? =
-Post it in the [support section](http://wordpress.org/support/plugin/amazon-auto-links). If it is feasible, it will be included in the to-do list in the Other Notes section.
+Post it from [here](https://github.com/michaeluno/amazon-auto-links/issues/new?assignees=&labels=enhancement&template=feature_request.yml).
 
 = I get Amazon product links everywhere on the site after creating some units. How can I restrict them to certain pages? =
 Go to `Dashboard` -> `Auto Amazon Links` -> `Manage Auto-insert`. There turn off unnecessary auto-insert items. You can edit their definitions and define where units should be displayed.
@@ -171,7 +231,7 @@ Try [Scratchpad](https://webservices.amazon.com/paapi5/scratchpad/) to make sure
 For the category unit type, yes. But for the search and contextual unit types, no as PA-API 5 does not support it.
 
 = Is this plugin Amazon Auto Links? =
-Yes, that's a former name of this plugin and it is now Auto Amazon Links.
+Yes, that is the former name of this plugin and it is now Auto Amazon Links.
 
 == Other Notes ==
 
@@ -332,6 +392,8 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 3. **Setting Page** (Selecting Categories)
 4. **Setting Page** (Creating New Category Unit)
 5. **Setting Page** (Selecting Templates)
+6. **Setting Page** (Buttons)
+7. **Setting Page** (Editing Buttons)
 
 == Changelog ==
 
