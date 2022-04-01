@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.9.2
 Requires MySQL:     5.0.3
-Stable tag:         5.1.6
+Stable tag:         5.2.0
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -334,6 +334,12 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 5. **Setting Page** (Selecting Templates)
 
 == Changelog ==
+
+= 5.2.0 - 04/01/2022 =
+- Added the `Category` unit option for the `Product Search` units.
+- Added the `Button2` and `Image` button types and the existing buttons are categorized as `Classic`.
+- Tweaked the UI of the button previews.
+- Moved the button unit options in the `Common Advanced` section to the new `Button` section.
 
 = 5.1.6 - 03/19/2022 =
 - Added the ability to set custom text to the plugin credit links.
