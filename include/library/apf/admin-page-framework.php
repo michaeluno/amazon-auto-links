@@ -1,17 +1,17 @@
 <?php
 /*
- * Admin Page Framework v3.9.1b04 by Michael Uno
+ * Admin Page Framework v3.9.1 by Michael Uno
  * Compiled with Admin Page Framework Compiler <https://github.com/michaeluno/admin-page-framework-compiler>
  * <https://en.michaeluno.jp/admin-page-framework>
  * Copyright (c) 2013-2022, Michael Uno; Licensed under MIT <https://opensource.org/licenses/MIT>
- * Compiled on 2022-03-31
+ * Compiled on 2022-04-02
  * Included Components: Admin Pages, Custom Post Types, Post Meta Boxes, Page Meta Boxes, Widgets, Utilities
  * Custom Field Types: Date, Date Range, Date-time, Date-time Range, Time, Time Range, Revealer, Select2
  */
 
 if (! class_exists('AmazonAutoLinks_AdminPageFramework_Registry', false)) :
 abstract class AmazonAutoLinks_AdminPageFramework_Registry_Base {
-    const VERSION = '3.9.1b04';
+    const VERSION = '3.9.1';
     const NAME = 'Admin Page Framework';
     const DESCRIPTION = 'Facilitates WordPress plugin and theme development.';
     const URI = 'https://en.michaeluno.jp/admin-page-framework';
