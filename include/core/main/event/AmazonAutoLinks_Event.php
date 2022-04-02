@@ -11,7 +11,7 @@
 /**
  * Plugin event handler.
  * 
- * @since   2.0.0
+ * @since 2.0.0
  */
 class AmazonAutoLinks_Event {
 
@@ -23,39 +23,28 @@ class AmazonAutoLinks_Event {
     }
 
     /**
-     * @return      void
-     * @since       3.3.0
+     * @since 3.3.0
      */
     public function replyToLoadEvents() {
-
         do_action( 'aal_action_events' );
-
         $this->___handleWPCronEvents();
         $this->___handleQueryURL();
         $this->___handleActions();
         $this->___handleFilters();
-
-        // This must be called at last as hooks especially for WP Cron must be set up.
-        $this->___handleBackgroundRoutines();
-
+        $this->___handleBackgroundRoutines();   // must be called last as hooks especially for WP Cron has to be set up.
     }
 
         /**
-         * @since       3.5.0
-         * @return      void
+         * @since 3.5.0
          */
         private function ___handleWPCronEvents() {
-
             new AmazonAutoLinks_Event___Action_HTTPCacheRenewal;
             new AmazonAutoLinks_Event___Action_SimplePie_CacheRenewal;
             new AmazonAutoLinks_Event___Action_DeleteExpiredCaches;
-
         }
 
         /**
-         *
-         * @since       3.1.0
-         * @return      void
+         * @since 3.1.0
          */
         private function ___handleQueryURL() {
 
@@ -74,7 +63,7 @@ class AmazonAutoLinks_Event {
         }
 
         /**
-         * @since       4.0.0
+         * @since 4.0.0
          */
         private function ___handleActions() {
             new AmazonAutoLinks_Event_Error_Log_HTTPRequestCache;
@@ -97,9 +86,8 @@ class AmazonAutoLinks_Event {
          *
          * As it reads and trigger WP Cron tasks, the callback functions associated with registered action names must be set up.
          *
-         * @callback    add_action  aal_action_loaded_plugin
-         * @since       3.5.0
-         * @return      void
+         * @callback add_action() aal_action_loaded_plugin
+         * @since    3.5.0
          */
         private function ___handleBackgroundRoutines() {
 
@@ -128,11 +116,10 @@ class AmazonAutoLinks_Event {
 
             // @deprecated 4.3.0
             // If it is a background page load, exit() is performed via the constructor of AmazonAutoLinks_Shadow.
-    //                if ( ! $_bIsIntenseCachingMode && AmazonAutoLinks_Shadow::isBackground() ) {
-    //                    exit;
-    //                }
+            // if ( ! $_bIsIntenseCachingMode && AmazonAutoLinks_Shadow::isBackground() ) {
+            //     exit;
+            // }
 
         }
-
 
 }
