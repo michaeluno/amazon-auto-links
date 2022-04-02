@@ -399,7 +399,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 = 5.2.0 - 04/01/2022 =
 - Added the `Category` unit option for the `Product Search` units.
-- Added the `Button2` and `Image` button types and the existing buttons are categorized as `Classic`.
+- Added the `Flat` and `Image` button types and the existing buttons are categorized as `Classic`.
 - Tweaked the UI of the button previews.
 - Moved the button unit options in the `Common Advanced` section to the new `Button` section.
 
@@ -420,7 +420,7 @@ You can check if your access key is valid or not with [Scratchpad](https://webse
 
 = 5.1.3 - 02/20/2022 =
 - Fixed a bug of incorrect discount percentages.
-- Fixed a bug that produce prices were not retrieved properly in some cases.
+- Fixed a bug that prices were not retrieved properly in some cases.
 - Fixed raw query strings passed from user inputs.
 
 = 5.1.2 - 02/09/2022 =
