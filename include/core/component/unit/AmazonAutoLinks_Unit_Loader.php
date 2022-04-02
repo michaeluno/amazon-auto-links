@@ -43,6 +43,8 @@ class AmazonAutoLinks_Unit_Loader extends AmazonAutoLinks_PluginUtility {
         // Unit Types
         new AmazonAutoLinks_Unit_UnitTypes_Loader( AmazonAutoLinks_Registry::$sFilePath );
 
+        new AmazonAutoLinks_UnitOptionConverterLoader; // [3.3.0]
+
         // [4.4.0] PA-API Request Counter
         new AmazonAutoLinks_Unit_PAAPIRequestCounter_Loader;
 

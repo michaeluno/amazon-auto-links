@@ -456,10 +456,6 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
             'type'   => 'class',
             'loader' => 'AmazonAutoLinks_WidgetsLoader',
         ),
-        'unit_option_converter' => array(
-            'type'   => 'class',
-            'loader' => 'AmazonAutoLinks_UnitOptionConverterLoader',
-        ),
         'link_converter' => array( // [3.8.10]
             'type'   => 'class',
             'loader' => 'AmazonAutoLinks_Loader_LinkConverter',
