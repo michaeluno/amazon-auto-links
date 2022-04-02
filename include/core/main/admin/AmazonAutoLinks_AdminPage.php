@@ -25,12 +25,29 @@ class AmazonAutoLinks_AdminPage extends AmazonAutoLinks_AdminPageFramework {
             return;
         }     
         add_filter( 'options_' . $this->oProp->sClassName, array( $this, 'replyToSetOptions' ) );
-        
+        add_filter( 'upload_mimes', array( $this, 'replyToGetAllowedFileTypesToUpload' ) );
+
     }
+
+        /**
+         * @since  5.2.1
+         * @param  array $aMimeTypes
+         * @return array
+         */
+        public function replyToGetAllowedFileTypesToUpload( $aMimeTypes ) {
+            // If not from the plugin admin pages, return intact
+            parse_str( wp_get_referer(), $_aRefererQuery );
+            if ( ! in_array( $this->oUtil->getElement( $_aRefererQuery, 'page' ), AmazonAutoLinks_Registry::$aAdminPages, true ) ) {
+                return $aMimeTypes;
+            }
+            $aMimeTypes[ 'log' ] = 'text/plain';  // allow .log files to be attached via the bug report form
+            return $aMimeTypes;
+        }
+
         /**
          * Sets the default option values for the setting form.
          * @param  array $aOptions
-         * @return array       The options array.
+         * @return array The options array.
          */
         public function replyToSetOptions( $aOptions ) {
 
@@ -65,10 +82,8 @@ class AmazonAutoLinks_AdminPage extends AmazonAutoLinks_AdminPageFramework {
     }
         
     public function load() {
-
         $this->___doPageSettings();
         $this->___setAdminNoticePluginWarning();
-
     }
 
         /**
@@ -85,17 +100,14 @@ class AmazonAutoLinks_AdminPage extends AmazonAutoLinks_AdminPageFramework {
 
          /**
          * Do page styling.
-         * @since    3
-         * @since    4.4.0  Changed the visibility to private and renamed from `replyToDoPageSettings()`.
-         * @return   void
+         * @since 3
+         * @since 4.4.0  Changed the visibility to private and renamed from `replyToDoPageSettings()`.
          */
         private function ___doPageSettings() {
-
             $this->setPageTitleVisibility( false ); // disable the page title of a specific page.
             $this->setInPageTabTag( 'h2' );                
             $this->enqueueStyle( AmazonAutoLinks_Main_Loader::$sDirPath . '/asset/css/admin.css' );
-            $this->setDisallowedQueryKeys( array( 'aal-option-upgrade', 'bounce_url' ) );            
-        
+            $this->setDisallowedQueryKeys( array( 'aal-option-upgrade', 'bounce_url' ) );
         }
 
     /**

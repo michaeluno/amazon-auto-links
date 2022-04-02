@@ -101,6 +101,7 @@ class AmazonAutoLinks_HelpAdminPage_Help_Section_BugReport extends AmazonAutoLin
                         'style' => 'max-width: 200px;'
                     ),
                 ),
+                'description'       => __( 'Besides image files, <code>.log</code> and <code>.txt</code> files can be attached as well.', 'amazon-auto-links' ),
             ),
             array(
                 'field_id'          => 'allow_sending_system_information',

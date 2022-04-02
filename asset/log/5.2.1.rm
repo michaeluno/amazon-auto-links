@@ -1,1 +1,2 @@
+- Added the ability to attach `.log` files to the bug report form.
 - Fixed a bug that some setting notices were not displayed in some setting pages including the pages of the litsting table of units, auto-inserts, and buttons.   
