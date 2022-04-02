@@ -24,7 +24,7 @@ class AmazonAutoLinks_TemplateLoader {
     /**
      * Loads necessary components.
      */
-    public function __construct( $sScriptPath ) {
+    public function __construct() {
 
         self::$sDirPath = dirname( __FILE__ );
 

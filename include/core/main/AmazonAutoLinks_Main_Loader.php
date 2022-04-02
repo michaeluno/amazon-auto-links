@@ -12,8 +12,8 @@
 /**
  * Loads the main component
  *  
- * @since   3.3.0
- * @since   4.4.0   Renamed from `AmazonAutoLinks_MainLoader`.
+ * @since 3.3.0
+ * @since 4.4.0 Renamed from `AmazonAutoLinks_MainLoader`.
  */
 class AmazonAutoLinks_Main_Loader extends AmazonAutoLinks_PluginUtility {
 
@@ -32,16 +32,15 @@ class AmazonAutoLinks_Main_Loader extends AmazonAutoLinks_PluginUtility {
 
     /**
      * Sets up hooks and properties.
-     * @param string $sScriptPath
      */
-    public function __construct( $sScriptPath ) {
+    public function __construct() {
         
         if ( $this->hasBeenCalled( __METHOD__ ) ) {
             return;
         }
 
-        self::$sDirPath = dirname( __FILE__ );
-        $this->sScriptPath = $sScriptPath;
+        self::$sDirPath    = dirname( __FILE__ );
+        $this->sScriptPath = AmazonAutoLinks_Registry::$sFilePath;
 
         // Front-end
         

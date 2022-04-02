@@ -11,35 +11,32 @@
 /**
  * Loads the Auto-insert component.
  *  
- * @since       3.1.0
+ * @since 3.1.0
 */
 class AmazonAutoLinks_AutoInsertLoader {
     
     /**
      * Loads necessary components.
      */
-    public function __construct( $sScriptPath ) {
+    public function __construct() {
         
         // Post type
         new AmazonAutoLinks_PostType_AutoInsert(
             AmazonAutoLinks_Registry::$aPostTypes[ 'auto_insert' ],  // slug
             null,   // post type argument. This is defined in the class.
-            $sScriptPath   // script path               
+            AmazonAutoLinks_Registry::$sFilePath
         );    
 
         // Admin
         if ( is_admin() ) {
             
-            new AmazonAutoLinks_AutoInsertOutput_StaticInsertion;       // 3.4.10+
-            
-            new AmazonAutoLinks_AutoInsertAdminPage(
-                '', // disable the options
-                $sScriptPath            
-            );        
+            new AmazonAutoLinks_AutoInsertOutput_StaticInsertion; // 3.4.10+
+            new AmazonAutoLinks_AutoInsertAdminPage( '', AmazonAutoLinks_Registry::$sFilePath ); // disable the options by passing an empty string to the first parameer
             
             add_filter( 'aal_filter_custom_meta_keys', array( $this, 'replyToAddProtectedMetaKeys' ) );
 
         }
+
         // Front-end
         else {
             new AmazonAutoLinks_AutoInsertOutput_Frontend;
@@ -52,11 +49,10 @@ class AmazonAutoLinks_AutoInsertLoader {
     
     }    
         /**
-         * @remark      When an auto-insert is created or edited, this method will be called too early from the system.
+         * @remark   When an auto-insert is created or edited, this method will be called too early from the system.
          * However, this hook is also triggered when the user trashes the auto-insert item from the action link in the post listing table. 
-         * @since       3.3.0
-         * @callback    filter      "{new post status}_{post type slug}"
-         * @return      string
+         * @since    3.3.0
+         * @callback add_filter() "{new post status}_{post type slug}"
          */
         public function replyToCheckActiveAutoInsertStatusChange( $iPostID, $oPost ) {           
             do_action( 'aal_action_update_active_auto_inserts' );
@@ -64,8 +60,8 @@ class AmazonAutoLinks_AutoInsertLoader {
     
         /**
          * Updates the active auto-insert items.
-         * @since           3.3.0
-         * @callback        action      aal_action_update_active_auto_inserts
+         * @since    3.3.0
+         * @callback add_action() aal_action_update_active_auto_inserts
          */
         public function replyToUpdateActiveAutoInsert() {
             $_aActiveIDs = AmazonAutoLinks_PluginUtility::getActiveAutoInsertIDsQueried();
@@ -77,10 +73,10 @@ class AmazonAutoLinks_AutoInsertLoader {
         }
         
         /**
-         * @return      array
-         * @since       3.3.0
-         * @param       array        $aMetaKeys
-         * @callback    add_filter() aal_filter_custom_meta_keys
+         * @return   array
+         * @since    3.3.0
+         * @param    array        $aMetaKeys
+         * @callback add_filter() aal_filter_custom_meta_keys
          */
         public function replyToAddProtectedMetaKeys( $aMetaKeys ) {
             

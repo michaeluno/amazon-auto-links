@@ -27,10 +27,8 @@ class AmazonAutoLinks_Unit_Loader extends AmazonAutoLinks_PluginUtility {
 
     /**
      * Loads the unit component.
-     *
-     * @param string $sScriptPath the plugin main file path.
      */
-    public function __construct( $sScriptPath ) {
+    public function __construct() {
 
         self::$sDirPath = dirname( __FILE__ );
 
@@ -38,12 +36,12 @@ class AmazonAutoLinks_Unit_Loader extends AmazonAutoLinks_PluginUtility {
         new AmazonAutoLinks_PostType_Unit(
             AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],  // slug
             null,          // post type argument. This is defined in the class.
-            $sScriptPath   // script path
+            AmazonAutoLinks_Registry::$sFilePath   // script path
         );
         new AmazonAutoLinks_PostType_UnitPreview;
 
         // Unit Types
-        new AmazonAutoLinks_Unit_UnitTypes_Loader( $sScriptPath );
+        new AmazonAutoLinks_Unit_UnitTypes_Loader( AmazonAutoLinks_Registry::$sFilePath );
 
         // [4.4.0] PA-API Request Counter
         new AmazonAutoLinks_Unit_PAAPIRequestCounter_Loader;

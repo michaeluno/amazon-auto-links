@@ -199,19 +199,19 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
         private function ___loadComponents() {
 
             // Main
-            new AmazonAutoLinks_Main_Loader( $this->sFilePath );
+            new AmazonAutoLinks_Main_Loader;
             
             // Templates
-            new AmazonAutoLinks_TemplateLoader( $this->sFilePath );
+            new AmazonAutoLinks_TemplateLoader;
 
             // Units
-            new AmazonAutoLinks_Unit_Loader( $this->sFilePath );
+            new AmazonAutoLinks_Unit_Loader;
 
             // Buttons
-            new AmazonAutoLinks_Button_Loader( $this->sFilePath );
+            new AmazonAutoLinks_Button_Loader;
                 
             // Auto-insert        
-            new AmazonAutoLinks_AutoInsertLoader( $this->sFilePath );                        
+            new AmazonAutoLinks_AutoInsertLoader;
                         
             // Shortcode
             new AmazonAutoLinks_Shortcode;

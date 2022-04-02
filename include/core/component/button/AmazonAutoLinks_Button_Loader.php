@@ -23,7 +23,7 @@ class AmazonAutoLinks_Button_Loader extends AmazonAutoLinks_PluginUtility {
     /**
      * Sets up hooks and properties.
      */
-    public function __construct( $sScriptPath ) {
+    public function __construct() {
         
         if ( $this->hasBeenCalled( __METHOD__ ) ) {
             return;
@@ -40,7 +40,7 @@ class AmazonAutoLinks_Button_Loader extends AmazonAutoLinks_PluginUtility {
         new AmazonAutoLinks_PostType_Button(
             AmazonAutoLinks_Registry::$aPostTypes[ 'button' ],  // slug
             null,   // post type argument. This is defined in the class.
-            $sScriptPath   // script path               
+            AmazonAutoLinks_Registry::$sFilePath
         );
 
         /// Shortcode [4.3.0]
