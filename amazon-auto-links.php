@@ -423,6 +423,89 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
         return self::$___sPluginSiteTempDirPath;
     }
 
+    /**
+     * @var   string[]
+     * @since 5.2.1
+     */
+    static public $aComponents = array(
+        'main'      => array(
+            'type'   => 'class',
+            'loader' => 'AmazonAutoLinks_Main_Loader',
+        ),
+        'template' => array(
+            'type'   => 'class',
+            'loader' => 'AmazonAutoLinks_TemplateLoader',
+        ),
+        'unit'      => array(
+            'type'   => 'class',
+            'loader' => 'AmazonAutoLinks_Unit_Loader',
+        ),
+        'button'    => array(
+            'type'   => 'class',
+            'loader' => 'AmazonAutoLinks_Button_Loader',
+        ),
+        'auto_insert' => array(
+            'type'   => 'class',
+            'loader' => 'AmazonAutoLinks_AutoInsertLoader',
+        ),
+        'shortcode'   => array(
+            'type'   => 'class',
+            'loader' => 'AmazonAutoLinks_Shortcode',
+        ),
+        'widget' => array(
+            'type'   => 'class',
+            'loader' => 'AmazonAutoLinks_WidgetsLoader',
+        ),
+        'unit_option_converter' => array(
+            'type'   => 'class',
+            'loader' => 'AmazonAutoLinks_UnitOptionConverterLoader',
+        ),
+        'link_converter' => array( // [3.8.10]
+            'type'   => 'class',
+            'loader' => 'AmazonAutoLinks_Loader_LinkConverter',
+        ),
+        'database' => array( // [3.8.10]
+            'type'   => 'class',
+            'loader' => 'AmazonAutoLinks_DatabaseUpdater_Loader',
+        ),
+        'oembed' => array( // [4.0.0]
+            'type'   => 'class',
+            'loader' => 'AmazonAutoLinks_CustomOEmbed_Loader',
+        ),
+        'third_party' => array( // [4.1.0]
+            'type'   => 'class',
+            'loader' => 'AmazonAutoLinks_ThirdPartySupportLoader',
+        ),
+        'proxy' => array( // [4.2.0]
+            'type'   => 'class',
+            'loader' => 'AmazonAutoLinks_Proxy_Loader',
+        ),
+        'log' => array( // [4.3.0]
+            'type'   => 'class',
+            'loader' => 'AmazonAutoLinks_Log_Loader',
+        ),
+        'test' => array( // [4.3.0]
+            'type'   => 'class',
+            'loader' => 'AmazonAutoLinks_Test_Loader',
+        ),
+        'geo_targeting' => array( // [4.6.0]
+            'type'   => 'class',
+            'loader' => 'AmazonAutoLinks_Geotargeting_Loader',
+        ),
+        'opt' => array( // [4.7.0]
+            'type'   => 'class',
+            'loader' => 'AmazonAutoLinks_Opt_Loader',
+        ),
+        'disclosure' => array( // [4.7.0]
+            'type'   => 'class',
+            'loader' => 'AmazonAutoLinks_Disclosure_Loader',
+        ),
+        'gutenberg_block' => array( // [5.1.0]
+            'type'   => 'class',
+            'loader' => 'AmazonAutoLinks_GutenbergBlock_Loader',
+        ),
+    );
+
 }
 AmazonAutoLinks_Registry::setUp( __FILE__ );
 

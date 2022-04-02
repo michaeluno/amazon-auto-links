@@ -152,79 +152,62 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
         if ( defined( 'DOING_PLUGIN_UNINSTALL' ) && DOING_PLUGIN_UNINSTALL ) {
             return;
         }
-            
-        // Include PHP files.
-        $this->___include();
-
-        // Load components
         $this->___loadComponents();
-                            
-        // Trigger the action. 2.1.2+
-        do_action( 'aal_action_loaded_plugin' );
+        do_action( 'aal_action_loaded_plugin' ); // Trigger the action. 2.1.2+
 
     }
-   
         /**
          * @since 3.3.0
          */
         private function ___loadComponents() {
-
-            // Main
-            new AmazonAutoLinks_Main_Loader;
-            
-            // Templates
-            new AmazonAutoLinks_TemplateLoader;
-
-            // Units
-            new AmazonAutoLinks_Unit_Loader;
-
-            // Buttons
-            new AmazonAutoLinks_Button_Loader;
-                
-            // Auto-insert        
-            new AmazonAutoLinks_AutoInsertLoader;
-                        
-            // Shortcode
-            new AmazonAutoLinks_Shortcode;
-                
-            // Widgets
-            new AmazonAutoLinks_WidgetsLoader;                 
-            
-            // Tools - Unit option converter. This component has an event handler so needs to be loaded in the front-end as well.
-            new AmazonAutoLinks_UnitOptionConverterLoader;
-
-            new AmazonAutoLinks_Proxy_Loader; // [4.2.0]
-
-            new AmazonAutoLinks_ThirdPartySupportLoader; // [4.1.0]
-
-            // [3.8.10]
-            new AmazonAutoLinks_Loader_LinkConverter;
-            new AmazonAutoLinks_DatabaseUpdater_Loader;
-
-            new AmazonAutoLinks_CustomOEmbed_Loader; // [4.0.0]
-
-            new AmazonAutoLinks_Log_Loader;  // [4.3.0]
-
-            new AmazonAutoLinks_Geotargeting_Loader; // [4.6.0]
-
-            new AmazonAutoLinks_Opt_Loader; // [4.7.0]
-
-            new AmazonAutoLinks_Disclosure_Loader; // [4.7.0]
-
-            new AmazonAutoLinks_GutenbergBlock_Loader; // [5.1.0]
-
-            // [4.6.19] Released versions don't include these
-            if ( file_exists( dirname( __FILE__ ) . '/component/test' ) ) {
-                new AmazonAutoLinks_Test_Loader; // [4.3.0]
+            add_filter( 'aal_filter_loading_components', array( $this, 'replyToGetLoadingComponents' ) );
+            $_aComponents = apply_filters( 'aal_filter_loading_components', AmazonAutoLinks_Registry::$aComponents );
+            $_aTypes      = array(
+                'file'    => '___loadComponent_file',
+                'class'   => '___loadComponent_class',
+                'unknown' => '___loadComponent_unknown',
+            );
+            foreach( $_aComponents as $_aComponent ) {
+                $_aComponent  = $_aComponent + array( 'type' => null, 'loader' => null );
+                $_sMethodName = isset( $_aTypes[ $_aComponent[ 'type' ] ] )
+                    ? $_aTypes[ $_aComponent[ 'type' ] ]
+                    : $_aTypes[ 'unknown' ];
+                $this->{$_sMethodName}( $_aComponent[ 'loader' ] );
             }
-
         }
+            /**
+             * @param $sFile
+             * @since 5.2.0
+             */
+            private function ___loadComponent_file( $sFile ) {
+                include( $sFile );
+            }
+            /**
+             * @param $sClassName
+             * @since 5.2.0
+             */
+            private function ___loadComponent_class( $sClassName ) {
+                new $sClassName;
+            }
+            /**
+             * @param $thing
+             * @since 5.2.0
+             */
+            private function ___loadComponent_unknown( $thing ) {}  // do nothing for unknown types
 
-        /**
-         * Includes additional files.
-         */
-        private function ___include() {
-            include( dirname( __FILE__ ) . '/function/functions.php' );
-        }
+            /**
+             * @since 5.2.1
+             */
+            public function replyToGetLoadingComponents( $aLoadingComponents ) {
+                $aLoadingComponents[ 'functions' ] = array(
+                    'type'   => 'file',
+                    'loader' => dirname( __FILE__ ) . '/function/functions.php',
+                );
+                // [4.6.19] Released versions don't include these
+                if ( ! file_exists( dirname( __FILE__ ) . '/component/test' ) ) {
+                    unset( $aLoadingComponents[ 'test' ] );
+                }
+                return $aLoadingComponents;
+            }
     
 }
