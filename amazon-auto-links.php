@@ -55,21 +55,17 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
     /**
      * The hook slug used for the prefix of action and filter hook names.
      * 
-     * @remark      The ending underscore is not necessary.
+     * @remark The ending underscore is not necessary.
      */    
     const HOOK_SLUG                 = 'aal';    // without trailing underscore
     
     /**
      * The transient prefix. 
      * 
-     * @remark      This is also accessed from uninstall.php so do not remove.
-     * @remark      Up to 8 characters as transient name allows 45 characters or less ( 40 for site transients ) so that md5 (32 characters) can be added
+     * @remark This is also accessed from uninstall.php so do not remove.
+     * @remark Up to 8 characters as transient name allows 45 characters or less ( 40 for site transients ) so that md5 (32 characters) can be added
      */    
     const TRANSIENT_PREFIX          = 'AAL';
-    
-   
-    // const SectionID_License         = 'pro_license';
-    // const FieldID_LicenseKey        = 'pro_license_key';
 
     /**
      * @var   string
@@ -90,13 +86,13 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
     static public $sDirPath;
 
     /**
-     * @var   string    The plugin base name retrieved with `plugin_basename()`.
+     * @var   string The plugin base name retrieved with `plugin_basename()`.
      * @since 5.1.0
      */
     static public $sBaseName;
 
     /**
-     * @since       3
+     * @since 3
      */
     static public $aOptionKeys = array(
 
@@ -184,7 +180,7 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
         
     /**
      * Used admin pages.
-     * @since       3
+     * @since 3
      */
     static public $aAdminPages = array(
         // key => 'page slug'        
@@ -213,7 +209,7 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
         // used to be const PostTypeSlug      
         'unit'        => 'amazon_auto_links',
         
-        // use to be const PostTypeSlugAutoInsert
+        // used to be const PostTypeSlugAutoInsert
         'auto_insert' => 'aal_auto_insert',
         
         // 3+
@@ -242,15 +238,15 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
      * Used shortcode slugs
      */
     static public $aShortcodes = array(
-        'main'        => 'amazon_auto_links',
-        'button'      => 'aal_button',        // 4.3.0
-        'disclosure'  => 'aal_disclosure',    // 4.7.0
-        'v1'          => 'amazonautolinks',   // backward compatibility for v1
+        'main'       => 'amazon_auto_links',
+        'button'     => 'aal_button',        // 4.3.0
+        'disclosure' => 'aal_disclosure',    // 4.7.0
+        'v1'         => 'amazonautolinks',   // backward compatibility for v1
     );
 
     /**
      * Stores custom database table names.
-     * @remark      The below is the structure
+     * @remark The below is the structure
      * array(
      *      'slug (part of database wrapper class file name)' => array(
      *          'version'   => '0.1',
@@ -258,9 +254,9 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
      *      ),
      *      ...
      * )
-     * @since       3.5.0
-     * @since       3.8.0       Changed the version from 1.0.0 to 1.1.0.
-     * @since       4.3.0       Changed the `aal_products` table version from 1.3.0 to 1.4.0.
+     * @since  3.5.0
+     * @since  3.8.0 Changed the version from 1.0.0 to 1.1.0.
+     * @since  4.3.0 Changed the `aal_products` table version from 1.3.0 to 1.4.0.
      */
     static public $aDatabaseTables = array(
          'aal_products'        => array(
@@ -286,23 +282,20 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
 
     /**
      * Sets up class properties.
-     * @param  string $sPluginFilePath
-     * @return void
+     * @param string $sPluginFilePath
      */
     static function setUp( $sPluginFilePath ) {
-
-        self::$sFilePath = $sPluginFilePath; 
+        self::$sFilePath = $sPluginFilePath;
         self::$sDirPath  = dirname( self::$sFilePath );
         self::$sBaseName = plugin_basename( $sPluginFilePath );
-        
     }
 
     /**
-     * @return      string
-     * @since       ?
-     * @since       3.9.0   Added the `$bAbsolute` parameter.
-     * @param       string  $sPath
-     * @param       boolean $bAbsolute
+     * @return string
+     * @since  ?
+     * @since  3.9.0   Added the `$bAbsolute` parameter.
+     * @param  string  $sPath
+     * @param  boolean $bAbsolute
      */
     public static function getPluginURL( $sPath='', $bAbsolute=false ) {
         $_sRelativePath = $bAbsolute
@@ -315,13 +308,13 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
         return self::$___sPluginURLCache . $_sRelativePath;
     }
         /**
-         * @since    3.9.0
+         * @since 3.9.0
          */
         static private $___sPluginURLCache;
 
     /**
      * Requirements.
-     * @since           3
+     * @since 3
      */    
     static public $aRequirements = array(
         'php' => array(
@@ -362,12 +355,12 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
     );
 
     /**
-     * @param   string $sMessage
-     * @param   string $sType       `error`, `updated`, `info`, and `bell` are accepted.
-     * @param   string $sDashIcon   The past part of a dash-icon class such as `warning` in `dashicons-warning`.
-     * @param   string $sExtra      Extra output placed outside the `<p>` tag for the message.
-     * @since   3.11.0
-     * @since   4.7.5  Added the `$sExtra` parameter.
+     * @param string $sMessage
+     * @param string $sType       `error`, `updated`, `info`, and `bell` are accepted.
+     * @param string $sDashIcon   The past part of a dash-icon class such as `warning` in `dashicons-warning`.
+     * @param string $sExtra      Extra output placed outside the `<p>` tag for the message.
+     * @since 3.11.0
+     * @since 4.7.5  Added the `$sExtra` parameter.
      */
     static public function setAdminNotice( $sMessage, $sType='error', $sDashIcon='', $sExtra='' ) {
         self::$aAdminNotices[ $sMessage ] = array( 'message' => $sMessage, 'type' => $sType, 'icon' => $sDashIcon, 'extra' => $sExtra, );
@@ -410,7 +403,7 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
     static public $sTempDirNameSuffix = 'WPAAL_';
 
     /**
-     * @var   string    Caches the plugin site temporary directory path.
+     * @var   string Caches the plugin site temporary directory path.
      * @since 4.3.8
      */
     static private $___sPluginSiteTempDirPath;
@@ -419,7 +412,7 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
      * @remark Consider a case that the server hosts multiple WordPress sites. In that case, a temp directory needs to be created one per site.
      * It used to create a plugin specific parent directory but it caused a problem on a shared server that one creates it with the permission, 0755, with umask() and other users became unable to create a directory inside it.
      * @since  4.3.4
-     * @return string   A temporary directory path for the site.
+     * @return string A temporary directory path for the site.
      */
     static public function getPluginSiteTempDirPath() {
         if ( isset( self::$___sPluginSiteTempDirPath ) ) {
