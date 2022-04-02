@@ -42,17 +42,10 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
                 return;
             }
             
-            // At this point, there is a value `false` in the array, 
-            // which means there is a table that is not installed.            
-            // Install tables.
-            add_action( 
-                'plugins_loaded', // action hook name
-                array( $this, 'replyToInstallCustomTables' ), // callback 
-                1       // priority
-            );
+            // At this point, there is a value `false` in the array, which means there is a table that is not installed. So install tables.
+            add_action( 'plugins_loaded', array( $this, 'replyToInstallCustomTables' ), 1 );
             
         }
-    
     
     /**
      * Installs plugin custom database tables.
@@ -61,16 +54,14 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
      * @callback add_action() activate_{plugin_basename($file)}
      */
     public function replyToInstallCustomTables() {
-
         new AmazonAutoLinks_DatabaseTableInstall( true ); // install
-
     }
 
         
     /**
      * Register classes to be auto-loaded.
      * 
-     * @since       3
+     * @since 3
      */
     public function getClasses() {
         return include( dirname( __FILE__ ) . '/class-map.php' );
@@ -80,19 +71,14 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
      * Sets up constants.
      */
     public function setConstants() {
-        
-        // For backward compatibility.
-        define( "AMAZONAUTOLINKSPLUGINFILEBASENAME", AmazonAutoLinks_Registry::$sBaseName );
-        
+        define( "AMAZONAUTOLINKSPLUGINFILEBASENAME", AmazonAutoLinks_Registry::$sBaseName );    // For backward-compatibility.
     }    
     
     /**
      * Sets up global variables.
      */
     public function setGlobals() {
-
-        if ( $this->bIsAdmin ) { 
-        
+        if ( $this->bIsAdmin ) {
             // The form transient key will be sent via the both get and post methods.
             $GLOBALS[ 'aal_transient_id' ] = isset( $_REQUEST[ 'transient_id' ] )
                 ? sanitize_text_field( $_REQUEST[ 'transient_id' ] )
@@ -100,9 +86,7 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
                     . '_Form' 
                     . '_' . get_current_user_id() 
                     . '_' . uniqid();
-
-        }        
-        
+        }
     }    
     
     /**
@@ -112,45 +96,34 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
      * Also, custom post types are not registered by the time this is called.
      */    
     public function replyToPluginActivation() {
-
         $this->___checkRequirements();
-        
         $this->replyToInstallCustomTables();
-
         do_action( 'aal_action_plugin_activated' );
-        
     }
-        
         /**
-         * 
-         * @since            3
+         * @since 3
          */
         private function ___checkRequirements() {
-
             $_oRequirementCheck = new AmazonAutoLinks_AdminPageFramework_Requirement(
                 AmazonAutoLinks_Registry::$aRequirements,
                 AmazonAutoLinks_Registry::NAME
             );
-            
             if ( $_oRequirementCheck->check() ) {            
                 $_oRequirementCheck->deactivatePlugin( 
                     $this->sFilePath, 
                     __( 'Deactivating the plugin', 'amazon-auto-links' ),  // additional message
                     true    // is in the activation hook. This will exit the script.
                 );
-            }        
-             
+            }
         }    
 
     /**
      * The plugin activation callback method.
      */    
     public function replyToPluginDeactivation() {
-        
         // Clean transients.
         AmazonAutoLinks_WPUtility::cleanTransients( AmazonAutoLinks_Registry::TRANSIENT_PREFIX );
         AmazonAutoLinks_WPUtility::cleanTransients( 'apf_' );
-        
     }        
     
         
@@ -160,14 +133,12 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
      * @callback add_action() init
      */
     public function setLocalization() {
-                
         load_plugin_textdomain( 
             'amazon-auto-links',
             false, 
             dirname( AmazonAutoLinks_Registry::$sBaseName ) . AmazonAutoLinks_Registry::TEXT_DOMAIN_PATH
         );
-
-    }        
+    }
     
     /**
      * Loads the plugin specific components. 

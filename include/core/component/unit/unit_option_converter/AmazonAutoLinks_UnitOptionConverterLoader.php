@@ -10,8 +10,10 @@
 
 /**
  * Loads the unit option converter component.
- * 
- * @since        3.3.0
+ *
+ * This component has an event handler so needs to be loaded in the front-end as well.
+ *
+ * @since 3.3.0
  */
 class AmazonAutoLinks_UnitOptionConverterLoader {
         
