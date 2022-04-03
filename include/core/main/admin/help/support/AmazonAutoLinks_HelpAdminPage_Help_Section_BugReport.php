@@ -92,7 +92,7 @@ class AmazonAutoLinks_HelpAdminPage_Help_Section_BugReport extends AmazonAutoLin
             ),
             array(
                 'field_id'          => 'attachments',
-                'title'             => __( 'Screenshots', 'amazon-auto-links' ),
+                'title'             => __( 'Attachments', 'amazon-auto-links' ),
                 'type'              => 'image',
                 'repeatable'        => true,
                 'attributes'        => array(
@@ -101,7 +101,12 @@ class AmazonAutoLinks_HelpAdminPage_Help_Section_BugReport extends AmazonAutoLin
                         'style' => 'max-width: 200px;'
                     ),
                 ),
-                'description'       => __( 'Besides image files, <code>.log</code> and <code>.txt</code> files can be attached as well.', 'amazon-auto-links' ),
+                'mime_types'        => array(
+                    'image' => 'image',
+                    'log'   => 'text/plain',
+                    'txt'   => 'text/plain',
+                ),
+                'description'       => __( 'Image files, <code>.log</code> and <code>.txt</code> files can be attached.', 'amazon-auto-links' ),
             ),
             array(
                 'field_id'          => 'allow_sending_system_information',

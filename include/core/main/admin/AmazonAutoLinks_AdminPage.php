@@ -8,7 +8,6 @@
  * Copyright (c) 2013-2022 Michael Uno
  */
 
-
 /**
  * Deals with the plugin admin pages.
  * 
@@ -20,29 +19,11 @@ class AmazonAutoLinks_AdminPage extends AmazonAutoLinks_AdminPageFramework {
      * User constructor.
      */
     public function start() {
-        
         if ( ! $this->oProp->bIsAdmin ) {
             return;
         }     
         add_filter( 'options_' . $this->oProp->sClassName, array( $this, 'replyToSetOptions' ) );
-        add_filter( 'upload_mimes', array( $this, 'replyToGetAllowedFileTypesToUpload' ) );
-
     }
-
-        /**
-         * @since  5.2.1
-         * @param  array $aMimeTypes
-         * @return array
-         */
-        public function replyToGetAllowedFileTypesToUpload( $aMimeTypes ) {
-            // If not from the plugin admin pages, return intact
-            parse_str( wp_get_referer(), $_aRefererQuery );
-            if ( ! in_array( $this->oUtil->getElement( $_aRefererQuery, 'page' ), AmazonAutoLinks_Registry::$aAdminPages, true ) ) {
-                return $aMimeTypes;
-            }
-            $aMimeTypes[ 'log' ] = 'text/plain';  // allow .log files to be attached via the bug report form
-            return $aMimeTypes;
-        }
 
         /**
          * Sets the default option values for the setting form.

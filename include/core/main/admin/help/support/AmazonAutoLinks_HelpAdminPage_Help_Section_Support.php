@@ -95,7 +95,7 @@ class AmazonAutoLinks_HelpAdminPage_Help_Section_Support extends AmazonAutoLinks
             ),
             array(
                 'field_id'          => 'attachments',
-                'title'             => __( 'Screenshots', 'amazon-auto-links' ),
+                'title'             => __( 'Attachments', 'amazon-auto-links' ),
                 'type'              => 'image',
                 'repeatable'        => array(
                     'max' => 1,
@@ -112,7 +112,12 @@ class AmazonAutoLinks_HelpAdminPage_Help_Section_Support extends AmazonAutoLinks
                         'style' => 'max-width: 200px;'
                     ),
                 ),
-                'description'       => __( 'Besides image files, <code>.log</code> and <code>.txt</code> files can be attached as well.', 'amazon-auto-links' ),
+                'mime_types'        => array(
+                    'image' => 'image',
+                    'log'   => 'text/plain',
+                    'txt'   => 'text/plain',
+                ),
+                'description'       => __( 'Image files, <code>.log</code> and <code>.txt</code> files can be attached.', 'amazon-auto-links' ),
                 'before_fieldset'   => "<div title='" . esc_attr( AmazonAutoLinks_Message::getUpgradePromptMessage( false ) ) . "'>",
                 'after_fieldset'    => "</div>",
             ),
