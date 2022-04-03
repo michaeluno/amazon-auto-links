@@ -34,7 +34,7 @@ class AmazonAutoLinks_AdWidgetAPI_Search extends AmazonAutoLinks_AdWidgetAPI_Bas
         // Check item count and if it is less than the expected number, perform requests by incrementing the page.
         $_iExpected  = ( integer ) $inCount;
         $_iActual    = count( $this->getElementAsArray( $_aResult, array( 'results' ) ) );
-        while( $_iActual && $_iActual < $_iExpected ) {
+        while( $this->___shouldFetchNext( $_iActual, $_iExpected ) ) {
             $_iOffset      = $_iOffset + 20;
             $_aResultPaged = $this->___getResultWithOffset( $asKeywords, $aPayload, $_iOffset );
             $_iThis        = count( $_aResultPaged[ 'results' ] );
@@ -53,6 +53,16 @@ class AmazonAutoLinks_AdWidgetAPI_Search extends AmazonAutoLinks_AdWidgetAPI_Bas
         return $_aResult;
 
     }
+        /**
+         * @since  5.2.1
+         * @return boolean
+         */
+        private function ___shouldFetchNext( $iActual, $iExpected ) {
+            if ( $iExpected <= 20 ) {
+                return false;
+            }
+            return $iActual && $iActual < $iExpected;
+        }
         private function ___getResultItemsMerged( $aPrecedence, $aAdditional ) {
             $_aMerged = array();
             foreach( array_merge( $aPrecedence, $aAdditional ) as $_aItem ) {
