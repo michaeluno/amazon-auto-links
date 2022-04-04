@@ -5,7 +5,7 @@
  * Description:       Formerly, Amazon Auto Links. The plugin generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  * Author:            Michael Uno (miunosoft)
  * Author URI:        https://michaeluno.jp
- * Version:           5.2.1b01
+ * Version:           5.2.1
  * Text Domain:       amazon-auto-links
  * Domain Path:       /language
  * GitHub Plugin URI: https://github.com/michaeluno/amazon-auto-links
@@ -18,7 +18,7 @@
  * @since 3     Changed the name from `AmazonAutoLinks_Commons_Base`
  */
 class AmazonAutoLinks_Registry_Base {
-    const VERSION      = '5.2.1b01';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
+    const VERSION      = '5.2.1';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
     const NAME         = 'Auto Amazon Links';
     const DESCRIPTION  = 'Formerly, Amazon Auto Links. The plugin generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.';
     const URI          = 'https://en.michaeluno.jp/amazon-auto-links';
@@ -410,7 +410,9 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
 
     /**
      * @remark Consider a case that the server hosts multiple WordPress sites. In that case, a temp directory needs to be created one per site.
-     * It used to create a plugin specific parent directory but it caused a problem on a shared server that one creates it with the permission, 0755, with umask() and other users became unable to create a directory inside it.
+     * It used to create a plugin specific parent directory,
+     * but it caused a problem on a shared server that one creates it with the permission, 0755, with umask()
+     * and other users became unable to create a directory inside it.
      * @since  4.3.4
      * @return string A temporary directory path for the site.
      */
