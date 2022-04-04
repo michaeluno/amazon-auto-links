@@ -70,7 +70,7 @@ Insert the ads in specific posts and pages with the shortcode. If you want to in
 You can filter out certain products you don't want to display with a black and white list by description, title, and ASIN.
 
 = RSS and JSON Unit Feeds =
-By subscribing to the product RSS/JSON feeds of the units you crate, you can import them from other sites.
+By subscribing to the product RSS/JSON feeds of the units you create, you can import them from other sites.
 
 If you have a web site that can display RSS feed contents, just create a WordPress site somewhere with this plugin and fetch the feed from the site. If you are an App developer, you can just display the items from the feed without programming an API client.
 
