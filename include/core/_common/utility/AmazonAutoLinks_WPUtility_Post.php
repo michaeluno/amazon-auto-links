@@ -94,14 +94,15 @@ class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Path {
      *
      * This is another version of wp_count_posts() without a filter.
      *
-     * @param  string $sPostType
-     * @param  string $sPermission
+     * @param  string  $sPostType
+     * @param  string  $sPermission
+     * @param  boolean $bUseCache   Whether to use the cache from previous results.
      * @return false|mixed|object
      * @see    wp_count_posts()
      * @since  2.0.0
-     * @since  5.2.2  Renamed from `countPosts()`.
+     * @since  5.2.2  Renamed from `countPosts()`. Added the `$bUseCache` parameter
      */
-    static public function getPostCountObject( $sPostType, $sPermission='' ) {
+    static public function getPostCountObject( $sPostType, $sPermission='', $bUseCache=true ) {
         
         global $wpdb;
 
@@ -118,12 +119,12 @@ class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Path {
         $_sSQLQuery .= ' GROUP BY post_status';
 
         $_oCount     = wp_cache_get( $_sCacheKey, 'counts' );
-        if ( false === $_oCount ) {
+        if ( ! $bUseCache || false === $_oCount ) {
             $_aResults = ( array ) $wpdb->get_results( $wpdb->prepare( $_sSQLQuery, $sPostType ), ARRAY_A );
             $_oCount   = array_fill_keys( get_post_stati(), 0 );
 
             foreach ( $_aResults as $_aRow ) {
-                $_oCount[ $_aRow[ 'post_status' ] ] = $_aRow['num_posts'];
+                $_oCount[ $_aRow[ 'post_status' ] ] = $_aRow[ 'num_posts' ];
             }
 
             $_oCount = ( object ) $_oCount;
