@@ -11,6 +11,8 @@ readme.md export-ignore
 asset/log export-ignore
 asset/todo export-ignore
 asset/language export-ignore
+
+changelog.md export-ignore
 .github export-ignore
 
 .gitattributes export-ignore  
