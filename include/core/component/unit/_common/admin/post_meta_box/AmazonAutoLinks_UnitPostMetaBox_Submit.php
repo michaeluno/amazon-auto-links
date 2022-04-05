@@ -33,7 +33,7 @@ class AmazonAutoLinks_UnitPostMetaBox_Submit extends AmazonAutoLinks_UnitPostMet
         parent::_replyToRegisterMetaBoxes();
     }
         private function ___canRegister() {
-            $_oNumber = AmazonAutoLinks_WPUtility::countPosts( AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] );
+            $_oNumber = AmazonAutoLinks_WPUtility::getPostCountObject( AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] );
             $_iNumber = $_oNumber->publish + $_oNumber->private + $_oNumber->trash;
             if ( $_iNumber < 4 ) {
                 return false;

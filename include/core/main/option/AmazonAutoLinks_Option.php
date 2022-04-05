@@ -555,25 +555,27 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
     }
 
     /**
-     * @return  boolean
      * @param   integer|null $iNumberOfUnits
+     * @return  boolean
      */
     public function isUnitLimitReached( $iNumberOfUnits=null ) {
-        
         if ( ! isset( $iNumberOfUnits ) ) {
-            $_oNumberOfUnits = AmazonAutoLinks_WPUtility::countPosts( AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] );
+            $_oNumberOfUnits = AmazonAutoLinks_WPUtility::getPostCountObject( AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] );
             $iNumberOfUnits  = $_oNumberOfUnits->publish 
                 + $_oNumberOfUnits->private 
                 + $_oNumberOfUnits->trash;
         } 
         return ( boolean ) ( $iNumberOfUnits >= 3 );
-        
-    }    
+    }
+
+    /**
+     * @return integer
+     */
     public function getRemainedAllowedUnits( $iNumberOfUnits=null ) {
         
         if ( ! isset( $iNumberOfUnits ) ) {
-            $_oNumberOfUnits   = AmazonAutoLinks_WPUtility::countPosts( 
-                AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] 
+            $_oNumberOfUnits   = AmazonAutoLinks_WPUtility::getPostCountObject(
+                AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ]
             );
             $iNumberOfUnits   = $_oNumberOfUnits->publish 
                 + $_oNumberOfUnits->private 
@@ -582,6 +584,7 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
         return 3 - $iNumberOfUnits;
         
     }
+
     public function getMaximumNumberOfCategories() {
         return 3;
     }

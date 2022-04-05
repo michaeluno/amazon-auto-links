@@ -81,6 +81,15 @@ class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Path {
     }
 
     /**
+     * @param      string $sPostType
+     * @param      string $sPermission
+     * @return     false|mixed|object
+     * @deprecated 5.2.2  All method and function names which return something must start with "get".
+     */
+    static public function countPosts( $sPostType, $sPermission='' ) {
+        return self::getPostCountObject( $sPostType, $sPermission );
+    }
+    /**
      * Counts the posts of the specified post type.
      *
      * This is another version of wp_count_posts() without a filter.
@@ -90,8 +99,9 @@ class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Path {
      * @return false|mixed|object
      * @see    wp_count_posts()
      * @since  2.0.0
+     * @since  5.2.2  Renamed from `countPosts()`.
      */
-    static public function countPosts( $sPostType, $sPermission='' ) {
+    static public function getPostCountObject( $sPostType, $sPermission='' ) {
         
         global $wpdb;
 
