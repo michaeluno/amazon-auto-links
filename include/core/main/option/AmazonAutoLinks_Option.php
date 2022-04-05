@@ -555,12 +555,14 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
     }
 
     /**
-     * @param   integer|null $iNumberOfUnits
+     * @since   ?
+     * @since   5.2.2        Deprecated the $iNUmberOfUnits parameter and changed it to the `$bUseCache`.
+     * @param   boolean      $bUseCache
      * @return  boolean
      */
-    public function isUnitLimitReached( $iNumberOfUnits=null ) {
+    public function isUnitLimitReached( $bUseCache=true ) {
         if ( ! isset( $iNumberOfUnits ) ) {
-            $_oNumberOfUnits = AmazonAutoLinks_WPUtility::getPostCountObject( AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ] );
+            $_oNumberOfUnits = AmazonAutoLinks_WPUtility::getPostCountObject( AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ], '', $bUseCache );
             $iNumberOfUnits  = $_oNumberOfUnits->publish 
                 + $_oNumberOfUnits->private 
                 + $_oNumberOfUnits->trash;
