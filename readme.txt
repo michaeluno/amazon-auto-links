@@ -236,34 +236,38 @@ Yes, that is the former name of this plugin and it is now Auto Amazon Links.
 == Other Notes ==
 
 = Shortcode and Function Parameters =
-The following parameters can be used for the shortcode, `[amazon_auto_links]` or the PHP function of the plugin, `AmazonAutoLinks()`
+The following parameters can be used for the shortcode, `[amazon_auto_links]`, the PHP action hook of the plugin, `do_action( 'aal_action_output' );`, or the filter hooks, `apply_filters( 'aal_filter_output' );`
 
 <h5><strong>id</strong> - the unit ID</h5>
 
 `
 [amazon_auto_links id="123"]
-<?php AmazonAutoLinks( array( 'id' => 123 ) ); ?>
+<?php do_action( 'aal_action_output', array( 'id' => 123 ) ); ?>
+<?php echo apply_filters( 'aal_filter_output', array( 'id' => 123 ) ); ?>
 `
 
 <h5><strong>label</strong> - the label associated with the units</h5>
 
 `
 [amazon_auto_links label="WordPress"]
-<?php AmazonAutoLinks( array( 'label' => 'WordPress' ) ); ?>
+<?php do_action( 'aal_action_output', array( 'label' => 'WordPress' ) ); ?>
+<?php echo apply_filters( 'aal_filter_output', array( 'label' => 'WordPress' ) ); ?>
 `
 
 <h5><strong>asin</strong> - ASINs (product IDs) separated by commas (`,`).</h5>
 
 `
 [amazon_auto_links asin="B016ZNRC0Q, B00ZV9PXP2"]
-<?php AmazonAutoLinks( array( 'asin' => 'B016ZNRC0Q, B00ZV9PXP2' ) ); ?>
+<?php do_action( 'aal_action_output', array( 'asin' => 'B016ZNRC0Q, B00ZV9PXP2' ) ); ?>
+<?php echo apply_filters( 'aal_filter_output', array( 'asin' => 'B016ZNRC0Q, B00ZV9PXP2' ) ); ?>
 `
 
 <h5><strong>search</strong> - Search keywords separated by commas (`,`).</h5>
 
 `
 [amazon_auto_links search="WordPress"]
-<?php AmazonAutoLinks( array( 'search' => 'WordPress' ) ); ?>
+<?php do_action( 'aal_action_output', array( 'search' => 'WordPress' ) ); ?>
+<?php echo apply_filters( 'aal_filter_output', array( 'search' => 'WordPress' ) ); ?>
 `
 
 When the `search` argument is specified, the following arguments can be used.
