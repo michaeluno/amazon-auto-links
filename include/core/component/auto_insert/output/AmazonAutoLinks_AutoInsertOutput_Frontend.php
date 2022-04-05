@@ -171,10 +171,10 @@ class AmazonAutoLinks_AutoInsertOutput_Frontend extends AmazonAutoLinks_AutoInse
             );
 
             if ( $sPosition == 'above' || $sPosition == 'both' ) {
-                $sPre  .= AmazonAutoLinks( $_aArguments, false );
+                $sPre  .= apply_filters( 'aal_filter_output', $_aArguments );
             }
             if ( $sPosition == 'below' || $sPosition == 'both' ) {
-                $sPost .= AmazonAutoLinks( $_aArguments, false );
+                $sPost .= apply_filters( 'aal_filter_output', $_aArguments );
             }
         
         }
@@ -207,8 +207,8 @@ class AmazonAutoLinks_AutoInsertOutput_Frontend extends AmazonAutoLinks_AutoInse
             $aAutoInsertOptions = $this->aAutoInsertOptions[ $iAutoInsertID ];                  
             $_aArguments = array( 
                 'id' => $aAutoInsertOptions[ 'unit_ids' ]
-            );            
-            AmazonAutoLinks( $_aArguments );
+            );
+            do_action( 'aal_action_output', $_aArguments );
 
         }
 

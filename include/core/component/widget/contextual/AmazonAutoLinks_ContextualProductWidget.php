@@ -11,7 +11,7 @@
 /**
  * Creates a widget by unit.
  * 
- * @since   3
+ * @since 3
  */
 class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageFramework_Widget {
     
@@ -20,8 +20,7 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
      * 
      * Alternatively you may use start_{instantiated class name} method.
      */
-    public function start() {
-    }
+    public function start() {}
     
     /**
      * Sets up arguments.
@@ -45,8 +44,8 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
         
     }    
         /**
-         * @param       string  $sCSSRules
-         * @return      string
+         * @param  string $sCSSRules
+         * @return string
          */
         public function replyToModifyCSSRules( $sCSSRules ) {
             
@@ -76,9 +75,9 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
         
         /**
          * Sets the default options.
-         * @param       array $aOptions
-         * @return      array
-         * @since       3.3.0
+         * @param  array $aOptions
+         * @return array
+         * @since  3.3.0
          */
         public function replyToSetDefaultOptions( $aOptions ) {
             $_aDefaults = apply_filters( 'aal_filter_default_unit_options_search', array() );
@@ -210,9 +209,9 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
         }
         /**
          * Modifies the 'button_id' field to add lables for selection.
-         * @param       array   $aFieldset
-         * @return      array
-         * @since       3.3.0
+         * @param  array $aFieldset
+         * @return array
+         * @since  3.3.0
          */
         public function replyToSetActiveButtonLabels( $aFieldset ) {
             $aFieldset[ 'label' ] = AmazonAutoLinks_PluginUtility::getActiveButtonLabelsForFields();
@@ -268,9 +267,9 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
     /**
      * Validates the submitted form data.
      *
-     * @callback add_filter()   validation_{instantiated class name}
-     * @param    array $aSubmit
-     * @param    array $aStored
+     * @callback add_filter() validation_{instantiated class name}
+     * @param    array        $aSubmit
+     * @param    array        $aStored
      * @param    AmazonAutoLinks_AdminPageFramework_Widget $oAdminWidget
      * @return   array
      */
@@ -296,7 +295,7 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
     /**
      * Print out the contents in the front-end.
      * 
-     * @callback        filter      content_{instantiated class name}
+     * @callback add_filter() content_{instantiated class name}
      */
     public function content( $sContent, $aArguments, $aFormData ) {
 
@@ -384,7 +383,7 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
             $aFormData[ 'unit_type' ] = 'contextual';
             // [4.6.8] Search units have the `Title` argument and this causes a conflict in WordPress 5.8
             unset( $aFormData[ 'title' ] );
-            return AmazonAutoLinks( $aFormData, false );
+            return apply_filters( 'aal_filter_output', $aFormData );
         }
        
 }

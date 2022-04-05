@@ -46,7 +46,7 @@ class AmazonAutoLinks_CustomOEmbed_Content_NonIframe {
             'uri'         => urldecode( $sURL ),
             'template_id' => $_oOption->get( array( 'custom_oembed', 'template_id' ) ),
         );
-        return AmazonAutoLinks( $_aArguments, false );
+        return apply_filters( 'aal_filter_output', $_aArguments );
     }
 
 }

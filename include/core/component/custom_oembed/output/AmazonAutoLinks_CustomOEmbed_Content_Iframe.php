@@ -131,7 +131,7 @@ class AmazonAutoLinks_CustomOEmbed_Content_Iframe {
             'uri'         => urldecode( AmazonAutoLinks_PluginUtility::getURLSanitized( $_GET[ 'uri' ] ) ), // sanitization done
             'template_id' => $_oOption->get( array( 'custom_oembed', 'template_id' ) ),
         );
-        AmazonAutoLinks( $_aArguments );
+        do_action( 'aal_action_output', $_aArguments );
 
     }
 

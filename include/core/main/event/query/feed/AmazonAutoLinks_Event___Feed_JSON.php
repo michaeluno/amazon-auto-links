@@ -41,7 +41,7 @@ class AmazonAutoLinks_Event___Feed_JSON extends AmazonAutoLinks_Event___Feed_Bas
         $_aArguments[ 'load_with_javascript' ] = false; // 3.6.0+
 
         header( 'Content-Type: application/json; charset=' . get_option( 'blog_charset' ), true );
-        AmazonAutoLinks( $_aArguments, true );
+        do_action( 'aal_action_output', $_aArguments );
 
     }
 

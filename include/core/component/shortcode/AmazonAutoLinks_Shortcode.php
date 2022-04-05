@@ -11,8 +11,8 @@
 /**
  * Handles plugin's shortcodes.
  * 
- * @since       2.0.0
- * @since       3       Extends `AmazonAutoLinks_WPUtility`.
+ * @since 2.0.0
+ * @since 3     Extends `AmazonAutoLinks_WPUtility`.
  */
 class AmazonAutoLinks_Shortcode extends AmazonAutoLinks_WPUtility {
 
@@ -25,10 +25,7 @@ class AmazonAutoLinks_Shortcode extends AmazonAutoLinks_WPUtility {
             AmazonAutoLinks_Registry::$aShortcodes[ 'v1' ],
         );
         foreach( $this->getAsArray( $_aShortcodes ) as $_sShortCode ) {
-            add_shortcode( 
-                $_sShortCode, 
-                array( $this, '_replyToGetOutput' ) 
-            );
+            add_shortcode( $_sShortCode, array( $this, '_replyToGetOutput' ) );
         }
     }
     
@@ -41,7 +38,7 @@ class AmazonAutoLinks_Shortcode extends AmazonAutoLinks_WPUtility {
      * @return string
      */
     public function _replyToGetOutput( $aArguments ) {
-        return AmazonAutoLinks( $aArguments, false );
+        return apply_filters( 'aal_filter_output', $aArguments );
     }    
 
 }

@@ -11,7 +11,7 @@
 /**
  * Provides method to render post contents in a single post page.
  * 
- * @since       3
+ * @since 3
  * 
  */
 class AmazonAutoLinks_PostType_Unit_PostContent extends AmazonAutoLinks_PostType_Unit_ListTable {
@@ -19,24 +19,20 @@ class AmazonAutoLinks_PostType_Unit_PostContent extends AmazonAutoLinks_PostType
     /**
      * Prints out the fetched product links.
      *
-     * @param       string  $sContent       The post content to filter.
-     * @remark          Used for the post type single page that functions as preview the result.
-     * @since           3       Changed the name from `_replytToPrintPreviewProductLinks()`.
+     * @param  string  $sContent The post content to filter.
+     * @remark Used for the post type single page that functions as preview the result.
+     * @since  3       Changed the name from `_replyToPrintPreviewProductLinks()`.
      * */
     public function content( $sContent ) {
-    
         $_oOption = AmazonAutoLinks_Option::getInstance();
         if ( ! $_oOption->isPreviewVisible() ) {
             return $sContent;
         }
-
         if ( ! in_the_loop() ) {
             return $sContent;
         }
-
         return $sContent
-            . AmazonAutoLinks( array( 'id' => $GLOBALS[ 'post' ]->ID ), false );
-
-    }    
+            . apply_filters( 'aal_filter_output', array( 'id' => $GLOBALS[ 'post' ]->ID ) );
+    }
    
 }

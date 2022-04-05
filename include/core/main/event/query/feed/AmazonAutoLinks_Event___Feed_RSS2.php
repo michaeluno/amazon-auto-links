@@ -11,13 +11,13 @@
 /**
  * Handles JSON feed output.
  *
- * @since       3.5.0
- * @since       4.6.0   Extends `AmazonAutoLinks_Event___Feed_Base`.
+ * @since 3.5.0
+ * @since 4.6.0 Extends `AmazonAutoLinks_Event___Feed_Base`.
  */
 class AmazonAutoLinks_Event___Feed_RSS2 extends AmazonAutoLinks_Event___Feed_Base {
 
     /**
-     * @var string The feed type such as rss2 or json.
+     * @var   string The feed type such as rss2 or json.
      * @since 4.6.4
      */
     public $sType = 'rss2';
@@ -39,7 +39,7 @@ class AmazonAutoLinks_Event___Feed_RSS2 extends AmazonAutoLinks_Event___Feed_Bas
         $_aArguments[ 'load_with_javascript' ] = false; // 3.6.0+
 
         header( 'Content-Type: ' . feed_content_type( 'rss-http' ) . '; charset=' . get_option( 'blog_charset' ), true );
-        AmazonAutoLinks( $_aArguments, true );
+        do_action( 'aal_action_output', $_aArguments );
 
     }
 

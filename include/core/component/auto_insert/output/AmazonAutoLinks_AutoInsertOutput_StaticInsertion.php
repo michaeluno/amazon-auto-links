@@ -94,10 +94,10 @@ class AmazonAutoLinks_AutoInsertOutput_StaticInsertion extends AmazonAutoLinks_A
                     'id' => $_aUnitIDs,
                 );
                 if ( 'above' === $_sPosition || 'both' === $_sPosition ) {
-                    $sPre  .= AmazonAutoLinks( $_aArguments, false );
+                    $sPre  .= apply_filters( 'aal_filter_output', $_aArguments );
                 }
                 if ( 'below' === $_sPosition || 'both' === $_sPosition ) {
-                    $sPost .= AmazonAutoLinks( $_aArguments, false );
+                    $sPost .= apply_filters( 'aal_filter_output', $_aArguments );
                 }
             
             }

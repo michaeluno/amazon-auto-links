@@ -90,9 +90,8 @@ class AmazonAutoLinks_WidgetByID extends AmazonAutoLinks_AdminPageFramework_Widg
     
         /**
          * Adds form fields by the given class names.
-         * @since       3.0.5
-         * @param       array  $aClassNames
-         * @return      void
+         * @since 3.0.5
+         * @param array $aClassNames
          */
         private function _addFieldsByFieldClass( $aClassNames ) {    
         
@@ -120,7 +119,7 @@ class AmazonAutoLinks_WidgetByID extends AmazonAutoLinks_AdminPageFramework_Widg
         }
         
         /**
-         * @return  array
+         * @return array
          */
         private function _getUnitLabels() {
             return AmazonAutoLinks_PluginUtility::getPostsLabelsByPostType(
@@ -134,9 +133,7 @@ class AmazonAutoLinks_WidgetByID extends AmazonAutoLinks_AdminPageFramework_Widg
      * Alternatively you may use validation_{instantiated class name} method.
      */
     public function validate( $aSubmit, $aStored, $oAdminWidget ) {
-        
         return $aSubmit;
-        
     }    
     
     /**
@@ -155,12 +152,12 @@ class AmazonAutoLinks_WidgetByID extends AmazonAutoLinks_AdminPageFramework_Widg
 
         // Store widget instance information so that the output function knows what to do with JavaScript loading.
         $aFormData[ '_widget_option_name' ] = $this->oProp->oWidget->option_name;
-        $aFormData[ '_widget_number' ] = $this->oProp->oWidget->number;
+        $aFormData[ '_widget_number' ]      = $this->oProp->oWidget->number;
 
         // [4.6.8] Search units have the `Title` argument and this causes a conflict in WordPress 5.8
         unset( $aFormData[ 'title' ] );
 
-        return $sContent . AmazonAutoLinks( $aFormData, false );
+        return $sContent . apply_filters( 'aal_filter_output', $aFormData );
     
     }
         /**

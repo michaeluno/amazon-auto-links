@@ -99,7 +99,7 @@ class AmazonAutoLinks_GutenbergBlock_UnitBlock extends AmazonAutoLinks_Gutenberg
             if ( ! $_iUnitID ) {
                 return "<!-- A unit is not selected. -->";
             }
-            return AmazonAutoLinks( $aBlockAttributes, false );
+            return apply_filters( 'aal_filter_output', $aBlockAttributes );
         }
         private function ___getOutputBackend( $aBlockAttributes, $sContent, $aProperties ) {
             $_iUnitID = ( integer ) $this->getElement( $aBlockAttributes, array( 'id' ) );
