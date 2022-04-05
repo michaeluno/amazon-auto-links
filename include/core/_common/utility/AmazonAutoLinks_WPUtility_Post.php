@@ -85,58 +85,54 @@ class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Path {
      *
      * This is another version of wp_count_posts() without a filter.
      *
-     * @param  string $strPostType
-     * @param  string $perm
+     * @param  string $sPostType
+     * @param  string $sPermission
      * @return false|mixed|object
      * @see    wp_count_posts()
      * @since  2.0.0
      */
-    static public function countPosts( $strPostType, $perm='' ) {
+    static public function countPosts( $sPostType, $sPermission='' ) {
         
         global $wpdb;
 
-        $oUser      = wp_get_current_user();
-        $cache_key  = 'posts-' . $strPostType;
-        $query      = "SELECT post_status, COUNT( * ) AS num_posts FROM {$wpdb->posts} WHERE post_type = %s";
-        if ( 'readable' == $perm && is_user_logged_in() ) {
-            $post_type_object = get_post_type_object( $strPostType );
-            if ( !current_user_can( $post_type_object->cap->read_private_posts ) ) {
-                $cache_key .= '_' . $perm . '_' . $oUser->ID;
-                $query .= " AND (post_status != 'private' OR ( post_author = '$oUser->ID' AND post_status = 'private' ))";
+        $_oUser      = wp_get_current_user();
+        $_sCacheKey  = 'posts-' . $sPostType;
+        $_sSQLQuery  = "SELECT post_status, COUNT( * ) AS num_posts FROM {$wpdb->posts} WHERE post_type = %s";
+        if ( 'readable' == $sPermission && is_user_logged_in() ) {
+            $_oPostType = get_post_type_object( $sPostType );
+            if ( !current_user_can( $_oPostType->cap->read_private_posts ) ) {
+                $_sCacheKey .= '_' . $sPermission . '_' . $_oUser->ID;
+                $_sSQLQuery .= " AND (post_status != 'private' OR ( post_author = '$_oUser->ID' AND post_status = 'private' ))";
             }
         }
-        $query .= ' GROUP BY post_status';
+        $_sSQLQuery .= ' GROUP BY post_status';
 
-        $oCount = wp_cache_get( $cache_key, 'counts' );
-        if ( false === $oCount ) {
-            $results = (array) $wpdb->get_results( $wpdb->prepare( $query, $strPostType ), ARRAY_A );
-            $oCount = array_fill_keys( get_post_stati(), 0 );
+        $_oCount     = wp_cache_get( $_sCacheKey, 'counts' );
+        if ( false === $_oCount ) {
+            $_aResults = ( array ) $wpdb->get_results( $wpdb->prepare( $_sSQLQuery, $sPostType ), ARRAY_A );
+            $_oCount   = array_fill_keys( get_post_stati(), 0 );
 
-            foreach ( $results as $row ) {
-                $oCount[ $row['post_status'] ] = $row['num_posts'];
+            foreach ( $_aResults as $_aRow ) {
+                $_oCount[ $_aRow[ 'post_status' ] ] = $_aRow['num_posts'];
             }
 
-            $oCount = (object) $oCount;
-            wp_cache_set( $cache_key, $oCount, 'counts' );
+            $_oCount = ( object ) $_oCount;
+            wp_cache_set( $_sCacheKey, $_oCount, 'counts' );
         }
-    
-        return $oCount;
+        return $_oCount;
         
     }
 
     /**
-     *
-     * @remark      Be careful when the meta key does not exist, an empty string is returned instead of null, which can cause an unexpected behavior when merging a resulting array.
-     *
-     * @param integer $iPostID
-     * @param string $sKey
-     * @param array|string $asDefaults      Default values for when the meta value does not exist.
-     *
-     * @return      array|string       If no key is specified, an associative array holding meta values of the specified post by post ID.
+     * @remark  Be careful when the meta key does not exist, an empty string is returned instead of null, which can cause an unexpected behavior when merging a resulting array.
+     * @param   integer      $iPostID
+     * @param   string       $sKey
+     * @param   array|string $asDefaults Default values for when the meta value does not exist.
+     * @return  array|string If no key is specified, an associative array holding meta values of the specified post by post ID.
      * If a meta key is specified, it returns the value of the meta.
      * @since   3
-     * @since   4.2.6   Added the $asDefaults parameter.
-     * @sinee   4.5.0   Uses object caches to reduce SQL queries.
+     * @since   4.2.6        Added the $asDefaults parameter.
+     * @sinee   4.5.0        Uses object caches to reduce SQL queries.
      */
     static public function getPostMeta( $iPostID, $sKey='', $asDefaults=array() ) {
 
