@@ -9,9 +9,8 @@
  */
 
 /**
- * Updates unit status via ajax calls.
- * @since   4.3.0
- *
+ * Updates unit elements via ajax calls.
+ * @since 4.3.0
  */
 class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLinks_AjaxEvent_Base {
 
@@ -41,10 +40,10 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
     }
 
     /**
-     * @return string|array
-     * @throws Exception        Throws a string value of an error message.
+     * @throws Exception    Throws a string value of an error message.
      * @since  4.3.0
-     * @param array $aPost      POST data array containing, the `items` array element.
+     * @param  array $aPost POST data array containing, the `items` array element.
+     * @return string|array
      */
     protected function _getResponse( array $aPost ) {
 
@@ -54,10 +53,10 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
             do_action( 'aal_action_check_tasks' );
         }
 
-        $_aAllItems           = $this->getElementAsArray( $aPost, array( 'items' ) );
+        $_aAllItems = $this->getElementAsArray( $aPost, array( 'items' ) );
         $this->___updateProductsWithAdWidgetAPI( $_aAllItems );
-        $_aProducts           = $this->___getProducts( $_aAllItems );
-        $_aElements           = array();
+        $_aProducts = $this->___getProducts( $_aAllItems );
+        $_aElements = array();
         foreach( $_aAllItems as $_sASINLocaleCurLang => $_aDueElements ) {
             $_aElements = array_merge(
                 $_aElements,
@@ -136,9 +135,9 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
             }
         }
         /**
-         * @param array $aResults
-         * @since 4.3.1
-         * @deprecated 4.3.4    These request requires certain intervals so leave it to wp-cron.
+         * @param      array $aResults
+         * @since      4.3.1
+         * @deprecated 4.3.4 These requests require certain intervals so leave it to wp-cron.
          */
 /*        private function ___handleRatingsAndReviews( array $aResults ) {
 
@@ -259,8 +258,8 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
             }
                 /**
                  * Generates unit arguments with the first item and then add ASINs to the `ItemIDs` argument.
-                 * @param  integer|string $isID A call ID or unit ID 
-                 * @param  array $aItemsByProductID
+                 * @param  integer|string $isID              A call ID or unit ID
+                 * @param  array          $aItemsByProductID
                  * @return array
                  */
                 private function ___getUnitOptionSetsGeneratedWithID( $isID, $aItemsByProductID ) {
@@ -297,10 +296,10 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
 
         /**
          * Converts numeric indices to associate keys.
-         * @param array $aProducts
-         * @param AmazonAutoLinks_UnitOption_Base $oUnitOption
+         * @since  4.3.0
+         * @param  array $aProducts
+         * @param  AmazonAutoLinks_UnitOption_Base $oUnitOption
          * @return array A formatted products array.
-         * @since 4.3.0
          */
         private function ___getProductsFormatted( array $aProducts, AmazonAutoLinks_UnitOption_Base $oUnitOption ) {
             $_aNewProducts = array();
@@ -322,10 +321,10 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
         }
 
         /**
-         * @param  array  $aDueElements
-         * @param  array  $aProducts
+         * @since  4.3.0
+         * @param  array $aDueElements
+         * @param  array $aProducts
          * @return array
-         * @since 4.3.0
          */
         private function ___getElementsByASINLocaleCurLang( array $aDueElements, array $aProducts ) {
 
@@ -351,9 +350,9 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
 
         }
             /**
-             * @param $snOutput
-             * @return bool
-             * @since 4.3.0
+             * @since  4.3.0
+             * @param  string|null $snOutput
+             * @return boolean
              */
             private function ___isElementOutputSet( $snOutput ) {
                 if ( is_null( $snOutput ) ) {
@@ -372,10 +371,10 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
                 return is_scalar( $snOutput );
             }
             /**
-             * @param array $aDueElement
-             * @param array $aProducts
-             * @return string|null       When the element is not set, null is returned. This is to cache up cases that an empty string is returned which means the database already stores the result of an empty string. This is different from a case of unset (null) that the API request has not been done yet.
-             * @since 4.3.0
+             * @since  4.3.0
+             * @param  array       $aDueElement
+             * @param  array       $aProducts
+             * @return string|null When the element is not set, null is returned. This is to cache up cases that an empty string is returned which means the database already stores the result of an empty string. This is different from a case of unset (null) that the API request has not been done yet.
              */
             private function ___getElementOutput( array $aDueElement, array $aProducts ) {
                 $_sASINLocaleCurLang = "{$aDueElement[ 'asin' ]}|{$aDueElement[ 'locale' ]}|{$aDueElement[ 'currency' ]}|{$aDueElement[ 'language' ]}";
