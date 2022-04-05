@@ -60,7 +60,6 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First extends AmazonA
     }
     
     /**
-     * 
      * @callback add_filter() validation_{page slug}_{tab slug}
      * @return   array
      */
@@ -68,17 +67,15 @@ class AmazonAutoLinks_CategoryUnitAdminPage_CategorySelect_First extends AmazonA
 
         $_bVerified = ! $oFactory->hasFieldError();
         $_aErrors   = array();
-        $_oOption   = AmazonAutoLinks_Option::getInstance();
-    
-        // Check the limitation.
-        if ( $_oOption->isUnitLimitReached() ) {
 
+        try {
+            AmazonAutoLinks_Unit_Admin_Utility::tryCheckUnitCanBeCreated();
+        } catch ( Exception $_oException ) {
             // must set a field error array which does not yield empty so that it won't be redirected.
-            $oFactory->setFieldErrors( array( 'error' ) );        
+            $oFactory->setFieldErrors( array( 'error' ) );
             $oFactory->setSettingNotice( AmazonAutoLinks_Message::getUpgradePromptMessageToAddMoreUnits() );
             return $aOldInputs;
-            
-        }   
+        }
 
         // An invalid value is found. Set a field error array and an admin notice and return the old values.
         if ( ! $_bVerified ) {

@@ -15,6 +15,42 @@
 class AmazonAutoLinks_Unit_Admin_Utility extends AmazonAutoLinks_PluginUtility {
 
     /**
+     * @throws Exception
+     * @since  5.2.2
+     */
+    static public function tryCheckUnitCanBeCreated() {
+        $_oOption = AmazonAutoLinks_Option::getInstance();
+        if ( $_oOption->isUnitLimitReached() ) {
+            self::___deleteTrashedUnits();
+            if ( $_oOption->isUnitLimitReached( false ) ) {
+                throw new Exception();
+            }
+        }
+    }
+        /**
+         * @since 5.2.2
+         */
+        static private function ___deleteTrashedUnits() {
+            foreach( self::___getTrashedUnitIDs() as $_iPostID ) {
+                wp_delete_post( $_iPostID );
+            }
+        }
+            /**
+             * @return integer[]
+             * @since  5.2.2
+             */
+            static private function ___getTrashedUnitIDs() {
+                $_oWPQuery = new WP_Query( array(
+                    'post_type'      => AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],
+                    'post_status'    => 'trash',
+                    'posts_per_page' => -1,
+                    'order'          => 'ASC',
+                    'fields'         => 'ids',
+                ) );
+                return $_oWPQuery->get_posts();
+            }
+
+    /**
      * Makes the fields disabled.
      * @since   4.1.0
      * @retun   array

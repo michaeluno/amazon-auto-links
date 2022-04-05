@@ -130,9 +130,10 @@ abstract class AmazonAutoLinks_Unit_UnitType_Admin_Page_UnitCreationWizardBase e
         $_oTemplateOption = AmazonAutoLinks_TemplateOption::getInstance();
         $_oUtil           = new AmazonAutoLinks_PluginUtility;
 
-        // Check the limitation.
-        if ( $_oOption->isUnitLimitReached() ) {
-            $oFactory->setFieldErrors( $_aErrors + array( true ) );     // this prevents the submit-redirect routine
+        try {
+            AmazonAutoLinks_Unit_Admin_Utility::tryCheckUnitCanBeCreated();
+        } catch ( Exception $_oException ) {
+            $oFactory->setFieldErrors( $_aErrors + array( true ) );     // this prevents the submit redirect routine
             $oFactory->setSettingNotice( AmazonAutoLinks_Message::getUpgradePromptMessageToAddMoreUnits() );
             return $aOldInputs;
         }
@@ -176,5 +177,5 @@ abstract class AmazonAutoLinks_Unit_UnitType_Admin_Page_UnitCreationWizardBase e
         return $aInputs;
         
     }   
-            
+
 }

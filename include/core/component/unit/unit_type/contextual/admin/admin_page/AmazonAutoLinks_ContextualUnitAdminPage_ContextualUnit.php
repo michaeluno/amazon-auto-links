@@ -89,12 +89,13 @@ class AmazonAutoLinks_ContextualUnitAdminPage_ContextualUnit extends AmazonAutoL
         $_oTemplateOption = AmazonAutoLinks_TemplateOption::getInstance();
         $_oUtil           = new AmazonAutoLinks_PluginUtility;
 
-        // Check the limitation.
-        if ( $_oOption->isUnitLimitReached() ) {
+        try {
+            AmazonAutoLinks_Unit_Admin_Utility::tryCheckUnitCanBeCreated();
+        } catch ( Exception $_oException ) {
             $oFactory->setFieldErrors( $_aErrors + array( true ) );     // this prevents the submit redirect routine
             $oFactory->setSettingNotice( AmazonAutoLinks_Message::getUpgradePromptMessageToAddMoreUnits() );
             return $aOldInputs;
-        }        
+        }
 
         $aInputs[ 'associate_id' ] = $_oOption->getAssociateID( $aInputs[ 'country' ] );
 
@@ -151,5 +152,17 @@ class AmazonAutoLinks_ContextualUnitAdminPage_ContextualUnit extends AmazonAutoL
         return $aInputs;
         
     }   
-            
+
+        private function ___getOldestTrashedUnitID() {
+            $_oWPQuery = new WP_Query( array(
+                'post_type'      => AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],
+                'post_status'    => 'trash',
+                'posts_per_page' => 1,
+                'order'          => 'ASC',
+                'fields'         => 'ids',
+            ) );
+            $_aPosts  = $_oWPQuery->get_posts();
+            $_iFound  = reset( $_aPosts );
+            return ( integer ) $_iFound;
+        }
 }

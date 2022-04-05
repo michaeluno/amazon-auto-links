@@ -78,15 +78,14 @@ class AmazonAutoLinks_SearchUnitAdminPage_SearchUnit_First extends AmazonAutoLin
         $_aErrors   = array();
         $_oOption   = AmazonAutoLinks_Option::getInstance();
     
-        // Check the limitation.
-        if ( $_oOption->isUnitLimitReached() ) {
-
+        try {
+            AmazonAutoLinks_Unit_Admin_Utility::tryCheckUnitCanBeCreated();
+        } catch ( Exception $_oException ) {
             // must set a field error array which does not yield empty so that it won't be redirected.
-            $oFactory->setFieldErrors( array( 'error' ) );        
+            $oFactory->setFieldErrors( array( 'error' ) );
             $oFactory->setSettingNotice( AmazonAutoLinks_Message::getUpgradePromptMessageToAddMoreUnits() );
             return $aOldInputs;
-            
-        }   
+        }
 
         $aInputs[ 'associate_id' ] = $_oOption->getAssociateID( $aInputs[ 'country' ] );
 
