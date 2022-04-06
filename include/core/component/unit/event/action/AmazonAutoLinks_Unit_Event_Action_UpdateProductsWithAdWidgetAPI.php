@@ -34,7 +34,7 @@ class AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI extends Am
         }
 
         $_oOption           = AmazonAutoLinks_Option::getInstance();
-        $iCacheDuration     = isset( $iCacheDuration ) ? $iCacheDuration : ( integer ) $_oOption->get( 'unit_default', 'cache_duration' );
+        $iCacheDuration     = isset( $iCacheDuration ) ? ( integer ) $iCacheDuration : ( integer ) $_oOption->get( 'unit_default', 'cache_duration' );
         $_aASINsToSearch    = array_keys( $aItems );
         $_aResponse         = $this->___getAPIResponse( $sLocaleSlug, $_aASINsToSearch, $iCacheDuration, $bForceRenew );
         $_aProducts         = $this->getElementAsArray( $_aResponse, array( 'results' ) );
