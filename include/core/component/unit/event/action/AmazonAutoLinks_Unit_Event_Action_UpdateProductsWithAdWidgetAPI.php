@@ -147,6 +147,10 @@ class AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI extends Am
                         $_aRow[ 'product_id' ] = $_sKey;
                     }
 
+                    if ( $_aRowsSets[ 'default' ][ $_sKey ] == $_aRow ) {   // two operators '==' for arrays don't care about the array order
+                        continue;
+                    }
+
                     if ( ! $this->___shouldUpdateRow( $_aRow, $_aStoredRow, $iCacheDuration ) ) {
                         continue;
                     }
