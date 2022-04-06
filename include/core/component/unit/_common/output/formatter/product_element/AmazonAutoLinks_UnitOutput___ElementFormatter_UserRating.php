@@ -11,14 +11,14 @@
 /**
  * A class that provides methods to format user rating outputs.
  *
- * @since       3.5.0
+ * @since 3.5.0
  */
 class AmazonAutoLinks_UnitOutput___ElementFormatter_UserRating extends AmazonAutoLinks_UnitOutput___ElementFormatter_Base {
 
     /**
-     * @return      string
-     * @throws      Exception
-     * @since       3.5.0
+     * @return string
+     * @throws Exception
+     * @since  3.5.0
      */
     public function get() {
 
@@ -33,10 +33,12 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_UserRating extends AmazonAut
         }
 
         // Backward compatibility for 3.8.x or below
-        $_snEncodedHTML = $this->_getCell( 'rating_html' );
-        if ( $_snEncodedHTML ) {
-            return $this->___getFormattedOutput( $_snEncodedHTML );
-        }
+        // @deprecated 5.2.2 This causes extra HTTP request, by scheduling the `aal_action_api_get_product_rating` task. (`rating_html` column value no longer exists but if the value is checked, the action gets schedulerd)
+        // $_snEncodedHTML = $this->_getCell( 'rating_html' );
+        // if ( $_snEncodedHTML ) {
+        //     return $this->___getFormattedOutput( $_snEncodedHTML );
+        // }
+
         // For 3.9.0 or above, generate the output from the rating value.
         $_inRating      = isset( $this->_aProduct[ 'rating' ] ) // embed unit type sets it with the ad widget api
             ? $this->_aProduct[ 'rating' ]
@@ -47,7 +49,9 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_UserRating extends AmazonAut
                 isset( $this->_aProduct[ 'number_of_reviews' ] ) ? ( integer ) $this->_aProduct[ 'number_of_reviews' ] : null
             );
         }
-        if ( null === $_snEncodedHTML && null === $_inRating ) {
+
+        // @deprecated 5.2.2 if ( null === $_snEncodedHTML && null === $_inRating ) {
+        if ( null === $_inRating ) {
             return $this->_getPendingMessage(
                 __( 'Now retrieving the rating.', 'amazon-auto-links' ),
                 $this->_sLocale,
@@ -58,10 +62,10 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_UserRating extends AmazonAut
 
     }
         /**
-         * @since   3.9.0
-         * @param   integer $iRating
-         * @param   integer|null $iNumberOfReviews
-         * @return  string
+         * @since  3.9.0
+         * @param  integer $iRating
+         * @param  integer|null $iNumberOfReviews
+         * @return string
          */
         private function ___getRatingOutput( $iRating, $iNumberOfReviews ) {
             $_iReviewCount  = isset( $iNumberOfReviews )
@@ -75,9 +79,10 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_UserRating extends AmazonAut
         }
 
         /**
-         * @since   3.5.0
-         * @return  string
-         * @remark  kept for backward compatibility
+         * @since      3.5.0
+         * @return     string
+         * @remark     kept for backward compatibility
+         * @deprecated 5.2.2 The `rating_html` has been no longer used and checking its value triggers extra background routines of fetching and updating product data.
          */
         private function ___getFormattedOutput( $_snEncodedHTML ) {
             if ( '' === $_snEncodedHTML ) {
