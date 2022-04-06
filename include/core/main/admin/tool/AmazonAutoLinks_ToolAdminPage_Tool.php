@@ -59,6 +59,9 @@ class AmazonAutoLinks_ToolAdminPage_Tool extends AmazonAutoLinks_AdminPage_Page_
         if ( ! $_oOption->isDebug( 'back_end' ) ) {
             return;
         }
+        if ( 'unit_option_converter' === $_GET[ 'tab' ] ) {
+            return;
+        }
         $_oToolOption = AmazonAutoLinks_ToolOption::getInstance();
         echo "<div class='aal-accordion'>"
             . "<h4>Debug - Tool Options</h4>"
