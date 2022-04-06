@@ -11,12 +11,12 @@
 /**
  * Updates products with the Ad Widget API.
  *
- * @since   4.6.9
+ * @since 4.6.9
  */
 class AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI extends AmazonAutoLinks_PluginUtility {
 
     /**
-     * @since  4.6.9
+     * @since 4.6.9
      */
     public function __construct() {
         add_action( 'aal_action_update_products_with_ad_widget_api', array( $this, 'replyToUpdateProducts' ), 10, 4 );
@@ -157,7 +157,6 @@ class AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI extends Am
                 return $_aRowsSets;
 
             }
-
                 /**
                  * @since 4.6.9
                  */
@@ -264,6 +263,7 @@ class AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI extends Am
                         }
                         return $aStoredRow[ 'discounted_price_formatted' ];
                     }
+
         /**
          * @param  string  $sLocale
          * @param  array   $aASINs

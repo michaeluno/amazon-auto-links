@@ -139,7 +139,8 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
          * @since      4.3.1
          * @deprecated 4.3.4 These requests require certain intervals so leave it to wp-cron.
          */
-/*        private function ___handleRatingsAndReviews( array $aResults ) {
+        /*
+        private function ___handleRatingsAndReviews( array $aResults ) {
 
             // Extract only the review and rating items.
             $_aRatingItems = array();
@@ -189,7 +190,8 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
                 );
             }
 
-        }*/
+        }
+        */
 
         /**
          * @remark Fetches products as the item_lookup unit type regardless of passed unit types.
@@ -251,8 +253,7 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
             private function ___getUnitOptionSetsByItems( array $aSetsByID ) {
                 $_aUnitOptions = array();
                 foreach( $aSetsByID as $_iID => $_aItemsByProductID ) {
-                    $_aUnitOptions = $_aUnitOptions
-                         + $this->___getUnitOptionSetsGeneratedWithID( $_iID, $_aItemsByProductID );
+                    $_aUnitOptions = $_aUnitOptions + $this->___getUnitOptionSetsGeneratedWithID( $_iID, $_aItemsByProductID );
                 }
                 return $_aUnitOptions;
             }
