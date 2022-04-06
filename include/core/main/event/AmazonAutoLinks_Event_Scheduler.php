@@ -67,7 +67,7 @@ class AmazonAutoLinks_Event_Scheduler {
                 $_aParameters = $_aParameters + array( null, null, null );
                 $_sProductID = $_aParameters[ 0 ];
                 // If the product information routine is added for this product, do not schedule this routine.
-                if ( in_array( $_sProductID, self::$___aScheduledProductIDs ) ) {
+                if ( in_array( $_sProductID, self::$___aScheduledProductIDs, true ) ) {
                     continue;
                 }
                 self::scheduleReview( $_sProductID, $_aParameters[ 1 ], $_aParameters[ 2 ] );
@@ -171,7 +171,7 @@ class AmazonAutoLinks_Event_Scheduler {
                 $_aParameters = $_aParameters + array( null, null, null );
                 $_sProductID = $_aParameters[ 0 ];
                 // If the product information routine is added for this product, do not schedule this routine.
-                if ( in_array( $_sProductID, self::$___aScheduledProductIDs ) ) {
+                if ( in_array( $_sProductID, self::$___aScheduledProductIDs, true ) ) {
                     continue;
                 }
                 self::scheduleRating( $_sProductID, $_aParameters[ 1 ], $_aParameters[ 2 ] );
