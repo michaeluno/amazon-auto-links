@@ -59,7 +59,7 @@ class AmazonAutoLinks_ToolAdminPage_Tool extends AmazonAutoLinks_AdminPage_Page_
         if ( ! $_oOption->isDebug( 'back_end' ) ) {
             return;
         }
-        if ( 'unit_option_converter' === $_GET[ 'tab' ] ) {
+        if ( 'unit_option_converter' === $this->getHTTPQueryGET( 'tab' ) ) {
             return;
         }
         $_oToolOption = AmazonAutoLinks_ToolOption::getInstance();

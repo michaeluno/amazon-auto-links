@@ -37,6 +37,7 @@ class AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI extends Am
         $iCacheDuration     = isset( $iCacheDuration ) ? ( integer ) $iCacheDuration : ( integer ) $_oOption->get( 'unit_default', 'cache_duration' );
         $_aASINsToSearch    = array_keys( $aItems );
         $_aResponse         = $this->___getAPIResponse( $sLocaleSlug, $_aASINsToSearch, $iCacheDuration, $bForceRenew );
+        // @todo consider a case that a response failed
         $_aProducts         = $this->getElementAsArray( $_aResponse, array( 'results' ) );
         $_aProducts         = array_merge( $_aProducts, $this->___getMissedProducts( $_aASINsToSearch, $_aProducts ) );
         $this->___setProductsIntoDatabase( $_aProducts, $aItems, $sLocaleSlug, $iCacheDuration );
@@ -146,6 +147,10 @@ class AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI extends Am
                         $_aRow[ 'product_id' ] = $_sKey;
                     }
 
+                    if ( ! $this->___shouldUpdateRow( $_aRow, $_aStoredRow, $iCacheDuration ) ) {
+                        continue;
+                    }
+
                     // Multiple SQL queries are necessary per combinations of columns
                     $_aColumnNames = array_keys( $_aRow );
                     sort( $_aColumnNames );
@@ -157,6 +162,38 @@ class AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI extends Am
                 return $_aRowsSets;
 
             }
+                /**
+                 * @since  5.2.2
+                 * @param  array   $aRowToSet
+                 * @param  array   $aStoredRow
+                 * @param  integer $iCacheDuration
+                 * @return boolean
+                 */
+                private function ___shouldUpdateRow( $aRowToSet, $aStoredRow, $iCacheDuration ) {
+                    if ( $this->isExpired( $this->getElement( $aStoredRow, array( 'expiration_time' ), 0 ) ) ) {
+                        return true;
+                    }
+                    $_aColumnsToCompare = array(
+                        'preferred_currency' => null, 'language'   => null,
+                        'title'              => null, 'links'      => null,
+                        'is_prime'           => null, 'product_id' => null,
+                        'number_of_reviews'  => null, 'rating'     => null,
+                        'price'              => null, 'images'     => null,
+                    );
+                    $_aToSet  = array_intersect_key( $aRowToSet, $_aColumnsToCompare );
+                    $_aStored = array_intersect_key( $aStoredRow, $_aColumnsToCompare );
+
+                    if ( $_aToSet != $_aStored ) { // the double operators are used, not triple (!==) as the array element order does not matter here.
+                        return true;
+                    }
+                    $_iLastModified = ( integer ) strtotime( $this->getElement( $aStoredRow, array( 'modified_time' ), '' ) );
+                    if ( time() <= $_iLastModified + 600 ) { // 600 = 10 minutes
+                        return false;
+                    }
+                    // 10 minutes have passed from the last update. The updating values are the same but the modified date will be updated which needs to be displayed in the front-end with prices.
+                    return true;
+
+                }
                 /**
                  * @since 4.6.9
                  */
@@ -182,11 +219,17 @@ class AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI extends Am
                         'modified_time'      => date( 'Y-m-d H:i:s' ),
                         'title'              => strlen( $aProduct[ 'Title' ] ) ? $aProduct[ 'Title' ] : $aStoredRow[ 'title' ],
                         'links'              => empty( $aStoredRow[ 'links' ] ) ? $aProduct[ 'DetailPageURL' ] : $aStoredRow[ 'links' ],
-                        'images'             => empty( $aStoredRow[ 'images' ] ) ? ( $aProduct[ 'ImageUrl' ] ? array(
-                            'main' => array(
-                                'MediumImage' => $aProduct[ 'ImageUrl' ],
+                        'images'             => empty( $aStoredRow[ 'images' ] )
+                            ? (
+                                $aProduct[ 'ImageUrl' ]
+                                    ? array(
+                                        'main' => array(
+                                            'MediumImage' => $aProduct[ 'ImageUrl' ],
+                                        )
+                                    )
+                                    : ''    // needs to be a string value for ___shouldUpdateRow() to compare
                             )
-                        ) : null ) : $aStoredRow[ 'images' ],
+                            : $aStoredRow[ 'images' ],
                         'currency'           => $sCurrency,
                         'price'                      => $this->___getColumnValueOfPriceAmount( $aProduct, $aStoredRow ),
                         'price_formatted'            => $this->___getColumnValueOfFormattedPrice( $aProduct, $aStoredRow ),
@@ -208,7 +251,7 @@ class AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI extends Am
 
                     // If the table version is 1.2.0b01 or above,
                     if ( version_compare( $_sCurrentVersion, '1.2.0b01', '>=') ) {
-                        $_aRow[ 'is_prime' ] = $aProduct[ 'IsPrimeEligible' ];
+                        $_aRow[ 'is_prime' ] = $aProduct[ 'IsPrimeEligible' ] ? '1' : '0';  // needs to be a string value to be compared in ___shouldUpdateRow()
                         $_aRow[ 'language' ] = $sLanguage;
                         $_aRow[ 'preferred_currency' ] = $sCurrency;
                     }
