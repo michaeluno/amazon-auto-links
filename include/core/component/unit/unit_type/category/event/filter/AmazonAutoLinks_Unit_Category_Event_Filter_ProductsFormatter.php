@@ -22,7 +22,7 @@ class AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFormatter extends Amazo
 
     /**
      * Unit type specific product structure.
-     * @var array
+     * @var   array
      * @since 5.0.0
      */
     public static $aStructure_Product = array();
@@ -33,7 +33,6 @@ class AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFormatter extends Amazo
      * @since  5.0.0
      */
     protected function _getItemsFormatted( $aProducts ) {
-
         $_iCountUserSet      = ( integer ) $this->oUnitOutput->oUnitOption->get( 'count' );
         $_aProducts          = $this->___getProducts(
             $aProducts,
@@ -42,7 +41,6 @@ class AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFormatter extends Amazo
             $_iCountUserSet < 10 ? 10 : $_iCountUserSet     // 4.6.14 Fetch at least 10 to reduce http requests and database queries
         );
         return array_slice( $_aProducts, 0, $_iCountUserSet ); // truncate items
-
     }
         /**
          * @param  array   $aItems
@@ -84,7 +82,6 @@ class AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFormatter extends Amazo
                     continue;   // skip
                 }
 
-
                 $_aASINLocaleCurLang    = "{$_aProduct[ 'ASIN' ]}|{$_sLocale}|{$_sCurrency}|{$_sLanguage}";
                 $_aASINLocaleCurLangs[ $_aASINLocaleCurLang ] = array(
                     'asin'      => $_aProduct[ 'ASIN' ],
@@ -113,15 +110,15 @@ class AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFormatter extends Amazo
 
             /**
              * Second iteration
-             * @param  array   $aRawItems               Raw items fetched from sources. When the initial format of an item is done, the item is removed from this array.
-             * @param  array   $aProducts               Initially formatted items. (There are two formatting iterations and the second one is done in this method).
-             * @param  array   $aASINLocaleCurLangs     Holding the information of ASIN, locale, currency and language for a database query.
+             * @param  array   $aRawItems           Raw items fetched from sources. When the initial format of an item is done, the item is removed from this array.
+             * @param  array   $aProducts           Initially formatted items. (There are two formatting iterations and the second one is done in this method).
+             * @param  array   $aASINLocaleCurLangs Holding the information of ASIN, locale, currency and language for a database query.
              * @param  string  $sLocale
              * @param  string  $sAssociateID
-             * @param  integer $iUserSetMaxCount        The user set max count.
+             * @param  integer $iUserSetMaxCount    The user set max count.
              * @return array
              * @since  3.9.0
-             * @since  5.0.0  Moved from `AmazonAutoLinks_UnitOutput_category`.
+             * @since  5.0.0   Moved from `AmazonAutoLinks_UnitOutput_category`.
              */
             private function ___getProductsFormatted( $aRawItems, $aProducts, $aASINLocaleCurLangs, $sLocale, $sAssociateID, $iUserSetMaxCount ) {
 
@@ -162,13 +159,13 @@ class AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFormatter extends Amazo
 
             /**
              *
-             * @param  array  $_aItem
-             * @param  string $_sLocale
-             * @param  string $_sAssociateID
+             * @param  array     $_aItem
+             * @param  string    $_sLocale
+             * @param  string    $_sAssociateID
              * @return array
              * @throws Exception
              * @since  3.9.0
-             * @since  5.0.0  Moved from `AmazonAutoLinks_UnitOutput_category`. Changed the visibility to protected from private as an extended class access this.
+             * @since  5.0.0     Moved from `AmazonAutoLinks_UnitOutput_category`. Changed the visibility to protected from private as an extended class access this.
              */
             protected function _getProduct( $_aItem, $_sLocale, $_sAssociateID ) {
 
@@ -248,7 +245,7 @@ class AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFormatter extends Amazo
 
     /**
      * @remark   The timing of filtering items by image and title is changed in order to support resuming with caches.
-     * @param    array $aProduct
+     * @param    array        $aProduct
      * @return   array        A product array, empty when filtered out.
      * @callback add_filter() aal_filter_unit_each_product_with_database_row
      * @since    4.2.8
@@ -290,13 +287,13 @@ class AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFormatter extends Amazo
      *
      * Sets the 'content' and 'description' elements in the product (item) array which require plugin custom database table.
      *
-     * @param array $aProduct
-     * @param array $aDBRow
-     * @param array $aScheduleIdentifier
-     * @return      array
-     * @callback    add_filter()      aal_filter_unit_each_product_with_database_row
-     * @since       3.3.0
-     * @since       5.0.0  Moved from `AmazonAutoLinks_UnitOutput_category`.
+     * @since    3.3.0
+     * @since    5.0.0 Moved from `AmazonAutoLinks_UnitOutput_category`.
+     * @param    array $aProduct
+     * @param    array $aDBRow
+     * @param    array $aScheduleIdentifier
+     * @return   array
+     * @callback add_filter() aal_filter_unit_each_product_with_database_row
      */
     public function replyToFormatProductWithDBRow( $aProduct, $aDBRow, $aScheduleIdentifier=array() ) {
 
