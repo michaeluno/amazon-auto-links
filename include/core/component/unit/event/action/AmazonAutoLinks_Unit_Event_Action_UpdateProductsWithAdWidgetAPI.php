@@ -173,6 +173,7 @@ class AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI extends Am
                         'links'  => null,           'images' => null,
                         'price'  => null,           'price_formatted' => null,
                         'discounted_price' => null, 'discounted_price_formatted' => null,
+                        'title'  => null,
                     );
 
                     $_aRow    = array(
