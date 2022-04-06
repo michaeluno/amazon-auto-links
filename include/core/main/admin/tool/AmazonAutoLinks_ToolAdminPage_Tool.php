@@ -11,13 +11,13 @@
 /**
  * Adds the `Tools` page.
  * 
- * @since       3
+ * @since 3
  */
 class AmazonAutoLinks_ToolAdminPage_Tool extends AmazonAutoLinks_AdminPage_Page_Base {
 
     /**
      * @return array
-     * @since   3.11.1
+     * @since  3.11.1
      */
     protected function _getArguments() {
         return array(
@@ -36,16 +36,14 @@ class AmazonAutoLinks_ToolAdminPage_Tool extends AmazonAutoLinks_AdminPage_Page_
     }
 
     /**
-     * 
-     * @callback        action      load_{page slug}
+     * @callback add_action() load_{page slug}
      */    
     public function replyToLoadPage( $oFactory ) {
         $this->___doPageSettings( $oFactory );
     }
         /**
          * Page styling
-         * @since       3
-         * @return      void
+         * @since 3
          */
         private function ___doPageSettings( $oFactory ) {
             $oFactory->setPageTitleVisibility( false ); // disable the page title of a specific page.
@@ -80,5 +78,5 @@ class AmazonAutoLinks_ToolAdminPage_Tool extends AmazonAutoLinks_AdminPage_Page_
             . "</div>";
 
     }
-        
+
 }
