@@ -22,6 +22,12 @@ class AmazonAutoLinks_PAAPI50___Cache extends AmazonAutoLinks_PluginUtility {
     private $___sRequestType   = 'api';
 
     /**
+     * @since 5.2.2
+     * @var   integer   Stores an error lock interval in seconds.
+     */
+    private $___iLockInterval  = 1800;  // 60 * 30 = 30 minutes
+
+    /**
      * @var   string
      * @since 4.3.5
      */
@@ -46,6 +52,8 @@ class AmazonAutoLinks_PAAPI50___Cache extends AmazonAutoLinks_PluginUtility {
         $this->___bForceRenew    = $bForceRenew;
         $this->___sRequestType   = $sRequestType;
         $this->___sLocale        = $sLocale;
+        // @todo  Let the user set a lock interval through UI.
+        $this->___iLockInterval  = ( integer ) apply_filters( 'aal_filter_paapi_request_error_lock_interval', $this->___iLockInterval );
     }
 
     /**
@@ -121,38 +129,34 @@ class AmazonAutoLinks_PAAPI50___Cache extends AmazonAutoLinks_PluginUtility {
              * @callback add_action() aal_action_detected_paapi_errors
              */
             public function replyToSetLockOnError( $aErrors, $sURL, $sCacheName, $sCharSet, $iCacheDuration, $aArguments ) {
-                if ( ! $this->___hasRateLimitError( $this->getAsArray( $aErrors ) ) ) {
+
+                $_sErrors = implode( ' ', $aErrors );
+
+                // For a list of PA-API 5 errors, see https://webservices.amazon.com/paapi5/documentation/troubleshooting/error-messages.html
+                $_sErrorTypes = 'AccessDenied|AssociateValidation|IncompleteSignature|'
+                    . 'InvalidPartnerTag|InvalidSignature|TooManyRequests|UnrecognizedClient';
+                if ( ! preg_match( '/' . $_sErrorTypes . '/', $_sErrors ) ) {    // if one of those errors is not found,
                     return;
                 }
-                $this->___setAPIRequestLock( $this->getAsArray( $aArguments ) );
+                $this->___setAPIRequestLock( $this->getAsArray( $aArguments ), $_sErrors );
+
             }
                 /**
                  * Extend the unlock time
                  * @param array  $aArguments
+                 * @param string $sErrors
                  * @since 4.3.5
-                 * @todo  Let the user decide the lock interval.
+                 * @since 5.2.2  Added the `$sErrors` parameter.
                  */
-                private function ___setAPIRequestLock( array $aArguments ) {
+                private function ___setAPIRequestLock( array $aArguments, $sErrors ) {
                     $_aAPIParams = $this->getElementAsArray( $aArguments, array( 'constructor_parameters' ) );
                     $_oLock      = new AmazonAutoLinks_VersatileFileManager_PAAPILock(
                         $this->___sLocale,
                         $this->getElement( $_aAPIParams, array( 1 ) ), // public access key
                         $this->getElement( $_aAPIParams, array( 2 ) )  // secret access key
                     );
-                    $_oLock->lock( time() + ( 60 * 30 ) ); // 30 minutes
-                }
-                /**
-                 * @param  array   $aErrors
-                 * @return boolean
-                 * @since  4.3.5
-                 */
-                private function ___hasRateLimitError( $aErrors ) {
-                    foreach( $aErrors as $_sError ) {
-                        if ( false !== strpos( $_sError, 'TooManyRequests' ) ) {
-                            return true;
-                        }
-                    }
-                    return false;
+                    $_oLock->set( $sErrors );
+                    $_oLock->lock( time() + $this->___iLockInterval );
                 }
 
             /**
@@ -182,15 +186,18 @@ class AmazonAutoLinks_PAAPI50___Cache extends AmazonAutoLinks_PluginUtility {
                 while( $_oLock->isLocked() ) {
                     sleep( 1 );
                     $_iIteration++;
-                    if ( $_iIteration > 10 ) {
-                        $_sMessage = sprintf(
-                            'The API request is locked until %1$s. Now: %2$s.',
-                            $this->getSiteReadableDate( $_oLock->getModificationTime() + 1, 'Y-m-d H:i:s' ), // modification + 1
-                            $this->getSiteReadableDate( time(), 'Y-m-d H:i:s' )
-                        );
-                        throw new Exception( $_sMessage, 1 );
-                        break;
+                    if ( $_iIteration <= 10 ) {
+                        continue;
                     }
+                    $_iFrom = time();
+                    $_iTo   = $_oLock->getModificationTime() + 1;
+                    $_sMessage = sprintf(
+                        __( 'The API request is locked for %1$s. Error: %2$s', 'amazon-auto-links' ),
+                        human_time_diff( $_iFrom, $_iTo ),
+                        $_oLock->get()
+                    );
+                    throw new Exception( $_sMessage, 1 );
+                    break;
                 }
 
             }
