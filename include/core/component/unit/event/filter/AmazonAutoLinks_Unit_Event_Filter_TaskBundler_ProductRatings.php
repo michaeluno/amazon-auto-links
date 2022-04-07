@@ -91,7 +91,7 @@ class AmazonAutoLinks_Unit_Event_Filter_TaskBundler_ProductRatings extends Amazo
                 do_action(
                     'aal_action_update_products_with_ad_widget_api',
                     $_sLocale,
-                    $_aItems,
+                    $_aChunk,
                     $_iCacheDuration,
                     $_bForceRenew
                 );
