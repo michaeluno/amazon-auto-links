@@ -11,21 +11,21 @@
 /**
  * Provides methods to cache API requests.
  * 
- * @since       3.9.0
+ * @since 3.9.0
  */
 class AmazonAutoLinks_PAAPI50___Cache extends AmazonAutoLinks_PluginUtility {
 
-    private $___sRequestURI           = '';
-    private $___aHTTPArguments        = array();
-    private $___iCacheDuration        = 84000;
-    private $___bForceRenew           = false;
-    private $___sRequestType          = 'api';
+    private $___sRequestURI    = '';
+    private $___aHTTPArguments = array();
+    private $___iCacheDuration = 84000;
+    private $___bForceRenew    = false;
+    private $___sRequestType   = 'api';
 
     /**
      * @var   string
      * @since 4.3.5
      */
-    private $___sLocale               = '';
+    private $___sLocale        = '';
 
     /**
      * Sets up properties.
@@ -49,8 +49,8 @@ class AmazonAutoLinks_PAAPI50___Cache extends AmazonAutoLinks_PluginUtility {
     }
 
     /**
-     * @since       3.9.0
-     * @return      array|string
+     * @since  3.9.0
+     * @return array|string
      */
     public function get() {
         return $this->___getResponseBySignedRequest(
@@ -64,13 +64,13 @@ class AmazonAutoLinks_PAAPI50___Cache extends AmazonAutoLinks_PluginUtility {
         /**
          * Performs an API request.
          *
+         * @since         ?
+         * @since         3.9.0
          * @param string  $sRequestURI
          * @param array   $aHTTPArguments
          * @param integer $iDuration
-         * @param bool    $bForceRenew
+         * @param boolean $bForceRenew
          * @return        array|WP_Error    Returns a wp_remote_request() response array or a WP_Error object.
-         * @since         3.9.0
-         * @since         unknown
          */
         private function ___getResponseBySignedRequest( $sRequestURI, array $aHTTPArguments, $iDuration, $bForceRenew=false ) {
 
@@ -118,7 +118,6 @@ class AmazonAutoLinks_PAAPI50___Cache extends AmazonAutoLinks_PluginUtility {
              * @param    string  $sCharSet
              * @param    integer $iCacheDuration
              * @param    array   $aArguments
-             * @return   void
              * @callback add_action() aal_action_detected_paapi_errors
              */
             public function replyToSetLockOnError( $aErrors, $sURL, $sCacheName, $sCharSet, $iCacheDuration, $aArguments ) {
@@ -143,7 +142,7 @@ class AmazonAutoLinks_PAAPI50___Cache extends AmazonAutoLinks_PluginUtility {
                     $_oLock->lock( time() + ( 60 * 30 ) ); // 30 minutes
                 }
                 /**
-                 * @param  array $aErrors
+                 * @param  array   $aErrors
                  * @return boolean
                  * @since  4.3.5
                  */
@@ -155,6 +154,7 @@ class AmazonAutoLinks_PAAPI50___Cache extends AmazonAutoLinks_PluginUtility {
                     }
                     return false;
                 }
+
             /**
              * Gives an interval in API requests to avoid reaching the API rate limit.
              *
