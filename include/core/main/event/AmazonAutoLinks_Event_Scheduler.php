@@ -274,16 +274,10 @@ class AmazonAutoLinks_Event_Scheduler {
      */
     static public function scheduleProductInformation( $sAssociateIDLocaleCurLang, $sASIN, $iCacheDuration, $bForceRenew=false, $sItemFormat='' ) {
 
-        $_oOption = AmazonAutoLinks_Option::getInstance();
-
         // 4.0.1 Case: the PA-API keys are set but not for the requested locale. This occurs with embedded links.
         $_aRequestBaseInfo = explode( '|', $sAssociateIDLocaleCurLang );
         $_sLocale          = $_aRequestBaseInfo[ 1 ]; // the 2nd item
-        if ( ! $_oOption->isPAAPIKeySet( $_sLocale ) ) {
-            return;
-        }
-
-        if ( ! $_oOption->getPAAPIStatus( $_sLocale ) ) {
+        if ( ! self::___canPerformPAAPIRequests( $_sLocale ) ) {
             return;
         }
 
@@ -324,6 +318,42 @@ class AmazonAutoLinks_Event_Scheduler {
         // );
 
     }
+        /**
+         * @since  5.2.2
+         * @param  string  $sLocale
+         * @return boolean
+         */
+        static private function ___canPerformPAAPIRequests( $sLocale ) {
+
+            if ( isset( self::$___aCanPerformPAAPIRequests[ $sLocale ] ) ) {
+                return self::$___aCanPerformPAAPIRequests[ $sLocale ];
+            }
+
+            $_oOption = AmazonAutoLinks_Option::getInstance();
+            if ( ! $_oOption->isPAAPIKeySet( $sLocale ) ) {
+                self::$___aCanPerformPAAPIRequests[ $sLocale ] = false;
+                return false;
+            }
+            if ( ! $_oOption->getPAAPIStatus( $sLocale ) ) {
+                self::$___aCanPerformPAAPIRequests[ $sLocale ] = false;
+                return false;
+            }
+
+            $_oLock = new AmazonAutoLinks_VersatileFileManager_PAAPILock( $sLocale, $_oOption->getPAAPIAccessKey( $sLocale ), $_oOption->getPAAPISecretKey( $sLocale ) );
+            if ( $_oLock->getUnlockTime() - time() > 10 ) {
+                self::$___aCanPerformPAAPIRequests[ $sLocale ] = false;
+                return false;
+            }
+            self::$___aCanPerformPAAPIRequests[ $sLocale ] = true;
+            return true;
+
+        }
+        /**
+         * @since 5.2.2
+         * @var   array Caches flags by locale that indicate whether PA-API can be performed,
+         */
+        static private $___aCanPerformPAAPIRequests = array();
+
         /**
          * Schedules retrievals of product information at once.
          * @since    3.7.7
