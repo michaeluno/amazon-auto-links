@@ -13,7 +13,7 @@
  *
  * Used to create lock files for event actions.
  *
- * @since   3.7.7
+ * @since 3.7.7
  */
 class AmazonAutoLinks_VersatileFileManager {
 
@@ -36,7 +36,7 @@ class AmazonAutoLinks_VersatileFileManager {
 
     /**
      * Tells whether the directory is accessible or not.
-     * @var   bool
+     * @var   boolean
      * @since 4.4.0
      */
     protected $_bWritable = false;
@@ -200,7 +200,7 @@ class AmazonAutoLinks_VersatileFileManager {
 
     /**
      * @since  4.3.5
-     * @return integer  The timestamp of the modification time of the lock file.
+     * @return integer The timestamp of the modification time of the lock file.
      */
     public function getModificationTime() {
         clearstatcache( true, $this->_sFilePath );  // file functions such as filemtime() cache results.
@@ -241,7 +241,7 @@ class AmazonAutoLinks_VersatileFileManager {
             return call_user_func_array( 'touch', $_aParams );
         }
 
-        // At this point, the file does not exist so creat it.
+        // At this point, the file does not exist so create it.
         return ( boolean ) $this->set( $this->_getDefaultContent() );
 
     }
