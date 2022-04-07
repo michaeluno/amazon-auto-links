@@ -68,6 +68,14 @@ class AmazonAutoLinks_VersatileFileManager {
     }
 
     /**
+     * @since  5.2.2  Added for debugging.
+     * @return string
+     */
+    public function getFilePath() {
+        return $this->_sFilePath;
+    }
+
+    /**
      * @since  4.3.5
      * @since  4.4.0    Changed the visibility from protected to public.
      * @return string
