@@ -10,7 +10,7 @@
 
 /**
  * Triggers an action when there is a PA-API response error.
- * @since   4.3.5
+ * @since 4.3.5
  */
 class AmazonAutoLinks_Unit_Event_Filter_PAAPIErrors extends AmazonAutoLinks_PluginUtility {
 
@@ -40,36 +40,13 @@ class AmazonAutoLinks_Unit_Event_Filter_PAAPIErrors extends AmazonAutoLinks_Plug
      * @callback add_filter() aal_filter_http_request_set_cache_{request type}
      */
     public function replyToCheckAPIHTTPCacheResponse( $mData, $sCacheName, $sCharSet, $iCacheDuration, $sURL, $aArguments ) {
-
         $_aErrors = $this->___getErrors( $mData, $sURL );
         if ( empty( $_aErrors ) ) {
             return $mData;
         }
-
         do_action( 'aal_action_detected_paapi_errors', $_aErrors, $sURL, $sCacheName, $sCharSet, $iCacheDuration, $aArguments );
-
-        // If it is the TooManyRequests error, give a cache short lifespan
-        // @deprecated 4.3.5 requests resulted in errors may be counted in the rate limit so leave it as it is.
-//        if( false !== strpos( $_sError, 'TooManyRequests' ) ){
-//            add_filter(
-//                'aal_filter_http_request_set_cache_duration_' . $sCacheName,
-//                array( $this, 'replyToGiveShortCacheDuration' ),
-//                10,
-//                4
-//            );
-//        }
-
         return $mData;
-
     }
-        /* @deprecated 4.3.5 Requests resulted in errors may be counted in the rate limit so leave it as it is. */
-        /*public function replyToGiveShortCacheDuration( $iCacheDuration, $sCacheName, $sURL, $sRequestType ) {
-            remove_filter( 'aal_filter_http_request_set_cache_duration_' . $sCacheName, array( $this, 'replyToGiveShortCacheDuration' ), 10 );
-            return 'api50_test' === $sRequestType
-                ? 0
-                : 60 * 10; // 10 minutes
-        }*/
-
         /**
          * @param  mixed $mData
          * @param  string $sURL
@@ -124,36 +101,5 @@ class AmazonAutoLinks_Unit_Event_Filter_PAAPIErrors extends AmazonAutoLinks_Plug
                 }
                 return trim( $_sError );
             }
-
-            // @deprecated 4.3.0
-//            private function ___getHTTPStatusError( array $mData ) {
-//                $_sCode    = $this->getElement( $mData, array( 'response', 'code' ) );
-//                $_s1stChar = substr( $_sCode, 0, 1 );
-//                if ( in_array( $_s1stChar, array( 2, 3 ) ) ) {
-//                    return '';
-//                }
-//                return $_sCode . ': ' . $this->getElement( $mData, array( 'response', 'message' ) );
-//            }
-        /**
-         * @param $mData
-         * @deprecated 4.0.0
-         */
-        /*private function ___setAPIErrorLog( $sErrorItem, $sCacheName, $sURL ) {
-            $_sOptionKey = AmazonAutoLinks_Registry::$aOptionKeys[ 'error_log' ];
-            $_aErrorLog  = $this->getAsArray( get_option( $_sOptionKey, array() ) );
-            $_aErrorLog[ microtime( true ) ] = array(
-                'time'           => time(),
-                'cache_name'     => $sCacheName,
-                'url'            => $sURL,
-                'current_url'    => $this->getCurrentURL(),
-                // 'note'       => '',
-                'message'    => $sErrorItem,
-            );
-            // Keep up to latest 300 items
-            $_aErrorLog = array_slice( $_aErrorLog, -300, 300, true );
-            update_option( $_sOptionKey, $_aErrorLog );
-
-        }*/
-
 
 }
