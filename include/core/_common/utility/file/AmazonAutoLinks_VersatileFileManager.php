@@ -217,11 +217,13 @@ class AmazonAutoLinks_VersatileFileManager {
 
     /**
      * @since  4.3.5
-     * @return integer  The timestamp of the unlock time.
+     * @since  5.2.2   Changed the behavior not to create a lock file if not exist.
+     * @return integer The timestamp of the unlock time. If the lock file does not exist, 0 is returned.
      */
     public function getUnlockTime() {
         if ( ! file_exists( $this->_sFilePath ) ) {
-            $this->lock();
+            // $this->lock(); @deprecated 5.2.2 If the file does not exist, returns 0. If the file needs to be locked, just call lock() in prior.
+            return 0;
         }
         return $this->getModificationTime() + $this->_iTimeout;
     }

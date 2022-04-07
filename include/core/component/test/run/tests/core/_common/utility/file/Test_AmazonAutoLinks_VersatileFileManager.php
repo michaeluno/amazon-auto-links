@@ -22,7 +22,10 @@ class Test_AmazonAutoLinks_VersatileFileManager extends AmazonAutoLinks_UnitTest
      */
     public function test_Class() {
         $_oFile       = new AmazonAutoLinks_VersatileFileManager( 'test', 100, 'AAL_TEST_' );
+        $_iZero       = $_oFile->getUnlockTime();
+        $_oFile->lock();
         $_iUnlockTime = $_oFile->getUnlockTime();
+        $this->_assertFalse( $_iZero === $_iUnlockTime );
         $this->_outputDetails( 'Current Time:', $this->getSiteReadableDate( time(), 'Y/m/d/ H:i:s', true ) );
         $this->_outputDetails( 'Unlock Time:', $this->getSiteReadableDate( $_iUnlockTime, 'Y/m/d/ H:i:s', true ) ); //  . ' g:i a'
         $this->_assertNotEmpty( $_oFile->getUnlockTime() );
