@@ -86,16 +86,13 @@ class AmazonAutoLinks_Unit_Event_Filter_TaskBundler_ProductRatings extends Amazo
 
         // Do bundled tasks
         foreach( $_aItemsByLocale as $_sLocale => $_aItems ) {
-            $_aChunks = array_chunk( $_aItems, 20 );
-            foreach( $_aChunks as $_aChunk ) {
-                do_action(
-                    'aal_action_update_products_with_ad_widget_api',
-                    $_sLocale,
-                    $_aChunk,
-                    $_iCacheDuration,
-                    $_bForceRenew
-                );
-            }
+            do_action(
+                'aal_action_update_products_with_ad_widget_api',
+                $_sLocale,
+                $_aItems,
+                $_iCacheDuration,
+                $_bForceRenew
+            );
         }
 
         // Return tasks
