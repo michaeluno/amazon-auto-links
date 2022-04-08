@@ -46,9 +46,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
      * @since  4.3.0
      */
     protected function _shouldProceed() {
-
         $_aParameters = func_get_args();
-
         if ( $this->hasBeenCalled( get_class( $this ) . '::' . __METHOD__ . '_' . serialize( $_aParameters ) ) ) {
             new AmazonAutoLinks_Error( 'UPDATE_PRODUCTS', 'A same HTTP request is made.', $_aParameters, true );
             return false;
@@ -57,7 +55,6 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
             return false;
         }
         return true;
-
     }
 
     /**
@@ -123,6 +120,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
             new AmazonAutoLinks_Error( 'EVENT_SEARCH_PRODUCTS', "The associate tag is not given. The fallback, {$_sAssociateTag}, is applied.", $aParams );
             return $_sAssociateTag;
         }
+
         /**
          * @param array  $aResponse
          * @param array  $aList
@@ -158,19 +156,6 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
             }
 
             $this->setProductDatabaseRows( $_aRows );
-            // @deprecated 3.6.9 Moved to `setProductDatabaseRows()`.
-            // do_action( 'aal_action_debug_log', 'UPDATE_PRODUCTS', "Updating " . count( $_aRows ) . " row(s): ", array_keys( $_aRows ) , current_filter(), '' );
-            // if ( version_compare( $sTableVersion, '1.4.0b01', '<' ) ) {
-            //     foreach( $_aRows as $_sKey => $_aRow ) {
-            //         $_aKey          = explode( '|', $_sKey );
-            //         $_sASIN         = reset( $_aKey );
-            //         $_oProductTable = new AmazonAutoLinks_DatabaseTable_aal_products;
-            //         $_oProductTable->setRowByASINLocale( $_sASIN . '_' . strtoupper( $sLocale ), $_aRow, $sCurrency, $sLanguage );
-            //     }
-            //     return;
-            // }
-            // $_oProductTable = new AmazonAutoLinks_DatabaseTable_aal_products;
-            // $_oProductTable->setRows( $_aRows );
 
         }
 

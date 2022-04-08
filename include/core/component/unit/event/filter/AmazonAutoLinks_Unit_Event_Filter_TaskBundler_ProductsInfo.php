@@ -10,8 +10,8 @@
 
 /**
  * Bundles plugin tasks of `aal_action_api_get_products_info`.
- * @since   4.3.0
- * @since   4.6.11  Renamed from `AmazonAutoLinks_Unit_Event_Filter_TasksProductsInfo`.
+ * @since 4.3.0
+ * @since 4.6.11 Renamed from `AmazonAutoLinks_Unit_Event_Filter_TasksProductsInfo`.
  */
 class AmazonAutoLinks_Unit_Event_Filter_TaskBundler_ProductsInfo extends AmazonAutoLinks_PluginUtility {
 
@@ -19,10 +19,8 @@ class AmazonAutoLinks_Unit_Event_Filter_TaskBundler_ProductsInfo extends AmazonA
      * @since 4.3.0
      */
     public function __construct() {
-
         $_sActionName = 'aal_action_api_get_products_info';
         add_filter( "aal_filter_tasks_{$_sActionName}", array( $this, 'replyToBundleParameters' ), 10 );
-
     }
 
     /**
@@ -43,7 +41,7 @@ class AmazonAutoLinks_Unit_Event_Filter_TaskBundler_ProductsInfo extends AmazonA
      *  )
      * ```
      * @return array
-     * @since 4.3.0
+     * @since  4.3.0
      */
     public function replyToBundleParameters( array $aTasksPerActionName ) {
 
@@ -54,7 +52,7 @@ class AmazonAutoLinks_Unit_Event_Filter_TaskBundler_ProductsInfo extends AmazonA
              * @var array $_aArguments
              * structure:
              * 0: array(
-                    0 => array( 0 => $sAssociateID|Locale|Cur|Lang, 1 => $sASIN,  2 => $iCacheDuration, 3 => $bForceRenew, 4 => $sItemFormat ),
+             *      0 => array( 0 => $sAssociateID|Locale|Cur|Lang, 1 => $sASIN,  2 => $iCacheDuration, 3 => $bForceRenew, 4 => $sItemFormat ),
              *      1 => array( 0 => $sAssociateID|Locale|Cur|Lang, 1 => $sASIN,  2 => $iCacheDuration, 3 => $bForceRenew, 4 => $sItemFormat ),1
              *      ...
              * )
@@ -82,9 +80,9 @@ class AmazonAutoLinks_Unit_Event_Filter_TaskBundler_ProductsInfo extends AmazonA
     }
         /**
          * Join items up to 10.
-         * @param array $aTasksByLocaleCurLang
+         * @param  array $aTasksByLocaleCurLang
          * @return array
-         * @since 4.3.0
+         * @since  4.3.0
          */
         private function ___getTaskItemsJoined( array $aTasksByLocaleCurLang ) {
             $_aFormatted = array();
@@ -97,9 +95,9 @@ class AmazonAutoLinks_Unit_Event_Filter_TaskBundler_ProductsInfo extends AmazonA
             return $_aFormatted;
         }
             /**
-             * @param array $aTasksByLocaleCurLang
+             * @param  array $aTasksByLocaleCurLang
              * @return array
-             * @since   4.3.0
+             * @since  4.3.0
              */
             private function ___getTaskItemsJoinedByLocaleCurLang( array $aTasksByLocaleCurLang ) {
                 $_aTasks  = array();
