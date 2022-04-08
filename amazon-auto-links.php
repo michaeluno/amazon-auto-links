@@ -5,7 +5,7 @@
  * Description:       Formerly, Amazon Auto Links. The plugin generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  * Author:            Michael Uno (miunosoft)
  * Author URI:        https://michaeluno.jp
- * Version:           5.2.2
+ * Version:           5.2.3
  * Text Domain:       amazon-auto-links
  * Domain Path:       /language
  * GitHub Plugin URI: https://github.com/michaeluno/amazon-auto-links
@@ -18,7 +18,7 @@
  * @since 3     Changed the name from `AmazonAutoLinks_Commons_Base`
  */
 class AmazonAutoLinks_Registry_Base {
-    const VERSION      = '5.2.2';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
+    const VERSION      = '5.2.3';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
     const NAME         = 'Auto Amazon Links';
     const DESCRIPTION  = 'Formerly, Amazon Auto Links. The plugin generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.';
     const URI          = 'https://en.michaeluno.jp/amazon-auto-links';
@@ -41,11 +41,11 @@ if ( ! defined( 'ABSPATH' ) ) {
  * 
  * To use the class, first call the setUp() method, which sets up the necessary properties.
  * 
- * @copyright   Copyright (c) 2013-2022, Michael Uno
- * @authorurl   http://michaeluno.jp
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since       2.0.0
- * @since       3           Changed the name from `AmazonAutoLinks_Commons`.
+ * @copyright Copyright (c) 2013-2022, Michael Uno
+ * @authorurl http://michaeluno.jp
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     2.0.0
+ * @since     3     Changed the name from `AmazonAutoLinks_Commons`.
 */
 final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
     

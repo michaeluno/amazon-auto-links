@@ -1,3 +1,7 @@
+#### 5.2.2 - 04/08/2022
+- Optimized the method of renewing caches in the background.
+- Fixed a bug that caused a PHP notice of an undefined index occurred in the background.
+
 #### 5.2.1 - 04/04/2022
 - Added the ability to attach `.log` files to the bug report form.
 - Optimized some HTTP requests.
