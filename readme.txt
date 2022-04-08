@@ -4,7 +4,7 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon affiliate, amazon associate, amazon affiliates, amazon associates, amazon ads, automation, ads, advertisement, affiliate, affiliates, marketing, monetization, monetize, revenues, revenue, income, widget, widgets
 Requires at least:  3.4
 Requires PHP:       5.2.4
-Tested up to:       5.9.2
+Tested up to:       5.9.3
 Requires MySQL:     5.0.3
 Stable tag:         5.2.1
 License:            GPLv2 or later
@@ -373,10 +373,9 @@ You can check if your keys are valid with [Scratchpad](https://webservices.amazo
 
 == Changelog ==
 
-= 5.2.1 - 04/04/2022 =
-- Added the ability to attach `.log` files to the bug report form.
-- Optimized some HTTP requests.
-- Fixed a bug that some setting notices were not displayed in some setting pages including the pages of the listing table of units, auto-inserts, and buttons.
+= 5.2.2 - 04/08/2022 =
+- Optimized the method of renewing caches in the background.
+- Fixed a bug that caused a PHP notice of an undefined index occurred in the background.
 
 #### Old Log
 For old change logs, see [here](https://github.com/michaeluno/amazon-auto-links/blob/master/changelog.md).

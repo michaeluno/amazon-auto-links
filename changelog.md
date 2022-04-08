@@ -1,3 +1,8 @@
+#### 5.2.1 - 04/04/2022
+- Added the ability to attach `.log` files to the bug report form.
+- Optimized some HTTP requests.
+- Fixed a bug that some setting notices were not displayed in some setting pages including the pages of the listing table of units, auto-inserts, and buttons.
+
 #### 5.2.0 - 04/01/2022
 - Added the `Category` unit option for the `Product Search` units.
 - Added the `Flat` and `Image` button types and the existing buttons are categorized as `Classic`.
