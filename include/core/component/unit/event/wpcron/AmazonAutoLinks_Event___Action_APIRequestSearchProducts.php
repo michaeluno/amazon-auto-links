@@ -119,9 +119,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
             }
             $_sLocale       = $aParams[ 2 ];
             $_oOption       = AmazonAutoLinks_Option::getInstance();
-            $_sAssociateTag = $_sLocale === $_oOption->get( 'unit_default', 'country' )
-                ? $_oOption->get( 'unit_default', 'associate_id' )
-                : '';
+            $_sAssociateTag = $_oOption->getAssociateID( $_sLocale );
             new AmazonAutoLinks_Error( 'EVENT_SEARCH_PRODUCTS', "The associate tag is not given. The fallback, {$_sAssociateTag}, is applied.", $aParams );
             return $_sAssociateTag;
         }
