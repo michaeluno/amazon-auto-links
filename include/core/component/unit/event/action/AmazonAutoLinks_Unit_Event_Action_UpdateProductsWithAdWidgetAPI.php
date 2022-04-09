@@ -109,7 +109,7 @@ class AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI extends Am
                 $_sDefaultCurrency  = $_oLocale->getDefaultCurrency();
                 $_sDefaultLanguage  = $_oLocale->getDefaultLanguage();
 
-                $_aRowsSets    = array(
+                $_aRowsSets         = array(
                     'default' => array(),
                 );
                 foreach( $aProducts as $_aProduct ) {
@@ -147,11 +147,12 @@ class AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI extends Am
                         $_aRow[ 'product_id' ] = $_sKey;
                     }
 
-                    if ( $_aRowsSets[ 'default' ][ $_sKey ] == $_aRow ) {   // two operators '==' for arrays don't care about the array order
+                    if ( ! $this->___shouldUpdateRow( $_aRow, $_aStoredRow, $iCacheDuration ) ) {
+                        unset( $_aRowsSets[ 'default' ][ $_sKey ] );
                         continue;
                     }
 
-                    if ( ! $this->___shouldUpdateRow( $_aRow, $_aStoredRow, $iCacheDuration ) ) {
+                    if ( $_aRowsSets[ 'default' ][ $_sKey ] == $_aRow ) {   // two operators '==' for arrays don't care about the array order
                         continue;
                     }
 
@@ -162,6 +163,11 @@ class AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI extends Am
                     $_aRowsSets[ $_sColumns ] = isset( $_aRowsSets[ $_sColumns ] ) ? $_aRowsSets[ $_sColumns ] : array();
                     $_aRowsSets[ $_sColumns ][ $_sKey ] = $_aRow;
 
+                }
+
+                // It could be an empty array with the above check with ___shouldUpdateRow() and the empty entry should be removed not to perform redundant database insertions.
+                if ( empty( $_aRowsSets[ 'default' ] ) ) {
+                    unset( $_aRowsSets[ 'default' ] );
                 }
                 return $_aRowsSets;
 
@@ -182,7 +188,8 @@ class AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI extends Am
                         'title'              => null, 'links'      => null,
                         'is_prime'           => null, 'product_id' => null,
                         'number_of_reviews'  => null, 'rating'     => null,
-                        'price'              => null, 'images'     => null,
+                        'price'              => null,
+                        // 'images'     => null,    // images should not be compared as PA-API inserts multiple items while Ad Widget Search inserts only one
                     );
                     $_aToSet  = array_intersect_key( $aRowToSet, $_aColumnsToCompare );
                     $_aStored = array_intersect_key( $aStoredRow, $_aColumnsToCompare );
