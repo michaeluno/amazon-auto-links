@@ -25,6 +25,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
      */
     protected function _construct() {
         add_filter( 'aal_filter_disallowed_http_request_types_for_background_cache_renewal', array( $this, 'replyToAddExceptedRequestType' ) );
+        add_action( 'aal_action_cache_update_products_with_paapi_response', array( $this, 'replyToUpdateProductsCache' ), 10, 2 );  // 5.2.4
     }
         /**
          * Adds the request type for excepted types.
@@ -70,7 +71,6 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
         $_sLanguage    = $_aParams[ 4 ];
         $_aASINs       = $this->___getASINs( $_aList ); // $_aList will be updated to have keys of ASIN
         $_aResponse    = $this->___getAPIResponse( $_aASINs, $_sAssociateID, $_sLocale, $_sCurrency, $_sLanguage );
-        do_action( 'aal_action_debug_log', 'UPDATE_PRODUCTS', "{$_sAssociateID}, {$_sLocale}, {$_sCurrency}, {$_sLanguage}: " . implode( ', ', $_aASINs ), $_aResponse, current_filter(), true );
 
         /**
          * If there are item-specific errors, insert the error in the Items element
@@ -93,13 +93,8 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
             new AmazonAutoLinks_Error( 'UPDATE_PRODUCTS_FAILURE', $_sMessage, array( 'associate_id' => $_sAssociateID, 'asins'=> $_aASINs, 'locale' => $_sLocale, 'currency' => $_sCurrency, 'language' => $_sLanguage, 'response' => $_aResponse ), '' );
             return;
         }
-        $_sTableVersion = get_option( 'aal_products_version', '0' );
-        if ( ! $_sTableVersion ) {
-            new AmazonAutoLinks_Error( 'UPDATE_PRODUCTS_FAILURE', 'The products cache table does not seem to be installed.', array(), true );
-            return;
-        }
 
-        $this->___setProductRows( $_aResponse, $_aList, $_sLocale, $_sCurrency, $_sLanguage );
+        do_action( 'aal_action_cache_update_products_with_paapi_response', $this->getElementAsArray( $_aResponse, array( 'ItemsResult', 'Items' ) ), $_aList );
 
     }
         /**
@@ -120,68 +115,6 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
             new AmazonAutoLinks_Error( 'EVENT_SEARCH_PRODUCTS', "The associate tag is not given. The fallback, {$_sAssociateTag}, is applied.", $aParams );
             return $_sAssociateTag;
         }
-
-        /**
-         * @param array  $aResponse
-         * @param array  $aList
-         * @param string $sLocale
-         * @param string $sCurrency
-         * @param string $sLanguage
-         * @since 4.3.0
-         */
-        private function ___setProductRows( array $aResponse, array $aList, $sLocale, $sCurrency, $sLanguage ) {
-
-            $_aRows  = array();
-            $_aItems = $this->getElementAsArray( $aResponse, array( 'ItemsResult', 'Items' ) );
-
-            foreach( $_aItems as $_iIndex => $_aItem ) {
-
-                $_sASIN = $this->getElement( $_aItem, array( 'ASIN' ), '' );
-                if ( ! $_sASIN || ! isset( $aList[ $_sASIN ] ) ) {
-                    continue;
-                }
-
-                // Structure: array( 0 => $sAssociateID|Locale|Cur|Lang, 1 => $sASIN,  2 => $sLocale, 3 => $iCacheDuration, 4 => $bForceRenew, 5 => $sItemFormat ),
-                $_aParameters     = $aList[ $_sASIN ];
-                $_iCacheDuration  = ( integer ) $_aParameters[ 2 ];
-                $_bForceRenewal   = ( boolean ) $_aParameters[ 3 ];
-                $_sItemFormat     = $_aParameters[ 4 ];
-
-                $_sKey            = "{$_sASIN}|{$sLocale}|{$sCurrency}|{$sLanguage}";
-                $_aRows[ $_sKey ] = $this->___getRowFormatted( $_aItem, $_sASIN, $sLocale, $_iCacheDuration, $sCurrency, $sLanguage );
-
-                $this->___handleCustomerReview( $_sASIN, $sLocale, $_iCacheDuration, $_bForceRenewal, $sCurrency, $sLanguage, $_sItemFormat );
-
-            }
-
-            $this->setProductDatabaseRows( $_aRows );
-
-        }
-
-            /**
-             * @param  string  $sASIN
-             * @param  string  $sLocale
-             * @param  integer $iCacheDuration
-             * @param  boolean $bForceRenewal
-             * @param  string  $sCurrency
-             * @param  string  $sLanguage
-             * @param  string  $sItemFormat
-             * @since  4.3.0
-             */
-            private function ___handleCustomerReview( $sASIN, $sLocale, $iCacheDuration, $bForceRenewal, $sCurrency, $sLanguage, $sItemFormat ) {
-
-                // Reviews
-                if ( AmazonAutoLinks_UnitOutput_Utility::hasItemFormatTagsIn( $sItemFormat, array( '%review%' ) ) ) {
-                    AmazonAutoLinks_Event_Scheduler::scheduleReview( "{$sASIN}|{$sLocale}|{$sCurrency}|{$sLanguage}", $iCacheDuration, $bForceRenewal );
-                }
-
-                // Ratings
-                if ( ! AmazonAutoLinks_UnitOutput_Utility::hasItemFormatTagsIn( $sItemFormat, array( '%rating%', '%_review_rate%' ) ) ) { // 4.3.4 removed '%_discount_rate%' as it should be nothing to do with ratings.
-                    return;
-                }
-                AmazonAutoLinks_Event_Scheduler::scheduleRating( "{$sASIN}|{$sLocale}|{$sCurrency}|{$sLanguage}", $iCacheDuration, $bForceRenewal );
-
-            }
 
         /**
          * @param $aResponse
@@ -284,122 +217,197 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
 
         }
 
-            /**
-             * @param  array   $aItem
-             * @param  string  $sASIN
-             * @param  string  $sLocale
-             * @param  integer $iCacheDuration
-             * @param  string  $sCurrency
-             * @param  string  $sLanguage
-             * @return array
-             * @since  3.9.0
-             */
-            private function ___getRowFormatted( array $aItem, $sASIN, $sLocale, $iCacheDuration, $sCurrency, $sLanguage ) {
+    /**
+     * @callback add_action() aal_action_cache_update_products_with_paapi_response
+     * @param    array $aResponseItems The products-data array extracted from the direct response array.
+     * @param    array $aListQueried   A list of queried items.
+     * @since    5.2.4
+     */
+    public function replyToUpdateProductsCache( $aResponseItems, $aListQueried ) {
 
-                $_aPrices = AmazonAutoLinks_Unit_Utility::getPrices( $aItem );
-                $_aRow    = array(
-                    'asin_locale'        => $sASIN . '_' . $sLocale,
-                    'locale'             => $sLocale,
-                    'modified_time'      => date( 'Y-m-d H:i:s' ),
-                    'links'              => $this->getElement( $aItem, array( 'DetailPageURL' ), '' ),
-                    'sales_rank'         => ( integer ) $this->getElement(
-                        $aItem,
-                        array( 'BrowseNodeInfo', 'WebsiteSalesRank', 'SalesRank' ), 0
-                    ),
-                    'title'              => $this->getElement(
-                        $aItem,
-                        array( 'ItemInfo', 'Title', 'DisplayValue' ),
-                        ''
-                    ),
-                    'images'             => AmazonAutoLinks_Unit_Utility::getImageSet( $aItem ),    // 3.8.11
-                    'editorial_reviews'  => AmazonAutoLinks_Unit_Utility::getContent( $aItem ), // 3.9.0 Editorial reviews are no longer available in PA-API 5 so use features.
-                    'currency'           => $_aPrices[ 'currency' ],
-                    'price'              => $_aPrices[ 'price_amount' ],
-                    'price_formatted'    => $_aPrices[ 'price_formatted' ],
-                    'lowest_new_price'   => $_aPrices[ 'lowest_new_price_amount' ],
-                    'lowest_new_price_formatted'  => $_aPrices[ 'lowest_new_price_formatted' ],
-                    'lowest_used_price'           => $_aPrices[ 'lowest_used_price_amount' ],
-                    'lowest_used_price_formatted' => $_aPrices[ 'lowest_used_price_formatted' ],
-                    'count_new'          => -1, // 3.9.0 not available in PA-API5
-                    'count_used'         => -1, // 3.9.0 not available in PA-API5
-                    'discounted_price'   => $_aPrices[ 'discounted_price_amount' ],
-                    'discounted_price_formatted'   => $_aPrices[ 'discounted_price_formatted' ],
+        if ( empty( $aResponseItems ) ) {
+            return;
+        }
 
-                    // Similar products will be set with a separate routine. <--- @deprecated
-                    // Once an empty value is set, it will no longer trigger the value retrieval background routine
-                    // 'similar_products'   => '',
-                    // 'description'        => null,   // (string) product details
-                );
+        $_aRows = array();
+        foreach( $aResponseItems as $_aItem ) {
 
-                // if `0` is passed for the cache duration, it just renews the cache and do not update the expiration time.
-                if ( $iCacheDuration ) {
-                    $_aRow[ 'expiration_time' ] = date( 'Y-m-d H:i:s', time() + $iCacheDuration );
-                }
-
-                // 4.3.2 There are cases that rating information is included.
-                $_inReviewCount = AmazonAutoLinks_Unit_Utility::getReviewCountFromItem( $aItem );
-                $_inRating      = AmazonAutoLinks_Unit_Utility::getRatingFromItem( $aItem );
-                if ( isset( $_inReviewCount, $_inRating ) ) {
-                    $_aRow[ 'rating' ]                  = $_inRating;
-                    $_aRow[ 'rating_image_url' ]        = AmazonAutoLinks_Unit_Utility::getRatingStarImageURL( $_inRating );
-                    $_aRow[ 'rating_html' ]             = ''; // deprecated 3.9.0
-                    $_aRow[ 'number_of_reviews' ]       = $_inReviewCount;
-                }
-
-                // With PA-API5, we don't know whether a customer review exists or not.
-                // Regardless, fill these elements with an empty value.
-                // If the element value is null when retrieved from the front-end,
-                // it schedules a background task. So in order to avoid it, set a value.
-                // @deprecated  3.9.0   Now when %review% or %rating% is not set, it won't trigger the background routine.
-                // If these are set, even the user places those variables later on,
-                // the background routine won't be triggered and the values will not be shown.
-                // $_aRow[ 'rating' ]                  = 0;
-                // $_aRow[ 'rating_image_url' ]        = '';
-                // $_aRow[ 'rating_html' ]             = '';
-                // $_aRow[ 'number_of_reviews' ]       = 0;
-                // $_aRow[ 'customer_review_url' ]     = '';
-                // $_aRow[ 'customer_review_charset' ] = '';
-                // $_aRow[ 'customer_reviews' ]        = '';
-
-                // 3.8.0+ If the table version is 1.1.0b01 or above,
-                $_sCurrentVersion = get_option( "aal_products_version", '0' );
-                if ( version_compare( $_sCurrentVersion, '1.1.0b01', '>=') ) {
-                    $_aFeatures = $this->getElementAsArray( $aItem, array( 'ItemInfo', 'Features', 'DisplayValues' ) );
-                    $_aRow[ 'features' ]   = AmazonAutoLinks_Unit_Utility::getFeatures( $_aFeatures );
-                    $_aNodes = $this->getElementAsArray( $aItem, array( 'BrowseNodeInfo', 'BrowseNodes', ) );
-                    $_aRow[ 'categories' ] = AmazonAutoLinks_Unit_Utility::getCategories( $_aNodes );
-                }
-
-                // 3.9.0+ If the table version is 1.2.0b01 or above,
-                if ( version_compare( $_sCurrentVersion, '1.2.0b01', '>=') ) {
-                    $_aRow[ 'is_prime' ] = AmazonAutoLinks_Unit_Utility::isPrime( $aItem );
-                    $_aRow[ 'is_adult' ] = ( boolean ) $this->getElement(
-                        $aItem,
-                        array( 'ItemInfo', 'ProductInfo', 'IsAdultProduct', 'DisplayValue' ),
-                        false
-                    );
-                    $_aRow[ 'language' ] = $sLanguage;
-                    $_aRow[ 'preferred_currency' ] = $sCurrency;
-                    $_sError = $this->getElement( $aItem, array( 'Error', 'Message', ), '' );
-                    $_aRow[ 'error' ] = $_sError
-                        ? $this->getElement( $aItem, array( 'Error', 'Code', ), '' ) . ': ' . $_sError
-                        : '';
-                }
-
-                // 3.10.0+
-                if ( version_compare( $_sCurrentVersion, '1.3.0b01', '>=') ) {
-                    $_aRow[ 'delivery_free_shipping' ] = AmazonAutoLinks_Unit_Utility::isDeliveryEligible( $aItem, array( 'DeliveryInfo', 'IsFreeShippingEligible' )  );
-                    $_aRow[ 'delivery_fba' ] = AmazonAutoLinks_Unit_Utility::isDeliveryEligible( $aItem, array( 'DeliveryInfo', 'IsAmazonFulfilled' )  );
-                }
-
-                // 4.3.0
-                if ( version_compare( $_sCurrentVersion, '1.4.0b01', '>=' ) ) {
-                    $_aRow[ 'asin' ]       = $sASIN;
-                    $_aRow[ 'product_id' ] = "{$sASIN}|{$sLocale}|{$sCurrency}|{$sLanguage}";
-                }
-
-                return $_aRow;
-
+            $_sASIN = $this->getElement( $_aItem, array( 'ASIN' ), '' );
+            if ( ! $_sASIN || ! isset( $aListQueried[ $_sASIN ] ) ) {
+                continue;
             }
+
+            /**
+             * @see AmazonAutoLinks_Event_Scheduler::scheduleProductInformation()
+             * @var array $_aParameters
+             * Structure: array( 
+             *  0 => $sAssociateID|Locale|Cur|Lang, 
+             *  1 => $sASIN, 
+             *  2 => $iCacheDuration, 
+             *  3 => $bForceRenew, 
+             *  4 => $sItemFormat 
+             * ),
+             */
+            $_aParameters     = $aListQueried[ $_sASIN ];
+            $_aQueriedItem    = explode( '|', $_aParameters[ 0 ] );
+            $_sLocale         = $this->getElement( $_aQueriedItem, array( 1 ), '' );
+            $_sCurrency       = $this->getElement( $_aQueriedItem, array( 2 ), '' );
+            $_sLanguage       = $this->getElement( $_aQueriedItem, array( 3 ), '' );
+            $_iCacheDuration  = ( integer ) $_aParameters[ 2 ];
+            $_bForceRenewal   = ( boolean ) $_aParameters[ 3 ];
+            $_sItemFormat     = $_aParameters[ 4 ];
+
+            $_sKey            = "{$_sASIN}|{$_sLocale}|{$_sCurrency}|{$_sLanguage}";
+            $_aRows[ $_sKey ] = $this->___getRowFormatted( $_aItem, $_sASIN, $_sLocale, $_iCacheDuration, $_sCurrency, $_sLanguage );
+
+            $this->___handleCustomerReview( $_sASIN, $_sLocale, $_iCacheDuration, $_bForceRenewal, $_sCurrency, $_sLanguage, $_sItemFormat );
+
+        }
+        $this->setProductDatabaseRows( $_aRows );
+
+    }
+
+        /**
+         * @param  string  $sASIN
+         * @param  string  $sLocale
+         * @param  integer $iCacheDuration
+         * @param  boolean $bForceRenewal
+         * @param  string  $sCurrency
+         * @param  string  $sLanguage
+         * @param  string  $sItemFormat
+         * @since  4.3.0
+         */
+        private function ___handleCustomerReview( $sASIN, $sLocale, $iCacheDuration, $bForceRenewal, $sCurrency, $sLanguage, $sItemFormat ) {
+
+            // Reviews
+            if ( AmazonAutoLinks_UnitOutput_Utility::hasItemFormatTagsIn( $sItemFormat, array( '%review%' ) ) ) {
+                AmazonAutoLinks_Event_Scheduler::scheduleReview( "{$sASIN}|{$sLocale}|{$sCurrency}|{$sLanguage}", $iCacheDuration, $bForceRenewal );
+            }
+
+            // Ratings
+            if ( ! AmazonAutoLinks_UnitOutput_Utility::hasItemFormatTagsIn( $sItemFormat, array( '%rating%', '%_review_rate%' ) ) ) { // 4.3.4 removed '%_discount_rate%' as it should be nothing to do with ratings.
+                return;
+            }
+            AmazonAutoLinks_Event_Scheduler::scheduleRating( "{$sASIN}|{$sLocale}|{$sCurrency}|{$sLanguage}", $iCacheDuration, $bForceRenewal );
+
+        }
+
+        /**
+         * @param  array   $aItem
+         * @param  string  $sASIN
+         * @param  string  $sLocale
+         * @param  integer $iCacheDuration
+         * @param  string  $sCurrency
+         * @param  string  $sLanguage
+         * @return array
+         * @since  3.9.0
+         */
+        private function ___getRowFormatted( array $aItem, $sASIN, $sLocale, $iCacheDuration, $sCurrency, $sLanguage ) {
+
+            $_aPrices = AmazonAutoLinks_Unit_Utility::getPrices( $aItem );
+            $_aRow    = array(
+                'asin_locale'        => $sASIN . '_' . $sLocale,
+                'locale'             => $sLocale,
+                'modified_time'      => date( 'Y-m-d H:i:s' ),
+                'links'              => $this->getElement( $aItem, array( 'DetailPageURL' ), '' ),
+                'sales_rank'         => ( integer ) $this->getElement(
+                    $aItem,
+                    array( 'BrowseNodeInfo', 'WebsiteSalesRank', 'SalesRank' ), 0
+                ),
+                'title'              => $this->getElement(
+                    $aItem,
+                    array( 'ItemInfo', 'Title', 'DisplayValue' ),
+                    ''
+                ),
+                'images'             => AmazonAutoLinks_Unit_Utility::getImageSet( $aItem ),    // 3.8.11
+                'editorial_reviews'  => AmazonAutoLinks_Unit_Utility::getContent( $aItem ), // 3.9.0 Editorial reviews are no longer available in PA-API 5 so use features.
+                'currency'           => $_aPrices[ 'currency' ],
+                'price'              => $_aPrices[ 'price_amount' ],
+                'price_formatted'    => $_aPrices[ 'price_formatted' ],
+                'lowest_new_price'   => $_aPrices[ 'lowest_new_price_amount' ],
+                'lowest_new_price_formatted'  => $_aPrices[ 'lowest_new_price_formatted' ],
+                'lowest_used_price'           => $_aPrices[ 'lowest_used_price_amount' ],
+                'lowest_used_price_formatted' => $_aPrices[ 'lowest_used_price_formatted' ],
+                'count_new'          => -1, // 3.9.0 not available in PA-API5
+                'count_used'         => -1, // 3.9.0 not available in PA-API5
+                'discounted_price'   => $_aPrices[ 'discounted_price_amount' ],
+                'discounted_price_formatted'   => $_aPrices[ 'discounted_price_formatted' ],
+
+                // Similar products will be set with a separate routine. <--- @deprecated
+                // Once an empty value is set, it will no longer trigger the value retrieval background routine
+                // 'similar_products'   => '',
+                // 'description'        => null,   // (string) product details
+            );
+
+            // if `0` is passed for the cache duration, it just renews the cache and do not update the expiration time.
+            if ( $iCacheDuration ) {
+                $_aRow[ 'expiration_time' ] = date( 'Y-m-d H:i:s', time() + $iCacheDuration );
+            }
+
+            // 4.3.2 There are cases that rating information is included.
+            $_inReviewCount = AmazonAutoLinks_Unit_Utility::getReviewCountFromItem( $aItem );
+            $_inRating      = AmazonAutoLinks_Unit_Utility::getRatingFromItem( $aItem );
+            if ( isset( $_inReviewCount, $_inRating ) ) {
+                $_aRow[ 'rating' ]                  = $_inRating;
+                $_aRow[ 'rating_image_url' ]        = AmazonAutoLinks_Unit_Utility::getRatingStarImageURL( $_inRating );
+                $_aRow[ 'rating_html' ]             = ''; // deprecated 3.9.0
+                $_aRow[ 'number_of_reviews' ]       = $_inReviewCount;
+            }
+
+            // With PA-API5, we don't know whether a customer review exists or not.
+            // Regardless, fill these elements with an empty value.
+            // If the element value is null when retrieved from the front-end,
+            // it schedules a background task. So in order to avoid it, set a value.
+            // @deprecated  3.9.0   Now when %review% or %rating% is not set, it won't trigger the background routine.
+            // If these are set, even the user places those variables later on,
+            // the background routine won't be triggered and the values will not be shown.
+            // $_aRow[ 'rating' ]                  = 0;
+            // $_aRow[ 'rating_image_url' ]        = '';
+            // $_aRow[ 'rating_html' ]             = '';
+            // $_aRow[ 'number_of_reviews' ]       = 0;
+            // $_aRow[ 'customer_review_url' ]     = '';
+            // $_aRow[ 'customer_review_charset' ] = '';
+            // $_aRow[ 'customer_reviews' ]        = '';
+
+            // 3.8.0+ If the table version is 1.1.0b01 or above,
+            $_sCurrentVersion = get_option( "aal_products_version", '0' );
+            if ( version_compare( $_sCurrentVersion, '1.1.0b01', '>=') ) {
+                $_aFeatures = $this->getElementAsArray( $aItem, array( 'ItemInfo', 'Features', 'DisplayValues' ) );
+                $_aRow[ 'features' ]   = AmazonAutoLinks_Unit_Utility::getFeatures( $_aFeatures );
+                $_aNodes = $this->getElementAsArray( $aItem, array( 'BrowseNodeInfo', 'BrowseNodes', ) );
+                $_aRow[ 'categories' ] = AmazonAutoLinks_Unit_Utility::getCategories( $_aNodes );
+            }
+
+            // 3.9.0+ If the table version is 1.2.0b01 or above,
+            if ( version_compare( $_sCurrentVersion, '1.2.0b01', '>=') ) {
+                $_aRow[ 'is_prime' ] = AmazonAutoLinks_Unit_Utility::isPrime( $aItem );
+                $_aRow[ 'is_adult' ] = ( boolean ) $this->getElement(
+                    $aItem,
+                    array( 'ItemInfo', 'ProductInfo', 'IsAdultProduct', 'DisplayValue' ),
+                    false
+                );
+                $_aRow[ 'language' ] = $sLanguage;
+                $_aRow[ 'preferred_currency' ] = $sCurrency;
+                $_sError = $this->getElement( $aItem, array( 'Error', 'Message', ), '' );
+                $_aRow[ 'error' ] = $_sError
+                    ? $this->getElement( $aItem, array( 'Error', 'Code', ), '' ) . ': ' . $_sError
+                    : '';
+            }
+
+            // 3.10.0+
+            if ( version_compare( $_sCurrentVersion, '1.3.0b01', '>=') ) {
+                $_aRow[ 'delivery_free_shipping' ] = AmazonAutoLinks_Unit_Utility::isDeliveryEligible( $aItem, array( 'DeliveryInfo', 'IsFreeShippingEligible' )  );
+                $_aRow[ 'delivery_fba' ] = AmazonAutoLinks_Unit_Utility::isDeliveryEligible( $aItem, array( 'DeliveryInfo', 'IsAmazonFulfilled' )  );
+            }
+
+            // 4.3.0
+            if ( version_compare( $_sCurrentVersion, '1.4.0b01', '>=' ) ) {
+                $_aRow[ 'asin' ]       = $sASIN;
+                $_aRow[ 'product_id' ] = "{$sASIN}|{$sLocale}|{$sCurrency}|{$sLanguage}";
+            }
+
+            return $_aRow;
+
+        }
 
 }
