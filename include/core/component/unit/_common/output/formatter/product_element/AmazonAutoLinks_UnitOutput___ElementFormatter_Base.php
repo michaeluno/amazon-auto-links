@@ -96,7 +96,8 @@ abstract class AmazonAutoLinks_UnitOutput___ElementFormatter_Base extends Amazon
                     'data-attempt'          => 0, // indicates how many times that the Ajax request was made for this element
                     'data-cache_duration'   => $this->_oUnitOption->get( 'cache_duration' ),
                     'data-call_id'          => $this->_oUnitOption->sCallID,
-                    'data-item_format_tags' => str_replace( '%', '&', implode( ',', $this->_oUnitOption->aItemFormatTags ) ), // by itself it breaks HTML markups so convert % to & and these will be reverted in the now-retrieving updater Ajax script.
+                    'data-item_format_tags' => str_replace( '%', '|', implode( ' ', $this->_oUnitOption->aItemFormatTags ) ), // by itself it breaks HTML markups so convert % to & and these will be reverted in the now-retrieving updater Ajax script.
+                    'data-none'             => '',  // somehow, wp_kses() removes the last item for unknown reasons
                 )
             );
         }

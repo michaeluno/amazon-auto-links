@@ -1,1 +1,2 @@
-- Optimized the method of updating product caches in the background. 
+- Optimized the method of updating product caches in the background.
+- Fixed a bug that updating pending elements with Ajax failed. 

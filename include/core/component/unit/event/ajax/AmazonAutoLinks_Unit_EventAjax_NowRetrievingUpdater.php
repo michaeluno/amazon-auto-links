@@ -74,7 +74,7 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
          * Array(
          *     [B08MF4NHXZ|IT|EUR|it_IT] => Array(
          *         [formatted_rating] => Array(
-         *             [item_format_tags] => (string, len`gth: 88) &image&,&image_set&,&title&,&rating&,&prime&,&price&,&description&,&button&,&disclaimer&
+         *             [item_format_tags] => (string, len`gth: 88) |image| |image_set| |title| |rating| |prime| |price| |description| |button| |disclaimer|
          *             [call_id] => (string, length: 13) 60fecdb30833c
          *             [cache_duration] => (string, length: 5) 86400
          *             [attempt] => (string, length: 1) 1
@@ -90,7 +90,7 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
          *      ),
          *     [B08FHT7ZVH|IT|EUR|it_IT] => Array(
          *         [formatted_rating] => Array(
-         *             [item_format_tags] => (string, length: 88) &image&,&image_set&,&title&,&rating&,&prime&,&price&,&description&,&button&,&disclaimer&
+         *             [item_format_tags] => (string, length: 88) |image| |image_set| |title| |rating| |prime| |price| |description| |button| |disclaimer|
          *             [call_id] => (string, length: 13) 60fecdb30833c
          *             [cache_duration] => (string, length: 5) 86400
          *             [attempt] => (string, length: 1) 1
@@ -286,7 +286,7 @@ class AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater extends AmazonAutoLink
                                 'show_now_retrieving_message'  => true,
                                 'ItemIds'            => array(),
                                 'associate_id'       => $_sAssociateTag,
-                                'item_format'        => str_replace( '&', '%', $this->getElement( $_aElement, array( 'item_format_tags' ) ) ),
+                                'item_format'        => str_replace( '|', '%', $this->getElement( $_aElement, array( 'item_format_tags' ) ) ),
                             );
                         $_aUnitOptionSets[ $_sKey ][ 'ItemIds' ][] = $_sASIN;
                     }
