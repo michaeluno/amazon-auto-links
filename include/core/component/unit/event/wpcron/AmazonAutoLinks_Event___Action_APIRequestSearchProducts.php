@@ -13,7 +13,7 @@
  *
  * This is a plural version of `AmazonAutoLinks_Event___Action_APIRequestSearchProducts` which queries multiple products at a time.
  *
- * @since       3.7.7
+ * @since 3.7.7
  */
 class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAutoLinks_Event___Action_Base {
 
@@ -62,14 +62,14 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
      */
     protected function _doAction( /* $aArguments */ ) {
 
-        $_aParams        = func_get_args() + array( array(), '', '', '', '' );
-        $_aList          = $_aParams[ 0 ];
-        $_sAssociateID   = $this->___getAssociateTag( $_aParams[ 1 ], $_aParams );
-        $_sLocale        = $_aParams[ 2 ];
-        $_sCurrency      = $_aParams[ 3 ];
-        $_sLanguage      = $_aParams[ 4 ];
-        $_aASINs         = $this->___getASINs( $_aList ); // $_aList will be updated to have keys of ASIN
-        $_aResponse      = $this->___getAPIResponse( $_aASINs, $_sAssociateID, $_sLocale, $_sCurrency, $_sLanguage );
+        $_aParams      = func_get_args() + array( array(), '', '', '', '' );
+        $_aList        = $_aParams[ 0 ];
+        $_sAssociateID = $this->___getAssociateTag( $_aParams[ 1 ], $_aParams );
+        $_sLocale      = $_aParams[ 2 ];
+        $_sCurrency    = $_aParams[ 3 ];
+        $_sLanguage    = $_aParams[ 4 ];
+        $_aASINs       = $this->___getASINs( $_aList ); // $_aList will be updated to have keys of ASIN
+        $_aResponse    = $this->___getAPIResponse( $_aASINs, $_sAssociateID, $_sLocale, $_sCurrency, $_sLanguage );
         do_action( 'aal_action_debug_log', 'UPDATE_PRODUCTS', "{$_sAssociateID}, {$_sLocale}, {$_sCurrency}, {$_sLanguage}: " . implode( ', ', $_aASINs ), $_aResponse, current_filter(), true );
 
         /**
@@ -167,7 +167,6 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
              * @param  string  $sCurrency
              * @param  string  $sLanguage
              * @param  string  $sItemFormat
-             * @return void
              * @since  4.3.0
              */
             private function ___handleCustomerReview( $sASIN, $sLocale, $iCacheDuration, $bForceRenewal, $sCurrency, $sLanguage, $sItemFormat ) {
@@ -287,7 +286,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
         }
 
             /**
-             * @param  array $aItem
+             * @param  array   $aItem
              * @param  string  $sASIN
              * @param  string  $sLocale
              * @param  integer $iCacheDuration
