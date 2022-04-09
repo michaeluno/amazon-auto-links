@@ -99,7 +99,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
             return;
         }
 
-        $this->___setProductRows( $_aResponse, $_aList, $_sLocale, $_sCurrency, $_sLanguage, $_sTableVersion );
+        $this->___setProductRows( $_aResponse, $_aList, $_sLocale, $_sCurrency, $_sLanguage );
 
     }
         /**
@@ -127,10 +127,9 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
          * @param string $sLocale
          * @param string $sCurrency
          * @param string $sLanguage
-         * @param string $sTableVersion
          * @since 4.3.0
          */
-        private function ___setProductRows( array $aResponse, array $aList, $sLocale, $sCurrency, $sLanguage, $sTableVersion ) {
+        private function ___setProductRows( array $aResponse, array $aList, $sLocale, $sCurrency, $sLanguage ) {
 
             $_aRows  = array();
             $_aItems = $this->getElementAsArray( $aResponse, array( 'ItemsResult', 'Items' ) );
