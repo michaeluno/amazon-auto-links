@@ -1,3 +1,6 @@
+#### 5.2.3 - 04/09/2022
+- Fixed a bug that empty product caches were created, started since v5.2.2.
+
 #### 5.2.2 - 04/08/2022
 - Optimized the method of renewing caches in the background.
 - Fixed a bug that caused a PHP notice of an undefined index occurred in the background.

@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.9.3
 Requires MySQL:     5.0.3
-Stable tag:         5.2.3
+Stable tag:         5.2.4
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -373,8 +373,9 @@ You can check if your keys are valid with [Scratchpad](https://webservices.amazo
 
 == Changelog ==
 
-#### 5.2.3 - 04/09/2022
-- Fixed a bug that empty product caches were created, started since v5.2.2.
+#### 5.2.4 - 04/10/2022
+- Optimized the method of updating product caches in the background.
+- Fixed a bug that updating pending elements with Ajax failed.
 
 #### Old Log
 For old change logs, see [here](https://github.com/michaeluno/amazon-auto-links/blob/master/changelog.md).
