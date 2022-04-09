@@ -41,7 +41,6 @@ class AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI extends Am
         $_aProducts         = $this->getElementAsArray( $_aResponse, array( 'results' ) );
         $_aProducts         = array_merge( $_aProducts, $this->___getMissedProducts( $_aASINsToSearch, $_aProducts ) );
         $this->___setProductsIntoDatabase( $_aProducts, $aItems, $sLocaleSlug, $iCacheDuration );
-
     }
         /**
          * Construct empty product data.
@@ -90,7 +89,9 @@ class AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI extends Am
                     $_aASINLocaleCurLangs[ $_sKey ] = $_aItem;
                 }
                 $_oProducts = new AmazonAutoLinks_ProductDatabase_Rows( $_aASINLocaleCurLangs );
-                return $_oProducts->get();
+                $_aRows     = $_oProducts->get();
+                AmazonAutoLinks_ProductDatabase_Rows::$aCaches = array();   // for the now-retrieving Ajax callback, do not leave the cache
+                return $_aRows;
 
             }
             /**
