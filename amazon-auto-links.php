@@ -426,7 +426,7 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
     }
 
     /**
-     * @var   string[]
+     * @var   array
      * @since 5.2.1
      */
     static public $aComponents = array(
