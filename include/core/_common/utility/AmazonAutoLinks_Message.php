@@ -77,7 +77,7 @@ class AmazonAutoLinks_Message {
      */
     static public function get( $sItemKey ) {
         $_oMessage = self::getInstance();
-        return $_oMessage->getItem( $sItemKey );
+        return apply_filters( 'aal_filter_message_' . $sItemKey, $_oMessage->getItem( $sItemKey ) );
     }
 
     /**
