@@ -182,13 +182,13 @@ You can display a formatted Amazon product link by pasting a product URL in the 
 
 Yes. Otherwise, you don't get any revenue. You can get it by signing up for [Amazon Associates](https://affiliate-program.amazon.com/).
 
-= Do I need Amazon Access Keys? =
+= Do I need API Keys? =
 
-For the category unit type, no, but for other unit types, yes. You need to issue a pair of keys on either the AWS site or the Amazon Associates page.
+For the category unit type, no, but for PA-API unit types, yes. You need to issue a pair of API keys on the Amazon Associates logged-in page.
 
 For that, you need to have an account with [Amazon Product Advertising API](https://affiliate-program.amazon.com/gp/advertising/api/detail/main.html). The keys can be obtained by logging in to [Amazon Web Services](http://aws.amazon.com/) and you need to get **Access Key ID** (public key) and **Secret Access Key** (private key).
 
-More detailed instruction, please refer to the [To register as a Product Advertising API developer](https://docs.aws.amazon.com/AWSECommerceService/latest/GSG/GettingStarted.html#BecominganAssociate) or [**How to Obtain Access Key and Secret Key**](http://wordpress.org/plugins/amazon-auto-links/other_notes/) section.
+More detailed instruction, please see [Register for Product Advertising API](https://webservices.amazon.com/paapi5/documentation/register-for-pa-api.html).
 
 = Is the plugin compatible with PA-API 5? =
 Yes. The plugin is compatible with PA-API (Amazon Product Advertising API) 5.0. The PA-API 4 is no longer available as of 10/31/2019 so if you are still using API keys of the old API, you need to reissue them.
