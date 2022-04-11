@@ -1,7 +1,7 @@
 {
-  "name": "amazon-auto-links",
-  "version": "5.1.0",
-  "description": "Auto Amazon Links is an open source WordPress plugin that inserts Amazon products in WordPress powered web sites.",
+  "name": "amazon-auto-links-gutenberg-blocks",
+  "version": "1.0.0",
+  "description": "The Gutenberg block component for Auto Amazon Links",
   "main": "index.js",
   "directories": {
     "test": "test"
