@@ -236,7 +236,15 @@ Yes, that is the former name of this plugin and it is now Auto Amazon Links.
 == Other Notes ==
 
 = Shortcode and Function Parameters =
-The following parameters can be used for the shortcode, `[amazon_auto_links]`, the PHP action hook of the plugin, `do_action( 'aal_action_output' );`, or the filter hooks, `apply_filters( 'aal_filter_output' );`
+The plugin provides means to display Amazon product links by manually inserting a piece of code into your post or a theme file. For posts, it's called _shortcode_. For theme files, you need to place a PHP function. Using these, you even don't have to create a unit.
+
+- Shortcode:
+  - `[amazon_auto_links]`
+- PHP Functions:
+  - `do_action( 'aal_action_output' );`
+  - `apply_filters( 'aal_filter_output' );`
+
+They both takes the following arguments.
 
 <h5><strong>id</strong> - the unit ID</h5>
 
