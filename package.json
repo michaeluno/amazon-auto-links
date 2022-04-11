@@ -1,0 +1,30 @@
+{
+  "name": "amazon-auto-links",
+  "version": "5.1.0",
+  "description": "Auto Amazon Links is an open source WordPress plugin that inserts Amazon products in WordPress powered web sites.",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michaeluno/amazon-auto-links.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/michaeluno/amazon-auto-links/issues"
+  },
+  "homepage": "https://github.com/michaeluno/amazon-auto-links#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^8.0.0",
+    "gulp-cached": "^1.1.1",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^5.1.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-using": "^0.1.1",
+    "require-dir": "^1.2.0",
+    "sass": "^1.50.0"
+  }
+}
