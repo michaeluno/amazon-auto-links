@@ -1,5 +1,8 @@
 == Change log ==
 
+= 1.4.0 =
+- Tweaked the font sizes.
+
 = 1.3.0 =
 - Fixed an issue with block widgets that the thumbnail overlaps with the product content body.
 
