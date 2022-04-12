@@ -28,10 +28,10 @@
   display: table;
   clear: both;
   margin-bottom: 20px;
-  font-size: medium;
+  font-size: 100%;
 }
 .amazon-products-container .amazon-auto-links-credit {
-  font-size: smaller;
+  font-size: 92%;
 }
 .amazon-products-container > .amazon-product-container .amazon-product-thumbnail-container {
   width: 100%;
@@ -68,7 +68,7 @@
   word-break: break-all;
 }
 .amazon-products-container > .amazon-product-container .amazon-customer-reviews .review-date {
-  font-size: smaller;
+  font-size: 92%;
 }
 .amazon-products-container > .amazon-product-container .amazon-customer-reviews .review-title {
   font-weight: bold;
@@ -94,7 +94,7 @@
   display: inline-block;
   vertical-align: middle;
   line-height: 24px;
-  font-size: medium;
+  font-size: 100%;
   margin-right: 0.32em;
 }
 .amazon-products-container > .amazon-product-container .amazon-customer-rating-stars * {
@@ -121,7 +121,7 @@
   margin: 1em;
 }
 .amazon-products-container > .amazon-product-container .pricing-disclaimer {
-  font-size: xx-small;
+  font-size: 76%;
 }
 .amazon-products-container > .amazon-product-container .pricing-disclaimer a.amazon-disclaimer-tooltip {
   outline: none;

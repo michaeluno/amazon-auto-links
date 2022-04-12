@@ -1,5 +1,8 @@
 == Change log ==
 
+= 1.3.0 =
+- Tweaked font sizes.
+
 = 1.2.4 =
 - Tweaked vertical alignment of author elements.
 

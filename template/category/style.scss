@@ -26,11 +26,11 @@
         display:table;
         clear:both;
         margin-bottom: 20px;
-        font-size: medium;
+        font-size: 100%;
     }    
 
     .amazon-auto-links-credit {
-        font-size: smaller;
+        font-size: 92%;
     }
     
     > .amazon-product-container {
@@ -90,7 +90,7 @@
         .amazon-customer-reviews {
             word-break: break-all;
             .review-date {
-                font-size: smaller;
+                font-size: 92%;
             }
             .review-title {
                 font-weight: bold;
@@ -119,7 +119,7 @@
             display: inline-block;
             vertical-align: middle;
             line-height: 24px;
-            font-size: medium;
+            font-size: 100%;
             margin-right: 0.32em;
             * {
                 line-height: 24px;
@@ -152,7 +152,7 @@
         
         // Pricing disclaimer 
         .pricing-disclaimer {
-            font-size: xx-small;
+            font-size: 76%;
             a.amazon-disclaimer-tooltip {
                 outline: none;
                 strong {
