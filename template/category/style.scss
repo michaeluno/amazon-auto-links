@@ -1,0 +1,315 @@
+/**
+ *  Template Name:  Category
+ *  Template URI:   http://en.michaeluno.jp
+ *  Author:         Michael Uno
+ *  Author URI:     http://en.michaeluno.jp
+ *  Description:    Displays Amazon products for the category unit type.
+ *  Version:        1.3.0
+ *  License:        GNU General Public License v2 or later
+ *  License URI:    http://www.gnu.org/licenses/gpl-2.0.html
+ *  Tags:           default
+ *  Text Domain:    amazon-auto-links
+ */
+.amazon-products-container {
+    overflow-y: auto;
+	overflow-x: hidden;
+    width: 100%;
+    padding-right: 1em;
+    * {
+        box-sizing: border-box;
+    }
+    a {
+        text-decoration: none;
+    }
+    .amazon-product-container {
+        width: 100%;
+        display:table;
+        clear:both;
+        margin-bottom: 20px;
+        font-size: medium;
+    }    
+
+    .amazon-auto-links-credit {
+        font-size: smaller;
+    }
+    
+    > .amazon-product-container {
+
+        // Thumbnails
+        .amazon-product-thumbnail-container {
+            width: 100%;
+        }
+        .amazon-product-thumbnail {
+            margin: 20px auto;
+            text-align: center;
+            img {
+                max-width: 100%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        // Descriptions
+        /// Word wrap        
+        .amazon-product-description {
+        
+            // Align with prices and rating stars
+            vertical-align: middle;
+            line-height: 24px;
+        
+            // These are technically the same, but use both
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+        
+            -ms-word-break: break-all;
+            // This is the dangerous one in WebKit, as it breaks things wherever
+            word-break: break-all;
+            // Instead use this non-standard one:
+            word-break: break-word;
+        
+            // Adds a hyphen where the word breaks, if supported (No Blink)
+            -ms-hyphens: auto;
+            -moz-hyphens: auto;
+            -webkit-hyphens: auto;
+            hyphens: auto;
+        
+            // For the disclaimer to continue
+            display: inline;
+            margin-right: 0.4em;
+        
+        }            
+
+        // Meta
+        .amazon-product-meta {
+            display: inline;
+            margin-right: 0.4em;
+            vertical-align: middle;        
+        }
+        
+        // Customer Reviews
+        .amazon-customer-reviews {
+            word-break: break-all;
+            .review-date {
+                font-size: smaller;
+            }
+            .review-title {
+                font-weight: bold;
+            }
+            .review-image-tile {
+                display: inline-block;
+                max-height: 120px;
+                max-width: 180px;
+                margin: 0.2em;
+            }            
+        }        
+        .crIFrameNumCustReviews {
+            display: inline-block;
+        }        
+        
+        // Rating starts
+        span.asinReviewsSummary > a > img,
+        .amazon-customer-reviews img,
+        span.crVotingButtons > nobr > a  > img {
+            display: inline-block;
+        }
+        .reviews-voting-stripe {
+            border-right: 0 !important;
+        }
+        .amazon-customer-rating-stars {
+            display: inline-block;
+            vertical-align: middle;
+            line-height: 24px;
+            font-size: medium;
+            margin-right: 0.32em;
+            * {
+                line-height: 24px;
+            }            
+            img {
+                // Prevents rating stars from being wrapped
+                display: inline-block;
+                // In some themes the rating number and the star image do not align. This is for the fix.
+                vertical-align: middle;
+            }            
+        }
+        .crIFrameNumCustReviews .crAvgStars {
+            white-space: nowrap;
+        }
+        .review-stars {
+            vertical-align: middle;
+            svg {
+                position: relative;
+                top: -3px;
+                margin-right: 0.32em;
+            }            
+        }
+        
+        // Sub-images
+        .sub-image-container {
+            display: inline-block;
+            clear: none;
+            margin: 1em;
+        }
+        
+        // Pricing disclaimer 
+        .pricing-disclaimer {
+            font-size: xx-small;
+            a.amazon-disclaimer-tooltip {
+                outline: none;
+                strong {
+                    line-height:30px;
+                }
+                span.amazon-disclaimer-tooltip-content > .amazon-disclaimer-tooltip-content-text {
+                    z-index: 999;
+                    display: none;
+                    padding: 14px 20px;
+                    margin-top: -30px;
+                    margin-left: 28px;
+                    width: 300px;
+                    line-height: 16px;
+                    border-radius:4px;
+                    box-shadow: 5px 5px 8px #CCC;                    
+                }                
+            }
+            a.amazon-disclaimer-tooltip:hover {
+                text-decoration: none;
+                > span.amazon-disclaimer-tooltip-content {
+                    display: inline;
+                    position: relative;
+                    > .amazon-disclaimer-tooltip-content-text {
+                        display: inline;
+                        float: right;
+                        position: absolute;
+                        color:#111;
+                        border:1px solid #DCA;
+                        background:#fffAF0;
+                    
+                        // Adjust the pop up element position
+                        margin-left: -100px;
+                        margin-top: -140px;
+                    }                    
+                }                
+            }
+  
+        }
+        
+        // Contents (%content%)
+        .amazon-product-content * {
+            width: auto !important;
+            max-width: 100% !important;
+        }        
+
+        // Similar Products
+        .amazon-similar-products .amazon-similar-product {
+            display: inline-block;
+            margin: 1em;
+            > img {
+                max-width: 100%;
+                margin-left: auto;
+                margin-right: auto;
+                vertical-align: middle;
+            }                    
+        }
+        
+        // Prime Icon
+        .amazon-prime {
+            display: inline-block;
+            vertical-align: middle;
+            line-height: 1;
+            svg {
+                height: 1.4em;
+                margin-right: 0.4em;
+            }                    
+        }
+        .prime-icon {
+            display: inline-block;
+            width: 68px;
+            height: 20px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: bottom;
+            position: relative;
+            top: -1px;
+        }
+        
+        // Prices and Discounts
+        .amazon-prices,
+        .amazon-discount
+        {
+            vertical-align: middle;
+            display: inline-block;
+            line-height: 24px;
+            margin-right: 0.34em;
+        }
+        .amazon-prices * {
+            line-height: 24px;
+        }
+        .amazon-product-price,
+        .amazon-product-discounted-price,
+        .amazon-product-lowest-new-price,
+        .amazon-product-lowest-used-price,
+        .amazon-prices .proper-price,
+        .amazon-prices .offered-price
+        {
+            display: inline;
+        }
+        .amazon-product-lowest-new-price-value,
+        span.offered-price {
+            color: #B12704;
+            font-weight: bold;
+        }
+        
+        // Categories
+        ul.categories {
+            list-style-type: none;
+            margin: 0.4em 0;
+        }
+
+        // Features
+        ul.features {
+            margin: 0.4em 0;
+        }
+    }
+
+    // Buttons
+    .amazon-auto-links-button-container {
+        width: 100%;
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }    
+    
+    // Description fix
+    .riRssContributor {
+        margin-right: 0.4em;
+    }
+ 
+    // Debug
+    .dump-array {
+        max-height: 300px;
+        overflow-y: scroll;
+        overflow-x: auto;
+        padding: 0 1em;
+        word-wrap: break-word;
+        word-break: break-all;
+        margin: 1em 0;
+    }
+    
+}
+
+// Widgets
+// Sub-images
+.widget-area .amazon-products-container .sub-image-container,
+.amazon-auto-links-widget .amazon-products-container .sub-image-container
+{
+    margin: 0.4em 0.4em 0 0;
+}
+
+// Content in Widgets
+.widget-area .amazon-products-container .amazon-product-content *,
+.amazon-auto-links-widget .amazon-products-container .amazon-product-content *
+{
+    width: auto;
+    display: inline-block;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
