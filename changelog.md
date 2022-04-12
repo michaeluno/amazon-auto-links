@@ -1,3 +1,10 @@
+#### 5.2.5 - 04/13/2022
+- Tweaked font sizes of the `List` and `Category` templates.
+
+#### 5.2.4 - 04/10/2022
+- Optimized the method of updating product caches in the background.
+- Fixed a bug that updating pending elements with Ajax failed.
+
 #### 5.2.3 - 04/09/2022
 - Fixed a bug that empty product caches were created, started since v5.2.2.
 
