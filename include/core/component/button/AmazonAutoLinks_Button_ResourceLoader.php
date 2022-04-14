@@ -58,7 +58,7 @@ class AmazonAutoLinks_Button_ResourceLoader extends AmazonAutoLinks_Button_Utili
         
         
         // If it is not in a post definition page, return.
-        if ( ! in_array( $GLOBALS[ 'pagenow' ], array( 'post.php', 'post-new.php' ) ) ) {
+        if ( ! in_array( $GLOBALS[ 'pagenow' ], array( 'post.php', 'post-new.php' ), true ) ) {
             return;
         }
 
@@ -67,7 +67,8 @@ class AmazonAutoLinks_Button_ResourceLoader extends AmazonAutoLinks_Button_Utili
                 $oScreen->post_type,
                 array(
                     AmazonAutoLinks_Registry::$aPostTypes[ 'unit' ],
-                )
+                ),
+                true
             )
         ) {        
             // For unit definition page
