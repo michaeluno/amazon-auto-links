@@ -162,8 +162,7 @@ CSS;
     static public function getDefaultButtonCSS( $isButtonID='default' ) {
                                         
         return <<<CSS
-.amazon-auto-links-button.amazon-auto-links-button-{$isButtonID} {
-    background: #4997e5;
+.amazon-auto-links-button.amazon-auto-links-button-{$isButtonID} {   
     background-image: -webkit-linear-gradient(top, #4997e5, #3f89ba);
     background-image: -moz-linear-gradient(top, #4997e5, #3f89ba);
     background-image: -ms-linear-gradient(top, #4997e5, #3f89ba);
@@ -178,9 +177,8 @@ CSS;
     white-space: nowrap;
     color: #ffffff;
     font-size: 13px;
-    text-shadow-color: transparent;
+    text-shadow: 0 0 transparent;
     width: 100px;
-    box-shadow-color: #666666;
     padding: 7px 8px 8px 8px;
     background: #3498db;
     border: solid #6891a5 1px;
