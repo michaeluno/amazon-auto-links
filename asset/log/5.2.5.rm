@@ -1,1 +1,2 @@
+- Fixed invalid properties in the default button CSS rules. 
 - Tweaked font sizes of the `List` and `Category` templates.

@@ -382,7 +382,7 @@ class AmazonAutoLinks_Button_DefaultButtons extends AmazonAutoLinks_Button_Utili
                     'button_css'         => '',
                     '_button_type'       => 'image',
                 ),
-                'css'          => ".amazon-auto-links-button-___button_id___ { display: block; margin-right: auto; margin-left: auto; position: relative; _custom_css: ; width: 176px; height: 28px; } .amazon-auto-links-button-___button_id___ > img { height: unset; max-width: 100%; max-height: 100%; margin-right: auto; margin-left: auto; display: block; position: absolute; top: 50%; left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%); }",
+                'css'          => ".amazon-auto-links-button-___button_id___ { display: block; margin-right: auto; margin-left: auto; position: relative; width: 176px; height: 28px; } .amazon-auto-links-button-___button_id___ > img { height: unset; max-width: 100%; max-height: 100%; margin-right: auto; margin-left: auto; display: block; position: absolute; top: 50%; left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%); }",
             ),
             'https://aal-default-button/image-button' => array(
                 'post_columns' => array(
@@ -411,7 +411,7 @@ class AmazonAutoLinks_Button_DefaultButtons extends AmazonAutoLinks_Button_Utili
                     'button_css'         => '',
                     '_button_type'       => 'image',
                 ),
-                'css'          => ".amazon-auto-links-button-___button_id___ { display: block; margin-right: auto; margin-left: auto; position: relative; _custom_css: ; width: 148px; height: 79px; transform: scale(0.98); } .amazon-auto-links-button-___button_id___:hover { transform: scale(1.0); } .amazon-auto-links-button-___button_id___ > img { height: unset; max-width: 100%; max-height: 100%; margin-right: auto; margin-left: auto; display: block; position: absolute; top: 50%; left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%); } .amazon-auto-links-button-___button_id___ > img:hover { filter: alpha(opacity=70); opacity: 0.7; }",
+                'css'          => ".amazon-auto-links-button-___button_id___ { display: block; margin-right: auto; margin-left: auto; position: relative; width: 148px; height: 79px; transform: scale(0.98); } .amazon-auto-links-button-___button_id___:hover { transform: scale(1.0); } .amazon-auto-links-button-___button_id___ > img { height: unset; max-width: 100%; max-height: 100%; margin-right: auto; margin-left: auto; display: block; position: absolute; top: 50%; left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%); } .amazon-auto-links-button-___button_id___ > img:hover { filter: alpha(opacity=70); opacity: 0.7; }",
             ),
         );
     }
