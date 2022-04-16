@@ -1,6 +1,6 @@
 /**
- * @name Image Button Preview Event Binder
- * @version 1.0.0
+ * @name    Image Button Preview Event Binder
+ * @version 1.0.1
  */
 (function ( $ ) {
   /* global aalImageButtonPreviewEventBinder, */
@@ -107,6 +107,7 @@
         }
         _imgTemp.src = _url;  // this triggers the onload function above
       },
+      '_custom_css': function() {}, // do nothing
       '_common': function( self ) {
         if ( ! self.data( 'property' ) ) {
           return;
