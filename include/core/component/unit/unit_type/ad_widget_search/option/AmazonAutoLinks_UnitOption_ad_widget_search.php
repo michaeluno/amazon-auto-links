@@ -24,8 +24,10 @@ class AmazonAutoLinks_UnitOption_ad_widget_search extends AmazonAutoLinks_UnitOp
      * @remark Accessed from the base class constructor to construct a default option array.
      */
     static public $aStructure_Default = array(
-        'Keywords' => '',
-        'sort'     => 'raw', // title, title_descending
+        'Keywords'    => '',
+        'sort'        => 'raw', // title, title_descending
+        'SearchIndex' => 'All',
+        'BrowseNode'  => null,
     );
 
     /**

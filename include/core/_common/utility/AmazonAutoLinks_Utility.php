@@ -16,6 +16,16 @@
 class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_FileSystem {
 
     /**
+     * Returns `null` if the given value is empty, used to construct API arguments to reduce conditions.
+     * @since  5.3.0
+     * @param  mixed $mValue
+     * @return mixed|null    `null` if the given value is empty.
+     */
+    static public function getEmptyConvertedToNull( $mValue ) {
+        return empty( $mValue ) ? null : $mValue;
+    }
+
+    /**
      * Returns an array of size units such as px, em to be used by field definitions.
      * @since  5.2.0
      * @return array

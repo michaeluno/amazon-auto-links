@@ -42,6 +42,7 @@ class AmazonAutoLinks_Unit_UnitType_AdWidgetSearch_Event_Filter_ProductsFetcher 
             $_aKeywords,
             array(
                 'SearchIndex' => $this->oUnitOutput->oUnitOption->get( array( 'SearchIndex' ), null ),
+                'BrowseNode'  => $this->getEmptyConvertedToNull( trim( $this->oUnitOutput->oUnitOption->get( array( 'BrowseNode' ), null ) ) ),   // 5.3.0
             ),
             ( integer ) $this->oUnitOutput->oUnitOption->get( 'count' )
         );
