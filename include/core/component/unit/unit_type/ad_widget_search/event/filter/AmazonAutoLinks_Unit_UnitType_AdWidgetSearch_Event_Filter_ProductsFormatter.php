@@ -94,9 +94,11 @@ class AmazonAutoLinks_Unit_UnitType_AdWidgetSearch_Event_Filter_ProductsFormatte
 
         // Price
         $_aProduct[ 'formatted_price' ]     = AmazonAutoLinks_Unit_Utility::getPrice( $_aProduct[ 'ListPrice' ], null, null, $_aProduct[ 'Price' ], $_aProduct[ 'Price' ] );
+        $_aProduct[ 'price_amount' ]        = $this->getPriceAmountExtracted( $_aProduct[ 'ListPrice' ] );
 
         // Discount
-        $_aProduct[ 'formatted_discount' ]  = $this->___getDiscountFormatted( $_aProduct[ 'ListPrice' ], $_aProduct[ 'Price' ] );
+        $_aProduct[ 'discounted_price_amount' ] = $_aProduct[ 'ListPrice' ] === $_aProduct[ 'Price' ] ? null : $this->getPriceAmountExtracted( $_aProduct[ 'Price' ] );
+        $_aProduct[ 'formatted_discount' ]      = $this->___getDiscountFormatted( $_aProduct[ 'ListPrice' ], $_aProduct[ 'Price' ] );   // discount percentage
 
         // Prime
         $_aProduct[ 'is_prime' ] = ( boolean ) $_aProduct[ 'IsPrimeEligible' ];
