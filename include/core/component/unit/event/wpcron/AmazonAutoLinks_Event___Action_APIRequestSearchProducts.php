@@ -375,7 +375,7 @@ class AmazonAutoLinks_Event___Action_APIRequestSearchProducts extends AmazonAuto
                 $_aFeatures = $this->getElementAsArray( $aItem, array( 'ItemInfo', 'Features', 'DisplayValues' ) );
                 $_aRow[ 'features' ]   = AmazonAutoLinks_Unit_Utility::getFeatures( $_aFeatures );
                 $_aNodes = $this->getElementAsArray( $aItem, array( 'BrowseNodeInfo', 'BrowseNodes', ) );
-                $_aRow[ 'categories' ] = AmazonAutoLinks_Unit_Utility::getCategories( $_aNodes );
+                $_aRow[ 'categories' ] = AmazonAutoLinks_Unit_Utility::getCategoriesFormattedFromBrowseNodes( $_aNodes );
             }
 
             // 3.9.0+ If the table version is 1.2.0b01 or above,

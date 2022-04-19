@@ -346,7 +346,7 @@ class AmazonAutoLinks_Unit_PAAPISearch_Event_Filter_ProductsFormatter extends Am
                     ), // 3.8.0
                     'is_prime'            => $this->oUnitOutput->isPrime( $_aItem ),
                     'feature'             => $this->___getFeatures( $_aItem ),
-                    'category'            => $this->___getCategories( $_aItem ),
+                    'category'            => $this->oUnitOutput->getCategoriesFormattedFromBrowseNodes( $this->getElementAsArray( $_aItem, array( 'BrowseNodeInfo', 'BrowseNodes', ) ) ),
 
                     // These must be retrieved separately -> There are cases that the review count and rating is returned.
                     'review'              => null,  // customer reviews
@@ -447,18 +447,6 @@ class AmazonAutoLinks_Unit_PAAPISearch_Event_Filter_ProductsFormatter extends Am
             private function ___getImageSet( $aItem, $sProductURL, $sTitle, $iMaxImageSize, $iMaxNumberOfImages, $bImagePreview=true ) {
                 $_aImages = $this->oUnitOutput->getImageSet( $aItem );
                 return $this->oUnitOutput->getSubImages( $_aImages, $sProductURL, $sTitle, $iMaxImageSize, $iMaxNumberOfImages, $bImagePreview );
-            }
-
-            /**
-             * @param  array  $aItem
-             * @return string
-             * @since  3.8.0
-             * @since  3.8.11 Moved from `AmazonAutoLinks_UnitOutput_Base_ElementFormat`.
-             * @since  5.0.0  Moved from `AmazonAutoLinks_UnitOutput_search`.
-             */
-            private function ___getCategories( array $aItem ) {
-                $_aNodes = $this->getElementAsArray( $aItem, array( 'BrowseNodeInfo', 'BrowseNodes', ) );
-                return $this->oUnitOutput->getCategories( $_aNodes );
             }
 
             /**

@@ -642,10 +642,11 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
      * Constructs the category output from an array of nested browse nodes.
      * @since  3.8.0
      * @since  3.8.11 Moved from `AmazonAutoLinks_UnitOutput_Utility`
+     * @since  5.2.6  Renamed from `getCategories()`.
      * @param  array  $aBrowseNodes
      * @return string
      */
-    static public function getCategories( array $aBrowseNodes ) {
+    static public function getCategoriesFormattedFromBrowseNodes( array $aBrowseNodes ) {
         $_sList = '';
         foreach( self::___getBrowseNodes( $aBrowseNodes ) as $_sBrowseNode ) {
             $_sList .= "<li class='category'>" . $_sBrowseNode . "</li>";
