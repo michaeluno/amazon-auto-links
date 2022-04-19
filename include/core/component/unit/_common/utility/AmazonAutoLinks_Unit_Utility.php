@@ -639,6 +639,21 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
     }
 
     /**
+     * @since  5.2.6
+     * @param  array  $aCategoryList
+     * @return string
+     */
+    static public function getCategoriesFormatted( array $aCategoryList ) {
+        $_sList = '';
+        foreach( $aCategoryList as $_aCategoryListItem ) {
+            $_sList .= is_string( $_aCategoryListItem )
+                ? "<li class='category'>" . $_aCategoryListItem . "</li>"
+                : "<li class='category'>" . implode( ' > ', $_aCategoryListItem ) . "</li>";
+        }
+        return "<ul class='categories'>" . $_sList . "</ul>";
+    }
+
+    /**
      * Constructs the category output from an array of nested browse nodes.
      * @since  3.8.0
      * @since  3.8.11 Moved from `AmazonAutoLinks_UnitOutput_Utility`
@@ -647,11 +662,7 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
      * @return string
      */
     static public function getCategoriesFormattedFromBrowseNodes( array $aBrowseNodes ) {
-        $_sList = '';
-        foreach( self::___getBrowseNodes( $aBrowseNodes ) as $_sBrowseNode ) {
-            $_sList .= "<li class='category'>" . $_sBrowseNode . "</li>";
-        }
-        return "<ul class='categories'>" . $_sList . "</ul>";
+        return self::getCategoriesFormatted( self::___getBrowseNodes( $aBrowseNodes ) );
     }
         /**
          * @since  3.8.0
@@ -660,7 +671,6 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
          * @return array
          */
         static private function ___getBrowseNodes( array $aBrowseNodes ) {
-
             $_aList = array();
             if ( empty( $aBrowseNodes ) ) {
                 return $_aList;

@@ -1,0 +1,1 @@
+- Fixed an issue that the `%category%` Item Format tag of Category units always returned empty. 
