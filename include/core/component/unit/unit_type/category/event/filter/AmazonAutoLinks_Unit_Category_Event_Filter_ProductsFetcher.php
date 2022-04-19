@@ -238,10 +238,10 @@ class AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFetcher extends AmazonA
                     $_sModifiedDate   = $this->getElement( $this->oUnitOutput->aModifiedDates, $_sURL );
                     $_oProductScraper = new AmazonAutoLinks_ScraperDOM_BestsellerProducts( $_sHTML );
                     $_aFoundProducts  = $_oProductScraper->get( $sAssociateID, $sSiteDomain );
-                    $_aFoundProducts[ 'rating' ]            = $_aFoundProducts[ 'rating_point' ];   // to be consistent with other unit type data structure
-                    $_aFoundProducts[ 'number_of_reviews' ] = $_aFoundProducts[ 'review_count' ];   // to be consistent with other unit type data structure
                     foreach( $_aFoundProducts as $_sASIN => $_aFoundProduct ) {
-                        $_aFoundProducts[ $_sASIN ][ 'updated_date' ] = $_sModifiedDate;
+                        $_aFoundProducts[ $_sASIN ][ 'updated_date' ]      = $_sModifiedDate;
+                        $_aFoundProducts[ $_sASIN ][ 'rating' ]            = $_aFoundProducts[ $_sASIN ][ 'rating_point' ]; // [5.2.6] to be consistent with other unit type data structure
+                        $_aFoundProducts[ $_sASIN ][ 'number_of_reviews' ] = $_aFoundProducts[ $_sASIN ][ 'review_count' ]; // [5.2.6] to be consistent with other unit type data structure
                     }
                     $_aProducts       = $_aProducts + $_aFoundProducts;
                 }
