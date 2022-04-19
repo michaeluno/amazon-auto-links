@@ -278,6 +278,7 @@ class AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFetcher extends AmazonA
                     $_sFirstItem  = reset( $_aBreadcrumb );
                     if ( in_array( $_sFirstItem, $aLocaleCodes, true ) ) {
                         unset( $_aBreadcrumb[ 0 ] );
+                        $_aBreadcrumb = array_values( $_aBreadcrumb );  // re-index to start from 0
                     }
                     return $_aBreadcrumb;
                 }

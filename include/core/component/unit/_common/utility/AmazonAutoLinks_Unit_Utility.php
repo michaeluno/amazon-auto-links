@@ -661,54 +661,57 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
      * @return string
      */
     static public function getCategoriesFormattedFromBrowseNodes( array $aBrowseNodes ) {
-        return self::getCategoriesFormatted( self::___getBrowseNodes( $aBrowseNodes ) );
+        return self::getCategoriesFormatted( self::getBrowseNodeList( $aBrowseNodes ) );
     }
-        /**
-         * @since  3.8.0
-         * @since  3.8.11 Moved from `AmazonAutoLinks_UnitOutput_Utility`
-         * @param  array  $aBrowseNodes
-         * @return array
-         */
-        static private function ___getBrowseNodes( array $aBrowseNodes ) {
-            $_aLocaleCodes = AmazonAutoLinks_Locales::getLocales();
-            $_aList        = array();
-            if ( empty( $aBrowseNodes ) ) {
-                return $_aList;
-            }
-            foreach( $aBrowseNodes as $_asBrowseNode ) {
-                if ( is_scalar( $_asBrowseNode ) ) {
-                    $_aBreadCrumb = explode( ' > ', $_asBrowseNode );
-                    $_sFirstItem  = reset( $_aBreadCrumb );
-                    if ( in_array( $_sFirstItem, $_aLocaleCodes, true ) ) {
-                        unset( $_aBreadCrumb[ 0 ] );
-                    }
-                    $_aList[] = $_aBreadCrumb;
-                    continue;
-                }
-                $_aList[] = self::___getNodeBreadcrumb( $_asBrowseNode, array() );
-            }
+
+    /**
+     * @since  3.8.0
+     * @since  3.8.11 Moved from `AmazonAutoLinks_UnitOutput_Utility`.
+     * @since  5.2.6  Renamed from `___getBrowseNodes()` and changed the visibility scope from private to public.
+     * @param  array  $aBrowseNodes
+     * @return array
+     */
+    static public function getBrowseNodeList( array $aBrowseNodes ) {
+        $_aLocaleCodes = AmazonAutoLinks_Locales::getLocales();
+        $_aList        = array();
+        if ( empty( $aBrowseNodes ) ) {
             return $_aList;
         }
-            /**
-             * @param  array  $aBrowseNode
-             * @param  array  $aBreadcrumb
-             * @return array
-             * @since  3.8.0
-             * @since  3.8.11 Moved from `AmazonAutoLinks_UnitOutput_Utility`
-             * @since  5.2.6  Change the `$sBreadcrumb` parameter to `$aBreadcrumb` and the return type from string to array.
-             */
-            static private function ___getNodeBreadcrumb( array $aBrowseNode, array $aBreadcrumb=array() ) {
-                $_sName     = self::getElement( $aBrowseNode, 'DisplayName' );
-                if ( ! $_sName ) {  // There are cases that the `Name` does not exist.
-                    return $aBreadcrumb;
+        foreach( $aBrowseNodes as $_asBrowseNode ) {
+            if ( is_scalar( $_asBrowseNode ) ) {
+                $_aBreadCrumb = explode( ' > ', $_asBrowseNode );
+                $_sFirstItem  = reset( $_aBreadCrumb );
+                if ( in_array( $_sFirstItem, $_aLocaleCodes, true ) ) {
+                    unset( $_aBreadCrumb[ 0 ] );
+                    $_aBreadCrumb = array_values( $_aBreadCrumb );  // re-index to start from 0
                 }
-                array_unshift( $aBreadcrumb, $_sName );
-                $_aAncestor = self::getElementAsArray( $aBrowseNode, array( 'Ancestor' ) );
-                if ( ! empty( $_aAncestor ) ) {
-                   $aBreadcrumb = self::___getNodeBreadcrumb( $_aAncestor, $aBreadcrumb );
-                }
+                $_aList[] = $_aBreadCrumb;
+                continue;
+            }
+            $_aList[] = self::___getNodeBreadcrumb( $_asBrowseNode, array() );
+        }
+        return $_aList;
+    }
+        /**
+         * @param  array  $aBrowseNode
+         * @param  array  $aBreadcrumb
+         * @return array
+         * @since  3.8.0
+         * @since  3.8.11 Moved from `AmazonAutoLinks_UnitOutput_Utility`
+         * @since  5.2.6  Change the `$sBreadcrumb` parameter to `$aBreadcrumb` and the return type from string to array.
+         */
+        static private function ___getNodeBreadcrumb( array $aBrowseNode, array $aBreadcrumb=array() ) {
+            $_sName     = self::getElement( $aBrowseNode, 'DisplayName' );
+            if ( ! $_sName ) {  // There are cases that the `Name` does not exist.
                 return $aBreadcrumb;
             }
+            array_unshift( $aBreadcrumb, $_sName );
+            $_aAncestor = self::getElementAsArray( $aBrowseNode, array( 'Ancestor' ) );
+            if ( ! empty( $_aAncestor ) ) {
+               $aBreadcrumb = self::___getNodeBreadcrumb( $_aAncestor, $aBreadcrumb );
+            }
+            return $aBreadcrumb;
+        }
 
     /**
      * Constructs the features list output from an array storing features.

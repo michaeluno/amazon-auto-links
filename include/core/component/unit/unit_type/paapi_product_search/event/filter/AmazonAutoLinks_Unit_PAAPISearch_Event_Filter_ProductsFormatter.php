@@ -310,7 +310,8 @@ class AmazonAutoLinks_Unit_PAAPISearch_Event_Filter_ProductsFormatter extends Am
 
                 // Construct a product array. This will be passed to a template.
                 // @remark  For values that could not be retrieved, leave it null so that later it will be filled with formatting routine or triggers a background routine to retrieve product data
-                $_aProduct = array(
+                $_aCategoryList = $this->oUnitOutput->getBrowseNodeList( $this->getElementAsArray( $_aItem, array( 'BrowseNodeInfo', 'BrowseNodes', ) ) );
+                $_aProduct      = array(
                     'ASIN'               => $_aItem[ 'ASIN' ],
                     'product_url'        => $_sProductURL,
                     'title'              => $sTitle, // the shortcode parameter 'title' can suppress the title in the parsed data but an empty string is not accepted. To remove a title, use the `Title Length` / `Item Format` option.
@@ -346,7 +347,9 @@ class AmazonAutoLinks_Unit_PAAPISearch_Event_Filter_ProductsFormatter extends Am
                     ), // 3.8.0
                     'is_prime'            => $this->oUnitOutput->isPrime( $_aItem ),
                     'feature'             => $this->___getFeatures( $_aItem ),
-                    'category'            => $this->oUnitOutput->getCategoriesFormattedFromBrowseNodes( $this->getElementAsArray( $_aItem, array( 'BrowseNodeInfo', 'BrowseNodes', ) ) ),
+
+                    'category'            => $this->oUnitOutput->getCategoriesFormatted( $_aCategoryList ),
+                    '_categories'         => $_aCategoryList,   // [5.2.6+]
 
                     // These must be retrieved separately -> There are cases that the review count and rating is returned.
                     'review'              => null,  // customer reviews
