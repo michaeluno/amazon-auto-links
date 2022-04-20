@@ -356,6 +356,8 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
 
             // 4.7.0
             'pop_up_images'                 => true,
+
+            '_no_rendering'                 => false,   // [5.2.6+] Skips applying template
         )
         
     );

@@ -297,6 +297,10 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
                 update_post_meta( $_iUnitID, '_error', 'normal' );
             }
 
+            if ( $this->oUnitOption->get( '_no_rendering' ) ) { // [5.2.6]
+                return '';
+            }
+
             $_sContent  = $this->getOutputBuffer( array( $this, 'replyToGetOutput' ), array( $_aOptions, $_aArguments, $_aProducts, $_sTemplatePath ) );
 
             // [4.6.17+] Add notes
