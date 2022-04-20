@@ -157,7 +157,7 @@ class AmazonAutoLinks_WidgetByID extends AmazonAutoLinks_AdminPageFramework_Widg
         // [4.6.8] Search units have the `Title` argument and this causes a conflict in WordPress 5.8
         unset( $aFormData[ 'title' ] );
 
-        return $sContent . apply_filters( 'aal_filter_output', $aFormData );
+        return $sContent . apply_filters( 'aal_filter_output', '', $aFormData );
     
     }
         /**

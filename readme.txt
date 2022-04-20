@@ -251,7 +251,7 @@ They both takes the following arguments.
 `
 [amazon_auto_links id="123"]
 <?php do_action( 'aal_action_output', array( 'id' => 123 ) ); ?>
-<?php echo apply_filters( 'aal_filter_output', array( 'id' => 123 ) ); ?>
+<?php echo apply_filters( 'aal_filter_output', '', array( 'id' => 123 ) ); ?>
 `
 
 <h5><strong>label</strong> - the label associated with the units</h5>
@@ -259,7 +259,7 @@ They both takes the following arguments.
 `
 [amazon_auto_links label="WordPress"]
 <?php do_action( 'aal_action_output', array( 'label' => 'WordPress' ) ); ?>
-<?php echo apply_filters( 'aal_filter_output', array( 'label' => 'WordPress' ) ); ?>
+<?php echo apply_filters( 'aal_filter_output', '', array( 'label' => 'WordPress' ) ); ?>
 `
 
 <h5><strong>asin</strong> - ASINs (product IDs) separated by commas (`,`).</h5>
@@ -267,7 +267,7 @@ They both takes the following arguments.
 `
 [amazon_auto_links asin="B016ZNRC0Q, B00ZV9PXP2"]
 <?php do_action( 'aal_action_output', array( 'asin' => 'B016ZNRC0Q, B00ZV9PXP2' ) ); ?>
-<?php echo apply_filters( 'aal_filter_output', array( 'asin' => 'B016ZNRC0Q, B00ZV9PXP2' ) ); ?>
+<?php echo apply_filters( 'aal_filter_output', '', array( 'asin' => 'B016ZNRC0Q, B00ZV9PXP2' ) ); ?>
 `
 
 <h5><strong>search</strong> - Search keywords separated by commas (`,`).</h5>
@@ -275,7 +275,7 @@ They both takes the following arguments.
 `
 [amazon_auto_links search="WordPress"]
 <?php do_action( 'aal_action_output', array( 'search' => 'WordPress' ) ); ?>
-<?php echo apply_filters( 'aal_filter_output', array( 'search' => 'WordPress' ) ); ?>
+<?php echo apply_filters( 'aal_filter_output', '', array( 'search' => 'WordPress' ) ); ?>
 `
 
 When the `search` argument is specified, the following arguments can be used.

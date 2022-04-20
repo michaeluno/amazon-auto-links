@@ -171,10 +171,10 @@ class AmazonAutoLinks_AutoInsertOutput_Frontend extends AmazonAutoLinks_AutoInse
             );
 
             if ( $sPosition == 'above' || $sPosition == 'both' ) {
-                $sPre  .= apply_filters( 'aal_filter_output', $_aArguments );
+                $sPre  .= apply_filters( 'aal_filter_output', '', $_aArguments );
             }
             if ( $sPosition == 'below' || $sPosition == 'both' ) {
-                $sPost .= apply_filters( 'aal_filter_output', $_aArguments );
+                $sPost .= apply_filters( 'aal_filter_output', '', $_aArguments );
             }
         
         }

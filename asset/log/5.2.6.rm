@@ -1,1 +1,2 @@
-- Fixed an issue that the `%category%` Item Format tag of Category units always returned empty. 
+- Fixed an issue that the `%category%` Item Format tag of Category units always returned empty.
+- Fixed the incorrect use of the `aal_filter_output` filter hook.

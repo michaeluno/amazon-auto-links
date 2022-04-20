@@ -24,7 +24,7 @@ class AmazonAutoLinks_Event___Action_UnitPrefetchByID extends AmazonAutoLinks_Ev
     protected function _doAction( /* $aArguments */ ) {
         $_aParams    = func_get_args() + array( array() );
         $_aArguments = $this->getAsArray( $_aParams[ 0 ] );
-        apply_filters( 'aal_filter_output', $_aArguments ); // no need to output anything for a background task
+        apply_filters( 'aal_filter_output', '', $_aArguments ); // no need to output anything for a background task
     }
     
 }
