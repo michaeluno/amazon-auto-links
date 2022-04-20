@@ -4,9 +4,9 @@
  * Generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  *
  * http://en.michaeluno.jp/amazon-auto-links/
- * Copyright (c) 2013-2021 Michael Uno
+ * Copyright (c) 2013-2022 Michael Uno
  * @name Plugin Database Updater
- * @version 1.0.0
+ * @version 1.0.1
  */
 (function($){
     $( document ).ready( function() {
@@ -34,11 +34,11 @@
                     } else {
                         _oNotice.removeClass( 'notice-info' ).addClass( 'error' );
                     }
-                    _oNotice.find( 'p' ).html( '<b>' + aalDBUpdater.pluginName + '</b>: ' + response.result );
+                    _oNotice.find( 'p' ).html( '<strong>' + aalDBUpdater.pluginName + '</strong>: ' + response.result );
                 },
                 error: function( response ) {
                     _oNotice.removeClass( 'notice-info' ).addClass( 'error' );
-                    _oNotice.find( 'p' ).html( '<b>' + aalDBUpdater.pluginName + '</b>: ' + response.responseText );
+                    _oNotice.find( 'p' ).html( '<strong>' + aalDBUpdater.pluginName + '</strong>: ' + response.responseText );
                 },
                 complete: function() {
                     _oSpinner.remove();
