@@ -1,3 +1,11 @@
+# Change Log
+
+#### 5.2.6 - 04/22/2022
+- Fixed a bug of unnecessary admin notices on multi-sites. 
+- Fixed a bug that some parts of text messages were not displayed. 
+- Fixed an issue that the `%category%` Item Format tag of Category units always returned empty.
+- Fixed the incorrect use of the `aal_filter_output` filter hook.
+
 #### 5.2.5 - 04/13/2022
 - Tweaked font sizes of the `List` and `Category` templates.
 

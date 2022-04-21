@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.9.3
 Requires MySQL:     5.0.3
-Stable tag:         5.2.5
+Stable tag:         5.2.6
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -381,8 +381,11 @@ You can check if your keys are valid with [Scratchpad](https://webservices.amazo
 
 == Changelog ==
 
-#### 5.2.5 - 04/13/2022
-- Tweaked font sizes of the `List` and `Category` templates.
+#### 5.2.6 - 04/22/2022
+- Fixed a bug of unnecessary admin notices on multi-sites.
+- Fixed a bug that some parts of text messages were not displayed.
+- Fixed an issue that the `%category%` Item Format tag of Category units always returned empty.
+- Fixed the incorrect use of the `aal_filter_output` filter hook.
 
 #### Old Log
 For old change logs, see [here](https://github.com/michaeluno/amazon-auto-links/blob/master/changelog.md).
