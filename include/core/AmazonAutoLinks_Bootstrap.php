@@ -147,17 +147,14 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
      * Loads the plugin specific components. 
      * 
      * @remark   All the necessary classes should have been already loaded.
-     * @callback add_action() plugins_loaded        Unless it is set in the constructor's third parameter.
+     * @callback add_action() plugins_loaded Unless it is set in the constructor's third parameter.
      */
     public function setUp() {
-        
-        // This constant is set when uninstall.php is loaded.
-        if ( defined( 'DOING_PLUGIN_UNINSTALL' ) && DOING_PLUGIN_UNINSTALL ) {
+        if ( defined( 'DOING_PLUGIN_UNINSTALL' ) && DOING_PLUGIN_UNINSTALL ) {  // This constant is set when uninstall.php is loaded.
             return;
         }
         $this->___loadComponents();
-        do_action( 'aal_action_loaded_plugin' ); // Trigger the action. 2.1.2+
-
+        do_action( 'aal_action_loaded_plugin' ); // [2.1.2+]
     }
         /**
          * @since 3.3.0
