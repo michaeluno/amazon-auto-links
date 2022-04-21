@@ -658,6 +658,7 @@ return array(
     "AmazonAutoLinks_OptionUpdater_To380" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/option/converter/AmazonAutoLinks_OptionUpdater_To380.php", 
     "AmazonAutoLinks_Option_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/option/_abstract/AmazonAutoLinks_Option_Base.php", 
     "AmazonAutoLinks_Output" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/output/AmazonAutoLinks_Output.php", 
+    "AmazonAutoLinks_Main_Output_Loader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/output/AmazonAutoLinks_Main_Output_Loader.php",      
     "AmazonAutoLinks_Output___ArgumentFormatter" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/output/argument/AmazonAutoLinks_Output___ArgumentFormatter.php", 
     "AmazonAutoLinks_Output___ArgumentFormatter_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/output/argument/AmazonAutoLinks_Output___ArgumentFormatter_Base.php", 
     "AmazonAutoLinks_Output___ArgumentFormatter_UnitID" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/output/argument/AmazonAutoLinks_Output___ArgumentFormatter_UnitID.php", 
