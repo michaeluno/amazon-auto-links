@@ -34,14 +34,17 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
          */
         private function ___checkCustomTables() {
 
+            $_bMultisite     = is_multisite();
             $_aTableVersions = array();
             foreach( AmazonAutoLinks_Registry::$aOptionKeys[ 'table_versions' ] as $_sOptionKey ) {
-                $_aTableVersions[ $_sOptionKey ] = get_option( $_sOptionKey, false );
+                $_aTableVersions[ $_sOptionKey ] = $_bMultisite
+                    ? get_site_option( $_sOptionKey, false )
+                    : get_option( $_sOptionKey, false );
             }
             if ( ! in_array( false, $_aTableVersions, true ) ) {
                 return;
             }
-            
+
             // At this point, there is a value `false` in the array, which means there is a table that is not installed. So install tables.
             add_action( 'plugins_loaded', array( $this, 'replyToInstallCustomTables' ), 1 );
             
@@ -49,8 +52,8 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
     
     /**
      * Installs plugin custom database tables.
-     * @callback register_activation_hook()
      * @callback add_action() plugins_loaded
+     * @callback register_activation_hook()
      * @callback add_action() activate_{plugin_basename($file)}
      */
     public function replyToInstallCustomTables() {
@@ -58,7 +61,6 @@ final class AmazonAutoLinks_Bootstrap extends AmazonAutoLinks_AdminPageFramework
         $_oTables->installAll();
     }
 
-        
     /**
      * Register classes to be auto-loaded.
      * 

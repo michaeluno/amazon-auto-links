@@ -46,6 +46,9 @@ class AmazonAutoLinks_DatabaseUpdater_Action_PluginActivation_aal_products_140 e
     }
         private function ___shouldProceed() {
             $_sProductsTableVersion = get_option( 'aal_products_version', '0' );
+            $_sProductsTableVersion = is_multisite()
+                ? get_site_option( 'aal_products_version', $_sProductsTableVersion ) // setting the get_option() value as the default for backward-compatibility
+                : $_sProductsTableVersion;
             if ( ! $_sProductsTableVersion ) {
                 return false;
             }

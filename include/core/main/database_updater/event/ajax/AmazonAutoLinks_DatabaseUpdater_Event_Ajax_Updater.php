@@ -47,6 +47,9 @@ class AmazonAutoLinks_DatabaseUpdater_Event_Ajax_Updater extends AmazonAutoLinks
         $_aErrors = array();
         foreach( AmazonAutoLinks_Registry::$aDatabaseTables as $_sTableName => $_aTableInfo ) {
             $_sCurrentVersion = get_option( "{$_aTableInfo[ 'name' ]}_version", 0 );
+            $_sCurrentVersion = $_aTableInfo[ 'across_network' ] && is_multisite()
+                ? get_site_option( "{$_aTableInfo[ 'name' ]}_version", $_sCurrentVersion ) // setting the get_option() value as the default for backward-compatibility
+                : $_sCurrentVersion;
             $_sToVersion      = $_aTableInfo[ 'version' ];
             $_boResult        = $this->___getDatabaseTableUpdated( $_aTableInfo[ 'name' ], $_sCurrentVersion, $_sToVersion );
             if ( is_wp_error( $_boResult ) ) {
@@ -78,10 +81,10 @@ class AmazonAutoLinks_DatabaseUpdater_Event_Ajax_Updater extends AmazonAutoLinks
             /**
              * @var $_oTable AmazonAutoLinks_DatabaseTable_Base
              */
-            $_sClassName    = "AmazonAutoLinks_DatabaseTable_{$sTableName}";
-            $_oTable        = new $_sClassName;
-            $_aResult       = $_oTable->install( true );
-            if ( empty( $_aResult ) ) {
+            $_sClassName = "AmazonAutoLinks_DatabaseTable_{$sTableName}";
+            $_oTable     = new $_sClassName;
+            $_aoResult   = $_oTable->install( true );
+            if ( is_wp_error( $_aoResult ) ) {
                 return new AmazonAutoLinks_Error(
                     'DATABASE_TABLE_UPDATE_FAILURE',
                     sprintf(
@@ -92,7 +95,7 @@ class AmazonAutoLinks_DatabaseUpdater_Event_Ajax_Updater extends AmazonAutoLinks
                         $sCurrentVersion
                             ? $sTableName . ' ' . $sCurrentVersion
                             : $sTableName
-                    ),
+                    ) . ' ' . $_aoResult->get_error_code() . ': ' . $_aoResult->get_error_message(),
                     array(),
                     true
                 );
@@ -101,7 +104,7 @@ class AmazonAutoLinks_DatabaseUpdater_Event_Ajax_Updater extends AmazonAutoLinks
             /**
              * Allows table specific routines to run.
              */
-            do_action( 'aal_action_updated_plugin_database_table_' . $sTableName, $sCurrentVersion, $sVersionTo, $_aResult ); // 4.3.0
+            do_action( 'aal_action_updated_plugin_database_table_' . $sTableName, $sCurrentVersion, $sVersionTo, $_aoResult ); // 4.3.0
             return true; // succeeded
 
         }

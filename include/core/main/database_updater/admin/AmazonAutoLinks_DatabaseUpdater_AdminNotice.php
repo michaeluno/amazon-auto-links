@@ -48,6 +48,9 @@ class AmazonAutoLinks_DatabaseUpdater_AdminNotice extends AmazonAutoLinks_Plugin
         private function ___hasTableUpdate() {
             foreach( AmazonAutoLinks_Registry::$aDatabaseTables as $_sTableName => $_aTableInfo ) {
                 $_sCurrentVersion = get_option( "{$_aTableInfo[ 'name' ]}_version", 0 );
+                $_sCurrentVersion = $_aTableInfo[ 'across_network' ] && is_multisite()
+                    ? get_site_option( "{$_aTableInfo[ 'name' ]}_version", $_sCurrentVersion ) // setting the get_option() value as the default for backward-compatibility
+                    : $_sCurrentVersion;
                 $_sToVersion      = $_aTableInfo[ 'version' ];
                 if ( version_compare( $_sCurrentVersion, $_sToVersion, '<' ) ) {
                     return true;

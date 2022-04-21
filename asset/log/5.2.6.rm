@@ -1,3 +1,4 @@
-- Fixed a bug of some parts of text messages were not displayed. 
+- Fixed a bug of unnecessary admin notices on multi-sites. 
+- Fixed a bug that some parts of text messages were not displayed. 
 - Fixed an issue that the `%category%` Item Format tag of Category units always returned empty.
 - Fixed the incorrect use of the `aal_filter_output` filter hook.
