@@ -698,6 +698,7 @@ return array(
     "AmazonAutoLinks_DatabaseTable_aal_products" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/database/AmazonAutoLinks_DatabaseTable_aal_products.php", 
     "AmazonAutoLinks_DatabaseTable_aal_request_cache" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/database/AmazonAutoLinks_DatabaseTable_aal_request_cache.php", 
     "AmazonAutoLinks_DatabaseTable_aal_tasks" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/database/AmazonAutoLinks_DatabaseTable_aal_tasks.php", 
+    "AmazonAutoLinks_DatabaseTables" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/database/AmazonAutoLinks_DatabaseTables.php", 
     "AmazonAutoLinks_Error" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/error/AmazonAutoLinks_Error.php", 
     "AmazonAutoLinks_VersatileFileManager" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/file/AmazonAutoLinks_VersatileFileManager.php", 
     "AmazonAutoLinks_VersatileFileManager_AmazonCookies" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/file/AmazonAutoLinks_VersatileFileManager_AmazonCookies.php", 

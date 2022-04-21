@@ -93,9 +93,8 @@ array_walk_recursive(
 );
 
 // Delete tables
-new AmazonAutoLinks_DatabaseTableInstall(
-    false   // uninstall
-);
+$_oTables = new AmazonAutoLinks_DatabaseTables();
+$_oTables->uninstallAll();
 
 // [3.6.6+] Delete Custom Post Type Posts
 foreach( AmazonAutoLinks_Registry::$aPostTypes as $_sKey => $_sPostTypeSlug ) {
