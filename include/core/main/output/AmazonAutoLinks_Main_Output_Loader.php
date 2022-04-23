@@ -19,7 +19,7 @@ class AmazonAutoLinks_Main_Output_Loader {
     public function __construct() {
         add_filter( 'aal_filter_output', array( $this, 'replyToGetOutput' ), 10, 2 );
         add_action( 'aal_action_output', array( $this, 'replyToPrintOutput' ) );
-        add_filter( 'aal_filter_output_products', 'replyToGetProducts', 10, 2 );
+        add_filter( 'aal_filter_output_products', array( $this, 'replyToGetProducts' ), 10, 2 );
     }
 
     /**
