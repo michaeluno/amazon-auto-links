@@ -1,5 +1,8 @@
 # Change Log
 
+#### 5.2.7 - 04/24/2022
+- Fixed a bug that the `aal_filter_output_products` filter hook introduced in v5.2.6 did not function.
+
 #### 5.2.6 - 04/22/2022
 - Fixed a bug of unnecessary admin notices on multi-sites. 
 - Fixed a bug that some parts of text messages were not displayed. 
