@@ -4,7 +4,7 @@
     Author:         Michael Uno
     Author URI:     http://en.michaeluno.jp
     Description:    Displays Amazon products for search units.
-    Version:        1.2.3
+    Version:        1.3.0
     License:        GNU General Public License v2 or later
     Licedisplay: inline-block;nse URI:    http://www.gnu.org/licenses/gpl-2.0.html
     Tags:           default
@@ -26,7 +26,7 @@
     display: table;
     clear: both;
     margin-bottom: 20px;
-    font-size: medium;
+    font-size: 100%;
 
     // Descriptions
     /// Word-wrap
@@ -79,7 +79,7 @@
 
   // Credits
   .amazon-auto-links-credit {
-    font-size: smaller;
+    font-size: 92%;
   }
 
   // Prices
@@ -88,7 +88,7 @@
   .amazon-product-discounted-price,
   .amazon-product-lowest-new-price,
   .amazon-product-lowest-used-price {
-    font-size: 0.92em;
+    font-size: 92%;
   }
   .amazon-product-lowest-new-price-value,
   span.offered-price {
@@ -108,7 +108,7 @@
   .amazon-customer-reviews {
     word-break: break-all;
     .review-date {
-      font-size: smaller;
+      font-size: 92%;
     }
     .review-title {
       font-weight: bold;
@@ -137,7 +137,7 @@
     display: inline-block;
     vertical-align: middle;
     line-height: 1;
-    font-size: medium;
+    font-size: 100%;
     img {
       // Prevents rating stars from being wrapped
       display: inline-block;
