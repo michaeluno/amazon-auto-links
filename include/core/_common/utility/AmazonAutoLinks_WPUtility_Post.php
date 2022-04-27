@@ -11,7 +11,7 @@
 /**
  * Provides utility methods that uses WordPress built-in functions.
  *
- * @since       3       
+ * @since 3
  */
 class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Path {
     
@@ -57,7 +57,7 @@ class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Path {
     /**
      * Attempts to find a current post iD.
      * 
-     * @return      integer
+     * @return integer
      */
     static public function getCurrentPostID() {
 
@@ -100,7 +100,7 @@ class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Path {
      * @return false|mixed|object
      * @see    wp_count_posts()
      * @since  2.0.0
-     * @since  5.2.2  Renamed from `countPosts()`. Added the `$bUseCache` parameter
+     * @since  5.2.2   Renamed from `countPosts()`. Added the `$bUseCache` parameter
      */
     static public function getPostCountObject( $sPostType, $sPermission='', $bUseCache=true ) {
         
@@ -221,7 +221,7 @@ class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Path {
      * Creates a post.
      *
      * @remark  another version of the `insertPost()` method below
-     * as it mixes meta data array and post columns. This method separates them.
+     * as it mixes meta-data array and post columns. This method separates them.
      * @param  string  $sPostTypeSlug
      * @param  array   $aPostColumns
      * @param  array   $aPostMeta
@@ -276,7 +276,7 @@ class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Path {
      * @param  string   $sPostTypeSlug
      * @param  array    $aTaxonomy
      * @param  string[] $aIgnoreFields
-     * @return int|WP_Error
+     * @return integer|WP_Error
      */
     static public function insertPost( $aUnitOptions, $sPostTypeSlug, $aTaxonomy=array(), $aIgnoreFields=array( 'unit_title' ) ) {
         
@@ -311,7 +311,12 @@ class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Path {
                 
         return $_iPostID;
         
-    }    
+    }
+
+    /**
+     * @param integer $iPostID
+     * @param array   $aPostData
+     */
     public static function updatePostMeta( $iPostID, array $aPostData ) {
         foreach( $aPostData as $_sFieldID => $_mValue ) {
             update_post_meta( 
