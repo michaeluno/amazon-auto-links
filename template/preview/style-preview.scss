@@ -1,11 +1,13 @@
 .products-container {
   width: 100%;
-}
-.products-container a {
-  text-decoration: none;
-}
-.products-container .amazon-product-description {
-  word-break: break-word;
+
+  a {
+    text-decoration: none;
+  }
+
+  .amazon-product-description {
+    word-break: break-word;
+  }
 }
 
 .product-container {
@@ -21,9 +23,9 @@
   padding: 0.8em;
   background-color: #fff;
   border-radius: 0.8em;
-}
-.product-thumbnail img {
-  vertical-align: middle;
+  img {
+    vertical-align: middle;
+  }
 }
 
 .amazon-auto-links-credit {
@@ -39,4 +41,3 @@ span.offered-price {
 .amazon-customer-rating-stars .review-stars svg {
   top: -2px;
 }
-/*# sourceMappingURL=style-preview.css.map */
