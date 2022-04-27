@@ -1,5 +1,9 @@
 == Change log ==
 
+= 1.2.3 =
+- Fixed the content element width.
+- Removed the font-size of pricing disclaimer as it is now defined in the common stylesheet.
+
 = 1.2.2 =
 - Tweaked vertical alignment of author elements.
 
