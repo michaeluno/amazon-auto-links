@@ -111,6 +111,10 @@ svg.definition {
   font-size: 76%;
 }
 
+.amazon-auto-links-credit {
+  font-size: 92%;
+}
+
 .dump-array {
   max-height: 300px;
   overflow-y: scroll;
