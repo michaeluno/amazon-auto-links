@@ -1,5 +1,8 @@
 == Change log ==
 
+= 1.4.1 =
+- Removed rules which belongs to the `Category` template.
+
 = 1.4.0 =
 - Tweaked the font sizes.
 

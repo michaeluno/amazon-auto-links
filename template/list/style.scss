@@ -4,7 +4,7 @@
  *  Author:         Michael Uno
  *  Author URI:     http://en.michaeluno.jp
  *  Description:    Displays Amazon products for the list unit type.
- *  Version:        1.4.0
+ *  Version:        1.4.1
  */
 .amazon-products-container-list {
     overflow-y: auto;
@@ -452,19 +452,4 @@
             margin-bottom: 0;
         }
     }
-}
-
-// @todo Unknown global rules. This needs to be moved to _common/style.css
-/// Buttons
-.amazon-products-container .amazon-auto-links-button-container {
-    width: 100%;
-    margin-top: 1em;
-    margin-bottom: 1em;
-}
-
-/// Contents %content%
-.amazon-products-container .amazon-product-content *
-{
-    width: auto !important;
-    max-width: 100% !important;
 }
