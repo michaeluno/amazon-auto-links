@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.9.3
 Requires MySQL:     5.0.3
-Stable tag:         5.2.7
+Stable tag:         5.2.8
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -381,8 +381,10 @@ You can check if your keys are valid with [Scratchpad](https://webservices.amazo
 
 == Changelog ==
 
-#### 5.2.7 - 04/24/2022
-- Fixed a bug that the `aal_filter_output_products` filter hook introduced in v5.2.6 did not function.
+#### 5.2.8 - 04/28/2022
+- Fixed a bug with Poland locale that PA-API requests did not go through.
+- Fixed redundant CSS rules of the `List` template.
+- Tweaked font sizes of the `Search` template.
 
 #### Old Log
 For old change logs, see [here](https://github.com/michaeluno/amazon-auto-links/blob/master/changelog.md).

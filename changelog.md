@@ -1,5 +1,10 @@
 # Change Log
 
+#### 5.2.8 - 04/28/2022
+- Fixed a bug with Poland locale that PA-API requests did not go through.
+- Fixed redundant CSS rules of the `List` template.
+- Tweaked font sizes of the `Search` template.
+
 #### 5.2.7 - 04/24/2022
 - Fixed a bug that the `aal_filter_output_products` filter hook introduced in v5.2.6 did not function.
 
