@@ -20,7 +20,7 @@ class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Path {
      * @return boolean
      */
     static public function isInPostEditingPage() {
-        return in_array( $GLOBALS[ 'pagenow' ], array( 'post.php', 'post-new.php' ) );
+        return in_array( $GLOBALS[ 'pagenow' ], array( 'post.php', 'post-new.php' ), true );
     }
 
     /**
