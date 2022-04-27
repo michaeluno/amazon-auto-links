@@ -25,7 +25,7 @@ class AmazonAutoLinks_PAAPI50_Locale_PL extends AmazonAutoLinks_PAAPI50_Locale_B
      * @var string
      * @see https://webservices.amazon.com/paapi5/documentation/common-request-parameters.html#host-and-region
      */
-    public $sServerRegion = '	eu-west-1';
+    public $sServerRegion = 'eu-west-1';
 
     /**
      * The host name of the market place.

@@ -1,2 +1,3 @@
-- Tweak font sizes of the `Search` template.
+- Fixed a bug with Poland locale that PA-API requests did not go through.
+- Tweaked font sizes of the `Search` template.
 - Fixed redundant CSS rules of the `List` template.
