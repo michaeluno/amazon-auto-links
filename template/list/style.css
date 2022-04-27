@@ -147,9 +147,6 @@
   margin-left: -2px;
   display: inline;
 }
-.amazon-products-container-list .pricing-disclaimer {
-  font-size: 76%;
-}
 .amazon-products-container-list .pricing-disclaimer a.amazon-disclaimer-tooltip {
   outline: none;
 }

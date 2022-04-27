@@ -4,7 +4,7 @@
     Author:         Michael Uno
     Author URI:     https://en.michaeluno.jp
     Description:    An internal template for common elements rendered with Auto Amazon Links
-    Version:        1.1.3
+    Version:        1.1.4
     License:        GNU General Public License v2 or later
     License URI:    http://www.gnu.org/licenses/gpl-2.0.html
     Tags:           common, internal
@@ -105,5 +105,9 @@ span.crAvgStars a {
 
 svg.definition {
   display: none;
+}
+
+.pricing-disclaimer {
+  font-size: 76%;
 }
 /*# sourceMappingURL=style.css.map */
