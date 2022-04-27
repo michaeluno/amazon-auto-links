@@ -278,15 +278,6 @@
 .amazon-products-container-list .now-retrieving.context-feature {
   margin-top: 0.8em;
 }
-.amazon-products-container-list .dump-array {
-  max-height: 300px;
-  overflow-y: scroll;
-  overflow-x: auto;
-  padding: 0 1em;
-  word-wrap: break-word;
-  word-break: break-all;
-  margin: 1em 0;
-}
 
 .widget-area .amazon-products-container-list .amazon-product-container,
 .amazon-auto-links-widget .amazon-products-container-list .amazon-product-container {

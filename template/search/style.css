@@ -205,15 +205,6 @@
 .amazon-products-container-search ul.features {
   margin: 0.4em 0;
 }
-.amazon-products-container-search .dump-array {
-  max-height: 300px;
-  overflow-y: scroll;
-  overflow-x: auto;
-  padding: 0 1em;
-  word-wrap: break-word;
-  word-break: break-all;
-  margin: 1em 0;
-}
 
 .widget-area .amazon-products-container-search .sub-image-container {
   margin: 0.4em 0.4em 0 0;
