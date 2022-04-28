@@ -35,7 +35,7 @@ class AmazonAutoLinks_VersatileFileManager_PAAPI_RequestCounter extends AmazonAu
      * @since  4.4.0
      */
     public function getDirectoryPath() {
-        return AmazonAutoLinks_Registry::getPluginSiteTempDirPath() . '/paapi_request_count/' . $this->_sIdentifier; // storing the locale code
+        return $this->_getBaseTemporaryDirectoryPath() . '/paapi_request_count/' . $this->_sIdentifier; // storing the locale code
     }
 
     /**

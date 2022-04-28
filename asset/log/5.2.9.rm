@@ -1,0 +1,1 @@
+- Fixed a bug that custom plugin temporary directory paths introduced in v5.2.8 were not applied to PA-API request counter log. 

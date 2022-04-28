@@ -92,7 +92,7 @@ class AmazonAutoLinks_VersatileFileManager {
      * @return string
      */
     protected function _getBaseTemporaryDirectoryPath() {
-        return apply_filters( 'aal_filter_temporary_directory_path', AmazonAutoLinks_Registry::getPluginSiteTempDirPath(), $this );
+        return untrailingslashit( apply_filters( 'aal_filter_temporary_directory_path', AmazonAutoLinks_Registry::getPluginSiteTempDirPath(), $this ) );
     }
 
     /**
