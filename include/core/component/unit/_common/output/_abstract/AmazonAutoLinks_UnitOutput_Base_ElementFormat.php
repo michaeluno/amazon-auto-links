@@ -102,13 +102,13 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             }
 
             // Item
-            $_oItemFormatter = new AmazonAutoLinks_UnitOutput__ItemFormatter(
+            $_aProduct[ 'product_id' ]     = $_aProduct[ 'ASIN' ] . '|' . $sLocale . '|' . $_sCurrency . '|' . $_sLanguage; // [5.2.6] for structure consistency among various unit types
+            $_oItemFormatter               = new AmazonAutoLinks_UnitOutput__ItemFormatter(
                 $this,
                 $_aProduct + self::$aStructure_ProductCommon,
                 $this->getElementAsArray( $_aDBProductRows, $this->getElement( $_aProduct, 'ASIN', '' ) . '|' . $sLocale . '|' . $_sCurrency . '|' . $_sLanguage )
             );
             $_aProduct[ 'formatted_item' ] = $_oItemFormatter->get();
-            $_aProduct[ 'product_id' ]     = $_aProduct[ 'ASIN' ] . '|' . $sLocale . '|' . $_sCurrency . '|' . $_sLanguage; // [5.2.6] for structure consistency among various unit types
 
         }
         return $aProducts;
