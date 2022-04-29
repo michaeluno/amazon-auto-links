@@ -102,6 +102,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             }
 
             // Item
+            $_aProduct[ '_unit_id' ]       = $this->oUnitOption->get( array( 'id' ) );  // [5.2.9]
             $_aProduct[ 'product_id' ]     = $_aProduct[ 'ASIN' ] . '|' . $sLocale . '|' . $_sCurrency . '|' . $_sLanguage; // [5.2.6] for structure consistency among various unit types
             $_oItemFormatter               = new AmazonAutoLinks_UnitOutput__ItemFormatter(
                 $this,
