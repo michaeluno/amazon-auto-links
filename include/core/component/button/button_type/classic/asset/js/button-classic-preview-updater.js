@@ -1,6 +1,6 @@
 /**
  * @name    Button Preview Updater
- * @version 1.1.0
+ * @version 1.1.1
  * Updates the button preview in the button definition screen.
  */
 (function ( $ ) {
@@ -62,7 +62,9 @@
       } );
 
     // remove the text data
-    $( '.amazon-auto-links-button' ).text( oPreviewButton.styles[ 'text' ] );
+    $( '#button-classic-preview > iframe' ).first()
+      .contents().find( '.amazon-auto-links-button' )
+      .text( oPreviewButton.styles[ 'text' ] );
     delete oPreviewButton.styles[ 'text' ];
 
     // combine padding if all are present
