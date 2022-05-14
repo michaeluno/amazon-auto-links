@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.9.3
 Requires MySQL:     5.0.3
-Stable tag:         5.2.8
+Stable tag:         5.2.9
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -381,10 +381,10 @@ You can check if your keys are valid with [Scratchpad](https://webservices.amazo
 
 == Changelog ==
 
-#### 5.2.8 - 04/28/2022
-- Fixed a bug with Poland locale that PA-API requests did not go through.
-- Fixed redundant CSS rules of the `List` template.
-- Tweaked font sizes of the `Search` template.
+#### 5.2.9 - 04/14/2022
+- Fixed a bug that Classic button setting fields were not displayed after saving the button settings.
+- Fixed a bug with the Classic button editing UI that the preview labels were not updated dynamically.
+- Fixed a bug that custom plugin temporary directory paths introduced in v5.2.8 were not applied to PA-API request counter log.
 
 #### Old Log
 For old change logs, see [here](https://github.com/michaeluno/amazon-auto-links/blob/master/changelog.md).

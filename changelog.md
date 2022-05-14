@@ -1,5 +1,10 @@
 # Change Log
 
+#### 5.2.9 - 04/14/2022
+- Fixed a bug that Classic button setting fields were not displayed after saving the button settings.
+- Fixed a bug with the Classic button editing UI that the preview labels were not updated dynamically. 
+- Fixed a bug that custom plugin temporary directory paths introduced in v5.2.8 were not applied to PA-API request counter log.
+
 #### 5.2.8 - 04/28/2022
 - Fixed a bug with Poland locale that PA-API requests did not go through.
 - Fixed redundant CSS rules of the `List` template.
