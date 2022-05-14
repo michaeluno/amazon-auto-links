@@ -85,7 +85,9 @@ class AmazonAutoLinks_AdminPageMetaBox_Announcement extends AmazonAutoLinks_Page
             $_sImageURL = AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_Main_Loader::$sDirPath .'/asset/image/information/cooperators-wanted.gif', true );
             $_sPageURL  = 'https://store.michaeluno.jp/amazon-auto-links-pro/cooperators-wanted/';
             return "<div class='announcement-item'>"
-                    . "<img style='max-width:100%; max-width: 250px;' src='" . esc_url( $_sImageURL ) . "'/>"
+                    . "<a href='" . esc_url( $_sPageURL ) . "' target='_blank' class='no-text-decoration'>"
+                        . "<img style='max-width:100%; max-width: 250px;' src='" . esc_url( $_sImageURL ) . "'/>"
+                    . "</a>"
                     . "<h4 class='font-size-1point2'>"
                         . "<a href='" . esc_url( $_sPageURL ) . "' target='_blank' class='no-text-decoration'>"
                             . __( 'Cooperators Wanted!', 'amazon-auto-links' )
