@@ -1,0 +1,436 @@
+/*!
+ * @name Admin
+ * @version 1.3.0
+ */
+
+// General
+.width-100 {
+	width: 100%;
+}
+.width-full,
+.postbox .amazon-auto-links-section .width-full
+{
+	width: 98%;
+}
+.width-half,
+.postbox .amazon-auto-links-section .width-half
+{
+	width: 50%;
+}
+.width-one-third,
+.postbox .amazon-auto-links-section .width-one-third
+{
+	width: 32%;
+}
+.width-two-third,
+.postbox .amazon-auto-links-section .width-two-third
+{
+	width: 76%;
+}
+.width-one-fourth {
+	width: 25%;
+}
+.width-one-fifth {
+	width: 20%;
+}
+
+.mb-1 {
+	margin-bottom: 1em;
+}
+
+.top-right {
+	margin: 0;
+	padding: 0;
+	max-height: 60px;
+	float: right;
+	display: inline-block;
+}
+
+hr {
+	margin-top: 20px;
+	border: 0;
+	height: 1px;
+	background: #DDD;
+	width: 96%;
+}
+
+.right-submit-button {
+    margin-right: 2em;
+    float: right;
+}
+.right-button {
+	margin-top: 8px;
+	float: right;
+}
+.optional {
+	margin-left: 1em;
+}
+.italic {
+	font-style: italic;
+}
+.inline-block {
+	display: inline-block;
+}
+.margin-left-1em {
+	margin-left: 1em;
+}
+.margin-right-1em {
+	margin-right: 1em;
+}
+.margin-bottom-dot-4em {
+	margin-bottom: 0.4em;
+}
+.align-center {
+	text-align: center;
+}
+.margin-left-2em {
+	margin-left: 1em;
+}
+.margin-left-0point5em {
+	margin-left: 0.5em;
+}
+.margin-top-0 {
+	margin-top: 0;
+}
+.margin-top-1point5em {
+	margin-top: 1.5em;
+}
+
+.no-text-decoration {
+	text-decoration: none;
+}
+.font-size-1point2 {
+	font-size: 1.2em;
+}
+
+// Blockquotes
+.blockquote {
+	margin-left: 0;
+	margin-right: 1em;
+    position: relative;
+	font-style: italic;
+	color: #555555;
+	padding: 1em 2em 1em 2.8em;
+	border-left: 4px solid #00a32a;
+	line-height: 1.6;
+	background: transparent;
+}
+.blockquote::before{
+  font-family: Arial;
+  content: "\201C";
+  color: #00a32a;
+  font-size: 3em;
+  position: absolute;
+  left: 10px;
+  top: -5px;
+}
+.blockquote p {
+    font-weight: 600;
+}
+.blockquote cite {
+  display: block;
+  color: #333333;
+  font-style: normal;
+  margin-top: 0.4em;
+}
+
+// WordPress built-in elements
+button.notice-dismiss {
+	height: 100%;
+}
+
+// Icon color
+.icon-info {
+	color: #0084ff;
+}
+
+// Dash-icons
+p .dashicons {
+	margin-left: 0.2em;
+	margin-right: 0.2em;
+}
+.metabox-title .dashicons {
+	margin-right: 0.32em;
+}
+.metabox-prefs .dashicons {
+	vertical-align: sub;
+}
+
+// Admin Pages
+#post-body > .amazon-auto-links-content {
+	margin-bottom: 0;
+}
+
+// Array Tables
+.column-key {
+    max-width: 26%;
+}
+// Nested tables
+table table .column-key {
+    max-width: 12%;
+}
+table ul.numeric {
+	list-style-type: decimal
+}
+
+// Form fields
+.links-style-label {
+    font-size: 0.8em;
+    width: 100%;
+    display: inline-block;
+}
+.links-style-label code {
+    font-size: 0.8em;
+}
+
+.amazon-auto-links-fieldset.child-fieldset > label.amazon-auto-links-child-field-title {
+	font-size: 13px;
+}
+
+.amazon-auto-links-field-text {
+	min-width: 50%;
+}
+.amazon-auto-links-field-textarea,
+.amazon-auto-links-field-text .amazon-auto-links-input-label-container,
+.amazon-auto-links-field-textarea .amazon-auto-links-input-label-container
+{
+    width: 100%;
+}
+.amazon-auto-links-section span.description {
+	font-style: italic;
+}
+
+.amazon-auto-links-fields.repeatable .amazon-auto-links-field.amazon-auto-links-field-text > .amazon-auto-links-input-label-container {
+	width: auto;
+}
+
+// Form Elements
+.wrap div.settings-error.error,
+.wrap div.error{
+	margin-top: 36px;
+}
+input.read-only,
+textarea.read-only {
+	background-color: #F6F6F6;
+}
+
+span.disabled {
+	color: #AAA;
+}
+.wrap div.error {
+	clear: both;
+}
+.upgrade-notice {
+	vertical-align: bottom;
+}
+.upgrade-notice a {
+	vertical-align: bottom;
+}
+
+/** Fix nested field repeatable buttons */
+.with-nested-fields .amazon-auto-links-repeatable-field-buttons .repeatable-field-button {
+	padding: 0.16em 0.4em 0;
+}
+
+
+// For Pro
+.description.upgrade-notice {
+	margin-left: 1em;
+}
+.get-now {
+	margin-bottom: 10px;
+}
+
+// Footer page load info
+// Page Load Stats
+#admin-page-framework-page-load-stats {
+	clear: both;
+	display: inline-block;
+	width: 100%
+}
+#admin-page-framework-page-load-stats li{
+	display: inline;
+	margin-right: 1em;
+}
+
+/// give the footer area more space
+#wpbody-content {
+	padding-bottom: 140px;
+}
+
+/* */
+.delete-line {
+    text-decoration: line-through;
+}
+
+span.warning {
+    color: red;
+}
+
+
+// Fix radio box alignment
+#fieldrow-Sort .amazon-auto-links-field-radio .amazon-auto-links-input-label-container {
+    padding-right: 1em;
+    display: inline-block;
+    width: 100%;
+}
+
+// Go Back Links
+.go-back {
+    vertical-align: middle;
+}
+.small-icon {
+    font-size: 1em;
+}
+.go-back .dashicons-arrow-left-alt:before {
+    vertical-align: middle;
+}
+
+// Footer Text
+.aal-rating-prompt .icon-dismiss {
+	font-size: 14px;
+	padding: 3px 0;
+	text-decoration: none;
+}
+.aal-have-you-rated {
+	margin-right: 0.2em;
+}
+.aal-have-you-rated-answer svg {
+	height: 10px;
+}
+.aal-have-you-rated-answer > span {
+	margin-right: 0.2em;
+}
+.aal-footer-left-original {
+	display: none;
+}
+.aal-thanks-for-rating {
+	margin-right: 0.2em;
+	font-style: italic;
+}
+
+// Debug output
+.debug {
+	max-width: 100%;
+}
+.debug-output {
+	box-sizing: border-box;
+}
+pre.dump-array {
+	box-sizing: border-box;
+	margin: 0;
+    width: inherit;
+}
+
+// Accordion (Collapsible)
+.aal-accordion, .aal-accordion * {
+	box-sizing: border-box;
+}
+.aal-accordion > * {
+	margin: 1em 1.6em 1em 0.4em;
+}
+.aal-accordion > h1,
+.aal-accordion > h2,
+.aal-accordion > h3,
+.aal-accordion > h4,
+.aal-accordion > h5,
+.aal-accordion > h6
+{
+	margin-bottom: 0;
+	border: 1px solid #c3c4c7;
+	font-size: 13px;
+	background-color: #fff;
+	padding: 1em 1em 1em 0.8em;
+	position: relative;
+	-webkit-user-select: none;
+	user-select: none;
+}
+.aal-accordion > h1 .dashicons,
+.aal-accordion > h2 .dashicons,
+.aal-accordion > h3 .dashicons,
+.aal-accordion > h4 .dashicons,
+.aal-accordion > h5 .dashicons,
+.aal-accordion > h6 .dashicons
+{
+    margin-right: 0.6em;
+    margin-left: 0.2em;
+}
+.aal-accordion .ui-accordion-header-collapsed .dashicons-arrow-up:before {
+    content: "\f140";
+}
+.aal-accordion .ui-accordion-content {
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	border-top: none;
+	margin-top: 0;
+	padding-top: 1px; /* without this somehow empty space appears just below the accordion title affected by pre.dump padding-top */
+}
+
+/// Override the tooltip arrow color
+.aal-pointer .wp-pointer-arrow, .wp-pointer-undefined .wp-pointer-arrow {
+    border-bottom-color: #c3c4c7;
+}
+.aal-pointer .wp-pointer-arrow-inner, .wp-pointer-undefined .wp-pointer-arrow-inner {
+    border-bottom-color: #FFF;
+}
+
+// Announcements
+.announcement-item {
+	margin-bottom: 1.6em;
+}
+.announcement-item:last-child {
+	margin-bottom: 1em;
+}
+.announcements h4 {
+	margin: 0.8em 0;
+}
+/// the label elements have margins but when they comes as the first element, remove the little space caused by the margin.
+.announcement-item p > *:first-child {
+	margin-left: 0;
+}
+
+// Post Type List Table
+/// Details Column
+.column-details ul {
+    margin: 0;
+}
+.column-details li {
+    box-sizing: border-box;
+    margin-bottom: 0;
+    font-size: 96%;
+}
+.column-details span.detail-title {
+    box-sizing: border-box;
+    display: inline-block;
+    width: 36%;
+    color: #777;
+}
+.column-details span.detail-value {
+    box-sizing: border-box;
+    display: inline-block;
+    width: 64%;
+}
+// Warnings
+.column-details .detail-title span.warning {
+    float: right;
+}
+.column-details .detail-title .icon-warning {
+    font-size: 16px;
+    vertical-align: sub;
+    height: 16px;
+    line-height: 1;
+}
+.column-details .detail-value.warning {
+    font-style: italic;
+    width: initial; /* do not fit to the container for the tooltip */
+}
+
+// Labels
+.label-free {
+	color: #fff;
+	background-color: #08cb3a;
+	border-radius: 4px;
+	margin: 0 0.4em;
+	padding: 1px 4px 3px;
+	font-weight: 500;
+}
