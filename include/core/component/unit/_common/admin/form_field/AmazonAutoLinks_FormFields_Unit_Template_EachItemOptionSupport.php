@@ -71,7 +71,7 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
             array(
                 'field_id'          => $sFieldIDPrefix . 'custom_text',
                 'title'             => __( 'Custom Text', 'amazon-auto-links' ),
-                'tip'               => __( 'The text replaced with the <code>%text%</code> tag in the <b>Unit Format</b> option.', 'amazon-auto-links' ),
+                'tip'               => __( 'The text replaced with the <code>%text%</code> tag in the <strong>Unit Format</strong> option.', 'amazon-auto-links' ),
                 'type'              => 'textarea',
                 'rich'              => true,
                 'class'             => array(
@@ -355,7 +355,7 @@ class AmazonAutoLinks_FormFields_Unit_Template_EachItemOptionSupport extends Ama
                     'content' => __( 'Sets the layout of the unit.', 'amazon-auto-links' )
                         . ' ' . __( 'The following tags are available.', 'amazon-auto-links' )
                         . '<br />'
-                        . '<code>%text%</code> - ' . __( 'the custom text set in the <b>Custom Text</b> option.', 'amazon-auto-links' ) . '<br />'
+                        . '<code>%text%</code> - ' . __( 'the custom text set in the <strong>Custom Text</strong> option.', 'amazon-auto-links' ) . '<br />'
                         . '<code>%products%</code> - ' . __( 'products', 'amazon-auto-links' ),
                     'width'   => 480,
                 ),

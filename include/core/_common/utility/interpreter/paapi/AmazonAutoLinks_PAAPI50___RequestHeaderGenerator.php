@@ -39,13 +39,13 @@ class AmazonAutoLinks_PAAPI50___RequestHeaderGenerator {
         $this->___sSecretKey   = $sSecretKey;
         $this->___sLocale      = $sLocale;
         $this->setLocale( $this->___sLocale );
-        $this->___sAmazonDate  = $this->___getTimeStamp();
+        $this->___sAmazonDate  = $this->___getCurrentTime();
         $this->___sCurrentDate = $this->___getDate();
         $this->setPayload( $aPayload ); // this also sets the operation property
         $this->___sHTTPMethod = $sHTTPMethod;
 
     }
-        private function ___getTimeStamp() {
+        private function ___getCurrentTime() {
             return gmdate( "Ymd\THis\Z" );
         }
 

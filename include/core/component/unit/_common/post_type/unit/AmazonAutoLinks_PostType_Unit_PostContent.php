@@ -32,7 +32,7 @@ class AmazonAutoLinks_PostType_Unit_PostContent extends AmazonAutoLinks_PostType
             return $sContent;
         }
         return $sContent
-            . apply_filters( 'aal_filter_output', array( 'id' => $GLOBALS[ 'post' ]->ID ) );
+            . apply_filters( 'aal_filter_output', '', array( 'id' => $GLOBALS[ 'post' ]->ID ) );
     }
    
 }

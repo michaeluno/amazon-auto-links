@@ -38,6 +38,7 @@ class AmazonAutoLinks_AdminPageMetaBox_Announcement extends AmazonAutoLinks_Page
                 . $this->___getProInfo()
                 . $this->___getAffiliateInfo()
                 . $this->___getCooperatorsWanted()
+                . $this->___getExtensionPluginInformation()
             . "</div>";
             // . $this->___getAnnouncements();
     }
@@ -85,7 +86,9 @@ class AmazonAutoLinks_AdminPageMetaBox_Announcement extends AmazonAutoLinks_Page
             $_sImageURL = AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_Main_Loader::$sDirPath .'/asset/image/information/cooperators-wanted.gif', true );
             $_sPageURL  = 'https://store.michaeluno.jp/amazon-auto-links-pro/cooperators-wanted/';
             return "<div class='announcement-item'>"
-                    . "<img style='max-width:100%; max-width: 250px;' src='" . esc_url( $_sImageURL ) . "'/>"
+                    . "<a href='" . esc_url( $_sPageURL ) . "' target='_blank' class='no-text-decoration'>"
+                        . "<img style='max-width:100%; max-width: 250px;' src='" . esc_url( $_sImageURL ) . "'/>"
+                    . "</a>"
                     . "<h4 class='font-size-1point2'>"
                         . "<a href='" . esc_url( $_sPageURL ) . "' target='_blank' class='no-text-decoration'>"
                             . __( 'Cooperators Wanted!', 'amazon-auto-links' )
@@ -103,6 +106,32 @@ class AmazonAutoLinks_AdminPageMetaBox_Announcement extends AmazonAutoLinks_Page
                     . "<p>" . sprintf( __( 'For more details please visit <a href="%1$s" target="_blank">here</a>', 'amazon-auto-links' ), esc_url( $_sPageURL ) ) . "</p>"
                 . "</div>"
             ;
+        }
+
+        /**
+         * @since  5.2.9
+         * @return string
+         */
+        private function ___getExtensionPluginInformation() {
+            $_sImageURL       = AmazonAutoLinks_Registry::getPluginURL( AmazonAutoLinks_Main_Loader::$sDirPath .'/asset/image/information/auto-amazon-links-woocommerce-products.gif', true );
+            $_sURLRepository  = 'https://github.com/michaeluno/auto-amazon-links-woocommerce-products';
+            return "<div class='announcement-item'>"
+                    . "<a href='" . esc_url( $_sURLRepository ) . "' target='_blank' class='no-text-decoration'>"
+                        . "<img style='max-width:100%; max-width: 250px;' src='" . esc_url( $_sImageURL ) . "'/>"
+                    . "</a>"
+                    . "<h4 class='font-size-1point2'>"
+                        . "<a href='" . esc_url( $_sURLRepository ) . "' target='_blank' class='no-text-decoration'>"
+                            . __( 'WooCommerce Integration', 'amazon-auto-links' )
+                        . "</a>"
+                    . "</h4>"
+                    . "<p>"
+                    . "<span class='label-free'>" . __( 'Free', 'auto-amazon-links' ) . "</span>"
+                    . sprintf(
+                        __( 'Add the <i><strong>on-site shopping cart</strong></i> system with <a href="%2$s" target="_blank">%1$s</a>, which can increase the average site-spent time of visitors and the conversion rates.', 'amazon-auto-links' ),
+                        'Auto Amazon Links - WooCommerce Products',
+                        esc_url( $_sURLRepository )
+                ) . "</p>"
+                . "</div>";
         }
 
         /**

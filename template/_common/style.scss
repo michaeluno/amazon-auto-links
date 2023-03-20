@@ -1,0 +1,134 @@
+/*
+    Template Name:  Common
+    Template URI:   https://en.michaeluno.jp
+    Author:         Michael Uno
+    Author URI:     https://en.michaeluno.jp
+    Description:    An internal template for common elements rendered with Auto Amazon Links
+    Version:        1.1.4
+    License:        GNU General Public License v2 or later
+    License URI:    http://www.gnu.org/licenses/gpl-2.0.html
+    Tags:           common, internal
+    Text Domain:    amazon-auto-links
+*/
+
+// Discount
+.amazon-discount .discount-label {
+  font-weight: bold;
+  color: white;
+  font-size: 0.96em;
+  vertical-align: middle;
+  background-color: #00772f;
+  padding: 1px 6px;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+// Image Preview Tooltip
+.aal-image-preview-tooltip {
+
+  .wp-pointer-arrow {
+    display: none;
+  }
+
+  .wp-pointer-content {
+    padding: 12px;
+    border-radius: 0.4em;
+    // Center child elements
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: inherit;
+    width: inherit;
+
+    a {
+      height: inherit;
+      width: inherit;
+      max-height: 100%;
+      max-width: 100%;
+      margin: 0;
+      padding: 0;
+      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      // Center image
+      vertical-align: middle;
+      display: block;
+      margin: auto;
+    }
+
+  }
+}
+
+// Pointer Tooltip
+.aal-tooltip {
+  .wp-pointer-content {
+    padding: 1em;
+    border-radius: 0.4em;
+    color: #444;
+  }
+
+  .wp-pointer-arrow {
+    display: none;
+  }
+}
+
+// Rating stars
+span.crAvgStars a {
+  text-decoration: none;
+  border-bottom: 0;
+  // No underlines in hyper links with box shadow
+  box-shadow: none;
+}
+
+.review-stars {
+  white-space: nowrap;
+  display: inline-block; /* for white-space: nowrap to take effect*/
+  svg {
+    width: auto;
+    height: 1em;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+  }
+}
+
+// Prime icon
+.amazon-prime svg {
+  position: relative;
+  height: 1.2em;
+  vertical-align: middle;
+}
+
+// SVG Definitions
+svg.definition {
+  display: none;
+}
+
+// Pricing Disclaimer
+/// This is globally defined and it also helps third-parties to insert custom disclaimer text such as WooCommerce integration
+.pricing-disclaimer {
+  font-size: 76%;
+}
+
+// Credits
+.amazon-auto-links-credit {
+  font-size: 92%;
+}
+
+// Debug
+.dump-array {
+    max-height: 300px;
+    overflow-y: scroll;
+    overflow-x: auto;
+    padding: 0 1em;
+    word-wrap: break-word;
+    word-break: break-all;
+    margin: 1em 0;
+}

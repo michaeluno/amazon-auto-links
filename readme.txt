@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       5.9.3
 Requires MySQL:     5.0.3
-Stable tag:         5.2.5
+Stable tag:         5.2.9
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -251,7 +251,7 @@ They both takes the following arguments.
 `
 [amazon_auto_links id="123"]
 <?php do_action( 'aal_action_output', array( 'id' => 123 ) ); ?>
-<?php echo apply_filters( 'aal_filter_output', array( 'id' => 123 ) ); ?>
+<?php echo apply_filters( 'aal_filter_output', '', array( 'id' => 123 ) ); ?>
 `
 
 <h5><strong>label</strong> - the label associated with the units</h5>
@@ -259,7 +259,7 @@ They both takes the following arguments.
 `
 [amazon_auto_links label="WordPress"]
 <?php do_action( 'aal_action_output', array( 'label' => 'WordPress' ) ); ?>
-<?php echo apply_filters( 'aal_filter_output', array( 'label' => 'WordPress' ) ); ?>
+<?php echo apply_filters( 'aal_filter_output', '', array( 'label' => 'WordPress' ) ); ?>
 `
 
 <h5><strong>asin</strong> - ASINs (product IDs) separated by commas (`,`).</h5>
@@ -267,7 +267,7 @@ They both takes the following arguments.
 `
 [amazon_auto_links asin="B016ZNRC0Q, B00ZV9PXP2"]
 <?php do_action( 'aal_action_output', array( 'asin' => 'B016ZNRC0Q, B00ZV9PXP2' ) ); ?>
-<?php echo apply_filters( 'aal_filter_output', array( 'asin' => 'B016ZNRC0Q, B00ZV9PXP2' ) ); ?>
+<?php echo apply_filters( 'aal_filter_output', '', array( 'asin' => 'B016ZNRC0Q, B00ZV9PXP2' ) ); ?>
 `
 
 <h5><strong>search</strong> - Search keywords separated by commas (`,`).</h5>
@@ -275,7 +275,7 @@ They both takes the following arguments.
 `
 [amazon_auto_links search="WordPress"]
 <?php do_action( 'aal_action_output', array( 'search' => 'WordPress' ) ); ?>
-<?php echo apply_filters( 'aal_filter_output', array( 'search' => 'WordPress' ) ); ?>
+<?php echo apply_filters( 'aal_filter_output', '', array( 'search' => 'WordPress' ) ); ?>
 `
 
 When the `search` argument is specified, the following arguments can be used.
@@ -381,8 +381,10 @@ You can check if your keys are valid with [Scratchpad](https://webservices.amazo
 
 == Changelog ==
 
-#### 5.2.5 - 04/13/2022
-- Tweaked font sizes of the `List` and `Category` templates.
+#### 5.2.9 - 04/14/2022
+- Fixed a bug that Classic button setting fields were not displayed after saving the button settings.
+- Fixed a bug with the Classic button editing UI that the preview labels were not updated dynamically.
+- Fixed a bug that custom plugin temporary directory paths introduced in v5.2.8 were not applied to PA-API request counter log.
 
 #### Old Log
 For old change logs, see [here](https://github.com/michaeluno/amazon-auto-links/blob/master/changelog.md).

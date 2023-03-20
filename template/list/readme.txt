@@ -1,5 +1,11 @@
 == Change log ==
 
+= 1.4.1 =
+- Removed the credit elements as it is now defined in the common stylesheet.
+- Removed the debug elements as it is now defined in the common stylesheet.
+- Removed the font size of pricing disclaimer as it is now defined in the common stylesheet.
+- Removed rules which belongs to the `Category` template.
+
 = 1.4.0 =
 - Tweaked the font sizes.
 

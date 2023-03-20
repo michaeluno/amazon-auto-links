@@ -11,7 +11,8 @@
 /**
  * Creates custom database tables for the plugin.
  * 
- * @since       3
+ * @since      3
+ * @deprecated 5.2.6
  */
 class AmazonAutoLinks_DatabaseTableInstall {
 

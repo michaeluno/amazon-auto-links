@@ -7,10 +7,10 @@
  */
 
 /**
- * Handles unit outputs.
+ * Handles outputs of the plugin.
  * 
- * @since       2
- * @since       3       Changed the name from `AmazonAutoLinks_Units`
+ * @since 2
+ * @since 3 Changed the name from `AmazonAutoLinks_Units`
 */
 class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
     
@@ -21,26 +21,27 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
 
     /**
      * Stores the raw arguments.
-     * @remark      Used for JavaScript loading.
+     * @remark Used for JavaScript loading.
      * Also, since v4.3.4 the unit option class accepts raw options to be passed. The 'item_format', 'image_format', 'title_format', 'unit_format' options need to use this to suppress the default.
-     * @var         array
-     * @since       3.6.0
+     * @var    array
+     * @since  3.6.0
      */
     private $___aRawArguments = array();
 
     /**
      * Instantiates the class and returns the object.
      *
-     * This is to enable a technique to call a method in one line like
-     * <code>
+     * This is for calling methods in one line like
+     * ```
      * $_sOutput = AmazonAutoLinks_Output::getInstance()->render();
-     * </code>
+     * ```
      *
      * @since  2.1.1
      * @param  array $aArguments
      * @return AmazonAutoLinks_Output
      */
     static public function getInstance( $aArguments ) {
+        // return new static( $aArguments ); Using static, extended classes don't have to declare the same method but the late static bindings are supported in PHP 5.3 or above.
         return new self( $aArguments );
     }
 
@@ -58,23 +59,22 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
 
     /**
      * Renders the output.
-     * @return      void
      */
     public function render() {
         echo $this->get();
     }
-    
+
     /**
-     * Retrieves the output.
-     * @since       2
-     * @since       3       Changed the name from `getOutput()`.
-     * @return      string
+     * Retrieves the unit output.
+     * @since  2
+     * @since  3      Changed the name from `getOutput()`.
+     * @return string
      */
     public function get() {
 
         /**
          * Allows the Ajax output to be returned.
-         * @since   4.3.0
+         * @since 4.3.0
          */
         $_sPreOutput = apply_filters( 'aal_filter_pre_unit_output', $this->aArguments, $this->___aRawArguments );
         if ( $_sPreOutput ) {
@@ -98,20 +98,16 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
         }
 
         /**
-         * @since       3.5.0
-         * @return      string
+         * @since  3.5.0
+         * @return string
          */
         private function ___getOutput() {
 
             $_aIDs    = $this->getAsArray( $this->aArguments[ '_unit_ids' ] );
 
-            // For cases without a unit
+            // For cases by direct arguments such as shortcode, PHP functions etc.
             if ( empty( $_aIDs ) || ! empty( $this->aArguments[ 'unit_type' ] ) ) {
-                // By direct arguments
-                return $this->___getOutputByUnitType(
-                    $this->___getUnitTypeFromArguments( $this->aArguments ),
-                    $this->aArguments
-                );
+                return $this->___getOutputByUnitType( $this->___getUnitTypeFromArguments( $this->aArguments ), $this->aArguments );
             }
 
             // If called by unit IDs,
@@ -125,36 +121,30 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
 
         /**
          * Returns the unit output by post (unit) ID.
-         * @param  integer $iPostID
-         * @return string
-         * @remark The auto-insert sets the 'id' as array storing multiple ids.
+         *
+         * The auto-insert sets the 'id' as array storing multiple ids.
          * But this method is called per ID so the ID should be discarded.
          * If the unit gets deleted, auto-insert causes an error for not finding the options.
+         *
+         * @param  integer $iPostID
+         * @return string
          */
         private function ___getOutputByID( $iPostID ) {
-
             $_aUnitOptions = array(
                     // Required keys
                     'id'        => $iPostID,
                     'unit_type' => get_post_meta( $iPostID, 'unit_type', true ), // [4.3.4]
                 )
                 + $this->aArguments;
-                // @deprecated 4.3.4 This is handled in the unit option class.
-//                 + $this->getPostMeta( $iPostID, '', $_oOption->get( 'unit_default' ) )
-//                 + array(
-//                    'unit_type' => null,
-//                );
-
             return $this->___getOutputByUnitType( $_aUnitOptions[ 'unit_type' ], $_aUnitOptions );
-   
         }
 
             /**
              * Determines the unit type from the given argument array.
-             * @since       3
-             * @return      string The unit type slug.
-             * @remark      When the arguments are passed via shortcodes, the keys get all converted to lower-cases by the WordPress core.
-             * @param       array  $aArguments
+             * @since  3
+             * @remark When the arguments are passed via shortcodes, the keys get all converted to lower-cases by the WordPress core.
+             * @param  array  $aArguments
+             * @return string The unit type slug.
              */
             private function ___getUnitTypeFromArguments( $aArguments ) {
                 return isset( $aArguments[ 'unit_type' ] )
@@ -171,16 +161,12 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
              * @return string The unit output
              */
             private function ___getOutputByUnitType( $sUnitType, array $aUnitOptions ) {
-
                 $_aRegisteredUnitTypes = $this->getAsArray( apply_filters( 'aal_filter_registered_unit_types', array() ) );
                 if ( in_array( $sUnitType, $_aRegisteredUnitTypes, true ) ) {
-                    /**
-                     * Each unit type hooks into this filter hook and generates their outputs.
-                     */
+                    // Each unit type hooks into this filter hook and generates their outputs.
                     return trim( apply_filters_ref_array( 'aal_filter_unit_output_' . $sUnitType, array( '', $aUnitOptions, &$_oUnitOption ) ) );
                 }
                 return apply_filters( 'aal_filter_unit_output_unknown', $this->___getUnknownUnitTypeMessage( $sUnitType, $aUnitOptions ), $aUnitOptions );
-
             }
                 /**
                  * @param  string $sUnitType
@@ -209,7 +195,7 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
     /* Deprecated Methods */
 
     /**
-     * @deprecated      3
+     * @deprecated 3
      */
     public function getOutput() {
         return $this->get();

@@ -192,7 +192,7 @@ class AmazonAutoLinks_UnitPostMetaBox_Submit extends AmazonAutoLinks_UnitPostMet
                 /* translators: Post date information. %s: Date on which the post was published. */
                 $stamp = $this->oUtil->___( 'Published on: %s' );
             } elseif ( '0000-00-00 00:00:00' === $post->post_date_gmt ) { // Draft, 1 or more saves, no date specified.
-                $stamp = $this->oUtil->___( 'Publish <b>immediately</b>' );
+                $stamp = $this->oUtil->___( 'Publish <strong>immediately</strong>' );
             } elseif ( time() < strtotime( $post->post_date_gmt . ' +0000' ) ) { // Draft, 1 or more saves, future date specified.
                 /* translators: Post date information. %s: Date on which the post is to be published. */
                 $stamp = $this->oUtil->___( 'Schedule for: %s' );
@@ -210,7 +210,7 @@ class AmazonAutoLinks_UnitPostMetaBox_Submit extends AmazonAutoLinks_UnitPostMet
                 ?>
                 <div class="misc-pub-section curtime misc-pub-curtime">
                     <span id="timestamp">
-                        <?php printf( $stamp, '<b>' . $date . '</b>' ); ?>
+                        <?php printf( $stamp, '<strong>' . $date . '</strong>' ); ?>
                     </span>
                     <a href="#edit_timestamp" class="edit-timestamp hide-if-no-js" role="button">
                         <span aria-hidden="true"><?php $this->oUtil->__e( 'Edit' ); ?></span>

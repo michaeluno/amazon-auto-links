@@ -38,7 +38,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
         'button'                => null,
 
         // [3.8.11]
-        'proper_price'          => null,
+        'proper_price'          => null,    // (string) HTML formatted proper (regular) price
 
         // used for disclaimer
         'updated_date'          => null,    // the date posted - usually it's the updated time of the feed at Amazon so it's useless
@@ -61,6 +61,10 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
 
         // [4.7.8]
         'formatted_discount'    => null,
+
+        // [5.2.6]
+        'product_id'            => null,
+
     );
 
     /**
@@ -98,7 +102,9 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
             }
 
             // Item
-            $_oItemFormatter = new AmazonAutoLinks_UnitOutput__ItemFormatter(
+            $_aProduct[ '_unit_id' ]       = $this->oUnitOption->get( array( 'id' ) );  // [5.2.9]
+            $_aProduct[ 'product_id' ]     = $_aProduct[ 'ASIN' ] . '|' . $sLocale . '|' . $_sCurrency . '|' . $_sLanguage; // [5.2.6] for structure consistency among various unit types
+            $_oItemFormatter               = new AmazonAutoLinks_UnitOutput__ItemFormatter(
                 $this,
                 $_aProduct + self::$aStructure_ProductCommon,
                 $this->getElementAsArray( $_aDBProductRows, $this->getElement( $_aProduct, 'ASIN', '' ) . '|' . $sLocale . '|' . $_sCurrency . '|' . $_sLanguage )

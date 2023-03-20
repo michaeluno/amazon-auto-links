@@ -82,7 +82,7 @@ class AmazonAutoLinks_Unit_EventAjax_UnitLoading extends AmazonAutoLinks_AjaxEve
          */
         private function ___getOutput( $aArguments ) {
             $aArguments[ 'load_with_javascript' ] = false;  // this must be set to false as it just returns the Ajax replacement output.
-            return apply_filters( 'aal_filter_output', $aArguments )
+            return apply_filters( 'aal_filter_output', '', $aArguments )
                 . apply_filters( 'aal_filter_svg_definitions', '' );
         }
 

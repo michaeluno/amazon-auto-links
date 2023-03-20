@@ -38,7 +38,7 @@ class AmazonAutoLinks_Shortcode extends AmazonAutoLinks_WPUtility {
      * @return string
      */
     public function _replyToGetOutput( $aArguments ) {
-        return apply_filters( 'aal_filter_output', $aArguments );
+        return apply_filters( 'aal_filter_output', '', $aArguments );
     }    
 
 }

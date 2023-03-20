@@ -79,7 +79,7 @@ CSSRULES;
             if ( ! $_iID ) {
                 return "<p>" . __( 'Select a unit.', 'amazon-auto-links' ) . "</p>";
             }
-            return apply_filters( 'aal_filter_output', $aArguments );
+            return apply_filters( 'aal_filter_output', '', $aArguments );
         }
 
         /**

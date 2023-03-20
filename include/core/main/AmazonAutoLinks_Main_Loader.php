@@ -48,21 +48,17 @@ class AmazonAutoLinks_Main_Loader extends AmazonAutoLinks_PluginUtility {
          * Option Object - must be done before the template object.
          * The initial instantiation will handle formatting options from earlier versions of the plugin.
          */
-        AmazonAutoLinks_Option::getInstance();            
-        
-        // Events
-        new AmazonAutoLinks_Event;               
+        AmazonAutoLinks_Option::getInstance();
 
-        // Resources
+        new AmazonAutoLinks_Event;
         new AmazonAutoLinks_Main_ResourceLoader;
+        new AmazonAutoLinks_Main_Output_Loader;  // 5.2.6
 
-        // Back-end
         if ( is_admin() ) {
             $this->___loadAdminComponents();
         }
 
-        // 3.8.0
-        new AmazonAutoLinks_OptionUpdater_To380;
+        new AmazonAutoLinks_OptionUpdater_To380; // 3.8.0
 
     }
 

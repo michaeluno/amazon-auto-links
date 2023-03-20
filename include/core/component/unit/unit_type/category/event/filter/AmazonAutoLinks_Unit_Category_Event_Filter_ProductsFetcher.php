@@ -28,30 +28,34 @@ class AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFetcher extends AmazonA
      */
     protected function _getItemsFromSource( $aProducts ) {
 
-        $_aPageURLs          = wp_list_pluck( $this->oUnitOutput->oUnitOption->get( array( 'categories' ), array() ), 'page_url' );
-        $_aPageURLs          = $this->___getURLs( $_aPageURLs );
-        $_aExcludingPageURLs = wp_list_pluck( $this->oUnitOutput->oUnitOption->get( array( 'categories_exclude' ), array() ), 'page_url' );
-        $_aExcludingPageURLs = $this->___getURLs( $_aExcludingPageURLs );
-
+        $_aBreadcrumbs       = array();
+        $_aPageURLs          = $this->___getURLs( $this->oUnitOutput->oUnitOption->get( array( 'categories' ), array() ), $_aBreadcrumbs );
+        $_aExcludingPageURLs = $this->___getURLs( $this->oUnitOutput->oUnitOption->get( array( 'categories_exclude' ), array() ) );
         $_iCountUserSet      = ( integer ) $this->oUnitOutput->oUnitOption->get( 'count' );
         $_iCount             = $_iCountUserSet < 10 ? 10 : $_iCountUserSet;     // 4.6.14 Fetch at least 10 to reduce http requests and database queries
-
-        return array_merge( $aProducts, $this->___getFoundProducts( $_aPageURLs, $_aExcludingPageURLs, $_iCount ) );
+        return array_merge( $aProducts, $this->___getFoundProducts( $_aPageURLs, $_aExcludingPageURLs, $_iCount, array(), $_aBreadcrumbs ) );
 
     }
 
         /**
          * Returns the subject urls for this unit.
-         * @param   array $aURLs
+         * @param   array  $aItems
+         * @param   array &$aBreadcrumbs An array to store breadcrumbs corresponding to the returning URLs.
          * @since   3.9.0
          * @since   5.0.0 Moved from `AmazonAutoLinks_UnitOutput_category`.
+         * @since   5.2.6 Added the `$aBreadcrumbs` parameter
          * @return  array
          */
-        private function ___getURLs( array $aURLs ) {
+        private function ___getURLs( array $aItems, array &$aBreadcrumbs=array() ) {
 
-            $_aAllURLs = array();
-            foreach( $aURLs as $_sURL ) {
+            $_aAllURLs     = array();
+            foreach( $aItems as $_aItem ) {
 
+                $_sURL        = $this->getElement( $_aItem, array( 'page_url' ), '' );
+                $_sBreadcrumb = $this->getElement( $_aItem, array( 'breadcrumb' ), '' );
+                if ( empty( $_sURL ) ) {
+                    continue;
+                }
                 foreach ( $this->oUnitOutput->oUnitOption->get( 'feed_type' ) as $_sSlug => $_bEnabled ) {
 
                     if ( ! $_bEnabled ) {
@@ -59,7 +63,8 @@ class AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFetcher extends AmazonA
                     }
 
                     if ( 'bestsellers' === $_sSlug ) {
-                        $_aAllURLs[] = $_sURL;
+                        $_aAllURLs[ $_sURL ]    = $_sURL;
+                        $aBreadcrumbs[ $_sURL ] = $_sBreadcrumb;
                         continue;
                     }
 
@@ -70,7 +75,8 @@ class AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFetcher extends AmazonA
                         $_sURL
                     );
                     if ( $_sURL !== $_sReplaced ) {
-                        $_aAllURLs[] = $_sReplaced;
+                        $_aAllURLs[ $_sReplaced ] = $_sReplaced;
+                        $aBreadcrumbs[ $_sReplaced ] = $_sBreadcrumb;
                         continue;
                     }
 
@@ -98,7 +104,8 @@ class AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFetcher extends AmazonA
                         $_sScheme   = isset( $_aURLParts[ 'scheme' ] ) ? $_aURLParts[ 'scheme' ] : '';
                         $_sDomain   = isset( $_aURLParts[ 'host' ] ) ? $_aURLParts[ 'host' ] : '';
                         $_sReplaced = $_sScheme . '://' . $_sDomain . '/gp/' . $_sSlug . $_aMatches[ 0 ];
-                        $_aAllURLs[] = $_sReplaced;
+                        $_aAllURLs[ $_sReplaced ] = $_sReplaced;
+                        $aBreadcrumbs[ $_sReplaced ] = $_sBreadcrumb;
                         continue;
                     }
 
@@ -106,25 +113,27 @@ class AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFetcher extends AmazonA
 
             }
 
-            return array_unique( $_aAllURLs );
+            return array_values( $_aAllURLs );
 
         }
 
         /**
          * Fetches product data.
-         * @remark Called recursively.
+         * @remark Called recursively. @todo investigate whether this is no longer the case.
+         * @since  ?
+         * @since  5.0.0    Moved from `AmazonAutoLinks_UnitOutput_category`.
+         * @since  5.2.6    Added the `$aBreadcrumbs` parameter.
          * @param  array    $aURLs
          * @param  array    $aExcludeURLs
          * @param  integer  $iItemCount
          * @param  array    $aExcludeASINs
+         * @param  array    $aBreadcrumbs
          * @return array
-         * @since  ?
-         * @since  5.0.0    Moved from `AmazonAutoLinks_UnitOutput_category`.
          */
-        private function ___getFoundProducts( array $aURLs, array $aExcludeURLs, $iItemCount, array $aExcludeASINs=array() ) {
+        private function ___getFoundProducts( array $aURLs, array $aExcludeURLs, $iItemCount, array $aExcludeASINs=array(), array $aBreadcrumbs=array() ) {
 
             // Find products
-            $_aProducts = $this->___getProductsFromURLs( $aURLs );
+            $_aProducts = $this->___getProductsFromURLs( $aURLs, $aBreadcrumbs );
 
             // If no items found, no need to continue.
             if ( empty( $_aProducts ) ) {
@@ -140,7 +149,7 @@ class AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFetcher extends AmazonA
             while( ( count( $_aProducts ) < $iItemCount ) && ( $_iPage <= $_iMaxPage ) ) {
                 $_aURLs          = $this->___getURLsPageIncremented( $aURLs, $_iPage );
                 $_aExcludeURLs   = $this->___getURLsPageIncremented( $aExcludeURLs, $_iPage );
-                $_aThisFound     = $this->___getProductsFromURLs( $_aURLs );
+                $_aThisFound     = $this->___getProductsFromURLs( $_aURLs, $aBreadcrumbs );
                 $_aThisFound     = empty( $_aThisFound )
                     ? $_aThisFound
                     : $this->___getExcludesApplied( $_aThisFound, $_aExcludeURLs, $aExcludeASINs );
@@ -159,10 +168,12 @@ class AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFetcher extends AmazonA
         }
             /**
              * @param  array $aURLs
+             * @param  array $aBreadcrumbs
              * @return array
              * @since  4.3.4
+             * @since  5.2.6 Added the `$aBreadcrumbs` parameter.
              */
-            private function ___getProductsFromURLs( array $aURLs ) {
+            private function ___getProductsFromURLs( array $aURLs, array $aBreadcrumbs ) {
                 add_filter( 'aal_filter_http_response_cache', array( $this, 'replyToCaptureUpdatedDate' ), 10, 1 );
                 add_filter( 'aal_filter_http_request_response', array( $this, 'replyToCaptureUpdatedDateForNewRequest' ), 10, 2 );
                 $_aHTMLs          = $this->___getHTTPBodies( $aURLs );
@@ -171,7 +182,7 @@ class AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFetcher extends AmazonA
                 $_sAssociateID    = $this->oUnitOutput->oUnitOption->get( 'associate_id' );
                 $_oLocale         = new AmazonAutoLinks_Locale( $this->oUnitOutput->oUnitOption->get( 'country' ) );
                 $_sMarketPlaceURL = $_oLocale->getMarketPlaceURL();
-                return $this->___getProductsScraped( $_aHTMLs, $_sAssociateID, $_sMarketPlaceURL );
+                return $this->___getProductsScraped( $_aHTMLs, $_sAssociateID, $_sMarketPlaceURL, $aBreadcrumbs );
             }
             /**
              * @param  array $aProducts
@@ -228,23 +239,49 @@ class AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFetcher extends AmazonA
              * @param  array  $aHTMLs
              * @param  string $sAssociateID
              * @param  string $sSiteDomain
+             * @param  array  $aBreadcrumbs
              * @return array
              * @since  ?
              * @since  5.0.0 Moved from `AmazonAutoLinks_UnitOutput_category`.
+             * @since  5.2.6 Added the `$aBreadcrumbs` parameter.
              */
-            private function ___getProductsScraped( array $aHTMLs, $sAssociateID, $sSiteDomain ) {
-                $_aProducts = array();
+            private function ___getProductsScraped( array $aHTMLs, $sAssociateID, $sSiteDomain, array $aBreadcrumbs ) {
+
+                $_aLocaleCodes = AmazonAutoLinks_Locales::getLocales();
+                $_aProducts    = array();
                 foreach( $aHTMLs as $_sURL => $_sHTML ) {
                     $_sModifiedDate   = $this->getElement( $this->oUnitOutput->aModifiedDates, $_sURL );
                     $_oProductScraper = new AmazonAutoLinks_ScraperDOM_BestsellerProducts( $_sHTML );
                     $_aFoundProducts  = $_oProductScraper->get( $sAssociateID, $sSiteDomain );
                     foreach( $_aFoundProducts as $_sASIN => $_aFoundProduct ) {
-                        $_aFoundProducts[ $_sASIN ][ 'updated_date' ] = $_sModifiedDate;
+                        $_aFoundProducts[ $_sASIN ][ 'updated_date' ]      = $_sModifiedDate;
+
+                        // [5.2.6+]
+                        $_aFoundProducts[ $_sASIN ][ 'rating' ]            = $_aFoundProducts[ $_sASIN ][ 'rating_point' ]; // [5.2.6] to be consistent with other unit type data structure
+                        $_aFoundProducts[ $_sASIN ][ 'number_of_reviews' ] = $_aFoundProducts[ $_sASIN ][ 'review_count' ]; // [5.2.6] to be consistent with other unit type data structure
+                        $_aFoundProducts[ $_sASIN ][ '_categories' ]       = array( $this->___getCategoryListFromBreadcrumb( $this->getElement( $aBreadcrumbs, array( $_sURL ) ), $_aLocaleCodes ) );   // enclosing it in an array because there are products with multiple categories
+                        $_aFoundProducts[ $_sASIN ][ 'category' ]          = $this->oUnitOutput->getCategoriesFormatted( $_aFoundProducts[ $_sASIN ][ '_categories' ] );
                     }
                     $_aProducts       = $_aProducts + $_aFoundProducts;
                 }
                 return $_aProducts;
+
             }
+                /**
+                 * @since  5.2.6
+                 * @param  string   $sBreadcrumb
+                 * @param  array    $aLocaleCodes
+                 * @return string[]
+                 */
+                private function ___getCategoryListFromBreadcrumb( $sBreadcrumb, array $aLocaleCodes ) {
+                    $_aBreadcrumb = explode( ' > ', $sBreadcrumb );
+                    $_sFirstItem  = reset( $_aBreadcrumb );
+                    if ( in_array( $_sFirstItem, $aLocaleCodes, true ) ) {
+                        unset( $_aBreadcrumb[ 0 ] );
+                        $_aBreadcrumb = array_values( $_aBreadcrumb );  // re-index to start from 0
+                    }
+                    return $_aBreadcrumb;
+                }
 
             /**
              * @param  array $aHTMLs

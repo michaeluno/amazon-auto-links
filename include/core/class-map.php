@@ -1,6 +1,6 @@
 <?php 
 /**
- * Auto Amazon Links v5.2.0b03 by miunosoft (Michael Uno) 
+ * Auto Amazon Links v5.2.6b02 by miunosoft (Michael Uno) 
  * Formerly, Amazon Auto Links. The plugin generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  * <https://en.michaeluno.jp/amazon-auto-links>
  * Copyright (c) 2013-2022, Michael Uno; Licensed under GPL v2 or later
@@ -657,7 +657,9 @@ return array(
     "AmazonAutoLinks_OptionConverter_V2ToV3" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/option/converter/AmazonAutoLinks_OptionConverter_V2ToV3.php", 
     "AmazonAutoLinks_OptionUpdater_To380" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/option/converter/AmazonAutoLinks_OptionUpdater_To380.php", 
     "AmazonAutoLinks_Option_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/option/_abstract/AmazonAutoLinks_Option_Base.php", 
+    "AmazonAutoLinks_Main_Output_Loader" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/output/AmazonAutoLinks_Main_Output_Loader.php", 
     "AmazonAutoLinks_Output" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/output/AmazonAutoLinks_Output.php", 
+    "AmazonAutoLinks_Output_Products" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/output/AmazonAutoLinks_Output_Products.php", 
     "AmazonAutoLinks_Output___ArgumentFormatter" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/output/argument/AmazonAutoLinks_Output___ArgumentFormatter.php", 
     "AmazonAutoLinks_Output___ArgumentFormatter_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/output/argument/AmazonAutoLinks_Output___ArgumentFormatter_Base.php", 
     "AmazonAutoLinks_Output___ArgumentFormatter_UnitID" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/main/output/argument/AmazonAutoLinks_Output___ArgumentFormatter_UnitID.php", 
@@ -698,6 +700,7 @@ return array(
     "AmazonAutoLinks_DatabaseTable_aal_products" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/database/AmazonAutoLinks_DatabaseTable_aal_products.php", 
     "AmazonAutoLinks_DatabaseTable_aal_request_cache" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/database/AmazonAutoLinks_DatabaseTable_aal_request_cache.php", 
     "AmazonAutoLinks_DatabaseTable_aal_tasks" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/database/AmazonAutoLinks_DatabaseTable_aal_tasks.php", 
+    "AmazonAutoLinks_DatabaseTables" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/database/AmazonAutoLinks_DatabaseTables.php", 
     "AmazonAutoLinks_Error" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/error/AmazonAutoLinks_Error.php", 
     "AmazonAutoLinks_VersatileFileManager" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/file/AmazonAutoLinks_VersatileFileManager.php", 
     "AmazonAutoLinks_VersatileFileManager_AmazonCookies" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/file/AmazonAutoLinks_VersatileFileManager_AmazonCookies.php", 

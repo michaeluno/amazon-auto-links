@@ -1,5 +1,10 @@
 == Change log ==
 
+= 1.3.1 =
+- Removed the credit elements as it is now defined in the common stylesheet.
+- Removed the debug elements as it is now defined in the common stylesheet.
+- Removed the font size of pricing disclaimer as it is now defined in the common stylesheet.
+
 = 1.3.0 =
 - Tweaked font sizes.
 

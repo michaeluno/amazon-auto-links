@@ -57,7 +57,7 @@ class AmazonAutoLinks_AdWidgetAPI_Base extends AmazonAutoLinks_PluginUtility {
     /**
      * @remark This might need to be moved a utility class.
      * @param  string $sJSONP
-     * @return array|null|false <b>NULL</b> is returned if the  * <i>json</i> cannot be decoded or if the encoded
+     * @return array|null|false <strong>NULL</strong> is returned if the <i>json</i> cannot be decoded or if the encoded
      * data is deeper than the recursion limit.
      * @since  4.6.9
      */

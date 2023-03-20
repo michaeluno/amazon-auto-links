@@ -64,7 +64,7 @@ class AmazonAutoLinks_FormFields_AdWidgetSearchUnit_Main extends AmazonAutoLinks
                 ),
             ),
             array(
-                'field_id'      => 'sort',
+                'field_id'      => 'Sort',
                 'title'         => __( 'Sort Order', 'amazon-auto-links' ),
                 'type'          => 'select',
                 'label'         => array(

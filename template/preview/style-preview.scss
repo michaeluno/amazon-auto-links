@@ -1,0 +1,39 @@
+.products-container {
+  width: 100%;
+
+  a {
+    text-decoration: none;
+  }
+
+  .amazon-product-description {
+    word-break: break-word;
+  }
+}
+
+.product-container {
+  width: 98%;
+  display: table;
+  clear: both;
+  margin-bottom: 20px;
+}
+
+.product-thumbnail {
+  margin: 20px auto;
+  text-align: center;
+  padding: 0.8em;
+  background-color: #fff;
+  border-radius: 0.8em;
+  img {
+    vertical-align: middle;
+  }
+}
+
+.amazon-product-lowest-new-price-value,
+span.offered-price {
+  color: #B12704;
+  font-weight: bold;
+}
+
+.amazon-customer-rating-stars .review-stars svg {
+  top: -2px;
+}

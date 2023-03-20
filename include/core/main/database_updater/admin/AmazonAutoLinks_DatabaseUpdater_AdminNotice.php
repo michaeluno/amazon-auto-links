@@ -34,7 +34,7 @@ class AmazonAutoLinks_DatabaseUpdater_AdminNotice extends AmazonAutoLinks_Plugin
 
         new AmazonAutoLinks_AdminPageFramework_AdminNotice(
             sprintf(
-                '<b>' . AmazonAutoLinks_Registry::NAME . '</b>: '
+                '<strong>' . AmazonAutoLinks_Registry::NAME . '</strong>: '
                     . __( 'Update the plugin database table by clicking <a href="%1$s">here</a>.', 'amazon-auto-links' ),
                 esc_url( add_query_arg( $_GET + array( 'aal_action' => 'db_update',  ), self::getPageNow() ) )  // sanitization done with esc_url()
             ),
@@ -48,6 +48,9 @@ class AmazonAutoLinks_DatabaseUpdater_AdminNotice extends AmazonAutoLinks_Plugin
         private function ___hasTableUpdate() {
             foreach( AmazonAutoLinks_Registry::$aDatabaseTables as $_sTableName => $_aTableInfo ) {
                 $_sCurrentVersion = get_option( "{$_aTableInfo[ 'name' ]}_version", 0 );
+                $_sCurrentVersion = $_aTableInfo[ 'across_network' ] && is_multisite()
+                    ? get_site_option( "{$_aTableInfo[ 'name' ]}_version", $_sCurrentVersion ) // setting the get_option() value as the default for backward-compatibility
+                    : $_sCurrentVersion;
                 $_sToVersion      = $_aTableInfo[ 'version' ];
                 if ( version_compare( $_sCurrentVersion, $_sToVersion, '<' ) ) {
                     return true;

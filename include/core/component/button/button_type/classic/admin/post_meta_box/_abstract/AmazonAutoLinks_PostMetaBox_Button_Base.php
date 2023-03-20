@@ -71,8 +71,11 @@ abstract class AmazonAutoLinks_PostMetaBox_Button_Base extends AmazonAutoLinks_B
             return true;
         }
 
+        // At this point, it is the post editing page, 'post.php?action=edit&post_type=aal_button'
+
         $_sButtonType = get_post_meta( $_iPostID, '_button_type', true );
-        return empty( $_sButtonType );
+        return empty( $_sButtonType )
+            || 'classic' === $_sButtonType;  // after saving the button, the value `classic` is set
 
     }
         

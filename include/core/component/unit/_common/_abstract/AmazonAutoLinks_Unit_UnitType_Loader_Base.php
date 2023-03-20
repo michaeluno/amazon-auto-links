@@ -87,19 +87,19 @@ class AmazonAutoLinks_Unit_UnitType_Loader_Base extends AmazonAutoLinks_PluginUt
     }
 
         /**
-         * @param    $bRequired
          * @since    3.9.0
-         * @callback filter      aal_filter_unit_type_is_api_access_required_{unit type slug}
-         * @return   bool
+         * @param    $bRequired
+         * @callback add_filter() aal_filter_unit_type_is_api_access_required_{unit type slug}
+         * @return   boolean
          */
         public function replyToDetermineAPIRequirement( $bRequired ) {
             return $this->bRequirePAAPI;
         }
 
         /**
-         * @param       array   $aUnitOptions
-         * @return      array
-         * @sinec       3.3.0
+         * @param  array $aUnitOptions
+         * @return array
+         * @sinec  3.3.0
          */
         public function replyToGetDefaultUnitOptions( $aUnitOptions ) {
             
@@ -117,10 +117,10 @@ class AmazonAutoLinks_Unit_UnitType_Loader_Base extends AmazonAutoLinks_PluginUt
         }    
     
         /**
-         * @since       3.3.0
-         * @param       array      $aUnitTypeSlugs
-         * @return      array
-         * @callback    add_filter aal_filter_registered_unit_types
+         * @since    3.3.0
+         * @param    array        $aUnitTypeSlugs
+         * @return   array
+         * @callback add_filter() aal_filter_registered_unit_types
          */
         public function replyToRegisterUnitTypeSlug( $aUnitTypeSlugs ) {
             if ( $this->sUnitTypeSlug ) {
@@ -130,11 +130,11 @@ class AmazonAutoLinks_Unit_UnitType_Loader_Base extends AmazonAutoLinks_PluginUt
         }
     
         /**
-         * @param       array           $aMetaKeys
-         * @return      array
-         * @since       3.3.0
-         * @callback    add_filter()    aal_filter_custom_meta_keys
-         * @remark      For field with a section, set keys in the $aProtectedMetaKeys property.
+         * @param    array           $aMetaKeys
+         * @return   array
+         * @since    3.3.0
+         * @callback add_filter()    aal_filter_custom_meta_keys
+         * @remark   For field with a section, set keys in the $aProtectedMetaKeys property.
          */
         public function replyToGetProtectedMetaKeys( $aMetaKeys ) {                
             foreach( $this->aFieldClasses as $_sClassName ) {
@@ -151,7 +151,6 @@ class AmazonAutoLinks_Unit_UnitType_Loader_Base extends AmazonAutoLinks_PluginUt
      * @since   3.5.0  Changed th visibility from public and renamed from `construct()`.
      * @param   string $sScriptPath
      * @remark  Override this method in an extended class.
-     * @return  void
      */
     protected function _loadAdminComponents( $sScriptPath ) {}
     
@@ -161,21 +160,20 @@ class AmazonAutoLinks_Unit_UnitType_Loader_Base extends AmazonAutoLinks_PluginUt
      * @since   3.3.0
      * @since   3.5.0  Changed th visibility from public and renamed from `construct()`.
      * @remark  Override this method in an extended class.
-     * @return  void
      */
     protected function _construct( $sScriptPath ) {}
 
     /**
      * Return the unit output.
      *
-     * @remark      Override this method in each unit type loader class.
-     * @callback    add_filter() aal_filter_unit_output_{unit type slug}
-     * @param       string $sOutput
-     * @param       array  $aArguments
-     * @param       AmazonAutoLinks_UnitOutput_Base|null $oUnitOption   null will be given by the caller but it be updated to an unit option object.
-     * @since       3.5.0
-     * @since       4.3.5   Added the `$oUnitOption` parameter.
-     * @return      string
+     * @since    3.5.0
+     * @since    4.3.5   Added the `$oUnitOption` parameter.
+     * @remark   Override this method in each unit type loader class.
+     * @callback add_filter() aal_filter_unit_output_{unit type slug}
+     * @param    string $sOutput
+     * @param    array  $aArguments
+     * @param    AmazonAutoLinks_UnitOutput_Base|null $oUnitOption   null will be given by the caller but it be updated to an unit option object.
+     * @return   string
      */
     public function replyToGetUnitOutput( $sOutput, $aArguments, &$oUnitOption ) {
 
@@ -192,11 +190,11 @@ class AmazonAutoLinks_Unit_UnitType_Loader_Base extends AmazonAutoLinks_PluginUt
     }
 
     /**
-     * @callback    add_filter  aal_filter_detected_unit_type_by_arguments
-     * @param       string      $sUnitTypeSlug
-     * @param       array       $aArguments     Aa argument array passed to the output function.
-     * @return      string
-     * @since       3.5.0
+     * @callback add_filter() aal_filter_detected_unit_type_by_arguments
+     * @param    string       $sUnitTypeSlug
+     * @param    array        $aArguments    Aa argument array passed to the output function.
+     * @return   string
+     * @since    3.5.0
      */
     public function replyToDetermineUnitType( $sUnitTypeSlug, $aArguments ) {
         return $this->_getUnitTypeSlugByOutputArguments( $sUnitTypeSlug, $aArguments );
@@ -213,10 +211,10 @@ class AmazonAutoLinks_Unit_UnitType_Loader_Base extends AmazonAutoLinks_PluginUt
         }
 
     /**
-     * @callback    add_filter      aal_filter_registered_unit_type_labels
-     * @param       array           $aLabels
-     * @return      array
-     * @since       3.5.0
+     * @callback add_filter() aal_filter_registered_unit_type_labels
+     * @param    array        $aLabels
+     * @return   array
+     * @since    3.5.0
      */
     public function replyToAddLabel( $aLabels ) {
         return $aLabels + array(
@@ -224,8 +222,8 @@ class AmazonAutoLinks_Unit_UnitType_Loader_Base extends AmazonAutoLinks_PluginUt
         );
     }
         /**
-         * @return      string
-         * @since       3.5.0
+         * @return  string
+         * @since   3.5.0
          */
         protected function _getLabel() {
             return __( 'Unknown', 'amazon-auto-links' );

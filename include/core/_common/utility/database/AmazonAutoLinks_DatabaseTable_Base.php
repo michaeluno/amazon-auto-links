@@ -11,8 +11,8 @@
 /**
  * Provides shared methods for the plugin database table classes.
  * 
- * @since       3
- * @version     1.1.0
+ * @since   3
+ * @version 1.1.1
  */
 abstract class AmazonAutoLinks_DatabaseTable_Base {
 
@@ -63,9 +63,9 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
      * Retrieves the table version stored in the options table.
      * @remark The returned value is different from the version set in the `$aArguments` property. As that one is for the latest version declared by the plugn, which does not mean that the actual table version espacially if the user has not updated it.
      * @param  boolean $bUseCache Whether to use per-page load cache.
-     * @return string The retrieved table version. 
+     * @return string  The retrieved table version.
      * @since  3.10.0
-     * @since  4.3.0 Added the `$bUseCache` parameter.
+     * @since  4.3.0   Added the `$bUseCache` parameter.
      */
     public function getVersion( $bUseCache=true ) {
 
@@ -74,10 +74,10 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
         if ( isset( $_sVersion ) && $bUseCache ) {
             return $_sVersion;
         }
-        $_sVersion = get_option(
-            $this->aArguments[ 'name' ]  . '_version',
-            '0'
-        );
+        $_sVersion = get_option( $this->aArguments[ 'name' ]  . '_version', '0' );
+        $_sVersion = $this->aArguments[ 'across_network' ] && is_multisite()
+            ? get_site_option( $this->aArguments[ 'name' ]  . '_version', $_sVersion ) // setting the get_option() value as the default for backward-compatibility
+            : $_sVersion;
         return $_sVersion;
 
     }
@@ -103,15 +103,16 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
     /**
      * Installs a table.
      *
-     * @since       1.1.0
-     * @param       boolean     $bForce
-     * @return      array       Strings containing the results of the various update queries.
+     * @since  1.1.0
+     * @since  1.1.1           Added `WP_Error` for the return type.
+     * @param  boolean $bForce
+     * @return array|WP_Error  Strings containing the results of the various update queries on success.
      */
     public function install( $bForce=false ) {
 
         // If already exists, return.
         if ( ! $bForce && $this->tableExists() ) {
-            return array();
+            return new WP_Error( 'TABLE_EXISTS', 'The table exists.', $this->aArguments );
         }
         return $this->___install();
 
@@ -119,27 +120,28 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
 
         /**
          * Installs the database table.
-         * @return      array       Strings containing the results of the various update queries.
-         * @since       1.1.0
+         * @return array|WP_Error Strings containing the results of the various update queries.
+         * @since  1.1.0
          */
         private function ___install() {
 
             // The method should be overridden in the extended class.
             $_sSQLQuery = $this->getCreationQuery();
             if ( ! $_sSQLQuery ) {
-                return array();
+                return new WP_Error( 'DB_QUERY_EMPTY', 'The database query is empty.', $_sSQLQuery );
             }
 
             require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
             $_aResult = dbDelta( $_sSQLQuery );
 
             if ( $this->aArguments[ 'version' ] ) {
-                update_option(
-                    $this->aArguments[ 'name' ]  . '_version',  // key
-                    $this->aArguments[ 'version' ]     // data
-                );
+                $_bResult = $this->aArguments[ 'across_network' ] && is_multisite()
+                    ? update_site_option( $this->aArguments[ 'name' ]  . '_version', $this->aArguments[ 'version' ] )
+                    : update_option( $this->aArguments[ 'name' ]  . '_version', $this->aArguments[ 'version' ] );
             }
-            return $_aResult;
+            return empty( $_aResult ) && ! $this->tableExists()
+                ? new WP_Error( 'TABLE_INSTALL_FAILURE', 'Failed to install the table.', $this->aArguments )
+                : $_aResult;
 
         }
 
@@ -160,18 +162,16 @@ abstract class AmazonAutoLinks_DatabaseTable_Base {
 
     /**
      * Drops a table.
-     * @since   1.1.0
+     * @since 1.1.0
      */
     public function uninstall() {
-
         if ( $this->aArguments[ 'version' ] ) {
-            delete_option( $this->aArguments[ 'name' ]  . '_version' );
+            if ( $this->aArguments[ 'across_network' ] && is_multisite() ) {
+                delete_site_option( $this->aArguments[ 'name' ]  . '_version' );
+            }
+            delete_option( $this->aArguments[ 'name' ]  . '_version' ); // even for multi-sites, delete it anyway for backward-compatibility
         }
-
-        $GLOBALS[ 'wpdb' ]->query(
-            "DROP TABLE IF EXISTS " . $this->aArguments[ 'table_name' ]
-        );
-
+        $GLOBALS[ 'wpdb' ]->query( "DROP TABLE IF EXISTS " . $this->aArguments[ 'table_name' ] );
     }
 
     /**

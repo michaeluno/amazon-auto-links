@@ -12,7 +12,6 @@
  * A base class for unit classes, search, tag, and category.
  * 
  * Provides shared methods and properties for those classes.
- *
  */
 abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutput_Utility {
 
@@ -86,8 +85,8 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
     public $oUnitOption;
 
     /**
-     * @var     AmazonAutoLinks_UnitOutput__ImpressionCounter
-     * @since   3.5.0
+     * @var   AmazonAutoLinks_UnitOutput__ImpressionCounter
+     * @since 3.5.0
      */
     public $oImpressionCounter;
 
@@ -100,8 +99,8 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
 
     /**
      * Lists the tags (variables) used in the Item Format unit option that require to access the custom database.
-     * @since       3.5.0
-     * @var array
+     * @since 3.5.0
+     * @var   array
      */
     protected $_aItemFormatDatabaseVariables = array(
         '%review%', '%rating%', '%image_set%', '%similar%', '%feature%', '%category%', '%rank%', '%prime%',
@@ -112,8 +111,8 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
 
     /**
      * Search unit types needs this property to determine and extract errors from API responses.
-     * @var string
-     * @since   3.10.0  This was actually added in 3.9.0 but not in the base class.
+     * @var   string
+     * @since 3.10.0  This was actually added in 3.9.0 but not in the base class.
      */
     protected $_sResponseItemsParentKey = '';
 
@@ -202,11 +201,11 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         /**
          * Checks whether the unit needs to access the plugin custom database table.
          * 
-         * @remark      For the category unit type, the %description%, %content%, and %price% tags (variables) need to access the database table
+         * @remark For the category unit type, the %description%, %content%, and %price% tags (variables) need to access the database table
          * and it requires the API to be connected.
          * @remark MUST be called after `_setProperties()`. This is important as some extended classes modifies `_aItemFormatDatabaseVariable` property.
          * @since  3.3.0
-         * @since  3.5.0       Changed the visibility scope from protected.
+         * @since  3.5.0   Changed the visibility scope from protected.
          * @return boolean
          */
         private function ___hasCustomDBTableAccess() {
@@ -269,10 +268,10 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
      * Gets the output of product links by specifying a template.
      *
      * @remark The local variables defined in this method will be accessible in the template file.
-     * @return string
      * @since  ?
      * @since  4.0.2  Deprecated the second parameter of `$sTemplatePath`.
      * @since  5.0.0  Deprecated the first parameter of `$aURLs`.
+     * @return string
      */
     public function get() {
 
@@ -288,7 +287,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         $_aArguments        = $this->oUnitOption->get();   // the unit option can be modified while fetching so set the variable right before calling the template
         try {
 
-            $_sError = $this->_getError( $_aProducts );
+            $_sError     = $this->_getError( $_aProducts );
             if ( $_sError ) {
                 throw new Exception( $_sError );
             }
@@ -298,17 +297,20 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
                 update_post_meta( $_iUnitID, '_error', 'normal' );
             }
 
-            $_sContent   = $this->getOutputBuffer( array( $this, 'replyToGetOutput' ), array( $_aOptions, $_aArguments, $_aProducts, $_sTemplatePath ) );
+            if ( $this->oUnitOption->get( '_no_rendering' ) ) { // [5.2.6]
+                return '';
+            }
+
+            $_sContent  = $this->getOutputBuffer( array( $this, 'replyToGetOutput' ), array( $_aOptions, $_aArguments, $_aProducts, $_sTemplatePath ) );
 
             // [4.6.17+] Add notes
-            $_sNotes     = trim( implode( ', ', $this->aNotes ) );
-            $_sContent  .= $_sNotes ? "<!-- {$_sNotes} -->": '';
+            $_sNotes    = trim( implode( ', ', $this->aNotes ) );
+            $_sContent .= $_sNotes ? "<!-- {$_sNotes} -->": '';
 
         } catch ( Exception $_oException ) {
 
             $_sErrorMessage  = $_oException->getMessage();
-            $_iShowErrorMode = ( integer ) $this->oUnitOption->get( 'show_errors' );
-            $_iShowErrorMode = ( integer ) apply_filters( 'aal_filter_unit_show_error_mode', $_iShowErrorMode, $_aArguments );
+            $_iShowErrorMode = ( integer ) apply_filters( 'aal_filter_unit_show_error_mode', ( integer ) $this->oUnitOption->get( 'show_errors' ), $_aArguments );
             $_sContent       = $this->___getErrorOutput( $_iShowErrorMode, $_sErrorMessage );
 
             if ( ! $_bHasPreviousError && $_iUnitID ) {
@@ -317,8 +319,8 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
 
         }
 
-        $_sContent          = $this->___getUnitFormatApplied( $_sContent );     // 4.3.0
-        $_sContent          = apply_filters( 'aal_filter_unit_output', $_sContent, $this->oUnitOption->get(), $_sTemplatePath, $_aOptions, $_aProducts );
+        $_sContent = $this->___getUnitFormatApplied( $_sContent );     // 4.3.0
+        $_sContent = apply_filters( 'aal_filter_unit_output', $_sContent, $this->oUnitOption->get(), $_sTemplatePath, $_aOptions, $_aProducts );
 
         $this->___removeHooksPerOutput( $_aHooks );
         return $_sContent;
@@ -377,15 +379,12 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
          * @return string  The template path.
          */
         private function ___getTemplatePath() {
-
             $_oTemplateOption   = AmazonAutoLinks_TemplateOption::getInstance();
             $_sTemplatePath     = $this->oUnitOption->get( 'template_path' );   // if directly specified, use it
             $_sTemplatePath     = $_sTemplatePath
                 ? $_sTemplatePath
                 : $_oTemplateOption->getPathFromID( $this->oUnitOption->get( 'template_id' ) ); // this method only returns from active templates
-
             $_sTemplatePath     = apply_filters( "aal_filter_template_path", $_sTemplatePath, $this->oUnitOption->get() );
-
             if ( ! file_exists( $_sTemplatePath ) ) {
                 // use the default one
                 return $_oTemplateOption->getDefaultTemplatePathByUnitType( $this->oUnitOption->sUnitType );
@@ -430,9 +429,9 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         }
 
         /**
-         * @return  bool
-         * @since   3.10.0
-         * @param   integer $iUnitID
+         * @since  3.10.0
+         * @param  integer $iUnitID
+         * @return boolean
          */
         private function ___hasPreviousUnitError( $iUnitID ) {
             if ( ! $iUnitID ) {
@@ -448,10 +447,10 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
             return true;
         }
         /**
-         * @param    array       $aOptions
-         * @param    array       $aArguments
-         * @param    array       $aProducts
-         * @param    string      $sTemplatePath
+         * @param    array  $aOptions
+         * @param    array  $aArguments
+         * @param    array  $aProducts
+         * @param    string $sTemplatePath
          * @since    3.5.0
          * @callback self::getOutputBuffer()     Not using the WordPress filter hook so there is no need to remove the filter within the `get()` method.
          * @remark   Not using include_once() because templates can be loaded multiple times.
@@ -471,10 +470,10 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         }
 
         /**
-         * @deprecated  Use `get()` instead.
-         * @return      string
-         * @param       array $aURLs
-         * @param       string $sTemplatePath
+         * @deprecated Use `get()` instead.
+         * @return     string
+         * @param      array $aURLs
+         * @param      string $sTemplatePath
          */
         public function getOutput( $aURLs=array(), $sTemplatePath=null ) {
             return $this->get( $aURLs );
@@ -493,13 +492,12 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
      * - A cached request had an error and it is renewed and has no error. -> delete the error.
      * - A cached request had an error and it is renewed and has an error. -> override the error.
      *
-     * @param       array   $aProducts
-     * @param       integer $iUnitID        The unit (post) ID.
-     * @callback    add_filter() aal_filter_products
-     * @see         AmazonAutoLinks_UnitOutput__ErrorChecker::_replyToCheckErrors()
-     * @remark      Although this hooks into a filter hook but called within an another outer callback method and this does not require a return value.
-     * @retuen      void
-     * @since       3.7.0
+     * @param    array   $aProducts
+     * @param    integer $iUnitID        The unit (post) ID.
+     * @callback add_filter() aal_filter_products
+     * @see      AmazonAutoLinks_UnitOutput__ErrorChecker::_replyToCheckErrors()
+     * @remark   Although this hooks into a filter hook but called within an another outer callback method and this does not require a return value.
+     * @since    3.7.0
      */
     public function replyToCheckErrors( $aProducts, $iUnitID ) {
 
@@ -541,8 +539,8 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
      *
      * @since  3.7.0
      * @remark Override this method in each extended class.
-     * @return string  The found error message. An empty string if no error is found.
-     * @param  array   $aProducts
+     * @return string The found error message. An empty string if no error is found.
+     * @param  array  $aProducts
      */
     protected function _getError( $aProducts ) {
         $this->___setErrors( $aProducts );
@@ -571,7 +569,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
             return $sNote;
         }
         /**
-         * @since  4.6.17   Moved from AmazonAutoLinks_UnitOutput_Base::_getError()
+         * @since 4.6.17 Moved from AmazonAutoLinks_UnitOutput_Base::_getError()
          */
         private function ___setErrors( $aProducts ) {
 

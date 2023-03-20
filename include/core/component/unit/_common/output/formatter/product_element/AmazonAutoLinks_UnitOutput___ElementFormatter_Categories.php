@@ -52,7 +52,7 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_Categories extends AmazonAut
                 return $_asCategories;
             }
             // For backward compatibility for v3.8.14 or below
-            return AmazonAutoLinks_Unit_Utility::getCategories( $_asCategories );
+            return AmazonAutoLinks_Unit_Utility::getCategoriesFormattedFromBrowseNodes( $_asCategories );
         }
 
 

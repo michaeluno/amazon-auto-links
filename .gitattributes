@@ -5,6 +5,7 @@ _note export-ignore
 /node_modules export-ignore
 package.json export-ignore
 package-lock.json export-ignore
+gulpfile.js export-ignore
 developers-guideline.md export-ignore
 composer.json export-ignore
 readme.md export-ignore

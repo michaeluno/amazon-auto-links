@@ -4,7 +4,7 @@
  *  Author:         Michael Uno
  *  Author URI:     http://en.michaeluno.jp
  *  Description:    Displays Amazon products for the list unit type.
- *  Version:        1.4.0
+ *  Version:        1.4.1
  */
 .amazon-products-container-list {
   overflow-y: auto;
@@ -75,9 +75,6 @@
   margin-left: auto;
   margin-right: auto;
 }
-.amazon-products-container-list .amazon-auto-links-credit {
-  font-size: 92%;
-}
 .amazon-products-container-list .amazon-product-author {
   display: inline-block;
   vertical-align: middle;
@@ -146,9 +143,6 @@
   margin-top: 2px;
   margin-left: -2px;
   display: inline;
-}
-.amazon-products-container-list .pricing-disclaimer {
-  font-size: 76%;
 }
 .amazon-products-container-list .pricing-disclaimer a.amazon-disclaimer-tooltip {
   outline: none;
@@ -281,15 +275,6 @@
 .amazon-products-container-list .now-retrieving.context-feature {
   margin-top: 0.8em;
 }
-.amazon-products-container-list .dump-array {
-  max-height: 300px;
-  overflow-y: scroll;
-  overflow-x: auto;
-  padding: 0 1em;
-  word-wrap: break-word;
-  word-break: break-all;
-  margin: 1em 0;
-}
 
 .widget-area .amazon-products-container-list .amazon-product-container,
 .amazon-auto-links-widget .amazon-products-container-list .amazon-product-container {
@@ -376,16 +361,5 @@
 }
 #aal-unit-preview .amazon-products-container-list .amazon-product-container:last-child {
   margin-bottom: 0;
-}
-
-.amazon-products-container .amazon-auto-links-button-container {
-  width: 100%;
-  margin-top: 1em;
-  margin-bottom: 1em;
-}
-
-.amazon-products-container .amazon-product-content * {
-  width: auto !important;
-  max-width: 100% !important;
 }
 /*# sourceMappingURL=style.css.map */

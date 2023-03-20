@@ -77,7 +77,7 @@ class AmazonAutoLinks_VersatileFileManager {
 
     /**
      * @since  4.3.5
-     * @since  4.4.0    Changed the visibility from protected to public.
+     * @since  4.4.0  Changed the visibility from protected to public.
      * @return string
      */
     public function getDirectoryPath() {
@@ -87,11 +87,12 @@ class AmazonAutoLinks_VersatileFileManager {
     /**
      * @remark This is needed to apply proper CHMOD to directories between the base directory and the subject directory.
      * @remark Override this in an extended class.
-     * @sinec  4.3.8
+     * @since  4.3.8
+     * @since  5.2.8    Added the `aal_filter_temporary_directory_path` filter hook.
      * @return string
      */
     protected function _getBaseTemporaryDirectoryPath() {
-        return AmazonAutoLinks_Registry::getPluginSiteTempDirPath();
+        return untrailingslashit( apply_filters( 'aal_filter_temporary_directory_path', AmazonAutoLinks_Registry::getPluginSiteTempDirPath(), $this ) );
     }
 
     /**
@@ -241,7 +242,7 @@ class AmazonAutoLinks_VersatileFileManager {
      * @since   4.3.5  Added the `$inTime` and `$inAccessTime` parameters.
      * @param   null|integer $inTime       A timestamp of the time to set for the modification time.
      * @param   null|integer $inAccessTime A timestamp of the time to set for the last access time.
-     * @return  boolean true if touched or created. Otherwise, false.
+     * @return  boolean      true if touched or created. Otherwise, false.
      */
     private function ___touch( $inTime=null, $inAccessTime=null ) {
 

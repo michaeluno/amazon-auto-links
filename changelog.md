@@ -1,3 +1,24 @@
+# Change Log
+
+#### 5.2.9 - 04/14/2022
+- Fixed a bug that Classic button setting fields were not displayed after saving the button settings.
+- Fixed a bug with the Classic button editing UI that the preview labels were not updated dynamically. 
+- Fixed a bug that custom plugin temporary directory paths introduced in v5.2.8 were not applied to PA-API request counter log.
+
+#### 5.2.8 - 04/28/2022
+- Fixed a bug with Poland locale that PA-API requests did not go through.
+- Fixed redundant CSS rules of the `List` template.
+- Tweaked font sizes of the `Search` template.
+
+#### 5.2.7 - 04/24/2022
+- Fixed a bug that the `aal_filter_output_products` filter hook introduced in v5.2.6 did not function.
+
+#### 5.2.6 - 04/22/2022
+- Fixed a bug of unnecessary admin notices on multi-sites. 
+- Fixed a bug that some parts of text messages were not displayed. 
+- Fixed an issue that the `%category%` Item Format tag of Category units always returned empty.
+- Fixed the incorrect use of the `aal_filter_output` filter hook.
+
 #### 5.2.5 - 04/13/2022
 - Tweaked font sizes of the `List` and `Category` templates.
 
