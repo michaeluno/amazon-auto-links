@@ -223,6 +223,8 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
             'title_length'                  => -1,
             'description_length'            => 250,     // 3.3.0+  Moved from the search unit types.
             'link_style'                    => 1,
+            'link_style_custom_path'        => 'merchandise',
+            'link_style_custom_path_review' => 'reviews',
             'credit_link'                   => 0,   // 1 or 0   // 3.5.3+ disabled by default
             'credit_link_type'              => 0,   // 3.2.2+ 0: normal, 1: image
 
