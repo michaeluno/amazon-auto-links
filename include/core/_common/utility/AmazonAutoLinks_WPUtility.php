@@ -447,4 +447,22 @@ class AmazonAutoLinks_WPUtility extends AmazonAutoLinks_WPUtility_KSES {
         return add_query_arg( self::getHTTPQueryGET(), admin_url( $GLOBALS[ 'pagenow' ] ) );
     }
 
+    /**
+     * @since 5.3.0
+     * @var   string
+     */
+    private static $___sSiteURL = '';
+
+    /**
+     * Retrieves the site URL using a class property cache
+     * @return string
+     */
+    public static function getSiteURL() {
+        if ( isset( self::$___sSiteURL ) && self::$___sSiteURL ) {
+            return self::$___sSiteURL;
+        }
+        self::$___sSiteURL = untrailingslashit( site_url() );
+        return self::$___sSiteURL;
+    }
+
 }
