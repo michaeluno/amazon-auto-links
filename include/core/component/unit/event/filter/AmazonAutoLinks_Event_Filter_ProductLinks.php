@@ -39,28 +39,30 @@ class AmazonAutoLinks_Event_Filter_ProductLinks extends AmazonAutoLinks_PluginUt
             $this->getElement( $aUnitOptions, array( 'associate_id' ), '' ),
             $this->getElement( $aUnitOptions, array( 'country' ), '' ),
             $sLanguageCode,
-            $sCurrency
+            $sCurrency,
+            $aUnitOptions
         );
     }
 
         /**
          * A helper function for the above `getProductLinkURLFormatted()` method.
          *
-         * @remark      $iStyle should be 1 to 5 indicating the url style of the link.
-         * @param string $sURL
-         * @param string $sASIN
-         * @param integer $iStyle
-         * @param boolean $bRefNosim
-         * @param string $sAssociateID
-         * @param string $sLocale
-         * @param string $sLanguageCode
-         * @param string $sCurrency
+         * @remark `$iStyle` should be 1 to 6 indicating the url style of the link.
+         * @param  string $sURL
+         * @param  string $sASIN
+         * @param  integer $iStyle
+         * @param  boolean $bRefNosim
+         * @param  string  $sAssociateID
+         * @param  string  $sLocale
+         * @param  string  $sLanguageCode
+         * @param  string  $sCurrency
+         * @param  array   $aUnitOptions
          *
-         * @return      string
-         * @since
-         * @since       4.3.0       Moved from ``.
+         * @return string
+         * @since  ?
+         * @since  4.3.0   Moved from ``.
          */
-        private function ___getFormattedProductLinkByStyle( $sURL, $sASIN, $iStyle=1, $bRefNosim=false, $sAssociateID='', $sLocale='US', $sLanguageCode='', $sCurrency='' ) {
+        private function ___getFormattedProductLinkByStyle( $sURL, $sASIN, $iStyle=1, $bRefNosim=false, $sAssociateID='', $sLocale='US', $sLanguageCode='', $sCurrency='', $aUnitOptions=array() ) {
 
             $iStyle      = $iStyle ? ( integer ) $iStyle : 1;
             $_sClassName = "AmazonAutoLinks_Output_Format_LinksStyle_{$iStyle}";
@@ -70,7 +72,8 @@ class AmazonAutoLinks_Event_Filter_ProductLinks extends AmazonAutoLinks_PluginUt
             $_oLinkStyle = new $_sClassName(
                 $bRefNosim,
                 $sAssociateID,
-                $sLocale
+                $sLocale,
+                $aUnitOptions
             );
             $_sURL = $_oLinkStyle->get( $sURL, $sASIN, $sLanguageCode, $sCurrency );
             return str_replace(

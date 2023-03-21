@@ -91,23 +91,59 @@ class AmazonAutoLinks_FormFields_Unit_Common extends AmazonAutoLinks_FormFields_
                     . ' ' . __( 'Default', 'amazon-auto-links' ) . ": <code>250</code>",
                 ),
                 'default'       => 250,
-            ),                
+            ),
             array(
                 'field_id'          => $sFieldIDPrefix . 'link_style',
-                'type'              => 'radio',
+                'type'              => 'revealer',
+                'select_type'       => 'radio',
                 'title'             => __( 'Link Style', 'amazon-auto-links' ),
                 'label'         => array(                        
-                    1    => 'http://www.amazon.<code>[domain-suffix]</code>/<code>[product-name]</code>/dp/<code>[asin]</code>/ref=<code>[...]</code>?tag=<code>[associate-id]</code>...'
+                    1    => 'https://www.amazon.<code>[domain-suffix]</code>/<code>[product-name]</code>/dp/<code>[asin]</code>/ref=<code>[...]</code>?tag=<code>[associate-id]</code>...'
                         . "&nbsp;<span class='description'>(" . __( 'Default', 'amazon-auto-links' ) . ")</span>",
-                    2    => 'http://www.amazon.<code>[domain-suffix]</code>/exec/obidos/ASIN/<code>[asin]</code>/<code>[associate-id]</code>/ref=<code>[...]</code>...',
-                    3    => 'http://www.amazon.<code>[domain-suffix]</code>/gp/product/<code>[asin]</code>/?tag=<code>[associate-id]</code>&ref=<code>[...]</code>...',
-                    4    => 'http://www.amazon.<code>[domain-suffix]</code>/dp/ASIN/<code>[asin]</code>/ref=<code>[...]</code>?tag=<code>[associate-id]</code>...',
-                    5    => site_url() . '?' . $_oOption->get( 'query', 'cloak' ) . '=<code>[asin]</code>&locale=<code>[...]</code>&tag=<code>[associate-id]</code>...'
+                    2    => 'https://www.amazon.<code>[domain-suffix]</code>/exec/obidos/ASIN/<code>[asin]</code>/<code>[associate-id]</code>/ref=<code>[...]</code>...',
+                    3    => 'https://www.amazon.<code>[domain-suffix]</code>/gp/product/<code>[asin]</code>/?tag=<code>[associate-id]</code>&ref=<code>[...]</code>...',
+                    4    => 'https://www.amazon.<code>[domain-suffix]</code>/dp/ASIN/<code>[asin]</code>/ref=<code>[...]</code>?tag=<code>[associate-id]</code>...',
+                    5    => site_url() . '?' . $_oOption->get( 'query', 'cloak' ) . '=<code>[asin]</code>&locale=<code>[...]</code>&tag=<code>[associate-id]</code>...',
+                    6    => site_url() . '/<code>[custom-slug]</code>/<code>[asin]</code>&tag=<code>[associate-id]</code>...'
                 ),
                 'before_label'  => "<span class='links-style-label'>",
                 'after_label'   => "</span>",
                 'default'       => 1,
-            )
+                'selectors'         => array(
+                    6   => '.fieldrow_link_style_custom_path,.fieldrow_link_style_custom_path_review',
+                ),
+            ),
+            array(
+                'field_id'      => $sFieldIDPrefix . 'link_style_custom_path',
+                'type'          => 'text',
+                'title'         => __( 'Custom URL Path', 'amazon-auto-links' ),
+                'hidden'        => true,
+                'class'             => array(
+                    'fieldrow'  => 'fieldrow_link_style_custom_path',
+                ),
+                'default'       => 'merchandise',
+                'tip'           => __( 'The custom URL path that follows after the site URL for the #6 links style option.', 'amazon-auto-links' )
+                    . ' ' . __( 'You would need to set up those pages or redirects by your self.', 'amazon-auto-links' )
+                    . ' ' . __( 'This is for those who know what they are doing.', 'amazon-auto-links' ),
+                'description'   => sprintf( 'The <code>[custom-url]</code> part in the URL.', trailingslashit( site_url( null ) ) )
+                                   . ' ' . __( 'Forward slashes (<code>/</code>) are allowed.', 'amazon-auto-links' )
+                                   . ' e.g.<code>merchandise</code>',
+            ),
+            array(
+                'field_id'      => $sFieldIDPrefix . 'link_style_custom_path_review',
+                'type'          => 'text',
+                'title'         => __( 'Custom URL Path for Reviews', 'amazon-auto-links' ),
+                'hidden'        => true,
+                'class'             => array(
+                    'fieldrow'  => 'fieldrow_link_style_custom_path_review',
+                ),
+                'default'       => 'reviews',
+                'tip'           => __( 'For the links for rating elements.', 'amazon-auto-links' ),
+                'description'   => array(
+                    __( 'The value set here will be appended to the above custom path where <code>[custom-review-slug]</code> is placed.', 'amazon-auto-links' ),
+                    site_url() . '/<code>[custom-slug]</code>/<code>[custom-review-slug]</code>/<code>[asin]</code>'
+                ),
+            ),
         );
         
         $_oCreditFields = new AmazonAutoLinks_FormFields_Unit_Credit( $this->oFactory );

@@ -36,7 +36,11 @@ class AmazonAutoLinks_UnitPostMetaBox_Common extends AmazonAutoLinks_UnitPostMet
     /**
      * Validates submitted form data.
      */
-    public function validate( $aInputs, $aOriginal, $oFactory ) {    
+    public function validate( $aInputs, $aOriginal, $oFactory ) {
+        $aInputs[ 'link_style_custom_path' ]        = filter_var( $aInputs[ 'link_style_custom_path' ], FILTER_SANITIZE_URL);
+        $aInputs[ 'link_style_custom_path' ]        = untrailingslashit( $aInputs[ 'link_style_custom_path' ] );
+        $aInputs[ 'link_style_custom_path_review' ] = filter_var( $aInputs[ 'link_style_custom_path_review' ], FILTER_SANITIZE_URL);
+        $aInputs[ 'link_style_custom_path_review' ] = untrailingslashit( $aInputs[ 'link_style_custom_path_review' ] );
         return $aInputs;
     }
     

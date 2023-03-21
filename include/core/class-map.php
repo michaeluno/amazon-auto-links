@@ -1,6 +1,6 @@
 <?php 
 /**
- * Auto Amazon Links v5.2.6b02 by miunosoft (Michael Uno) 
+ * Auto Amazon Links v5.2.10b01 by miunosoft (Michael Uno) 
  * Formerly, Amazon Auto Links. The plugin generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  * <https://en.michaeluno.jp/amazon-auto-links>
  * Copyright (c) 2013-2022, Michael Uno; Licensed under GPL v2 or later
@@ -491,6 +491,7 @@ return array(
     "AmazonAutoLinks_UnitOutput__AllowedInlineCSS" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/event/filter/AmazonAutoLinks_UnitOutput__AllowedInlineCSS.php", 
     "AmazonAutoLinks_UnitOutput__Credit" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/event/filter/AmazonAutoLinks_UnitOutput__Credit.php", 
     "AmazonAutoLinks_UnitOutput__CustomQueryArguments" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/event/filter/AmazonAutoLinks_UnitOutput__CustomQueryArguments.php", 
+    "AmazonAutoLinks_UnitOutput__LinkStyle6" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/event/filter/AmazonAutoLinks_UnitOutput__LinkStyle6.php", 
     "AmazonAutoLinks_UnitOutput__ProductFilter_AdultProducts" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/event/filter/product_filter/AmazonAutoLinks_UnitOutput__ProductFilter_AdultProducts.php", 
     "AmazonAutoLinks_UnitOutput__ProductFilter_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/event/filter/product_filter/AmazonAutoLinks_UnitOutput__ProductFilter_Base.php", 
     "AmazonAutoLinks_UnitOutput__ProductFilter_ByDiscountRate" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/event/filter/product_filter/AmazonAutoLinks_UnitOutput__ProductFilter_ByDiscountRate.php", 
@@ -506,6 +507,7 @@ return array(
     "AmazonAutoLinks_Output_Format_LinksStyle_3" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/formatter/link_style/AmazonAutoLinks_Output_Format_LinksStyle_3.php", 
     "AmazonAutoLinks_Output_Format_LinksStyle_4" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/formatter/link_style/AmazonAutoLinks_Output_Format_LinksStyle_4.php", 
     "AmazonAutoLinks_Output_Format_LinksStyle_5" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/formatter/link_style/AmazonAutoLinks_Output_Format_LinksStyle_5.php", 
+    "AmazonAutoLinks_Output_Format_LinksStyle_6" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/formatter/link_style/AmazonAutoLinks_Output_Format_LinksStyle_6.php", 
     "AmazonAutoLinks_Output_Format_LinksStyle_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/formatter/link_style/AmazonAutoLinks_Output_Format_LinksStyle_Base.php", 
     "AmazonAutoLinks_UnitOutput__ElementFormatter_SimilarItems" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/formatter/product_element/AmazonAutoLinks_UnitOutput__ElementFormatter_SimilarItems.php", 
     "AmazonAutoLinks_UnitOutput___ElementFormatter_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/_common/output/formatter/product_element/AmazonAutoLinks_UnitOutput___ElementFormatter_Base.php", 

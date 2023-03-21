@@ -411,6 +411,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
                 new AmazonAutoLinks_UnitOutput__HTTPErrorChecks( $this ),
                 new AmazonAutoLinks_UnitOutput__CustomQueryArguments( $this ),              // 4.6.19
                 new AmazonAutoLinks_UnitOutput__AllowedInlineCSS( $this ),                  // 4.6.19
+                new AmazonAutoLinks_UnitOutput__LinkStyle6( $this ),                        // 5.3.0
             );
         }
 
