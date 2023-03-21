@@ -136,5 +136,48 @@ class AmazonAutoLinks_Utility_String extends AmazonAutoLinks_AdminPageFramework_
         );
         
     }
+
+    /**
+     * @param  string $sPath
+     * @return string
+     * @since  5.3.0
+     */
+    static public function getDoubleSlashesToSingle( $sPath ) {
+        return ( string ) preg_replace('/\/\//', '\/', $sPath );
+    }
+
+    /**
+     * @return string A regex pattern that matches a URL
+     * @since  5.3.0
+     */
+    static public function getRegexPattern_URL( $sDomain='amazon' ) {
+        $_sPatternHref  = "("; // first element open
+            $_sPatternHref .= "<"; // 1 start of the tag
+            $_sPatternHref .= "\s*"; // 2 zero or more whitespace
+            $_sPatternHref .= "a"; // 3 the a of the tag itself
+            $_sPatternHref .= "\s+"; // 4 one or more whitespace
+            $_sPatternHref .= "[^>]*"; // 5 zero or more of any character that is _not_ the end of the tag
+            $_sPatternHref .= "href"; // 6 the href bit of the tag
+            $_sPatternHref .= "\s*"; // 7 zero or more whitespace
+            $_sPatternHref .= "="; // 8 the = of the tag
+            $_sPatternHref .= "\s*"; // 9 zero or more whitespace
+            $_sPatternHref .= '["\']?'; // 10 none or one of " or ' opening quote
+        $_sPatternHref .= ')'; // first element close
+        $_sPatternHref .= "("; // second element open
+            $_sPatternHref .= 'https?:\/\/(www\.)?' . $sDomain .  '\.[^"\' >]+';   // URL
+        $_sPatternHref .= ")"; // second element close
+        $_sPatternHref .= "("; // fourth element
+            $_sPatternHref .= '["\' >]'; // 14 closing characters of the bit we want to capture
+        $_sPatternHref .= ')'; // fourth element close
+
+        $_sNeedle  = "/"; // regex start delimiter
+        $_sNeedle .= $_sPatternHref;
+        $_sNeedle .= "/"; // regex end delimiter
+        $_sNeedle .= "i"; // Pattern Modifier - makes regex case insensative
+        $_sNeedle .= "s"; // Pattern Modifier - makes a dot metacharater in the pattern
+        // match all characters, including newlines
+        $_sNeedle .= "U"; // Pattern Modifier - makes the regex ungready
+        return $_sNeedle;
+    }
          
 }
