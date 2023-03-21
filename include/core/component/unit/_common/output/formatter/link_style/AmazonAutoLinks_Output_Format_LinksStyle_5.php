@@ -37,11 +37,8 @@ class AmazonAutoLinks_Output_Format_LinksStyle_5 extends AmazonAutoLinks_Output_
         if ( ! $this->bRefNosim ) {
             unset( $_aQuery[ 'ref' ] );
         }
-        return add_query_arg( 
-            $_aQuery, 
-            site_url()
-        );
+        return add_query_arg( $_aQuery, $this->getSiteURL() );
                 
-    }    
-             
+    }
+
 }
