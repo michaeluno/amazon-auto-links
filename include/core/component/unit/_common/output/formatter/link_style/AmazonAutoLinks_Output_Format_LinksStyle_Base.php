@@ -18,20 +18,24 @@ abstract class AmazonAutoLinks_Output_Format_LinksStyle_Base extends AmazonAutoL
     public $bRefNosim    = false;
     public $sAssociateID = '';
     public $sLocale      = 'US';
-
     public $oOption;
-    
+
+    /**
+     * @since 5.3.0
+     */
+    public $aUnitOptions = '';
+
     /**
      * Sets up properties.
      */
-    public function __construct( $bRefNosim=false, $sAssociateID='', $sLocale='US' ) {
+    public function __construct( $bRefNosim=false, $sAssociateID='', $sLocale='US', $aUnitOptions=array() ) {
         
         $this->bRefNosim    = $bRefNosim;
         $this->sAssociateID = $sAssociateID;
         $this->sLocale      = $sLocale;
-        
         $this->oOption      = AmazonAutoLinks_Option::getInstance();
-        
+        $this->aUnitOptions = $aUnitOptions;
+
     }
     
     /**
