@@ -108,7 +108,7 @@ class AmazonAutoLinks_LinkConverter_Output extends AmazonAutoLinks_PluginUtility
      * @return  string
      */
     public function replyToFilterContents( $sHTML ) {
-        return preg_replace_callback( $this->___getPattern(), array( $this, 'replyToConvertLink' ), $sHTML );
+        return preg_replace_callback( $this->getRegexPattern_URL( 'amazon' ), array( $this, 'replyToConvertLink' ), $sHTML );
     }
         /**
          * @param    array $aMatches
@@ -150,39 +150,5 @@ class AmazonAutoLinks_LinkConverter_Output extends AmazonAutoLinks_PluginUtility
                 $this->setObjectCache( __METHOD__ . $sLocale, $_sAssociateID );
                 return $_sAssociateID;
             }
-        /**
-         * @return string A regex pattern.
-         */
-        private function ___getPattern() {
-
-            $_sPatternHref  = "("; // first element open
-                $_sPatternHref .= "<"; // 1 start of the tag
-                $_sPatternHref .= "\s*"; // 2 zero or more whitespace
-                $_sPatternHref .= "a"; // 3 the a of the tag itself
-                $_sPatternHref .= "\s+"; // 4 one or more whitespace
-                $_sPatternHref .= "[^>]*"; // 5 zero or more of any character that is _not_ the end of the tag
-                $_sPatternHref .= "href"; // 6 the href bit of the tag
-                $_sPatternHref .= "\s*"; // 7 zero or more whitespace
-                $_sPatternHref .= "="; // 8 the = of the tag
-                $_sPatternHref .= "\s*"; // 9 zero or more whitespace
-                $_sPatternHref .= '["\']?'; // 10 none or one of " or ' opening quote
-            $_sPatternHref .= ')'; // first element close
-            $_sPatternHref .= "("; // second element open
-                $_sPatternHref .= 'https?:\/\/(www\.)?amazon\.[^"\' >]+';   // URL
-            $_sPatternHref .= ")"; // second elementclose
-            $_sPatternHref .= "("; // fourth element
-                $_sPatternHref .= '["\' >]'; // 14 closing chartacters of the bit we want to capture
-            $_sPatternHref .= ')'; // fourth element close
-
-            $_sNeedle  = "/"; // regex start delimiter
-            $_sNeedle .= $_sPatternHref;
-            $_sNeedle .= "/"; // regex end delimiter
-            $_sNeedle .= "i"; // Pattern Modifier - makes regex case insensative
-            $_sNeedle .= "s"; // Pattern Modifier - makes a dot metacharater in the pattern
-            // match all characters, including newlines
-            $_sNeedle .= "U"; // Pattern Modifier - makes the regex ungready
-            return $_sNeedle;
-
-        }
 
 }
