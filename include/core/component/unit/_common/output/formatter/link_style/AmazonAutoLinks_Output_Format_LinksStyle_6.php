@@ -23,17 +23,19 @@ class AmazonAutoLinks_Output_Format_LinksStyle_6 extends AmazonAutoLinks_Output_
      */
     public function get( $sURL, $sASIN, $sLanguageCode='', $sCurrency='' ) {
         $_sCustomPath = $this->getElement( $this->aUnitOptions, array( 'link_style_custom_path' ), 'merchandise' );
-        $_sURL        = $this->getSiteURL() . $this->getDoubleSlashesToSingle( '/' . $_sCustomPath . '/' ) . $sASIN;
-        $_aQuery      = array(
-            'locale'     => $this->sLocale,
-            'language'   => $sLanguageCode,
-            'currency'   => $sCurrency,
-            'tag'        => $this->getAssociateID(),
-        );
-        return add_query_arg(
-            array_filter( $_aQuery ), // drop empty elements
-            $_sURL
-        );
+        return $this->getSiteURL() . $this->getDoubleSlashesToSingle( '/' . $_sCustomPath . '/' ) . $sASIN;
+
+        // @deprecated If there becomes requests to add URL queries, implement this with an option.
+        // $_aQuery      = array(
+        //     'locale'     => $this->sLocale,
+        //     'language'   => $sLanguageCode,
+        //     'currency'   => $sCurrency,
+        //     'tag'        => $this->getAssociateID(),
+        // );
+        // return add_query_arg(
+        //     array_filter( $_aQuery ), // drop empty elements
+        //     $_sURL
+        // );
     }    
              
 }

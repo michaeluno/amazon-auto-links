@@ -66,18 +66,20 @@ class AmazonAutoLinks_UnitOutput__LinkStyle6 extends AmazonAutoLinks_UnitOutput_
             return preg_replace_callback( $this->getRegexPattern_URL( 'amazon' ), array( $this, '___getLinkReplaced' ), $sHTML );
         }
             private function ___getLinkReplaced( $aMatches ) {
-                $_sURLReview = $this->getSiteURL() . $this->getDoubleSlashesToSingle( '/' . $this->sCustomPath . '/' . $this->sReviewPath . '/' )
+                $_sURLReview = $this->getSiteURL() . $this->getDoubleSlashesToSingle( '/' . $this->sReviewPath . '/' )
                     . $this->getElement( self::getASINs( $aMatches[ 2 ] ), 0 ); // somehow getASINFromURL() doesn't detect an ASIN well
                 return $aMatches[ 1 ]
-                        . add_query_arg(
-                            array_filter( array(
-                                'language' => $this->sLanguage,
-                                'currency' => $this->sCurrency,
-                                'locale'   => $this->sLocale,
-                                'tag'      => $this->sAssociateID,
-                            ) ), // drop empty elements
-                            $_sURLReview
-                        )
+                        . $_sURLReview
+                        // @deprecated let the user set these through the Custom URL Query unit option. The option needs to be enhanced though.
+                        // . add_query_arg(
+                        //     array_filter( array(
+                        //         'language' => $this->sLanguage,
+                        //         'currency' => $this->sCurrency,
+                        //         'locale'   => $this->sLocale,
+                        //         'tag'      => $this->sAssociateID,
+                        //     ) ), // drop empty elements
+                        //     $_sURLReview
+                        // )
                     . $aMatches[ 4 ];
             }
 
