@@ -37,15 +37,16 @@ class AmazonAutoLinks_FormFields_ContextualUnit_Advanced extends AmazonAutoLinks
             }
             $_sFieldID = $_aFieldset[ 'field_id' ];
             if (
-                $this->hasSuffix( 'SearchIndex', $_sFieldID )
-                || $this->hasSuffix( 'Sort', $_sFieldID )
+                ! $this->hasSuffix( 'SearchIndex', $_sFieldID )
+                && ! $this->hasSuffix( 'Sort', $_sFieldID )
             ) {
-                $_aFieldset[ 'description' ] = $_sAPINotice;
-                if ( ! $_bAPIKeysSet ) {
-                    $this->setMultiDimensionalArray( $_aFieldset, array( 'attributes', 'disabled' ), 'disabled' );
-                }
-                $_aFields[] = $_aFieldset;
+                continue;
             }
+            $_aFieldset[ 'description' ] = $_sAPINotice;
+            if ( ! $_bAPIKeysSet ) {
+                $this->setMultiDimensionalArray( $_aFieldset, array( 'attributes', 'disabled' ), 'disabled' );
+            }
+            $_aFields[] = $_aFieldset;
         }
 
         $_oOption     = $this->oOption;
