@@ -84,7 +84,7 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
         'sslverify'          => true,
         'stream'             => false,
         'filename'           => null,
-        'method'             => null,       // [3.9.0]
+        'method'             => 'GET',       // [3.9.0], [5.3.0] The default is now `GET` from `null` to be compatibile with WordPress 6.2
         'reject_unsafe_urls' => true,       // [4.3.4]
     );
 
