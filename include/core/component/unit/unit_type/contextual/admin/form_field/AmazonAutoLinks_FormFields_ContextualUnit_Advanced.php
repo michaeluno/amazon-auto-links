@@ -29,6 +29,7 @@ class AmazonAutoLinks_FormFields_ContextualUnit_Advanced extends AmazonAutoLinks
         $_sLocale           = $this->oFactory->getValue( 'country' );
         $_bAPIKeysSet       = $this->oOption->isPAAPIKeySet( $_sLocale );
         $_sAPINotice        = array( $_bAPIKeysSet ? null : $this->getAPIKeyUnsetWarning( $_sLocale ), );
+        $_bAdWidgetSupport  = in_array( $_sLocale, AmazonAutoLinks_Locales::getLocalesWithAdWidgetAPISupport(), true );
 
         // Remove unnecessary fields
         foreach( $_aSearchUnitFields as $_iIndex => $_aFieldset ) {
@@ -42,11 +43,25 @@ class AmazonAutoLinks_FormFields_ContextualUnit_Advanced extends AmazonAutoLinks
             ) {
                 continue;
             }
-            $_aFieldset[ 'description' ] = $_sAPINotice;
-            if ( ! $_bAPIKeysSet ) {
-                $this->setMultiDimensionalArray( $_aFieldset, array( 'attributes', 'disabled' ), 'disabled' );
+
+            if ( $this->hasSuffix( 'Sort', $_sFieldID ) ) {
+                $_aFieldset[ 'description' ] = $_sAPINotice;
+                if ( ! $_bAPIKeysSet ) {
+                    $this->setMultiDimensionalArray( $_aFieldset, array( 'attributes', 'disabled' ), 'disabled' );
+                }
+                $_aFields[] = $_aFieldset;
             }
-            $_aFields[] = $_aFieldset;
+
+            if ( $this->hasSuffix( 'SearchIndex', $_sFieldID ) ) {
+                if ( ! $_bAdWidgetSupport ) {
+                    $_aFieldset[ 'description' ] = $_sAPINotice;
+                }
+                if ( ! $_bAPIKeysSet && ! $_bAdWidgetSupport ) {
+                    $this->setMultiDimensionalArray( $_aFieldset, array( 'attributes', 'disabled' ), 'disabled' );
+                }
+                $_aFields[] = $_aFieldset;
+            }
+
         }
 
         $_oOption     = $this->oOption;

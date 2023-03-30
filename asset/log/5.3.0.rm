@@ -1,3 +1,4 @@
 - Added the `Browse Node` unit option for `Product Search` units.
 - Added the new link style unit option and associated options.
+- Added the ability for some locales to set a search index for Contextual units.
 - Fixed incompatibility with WordPres 6.2.
