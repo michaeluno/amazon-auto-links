@@ -4,7 +4,7 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon affiliate, amazon associate, amazon affiliates, amazon associates, amazon ads, automation, ads, advertisement, affiliate, affiliates, marketing, monetization, monetize, revenues, revenue, income, widget, widgets
 Requires at least:  3.4
 Requires PHP:       5.2.4
-Tested up to:       5.9.3
+Tested up to:       6.2.0
 Requires MySQL:     5.0.3
 Stable tag:         5.3.0
 License:            GPLv2 or later
