@@ -454,6 +454,7 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
                     unset( $aArguments[ 'method' ] ); // not sure but if this is present, it causes 400 Bad Request
                     return wp_remote_head( $sURL, $aArguments );
                 }
+                $aArguments[ 'method' ] = 'GET';    // [5.3.1] This can be `null` for some reasons so ensure it is `GET`.
                 return wp_remote_get( $sURL, $aArguments );
 
             }
