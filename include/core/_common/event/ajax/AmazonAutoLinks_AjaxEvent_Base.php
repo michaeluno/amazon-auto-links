@@ -68,10 +68,12 @@ abstract class AmazonAutoLinks_AjaxEvent_Base extends AmazonAutoLinks_Event___Ac
 
     protected function _doAction() {
 
-        check_ajax_referer(
-            $this->_sNonceKey,   // the nonce key passed to the `wp_create_nonce()` - `add-post` is done by WordPress
-            'aal_nonce' // the $_REQUEST key storing the nonce.
-        );
+        if ( $this->_sNonceKey ) {
+            check_ajax_referer(
+                $this->_sNonceKey,   // the nonce key passed to the `wp_create_nonce()` - `add-post` is done by WordPress
+                'aal_nonce' // the $_REQUEST key storing the nonce.
+            );
+        }
 
         $_bSuccess  = true;
         try {
