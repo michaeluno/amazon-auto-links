@@ -27,7 +27,7 @@ class AmazonAutoLinks_FormFields_ContextualUnit_Main extends AmazonAutoLinks_For
         $_aFields = array(
             array(
                 'field_id'      => $sFieldIDPrefix . 'criteria',
-                'title'         => __( 'Additional Criteria', 'amazon-auto-links' ),
+                'title'         => __( 'Criteria', 'amazon-auto-links' ),
                 'type'          => 'checkbox',
                 'label'         => array(
                     'post_title'        => __( 'Post Title', 'amazon-auto-links' ),
