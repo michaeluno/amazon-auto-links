@@ -136,9 +136,8 @@ class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_Plugi
                 return array( get_bloginfo( 'name' ) );
             }
             /**
-             * 
-             * @since       3
-             * @return      array
+             * @since  3
+             * @return array
              */
             private function ___getSearchKeywordsByType_post_title() {
                 return isset( $this->___oPost->post_title )
