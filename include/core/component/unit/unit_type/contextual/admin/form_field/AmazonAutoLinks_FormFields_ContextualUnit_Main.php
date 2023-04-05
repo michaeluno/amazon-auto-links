@@ -33,6 +33,7 @@ class AmazonAutoLinks_FormFields_ContextualUnit_Main extends AmazonAutoLinks_For
                     'post_title'        => __( 'Post Title', 'amazon-auto-links' ),
                     'taxonomy_terms'    => __( 'Taxonomy Terms', 'amazon-auto-links' ),
                     'breadcrumb'        => __( 'Breadcrumb', 'amazon-auto-links' ),
+                    'site_title'        => __( 'Site Title', 'amazon-auto-links' ),
                 ),
                 'default'       => array(
                     'post_title'        => true,

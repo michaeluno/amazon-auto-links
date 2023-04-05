@@ -17,9 +17,15 @@
  */
 class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_PluginUtility {
 
-    public $aCriteria           = array();
+    public $aCriteria           = array(
+        // 1 or 0 as string (saved form value)
+        'post_title'     => '0',
+        'site_title'     => '0',
+        'taxonomy_terms' => '0',
+        'breadcrumb'     => '0',
+    );
     public $sAdditionalKeywords = '';
-    public $sExcludingKeywords = '';        // 3.12.0
+    public $sExcludingKeywords  = '';        // 3.12.0
 
     private $___oPost;
     private $___aGET = array();
@@ -29,7 +35,7 @@ class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_Plugi
      */
     public function __construct( array $aCriteria, $sAdditionalKeywords='', $sExcludingKeywords='' ) {
 
-        $this->aCriteria           = $aCriteria;
+        $this->aCriteria           = $aCriteria + $this->aCriteria;
         $this->sAdditionalKeywords = $sAdditionalKeywords;
         $this->sExcludingKeywords  = $sExcludingKeywords;
 
@@ -46,44 +52,37 @@ class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_Plugi
     }
     
     /**
-     * 
-     * @return      array       The search keywords.
+     * @return array The search keywords.
      */
     public function get() {
         
         $_aKeywords        = $this->___getSearchKeywordsByCriteria( $this->aCriteria );
-        $_aKeywords        = array_merge( $_aKeywords, $this->___getSiteSearchKeywords() );
-        $_aKeywords        = $this->___getFormattedSearchKeywordsArray( $_aKeywords );
-
-        $_aAdditionalWords = $this->getStringIntoArray( $this->sAdditionalKeywords, ',' );
-        $_aKeywords        = array_merge( $_aKeywords, $_aAdditionalWords );
-
+        $_aKeywords        = array_merge(
+            $_aKeywords,
+            $this->___getSiteSearchKeywords(),
+            $this->getStringIntoArray( $this->sAdditionalKeywords, ',' )
+        );
         $_aExcludeWords    = $this->getStringIntoArray( $this->sExcludingKeywords, ',' );
         $_aKeywords        = array_udiff( $_aKeywords, $_aExcludeWords, 'strcasecmp' ); // case-insensitive
-
-        $_aKeywords        = array_unique( $_aKeywords );
-        return $_aKeywords;
+        return array_unique( $_aKeywords );
 
     }
         
         /**
-         * @return      array
+         * @return array
          */
         private function ___getSiteSearchKeywords() {
-
-            $_sQuery = $this->getElement( $this->___aGET, 's' );
             $_sQuery = str_replace(
                 array( '+' ),
                 ',',
-                $_sQuery
+                $this->getElement( $this->___aGET, 's' )
             );
-            return explode( ',', $_sQuery );
-            
+            return array_filter( explode( ',', $_sQuery ) );
         }
 
         /**
-         * 
-         * @return      array
+         * @return     array
+         * @deprecated 5.4.0
          */
         private function ___getFormattedSearchKeywordsArray( array $aKeywords ) {
             $aKeywords = array_unique( array_filter( $aKeywords ) );
@@ -94,19 +93,21 @@ class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_Plugi
         }
 
         /**
-         * 
-         * @since       3
-         * @param       array       $aCriteria      
+         *
+         * @since  3
+         * @param  array $aCriteria
          * The structure:
+         * ```
          *  array(
          *      'post_title'        => true,
          *      'breadcrumb'        => true,
          *      'taxonomy_terms'    => true,
+         *      'site_title'        => true,
          *  )
-         * @return      array
+         * ```
+         * @return array
          */
         private function ___getSearchKeywordsByCriteria( array $aCriteria ) {
-
             $_aKeywords  = array();
             foreach( $this->___getFormattedCriteriaArray( $aCriteria ) as $_sCriteriaKey ) {
                 $_aKeywords = array_merge(
@@ -117,17 +118,22 @@ class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_Plugi
                 );
             }
             return $_aKeywords;
-            
         }
             /**
              * 
-             * @since       3
-             * @return      array
+             * @since  3
+             * @return array
              */
             private function ___getFormattedCriteriaArray( array $aCriteria ) {
-                return array_keys(
-                    array_filter( $aCriteria )
-                );                    
+                return array_keys( array_filter( $aCriteria ) );
+            }
+            /**
+             *
+             * @since  5.4.0
+             * @return array
+             */
+            private function ___getSearchKeywordsByType_site_title() {
+                return array( get_bloginfo( 'name' ) );
             }
             /**
              * 
