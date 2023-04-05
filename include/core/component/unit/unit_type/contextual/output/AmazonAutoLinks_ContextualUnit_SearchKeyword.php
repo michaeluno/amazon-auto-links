@@ -191,7 +191,7 @@ class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_Plugi
                         
                 $_aTerms = array();
                 foreach( $_aTermsObjects as $_oTerm ) {
-                    if ( in_array( 'uncategorized', array( $_oTerm->slug ) ) ) {
+                    if ( 'uncategorized' === $_oTerm->slug ) {
                         continue;
                     }                    
                     $_aTerms[] = $_oTerm->name;
