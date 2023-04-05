@@ -146,9 +146,8 @@ class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_Plugi
             }
             
             /**
-             * 
-             * @since       3
-             * @return      array
+             * @since  3
+             * @return array
              */
             private function ___getSearchKeywordsByType_breadcrumb() {
                 $_oBreadcrumb  = new AmazonAutoLinks_ContextualUnit_Breadcrumb(
@@ -159,9 +158,8 @@ class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_Plugi
             }  
  
             /**
-             * 
-             * @since       3
-             * @return      array
+             * @since  3
+             * @return array
              */
             private function ___getSearchKeywordsByType_taxonomy_terms() {
                 
