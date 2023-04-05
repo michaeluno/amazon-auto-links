@@ -84,13 +84,13 @@ class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_Plugi
          * @return     array
          * @deprecated 5.4.0
          */
-        private function ___getFormattedSearchKeywordsArray( array $aKeywords ) {
-            $aKeywords = array_unique( array_filter( $aKeywords ) );
-            if ( empty( $aKeywords ) ) {
-                $aKeywords[] = get_bloginfo( 'name' );
-            }
-            return $aKeywords;
-        }
+        // private function ___getFormattedSearchKeywordsArray( array $aKeywords ) {
+        //     $aKeywords = array_unique( array_filter( $aKeywords ) );
+        //     if ( empty( $aKeywords ) ) {
+        //         $aKeywords[] = get_bloginfo( 'name' );
+        //     }
+        //     return $aKeywords;
+        // }
 
         /**
          *
