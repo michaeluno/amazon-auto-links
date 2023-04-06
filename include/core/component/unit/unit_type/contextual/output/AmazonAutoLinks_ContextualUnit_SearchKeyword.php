@@ -168,10 +168,7 @@ class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_Plugi
                 }
                 
                 // Retrieve associated taxonomies.
-                $_aTaxonomyObjects = get_object_taxonomies( 
-                    $this->___oPost->post_type, 
-                    'objects' 
-                );
+                $_aTaxonomyObjects = get_object_taxonomies( $this->___oPost->post_type, 'objects' );
                 
                 // Generate current taxonomy terms.
                 $_aTaxonomyNames = array();
@@ -185,8 +182,7 @@ class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_Plugi
                     $this->___oPost->ID, 
                     $_aTaxonomyNames
                 );
-                        
-                        
+
                 $_aTerms = array();
                 foreach( $_aTermsObjects as $_oTerm ) {
                     if ( 'uncategorized' === $_oTerm->slug ) {
