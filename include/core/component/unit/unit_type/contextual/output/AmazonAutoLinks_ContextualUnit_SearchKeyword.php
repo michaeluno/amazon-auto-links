@@ -17,6 +17,11 @@
  */
 class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_PluginUtility {
 
+    /**
+     * @var AmazonAutoLinks_UnitOption_Base
+     */
+    public $oUnitOption;
+
     public $aCriteria           = array(
         // 1 or 0 as string (saved form value)
         'post_title'     => '0',
@@ -32,23 +37,25 @@ class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_Plugi
 
     /**
      * Sets up properties.
+     * @since 3
+     * @since 5.4.1 Removed all the parameters and replaced them with a unit option object.
      */
-    public function __construct( array $aCriteria, $sAdditionalKeywords='', $sExcludingKeywords='' ) {
+    public function __construct( $oUnitOption ) {
 
-        $this->aCriteria           = $aCriteria + $this->aCriteria;
-        $this->sAdditionalKeywords = $sAdditionalKeywords;
-        $this->sExcludingKeywords  = $sExcludingKeywords;
+        $this->oUnitOption         = $oUnitOption;
+        $this->aCriteria           = $oUnitOption->get( 'criteria' ) + $this->aCriteria;
+        $this->sAdditionalKeywords = $oUnitOption->get( 'additional_keywords' );
+        $this->sExcludingKeywords  = $oUnitOption->get( 'excluding_keywords' );
 
         // Allow ajax unit loading to set referrer's request
-        $this->___oPost            = apply_filters(
-            'aal_filter_post_object', 
-            $this->getElement( $GLOBALS, 'post' )
-        );
-        // Currently, only the `s` element is used
+        $this->___oPost            = apply_filters( 'aal_filter_post_object', $this->getElement( $GLOBALS, 'post' ) );
+
+        // Currently, only the `s` URL query parameter is used
         $_aGET                     = array(
             's' => _sanitize_text_fields( $this->getElement( $_GET, array( 's' ) ) ),   // sanitization done
         );
         $this->___aGET             = apply_filters( 'aal_filter_http_get', $_aGET );
+
     }
     
     /**

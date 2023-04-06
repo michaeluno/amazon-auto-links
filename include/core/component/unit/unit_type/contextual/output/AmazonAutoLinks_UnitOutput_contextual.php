@@ -55,11 +55,7 @@ class AmazonAutoLinks_UnitOutput_contextual extends AmazonAutoLinks_UnitOutput_a
          */
         private function ___getKeywords() {
 
-            $_oContextualSearch = new AmazonAutoLinks_ContextualUnit_SearchKeyword(
-                $this->oUnitOption->get( 'criteria' ),
-                $this->oUnitOption->get( 'additional_keywords' ),
-                $this->oUnitOption->get( 'excluding_keywords' )
-            );
+            $_oContextualSearch = new AmazonAutoLinks_ContextualUnit_SearchKeyword( $this->oUnitOption );
             $_aSearchKeywords   = $_oContextualSearch->get(); // get as an array
 
             // @todo make these optional
