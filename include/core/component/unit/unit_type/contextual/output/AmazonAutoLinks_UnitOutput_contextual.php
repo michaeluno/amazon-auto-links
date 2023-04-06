@@ -62,6 +62,7 @@ class AmazonAutoLinks_UnitOutput_contextual extends AmazonAutoLinks_UnitOutput_a
             );
             $_aSearchKeywords   = $_oContextualSearch->get(); // get as an array
 
+            // @todo make these optional
             shuffle( $_aSearchKeywords );
             array_splice( $_aSearchKeywords, 5 );   // up to 5 keywords.
 
