@@ -57,16 +57,16 @@ class AmazonAutoLinks_UnitPostMetaBox_Main_contextual extends AmazonAutoLinks_Un
             $aInputs
         );
         $_aFormatted = $_oUnitOption->get();
-        
+
         // An invalid value is found.
-        if ( ! $_bVerified ) {
-        
-            // Set the error array for the input fields.
-            $oFactory->setFieldErrors( $_aErrors );        
-            $oFactory->setSettingNotice( __( 'There was an error in your input.', 'amazon-auto-links' ) );
-            return $aInputs;
-            
-        }       
+        // if ( ! $_bVerified ) {
+        //
+        //     // Set the error array for the input fields.
+        //     $oFactory->setFieldErrors( $_aErrors );
+        //     $oFactory->setSettingNotice( __( 'There was an error in your input.', 'amazon-auto-links' ) );
+        //     return $aInputs;
+        //
+        // }
 
         // Drop unset keys.
         foreach( $_aFormatted as $_sKey => $_mValue ) {
