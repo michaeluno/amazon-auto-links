@@ -287,9 +287,12 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
 
         // Sanitize the form inputs.
         $_oItemFormatValidator = new AmazonAutoLinks_FormValidator_ItemFormat( $aSubmit, $aStored );
-        $aSubmit    = $_oItemFormatValidator->get();      
-        return $aSubmit;
-        
+        $aSubmit    = $_oItemFormatValidator->get();
+
+        // Formats the options
+        $_oUnitOption = new AmazonAutoLinks_UnitOption_contextual( null, $aSubmit );
+        return $_oUnitOption->get();
+
     }        
     
     /**
