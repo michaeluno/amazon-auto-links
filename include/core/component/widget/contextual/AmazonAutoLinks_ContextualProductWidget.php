@@ -157,6 +157,9 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
         );
         $this->___addFieldsByFieldClass( $_aClasses );
 
+        // Register custom filed type.
+        new AmazonAutoLinks_RevealerCustomFieldType( $oFactory->oProp->sClassName );
+
         // Product filters
         $this->addSettingSections(
             array(
