@@ -174,16 +174,16 @@ class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_Plugi
                 );
                 
                 // Generate current taxonomy terms.
-                $_aTaxoomyNames = array();
+                $_aTaxonomyNames = array();
                 foreach( $_aTaxonomyObjects as $_sKey => $_oTaxonomy ) {
                     if ( ! $_oTaxonomy->public ) {
                         continue;
                     }                    
-                    $_aTaxoomyNames[] = $_oTaxonomy->name;
+                    $_aTaxonomyNames[] = $_oTaxonomy->name;
                 }
                 $_aTermsObjects = wp_get_post_terms( 
                     $this->___oPost->ID, 
-                    $_aTaxoomyNames
+                    $_aTaxonomyNames
                 );
                         
                         
