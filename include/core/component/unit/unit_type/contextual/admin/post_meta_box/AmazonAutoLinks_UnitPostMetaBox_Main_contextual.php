@@ -48,14 +48,11 @@ class AmazonAutoLinks_UnitPostMetaBox_Main_contextual extends AmazonAutoLinks_Un
      */
     public function validate( $aInputs, $aOldInputs, $oFactory ) {    
         
-        $_aErrors   = array();
-        $_bVerified = true;
-        
+        // $_aErrors   = array();
+        // $_bVerified = true;
+
         // Formats the options
-        $_oUnitOption = new AmazonAutoLinks_UnitOption_contextual(
-            null,
-            $aInputs
-        );
+        $_oUnitOption = new AmazonAutoLinks_UnitOption_contextual( null, $aInputs );
         $_aFormatted = $_oUnitOption->get();
 
         // An invalid value is found.
