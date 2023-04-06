@@ -1,1 +1,2 @@
+- Fixed an issue that loading units with JavaScript failed with third-party caching plugins.  
 - Fixed an incompatibility issue with WordPress 6.2 which caused a critical error in the background.

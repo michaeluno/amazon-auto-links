@@ -218,4 +218,12 @@ class AmazonAutoLinks_Unit_EventAjax_UnitLoading extends AmazonAutoLinks_AjaxEve
             return $_aPageTypeInfo;
         }
 
+    /**
+     * @since 5.3.1
+     */
+    protected function _doAction() {
+        $this->_sNonceKey = ''; // disable nonce check
+        parent::_doAction();
+    }
+
 }

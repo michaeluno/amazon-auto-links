@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       6.2.0
 Requires MySQL:     5.0.3
-Stable tag:         5.3.0
+Stable tag:         5.3.1
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -381,10 +381,11 @@ You can check if your keys are valid with [Scratchpad](https://webservices.amazo
 
 == Changelog ==
 
-#### 5.2.9 - 04/14/2022
-- Fixed a bug that Classic button setting fields were not displayed after saving the button settings.
-- Fixed a bug with the Classic button editing UI that the preview labels were not updated dynamically.
-- Fixed a bug that custom plugin temporary directory paths introduced in v5.2.8 were not applied to PA-API request counter log.
+#### 5.3.1 - 04/06/2023
+- Fixed an issue that loading units with JavaScript failed with third-party caching plugins.
+- Fixed an incompatibility issue with WordPress 6.2 which caused a critical error in the background.
+
+
 
 #### Old Log
 For old change logs, see [here](https://github.com/michaeluno/amazon-auto-links/blob/master/changelog.md).
