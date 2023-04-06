@@ -28,17 +28,42 @@ class AmazonAutoLinks_FormFields_ContextualUnit_Main extends AmazonAutoLinks_For
             array(
                 'field_id'      => $sFieldIDPrefix . 'criteria',
                 'title'         => __( 'Criteria', 'amazon-auto-links' ),
-                'type'          => 'checkbox',
+                'type'          => 'revealer',
+                'select_type'   => 'checkbox',
                 'label'         => array(
                     'post_title'        => __( 'Post Title', 'amazon-auto-links' ),
                     'taxonomy_terms'    => __( 'Taxonomy Terms', 'amazon-auto-links' ),
                     'breadcrumb'        => __( 'Breadcrumb', 'amazon-auto-links' ),
                     'site_title'        => __( 'Site Title', 'amazon-auto-links' ),
+                    'url_query'         => __( 'URL Query', 'amazon-auto-links' ),
+                    // 'post_meta'         => __( 'Post Meta', 'amazon-auto-links' ),
                 ),
                 'default'       => array(
                     'post_title'        => true,
                     'taxonomy_terms'    => true,
                     'breadcrumb'        => false,
+                    'site_title'        => false,
+                    'url_query'         => false,
+                    // 'post_meta'         => false,
+                ),
+                'selectors'         => array(
+                    'url_query'   => '.fieldrow_http_query_parameters',
+                ),
+            ),
+            array(
+                'field_id'      => $sFieldIDPrefix . 'http_query_parameters',
+                'title'         => __( 'URL Query Keys', 'amazon-auto-links' ),
+                'type'          => 'text',
+                'attributes'    => array(
+                    'class' => 'width-full',
+                ),
+                'repeatable'    => true,
+                'tip'           => array(
+                    __( 'The parameter of the GET HTTP request seen in URLs.', 'amazon-auto-links' ),
+                ),
+                'hidden'        => true,
+                'class'         => array(
+                    'fieldrow'  => 'fieldrow_http_query_parameters',
                 ),
             ),
             array(

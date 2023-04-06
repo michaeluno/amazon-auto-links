@@ -28,9 +28,12 @@ class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_Plugi
         'site_title'     => '0',
         'taxonomy_terms' => '0',
         'breadcrumb'     => '0',
+        'url_query'      => '0',
+        // 'post_meta'      => '0',
     );
     public $sAdditionalKeywords = '';
     public $sExcludingKeywords  = '';        // 3.12.0
+    public $aQueryKeys          = array();   // 5.4.0
 
     private $___oPost;
     private $___aGET = array();
@@ -46,6 +49,7 @@ class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_Plugi
         $this->aCriteria           = $oUnitOption->get( 'criteria' ) + $this->aCriteria;
         $this->sAdditionalKeywords = $oUnitOption->get( 'additional_keywords' );
         $this->sExcludingKeywords  = $oUnitOption->get( 'excluding_keywords' );
+        $this->aQueryKeys          = array_filter( $this->getAsArray( $oUnitOption->get( 'http_query_parameters' ) ) );
 
         // Allow ajax unit loading to set referrer's request
         $this->___oPost            = apply_filters( 'aal_filter_post_object', $this->getElement( $GLOBALS, 'post' ) );
@@ -127,7 +131,6 @@ class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_Plugi
             return $_aKeywords;
         }
             /**
-             * 
              * @since  3
              * @return array
              */
@@ -135,7 +138,21 @@ class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_Plugi
                 return array_keys( array_filter( $aCriteria ) );
             }
             /**
-             *
+             * @since  5.4.0
+             * @return array
+             */
+            private function ___getSearchKeywordsByType_url_query() {
+                $_aKeywords = array();
+                foreach( $this->aQueryKeys as $_sQueryKey ) {
+                    $_sKeyword = trim( sanitize_text_field( $this->getElement( $_GET, $_sQueryKey ) ) );
+                    if ( empty( $_sKeyword ) ) {
+                        continue;
+                    }
+                    $_aKeywords[] = $_sKeyword;
+                }
+                return $_aKeywords;
+            }
+            /**
              * @since  5.4.0
              * @return array
              */

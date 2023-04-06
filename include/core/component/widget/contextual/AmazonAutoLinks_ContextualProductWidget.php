@@ -344,7 +344,11 @@ class AmazonAutoLinks_ContextualProductWidget extends AmazonAutoLinks_AdminPageF
                     'post_title'            => null,
                     'breadcrumb'            => null,
                     'taxonomy_terms'        => null,
+                    'site_title'            => null,
+                    'url_query'             => null,
+                    'post_meta'             => null,
                 ),
+                'http_query_parameters'     => array(),
                 'additional_keywords'       => '',
                 'excluding_keywords'        => '',  // 3.12.0
                 'width'                     => 100,
