@@ -1,5 +1,11 @@
 # Change Log
 
+#### 5.3.0 - 04/1/2022
+- Added the `Browse Node` unit option for `Product Search` units.
+- Added the new link style unit option and associated options.
+- Added the ability for some locales to set a search index for Contextual units.
+- Fixed incompatibility with WordPres 6.2.
+
 #### 5.2.9 - 04/14/2022
 - Fixed a bug that Classic button setting fields were not displayed after saving the button settings.
 - Fixed a bug with the Classic button editing UI that the preview labels were not updated dynamically. 
