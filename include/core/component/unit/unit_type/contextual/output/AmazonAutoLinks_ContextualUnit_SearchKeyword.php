@@ -34,6 +34,7 @@ class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_Plugi
     public $sAdditionalKeywords = '';
     public $sExcludingKeywords  = '';        // 3.12.0
     public $aQueryKeys          = array();   // 5.4.0
+    public $aPostMetaKeys       = array();   // 5.4.0
 
     private $___oPost;
     private $___aGET = array();
@@ -50,6 +51,7 @@ class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_Plugi
         $this->sAdditionalKeywords = $oUnitOption->get( 'additional_keywords' );
         $this->sExcludingKeywords  = $oUnitOption->get( 'excluding_keywords' );
         $this->aQueryKeys          = array_filter( $this->getAsArray( $oUnitOption->get( 'http_query_parameters' ) ) );
+        $this->aPostMetaKeys       = array_filter( $this->getAsArray( $oUnitOption->get( 'post_meta_keys' ) ) );
 
         // Allow ajax unit loading to set referrer's request
         $this->___oPost            = apply_filters( 'aal_filter_post_object', $this->getElement( $GLOBALS, 'post' ) );
@@ -141,10 +143,28 @@ class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_Plugi
              * @since  5.4.0
              * @return array
              */
+            private function ___getSearchKeywordsByType_post_meta() {
+                $_aKeywords = array();
+                foreach( $this->aPostMetaKeys as $_sPostMetaKey ) {
+                    if ( ! isset( $this->___oPost->ID ) ) {
+                        continue;
+                    }
+                    $_sKeyword = get_post_meta( $this->___oPost->ID, $_sPostMetaKey, true );
+                    if ( empty( $_sKeyword ) ) {
+                        continue;
+                    }
+                    $_aKeywords[] = $_sKeyword;
+                }
+                return $_aKeywords;
+            }
+            /**
+             * @since  5.4.0
+             * @return array
+             */
             private function ___getSearchKeywordsByType_url_query() {
                 $_aKeywords = array();
                 foreach( $this->aQueryKeys as $_sQueryKey ) {
-                    $_sKeyword = trim( sanitize_text_field( $this->getElement( $_GET, $_sQueryKey ) ) );
+                    $_sKeyword = trim( sanitize_text_field( $this->getElement( $_GET, $_sQueryKey ) ) );    // sanitization done
                     if ( empty( $_sKeyword ) ) {
                         continue;
                     }

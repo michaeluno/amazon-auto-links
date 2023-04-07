@@ -1,1 +1,2 @@
-- Added the `Site Title` and `URL Query` option items for the `Criteria` Contextual unit option.
+- Added the `Site Title`, `URL Query`, and `Post Meta` option items for the `Criteria` Contextual unit option.
+- Added the `Concatenate` Contextual unit option.

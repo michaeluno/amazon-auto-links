@@ -36,7 +36,7 @@ class AmazonAutoLinks_FormFields_ContextualUnit_Main extends AmazonAutoLinks_For
                     'breadcrumb'        => __( 'Breadcrumb', 'amazon-auto-links' ),
                     'site_title'        => __( 'Site Title', 'amazon-auto-links' ),
                     'url_query'         => __( 'URL Query', 'amazon-auto-links' ),
-                    // 'post_meta'         => __( 'Post Meta', 'amazon-auto-links' ),
+                    'post_meta'         => __( 'Post Meta', 'amazon-auto-links' ),
                 ),
                 'default'       => array(
                     'post_title'        => true,
@@ -44,13 +44,14 @@ class AmazonAutoLinks_FormFields_ContextualUnit_Main extends AmazonAutoLinks_For
                     'breadcrumb'        => false,
                     'site_title'        => false,
                     'url_query'         => false,
-                    // 'post_meta'         => false,
+                    'post_meta'         => false,
                 ),
                 'selectors'         => array(
                     'url_query'   => '.fieldrow_http_query_parameters',
+                    'post_meta'   => '.fieldrow_post_meta_keys',
                 ),
             ),
-            array(
+            array( // 5.4.0
                 'field_id'      => $sFieldIDPrefix . 'http_query_parameters',
                 'title'         => __( 'URL Query Keys', 'amazon-auto-links' ),
                 'type'          => 'text',
@@ -59,12 +60,37 @@ class AmazonAutoLinks_FormFields_ContextualUnit_Main extends AmazonAutoLinks_For
                 ),
                 'repeatable'    => true,
                 'tip'           => array(
-                    __( 'The parameter of the GET HTTP request seen in URLs.', 'amazon-auto-links' ),
-                ),
+                    __( 'The parameter of the GET HTTP request seen in URLs to be used as a search keyword.', 'amazon-auto-links' ),                ),
                 'hidden'        => true,
                 'class'         => array(
                     'fieldrow'  => 'fieldrow_http_query_parameters',
                 ),
+            ),
+            array( // 5.4.0
+                'field_id'      => $sFieldIDPrefix . 'post_meta_keys',
+                'title'         => __( 'Post Meta Keys', 'amazon-auto-links' ),
+                'type'          => 'text',
+                'attributes'    => array(
+                    'class' => 'width-full',
+                ),
+                'repeatable'    => true,
+                'tip'           => array(
+                    __( 'Set the post meta key names known as custom fields whose value will be used as a search keyword.', 'amazon-auto-links' ),
+                ),
+                'hidden'        => true,
+                'class'         => array(
+                    'fieldrow'  => 'fieldrow_post_meta_keys',
+                ),
+            ),
+            array( // 5.4.0
+                'field_id'      => $sFieldIDPrefix . 'concatenate_keywords',
+                'title'         => __( 'Concatenate', 'amazon-auto-links' ),
+                'type'          => 'checkbox',
+                'label'         => __( 'Concatenate multiple keywords to perform search at once rather than with a single word multiple times.', 'amazon-auto-links' ),
+                // 'hidden'        => true,
+                // 'class'         => array(
+                //     'fieldrow'  => 'fieldrow_concatenate_keywords',
+                // ),
             ),
             array(
                 'field_id'      => $sFieldIDPrefix . 'additional_keywords',
