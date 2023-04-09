@@ -92,5 +92,5 @@ class AmazonAutoLinks_AdminPage_Setting extends AmazonAutoLinks_AdminPage_Page_B
             . "</div>";
 
     }
-        
+
 }
