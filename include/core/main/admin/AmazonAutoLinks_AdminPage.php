@@ -33,7 +33,7 @@ class AmazonAutoLinks_AdminPage extends AmazonAutoLinks_AdminPageFramework {
         public function replyToSetOptions( $aOptions ) {
 
             $_oOption    = AmazonAutoLinks_Option::getInstance();
-            
+
             // [3.4.0] Merging recursively to cover newly added elements over new versions.
             return $this->oUtil->uniteArrays( $aOptions, $_oOption->aDefault );
             
@@ -100,6 +100,8 @@ class AmazonAutoLinks_AdminPage extends AmazonAutoLinks_AdminPageFramework {
      * @since  4.6.6
      */
     public function validate( $aInputs, $aOldInputs, $oAdminPage, $aSubmitInfo ) {
+
+        // User actions
         if ( ! isset( $aInputs[ 'user_actions' ] ) ) {
             $aInputs[ 'user_actions' ] = array();
         }
@@ -112,6 +114,15 @@ class AmazonAutoLinks_AdminPage extends AmazonAutoLinks_AdminPageFramework {
         if ( ! $_iTime ) {
             update_user_meta( $_iUserID, 'aal_first_saved', time() );
         }
+
+        // [5.3.2] Clean up legacy option values
+        $_sLocale = $this->oUtil->getElement( $aInputs, array( 'associates', 'locale' ) );
+        if (
+            $_sLocale === $this->oUtil->getElement( $aInputs, array( 'authentication_keys', 'server_locale' ) ) // the current Associates locale and legacy Associates locale is the same
+        ) {
+            unset( $aInputs[ 'authentication_keys' ] );
+        }
+
         return $aInputs;
     }
 
