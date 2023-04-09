@@ -87,5 +87,6 @@ class AmazonAutoLinks_Main_AdminPage_Tab_Associates extends AmazonAutoLinks_Admi
                 )
             );
 
-        }    
+        }
+
 }
