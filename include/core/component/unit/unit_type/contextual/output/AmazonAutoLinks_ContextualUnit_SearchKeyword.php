@@ -76,7 +76,16 @@ class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_Plugi
             $this->getStringIntoArray( $this->sAdditionalKeywords, ',' )
         );
         $_aExcludeWords    = $this->getStringIntoArray( $this->sExcludingKeywords, ',' );
-        $_aKeywords        = array_udiff( $_aKeywords, $_aExcludeWords, 'strcasecmp' ); // case-insensitive
+
+        // Formatting - remove blocked characters and sanitize doubled whitespaces
+        foreach ( $_aKeywords as $_i => $_sKeyword ) {
+            foreach( $_aExcludeWords as $_sExcludeWord ) {
+                $_sKeyword = str_ireplace( $_sExcludeWord, '', $_sKeyword );    // remove the excluding characters.
+            }
+            $_aKeywords[ $_i ] = preg_replace('/\s+/', ' ', $_sKeyword );
+        }
+        // @deprecated 5.4.0 As more contexts are used, phrases can be passed and a word in a phrase should be removed, not exact match of a word.
+        // $_aKeywords        = array_udiff( $_aKeywords, $_aExcludeWords, 'strcasecmp' ); // case-insensitive
         return array_unique( $_aKeywords );
 
     }
