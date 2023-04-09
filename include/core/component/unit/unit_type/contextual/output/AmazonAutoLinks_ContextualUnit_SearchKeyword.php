@@ -29,7 +29,7 @@ class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_Plugi
         'taxonomy_terms' => '0',
         'breadcrumb'     => '0',
         'url_query'      => '0',
-        // 'post_meta'      => '0',
+        'post_meta'      => '0',
     );
     public $sAdditionalKeywords = '';
     public $sExcludingKeywords  = '';        // 3.12.0
