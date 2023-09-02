@@ -22,5 +22,16 @@ class AmazonAutoLinks_Button_Flat_PostMetaBox_CSS extends AmazonAutoLinks_Button
     protected $_aFieldClasses = array(
         'AmazonAutoLinks_Button_Flat_FormFields_CSS',
     );
-    
+
+    /**
+     * Validates submitted form data.
+     * @since 5.3.2
+     */
+    public function validate( $aInputs, $aOldInputs, $oFactory ) {
+        // Prevent script injections
+        $aInputs[ 'button_css' ] = strip_tags( $aInputs[ 'button_css' ] );
+        $aInputs[ 'custom_css' ] = strip_tags( $aInputs[ 'custom_css' ] );
+        return $aInputs;
+    }
+
 }
