@@ -1,5 +1,9 @@
 # Change Log
 
+#### 5.3.1 - 04/06/2023
+- Fixed an issue that loading units with JavaScript failed with third-party caching plugins.
+- Fixed an incompatibility issue with WordPress 6.2 which caused a critical error in the background.
+
 #### 5.3.0 - 04/1/2022
 - Added the `Browse Node` unit option for `Product Search` units.
 - Added the new link style unit option and associated options.

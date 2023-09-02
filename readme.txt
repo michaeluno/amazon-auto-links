@@ -381,11 +381,9 @@ You can check if your keys are valid with [Scratchpad](https://webservices.amazo
 
 == Changelog ==
 
-#### 5.3.1 - 04/06/2023
-- Fixed an issue that loading units with JavaScript failed with third-party caching plugins.
-- Fixed an incompatibility issue with WordPress 6.2 which caused a critical error in the background.
-
-
+#### 5.3.2 - 09/02/2023
+- Fixed a bug that legacy option values of PA-API keys were referred if existed even after saving empty PA-API keys.
+- Fixed non-sanitized user inputs.
 
 #### Old Log
 For old change logs, see [here](https://github.com/michaeluno/amazon-auto-links/blob/master/changelog.md).
