@@ -26,7 +26,7 @@ class AmazonAutoLinks_FormFields_AutoInsert_WhereToEnable extends AmazonAutoLink
         return array(  
             array(
                 'field_id'      => $sFieldIDPrefix . strtolower( get_class( $this ) ),
-                'type'          => 'hidden',
+                // 'type'          => 'hidden', // @5.3.3 Commented out. Not sure why this field has been hidden.
                 'attributes'    => array(
                     'name' => '', // disables the value to be sent to the form
                 ),
