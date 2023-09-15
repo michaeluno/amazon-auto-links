@@ -67,13 +67,13 @@ class AmazonAutoLinks_ProductFilter extends AmazonAutoLinks_WPUtility {
      */
     public function __construct( array $aArguments=array() ) {
         
-        $this->bCaseSensitive   = $this->getElement(
+        $this->bCaseSensitive   = ( boolean ) $this->getElement(
             $aArguments,    // subject array
             'case_sensitive',   // dimensional key(s)
             false  // default
         );
         
-        $this->bNoDuplicate     = $this->getElement(
+        $this->bNoDuplicate     = ( boolean ) $this->getElement(
             $aArguments, // subject array
             'no_duplicate', // dimensional key(s)
             false   // default

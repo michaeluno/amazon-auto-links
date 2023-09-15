@@ -27,7 +27,7 @@ class AmazonAutoLinks_AutoInsertAdminPage_AutoInsert_Edit extends AmazonAutoLink
             $this->sPageSlug, // target page slug
             array(
                 'tab_slug'      => $this->sTabSlug,
-                'section_id'    => '_default', 
+                'section_id'    => '_default',
                 'description'   => array(
                     __( 'Define where you want to display units on the site.', 'amazon-auto-links' ),
                 ),
