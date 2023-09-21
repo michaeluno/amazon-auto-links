@@ -1,0 +1,1 @@
+- Fixed an issue that products for the shortcode with the `asin` argument was not sorted properly.

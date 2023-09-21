@@ -74,6 +74,12 @@ class AmazonAutoLinks_UnitOption_ad_widget_search extends AmazonAutoLinks_UnitOp
         // But missing the lower-case element causes the meta-box value not to be saved. So keep it.
         $_aUnitOptions[ 'sort' ] = $_aUnitOptions[ 'Sort' ];
 
+        // [5.3.4] The new sort order 'asin' is introduced and it is the default sort order for the shortcode with the `asin` argument
+        // This is needed because ad-widget API returns results in irregular order ignoring the keyword (ASIN) order.
+        if ( isset( $aUnitOptions[ 'asin' ] ) && 'raw' === $_aUnitOptions[ 'sort' ] ) {
+            $_aUnitOptions[ 'sort' ] = 'asin';
+        }
+
         return $_aUnitOptions;
 
     }
