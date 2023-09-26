@@ -165,7 +165,7 @@ class AmazonAutoLinks_Unit_EventAjax_UnitLoading extends AmazonAutoLinks_AjaxEve
             'messages'           => array(
                 'ajax_error'     => __( 'Failed to load product links.', 'amazon-auto-links' ),
             ),
-        ) + $this->___getPageTypeInformationForContextualUnits();
+        ) + AmazonAutoLinks_Unit_Utility::getPageTypeInformationForContextualUnits();
 
         $_sFileBaseName = defined( 'WP_DEBUG' ) && WP_DEBUG
             ? 'ajax-unit-loading.js'
@@ -186,38 +186,6 @@ class AmazonAutoLinks_Unit_EventAjax_UnitLoading extends AmazonAutoLinks_AjaxEve
             $_aScriptData
         );
     }
-
-        /**
-         * @return  array
-         */
-        private function ___getPageTypeInformationForContextualUnits() {
-            $_sPageType     = $this->getCurrentPageType();
-            $_aPageTypeInfo = array(
-                'term_id'       => 0,
-                'author_name'   => '',
-                'page_type'     => $_sPageType,
-                'post_id'       => get_the_ID(),
-                'REQUEST'       => array(
-                    // Currently, contextual units only use the `s` field.
-                    's' => sanitize_text_field( $this->getElement( $_REQUEST, array( 's' ) ) ),
-                ),
-            );
-            if ( 'taxonomy' === $_sPageType ) {
-                $_oTerm = $this->getCurrentQueriedObject();
-                $_aPageTypeInfo[ 'term_id' ] = isset( $_oTerm->term_id )
-                    ? $_oTerm->term_id
-                    : 0;
-                return $_aPageTypeInfo;
-            }
-            if ( 'author' === $_sPageType ) {
-                $_oAuthor = $this->getCurrentQueriedObject();
-                $_aPageTypeInfo[ 'author_name' ] = isset( $_oAuthor->display_name )
-                    ? $_oAuthor->display_name
-                    : '';
-                return $_aPageTypeInfo;
-            }
-            return $_aPageTypeInfo;
-        }
 
     /**
      * @since 5.3.1

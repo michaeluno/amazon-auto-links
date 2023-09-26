@@ -959,4 +959,37 @@ class AmazonAutoLinks_Unit_Utility extends AmazonAutoLinks_PluginUtility {
             . "</span>";*/
     }
 
+    /**
+     * @return  array
+     * @since   5.4.0 Moved from `AmazonAutoLinks_Unit_EventAjax_UnitLoading`
+     */
+    static public function getPageTypeInformationForContextualUnits() {
+        $_sPageType     = self::getCurrentPageType();
+        $_aPageTypeInfo = array(
+            'term_id'       => 0,
+            'author_name'   => '',
+            'page_type'     => $_sPageType,
+            'post_id'       => get_the_ID(),
+            'REQUEST'       => array(
+                // Currently, contextual units only use the `s` field.
+                's' => sanitize_text_field( self::getElement( $_REQUEST, array( 's' ) ) ),
+            ),
+        );
+        if ( 'taxonomy' === $_sPageType ) {
+            $_oTerm = self::getCurrentQueriedObject();
+            $_aPageTypeInfo[ 'term_id' ] = isset( $_oTerm->term_id )
+                ? $_oTerm->term_id
+                : 0;
+            return $_aPageTypeInfo;
+        }
+        if ( 'author' === $_sPageType ) {
+            $_oAuthor = self::getCurrentQueriedObject();
+            $_aPageTypeInfo[ 'author_name' ] = isset( $_oAuthor->display_name )
+                ? $_oAuthor->display_name
+                : '';
+            return $_aPageTypeInfo;
+        }
+        return $_aPageTypeInfo;
+    }    
+    
 }
