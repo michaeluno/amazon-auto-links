@@ -6,7 +6,7 @@
  * http://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2021 Michael Uno
  * @name Ajax Unit Loading
- * @version 1.0.0
+ * @version 1.1.0
  */
 (function($){
     $( document ).ready( function() {
@@ -65,6 +65,6 @@
                 });
             });
         }; // _loadAmazonAutoLinksAjax
-        setTimeout( _loadAmazonAutoLinksAjax, 1000 );
+        setTimeout( _loadAmazonAutoLinksAjax, parseInt( aalAjaxUnitLoading.delay ) );
     });
 }(jQuery));
