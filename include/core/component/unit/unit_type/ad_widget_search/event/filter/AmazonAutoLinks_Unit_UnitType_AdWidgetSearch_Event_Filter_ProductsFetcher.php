@@ -34,6 +34,9 @@ class AmazonAutoLinks_Unit_UnitType_AdWidgetSearch_Event_Filter_ProductsFetcher 
             ? $_asKeywords
             : explode( ',', $_asKeywords );
 
+        // 5.3.4 The keywords are used for sorting with the `asin` sort order
+        $this->oUnitOutput->oUnitOption->set( array( '_keywords' ), $_aKeywords );
+
         $_oAdWidgetAPI = new AmazonAutoLinks_AdWidgetAPI_Search(
             $_sLocale,
             ( integer ) $this->oUnitOutput->oUnitOption->get( 'cache_duration' )

@@ -27,7 +27,8 @@ class AmazonAutoLinks_Unit_UnitType_AdWidgetSearch_Event_Filter_ProductsSorter e
         $_oSorter     = new AmazonAutoLinks_Unit_Output_Sort(
             $aProducts,
             $this->oUnitOutput->oUnitOption->get( 'sort' ),
-            'Title'
+            'Title',
+            $this->getAsArray( $this->oUnitOutput->oUnitOption->get( array( '_keywords' ) ) )
         );
         return $_oSorter->get();
     }

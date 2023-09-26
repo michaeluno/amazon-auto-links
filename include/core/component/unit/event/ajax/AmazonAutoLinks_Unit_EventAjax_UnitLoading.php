@@ -161,6 +161,7 @@ class AmazonAutoLinks_Unit_EventAjax_UnitLoading extends AmazonAutoLinks_AjaxEve
             'spinnerURL'         => admin_url( 'images/loading.gif' ),
             'nonce'              => wp_create_nonce( $this->_sNonceKey ), // when not declared in class properties, the value will be the action name suffix
             'actionHookSuffix'   => $this->_sActionHookSuffix,
+            'delay'              => apply_filters( 'aal_filter_ajax_unit_loading_delay', 0 ),    // [5.3.4] Made it possible to customize the delay. It used to be `1000`.
             'messages'           => array(
                 'ajax_error'     => __( 'Failed to load product links.', 'amazon-auto-links' ),
             ),

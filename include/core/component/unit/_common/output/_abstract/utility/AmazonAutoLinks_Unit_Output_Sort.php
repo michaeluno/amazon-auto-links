@@ -33,13 +33,25 @@ class AmazonAutoLinks_Unit_Output_Sort extends AmazonAutoLinks_Unit_Utility {
     public $sTitleKey = 'title';
 
     /**
+     * @var   array
+     * @since 5.3.4
+     */
+    public $aKeywords = array();
+
+    /**
      * Sets up properties and hooks.
      * @since  5.0.0
+     * @since  5.3.4  Added the $aKeywords parameter
+     * @param  array  $aProducts The product data to sort.
+     * @param  string $sSortType The sort order.
+     * @param  string $sTitleKey The array key for the title used for the title (ascending and descending) sort order.
+     * @param  array  $aKeywords Custom keywords to be used to sort. Used for the `asin` sort order.
      */
-    public function __construct( array $aProducts, $sSortType, $sTitleKey='title' ) {
+    public function __construct( array $aProducts, $sSortType, $sTitleKey='title', array $aKeywords=array() ) {
         $this->aProducts = $aProducts;
         $this->sSortType = $sSortType;
         $this->sTitleKey = $sTitleKey;
+        $this->aKeywords = $aKeywords;
     }
 
     /**
@@ -93,5 +105,26 @@ class AmazonAutoLinks_Unit_Output_Sort extends AmazonAutoLinks_Unit_Utility {
             $_sTitleB = $this->getElement( $aProductB, $this->sTitleKey );
             return strnatcasecmp( $_sTitleB, $_sTitleA );
         }
+
+    /**
+     * @param  array $aProducts
+     * @since  5.3.4
+     * @return array
+     */
+    protected function _getItemsSorted_asin( $aProducts ) {
+        $_aSortedProducts = array();
+        foreach( $this->aKeywords as $_sASIN ) {
+            $_aProduct = $this->getElement( $aProducts, $_sASIN );
+            if ( empty( $_aProduct ) ) {
+                continue;
+            }
+            $_aSortedProducts[ $_sASIN ] = $_aProduct;
+        }
+        return $_aSortedProducts;
+
+        // @note If unrelated items which matched the passed ASINs are needed,
+        // use this instead of using the newly created array.
+        // return $_aSortedProducts + $aProducts;
+    }
 
 }
