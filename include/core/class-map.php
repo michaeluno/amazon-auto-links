@@ -1,6 +1,6 @@
 <?php 
 /**
- * Auto Amazon Links v5.2.10b01 by miunosoft (Michael Uno) 
+ * Auto Amazon Links v5.4.0b02 by miunosoft (Michael Uno) 
  * Formerly, Amazon Auto Links. The plugin generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  * <https://en.michaeluno.jp/amazon-auto-links>
  * Copyright (c) 2013-2022, Michael Uno; Licensed under GPL v2 or later
@@ -258,8 +258,11 @@ return array(
     "AmazonAutoLinks_Unit_Event_Action_Feed_UnitOutputHooks" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/action/AmazonAutoLinks_Unit_Event_Action_Feed_UnitOutputHooks.php", 
     "AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/action/AmazonAutoLinks_Unit_Event_Action_UpdateProductsWithAdWidgetAPI.php", 
     "AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/ajax/AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater.php", 
-    "AmazonAutoLinks_Unit_EventAjax_UnitLoading" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/ajax/AmazonAutoLinks_Unit_EventAjax_UnitLoading.php", 
     "AmazonAutoLinks_Unit_EventAjax_UnitStatusUpdater" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/ajax/AmazonAutoLinks_Unit_EventAjax_UnitStatusUpdater.php", 
+    "AmazonAutoLinks_Unit_AjaxUnitLoading" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/ajax/unit_loading/AmazonAutoLinks_Unit_AjaxUnitLoading.php", 
+    "AmazonAutoLinks_Unit_EventAjax_UnitLoading" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/ajax/unit_loading/AmazonAutoLinks_Unit_EventAjax_UnitLoading.php", 
+    "AmazonAutoLinks_Unit_EventAjax_UnitLoading_AdminAjax" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/ajax/unit_loading/AmazonAutoLinks_Unit_EventAjax_UnitLoading_AdminAjax.php", 
+    "AmazonAutoLinks_Unit_EventAjax_UnitLoading_RESTAPI" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/ajax/unit_loading/AmazonAutoLinks_Unit_EventAjax_UnitLoading_RESTAPI.php", 
     "AmazonAutoLinks_Event_Filter_ProductLinks" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/filter/AmazonAutoLinks_Event_Filter_ProductLinks.php", 
     "AmazonAutoLinks_Unit_EventFilter_UnitOutputAjaxPlaceholder" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/filter/AmazonAutoLinks_Unit_EventFilter_UnitOutputAjaxPlaceholder.php", 
     "AmazonAutoLinks_Unit_Event_Filter_Credit" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/component/unit/event/filter/AmazonAutoLinks_Unit_Event_Filter_Credit.php", 
@@ -682,6 +685,7 @@ return array(
     "AmazonAutoLinks_Event_Action_AdminNotices_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/event/action/AmazonAutoLinks_Event_Action_AdminNotices_Base.php", 
     "AmazonAutoLinks_Event___Action_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/event/action/AmazonAutoLinks_Event___Action_Base.php", 
     "AmazonAutoLinks_AjaxEvent_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/event/ajax/AmazonAutoLinks_AjaxEvent_Base.php", 
+    "AmazonAutoLinks_RestEvent_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/event/ajax/AmazonAutoLinks_RestEvent_Base.php", 
     "AmazonAutoLinks_Event___Filter_Base" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/event/filter/AmazonAutoLinks_Event___Filter_Base.php", 
     "AmazonAutoLinks_Debug" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/AmazonAutoLinks_Debug.php", 
     "AmazonAutoLinks_Message" => AmazonAutoLinks_Registry::$sDirPath . "/include/core/_common/utility/AmazonAutoLinks_Message.php", 

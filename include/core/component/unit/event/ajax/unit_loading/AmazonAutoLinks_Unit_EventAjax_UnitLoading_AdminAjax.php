@@ -14,11 +14,12 @@
  * If the `load_with_javascript` unit option is enabled, the unit displays a minimal output
  * and the Javascript script with Ajax replaces it with the content generated with this class method.
  *
- * @since        3.6.0
- * @since        4.3.0 Renamed from `AmazonAutoLinks_Event___Action_AjaxUnitLoading`
- * @since        4.3.0 Changed the base class from `AmazonAutoLinks_Event___Action_Base`.
+ * @since 3.6.0
+ * @since 4.3.0 Renamed from `AmazonAutoLinks_Event___Action_AjaxUnitLoading`
+ * @since 4.3.0 Changed the base class from `AmazonAutoLinks_Event___Action_Base`.
+ * @since 5.4.0 Renamed from `AmazonAutoLinks_Unit_EventAjax_UnitLoading`.
  */
-class AmazonAutoLinks_Unit_EventAjax_UnitLoading extends AmazonAutoLinks_AjaxEvent_Base {
+class AmazonAutoLinks_Unit_EventAjax_UnitLoading_AdminAjax extends AmazonAutoLinks_AjaxEvent_Base {
 
     /**
      * The part after `wp_ajax_` or `wp_ajax_nopriv_`.
@@ -57,86 +58,11 @@ class AmazonAutoLinks_Unit_EventAjax_UnitLoading extends AmazonAutoLinks_AjaxEve
 
         // At this point, it is an ajax request (admin-ajax.php + `{wp_ajax_/wp_ajax_nopriv_}aal_unit_ajax_loading` action hook )
 
-        // For the contextual widget
-        add_filter( 'aal_filter_http_get', array( $this, 'replyToGetHTTPGETRequest' ) );
-        add_filter( 'aal_filter_post_object', array( $this, 'replyToSetReferrerPostObject' ) );
-        add_filter( 'aal_filter_current_page_type', array( $this, 'replyToSetReferrerPageType' ) );
-        add_filter( 'aal_filter_current_queried_term_object', array( $this, 'replyToSetReferrerTermObject' ) );
-        add_filter( 'aal_filter_current_queried_author', array( $this, 'replyToSetReferrerAuthor' ) );
-
-        $_aData = $aPost[ 'data' ];
-
-        // For widget outputs, retrieve the widget instance options.
-        if ( isset( $_aData[ '_widget_option_name' ] ) ) {
-            $_aWidgetOptions  = get_option( $_aData[ '_widget_option_name' ] );
-            $_aData           = $this->getElement( $_aWidgetOptions, $_aData[ '_widget_number' ] );
-        }
-
-        return $this->___getOutput( $_aData );
+        $_oAjaxUnitOutput = new AmazonAutoLinks_Unit_AjaxUnitLoading();
+        return $_oAjaxUnitOutput->get( $aPost[ 'data' ] );
 
     }
-        /**
-         * @param  array  $aArguments
-         * @since  3.6.0
-         * @return string
-         */
-        private function ___getOutput( $aArguments ) {
-            $aArguments[ 'load_with_javascript' ] = false;  // this must be set to false as it just returns the Ajax replacement output.
-            return apply_filters( 'aal_filter_output', '', $aArguments )
-                . apply_filters( 'aal_filter_svg_definitions', '' );
-        }
 
-    /**
-     * @param       $aGET
-     * @return      array
-     * @since       3.6.0
-     * @remark      Will be sanitized later.
-     */
-    public function replyToGetHTTPGETRequest( $aGET ) {
-        return isset( $_POST[ 'REQUEST' ] )
-            ? array(
-                's' => _sanitize_text_fields( $this->getElement( $_POST, array( 's' ) ) ),   // sanitization done
-            )
-            : $aGET;
-    }
-    /**
-     * @since       3.6.0
-     * @return      object          The referrer's post object.
-     */
-    public function replyToSetReferrerPostObject( $oPost ) {
-        return isset( $_POST[ 'post_id' ] ) && $_POST[ 'post_id' ]
-            ? get_post( absint( $_POST[ 'post_id' ] ) )
-            : $oPost;
-    }
-
-    /**
-     * @return  string
-     * @since   3.6.0
-     */
-    public function replyToSetReferrerPageType( $sPageType ) {
-        return isset( $_POST[ 'page_type' ] ) && $_POST[ 'page_type' ]
-            ? sanitize_text_field( $_POST[ 'page_type' ] )
-            : $sPageType;
-    }
-
-    /**
-     * @return  object
-     * @since   3.6.0
-     */
-    public function replyToSetReferrerTermObject( $oTerm ) {
-        return isset( $_POST[ 'term_id' ] ) && $_POST[ 'term_id' ]
-            ? get_term( absint( $_POST[ 'term_id' ] ) )
-            : $oTerm;
-    }
-    /**
-     * @return  string
-     * @since   3.6.0
-     */
-    public function replyToSetReferrerAuthor( $sAuthor ) {
-        return isset( $_POST[ 'author_name' ] ) && $_POST[ 'author_name' ]
-            ? sanitize_text_field( $_POST[ 'author_name' ] )
-            : $sAuthor;
-    }
 
     /**
      * @since   4.3.0
@@ -165,7 +91,7 @@ class AmazonAutoLinks_Unit_EventAjax_UnitLoading extends AmazonAutoLinks_AjaxEve
             'messages'           => array(
                 'ajax_error'     => __( 'Failed to load product links.', 'amazon-auto-links' ),
             ),
-        ) + AmazonAutoLinks_Unit_Utility::getPageTypeInformationForContextualUnits();
+        ) + AmazonAutoLinks_Unit_AjaxUnitLoading::getPageTypeInformationForContextualUnits();
 
         $_sFileBaseName = defined( 'WP_DEBUG' ) && WP_DEBUG
             ? 'ajax-unit-loading.js'

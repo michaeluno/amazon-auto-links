@@ -72,7 +72,7 @@ class AmazonAutoLinks_Unit_Loader extends AmazonAutoLinks_PluginUtility {
 
             new AmazonAutoLinks_Unit_Log_PAAPIErrors; // [3.9.0]
 
-            new AmazonAutoLinks_Unit_EventAjax_UnitLoading; // [3.6.0]
+            new AmazonAutoLinks_Unit_EventAjax_UnitLoading;
             new AmazonAutoLinks_Unit_EventAjax_UnitStatusUpdater;
             new AmazonAutoLinks_Unit_EventAjax_NowRetrievingUpdater; // [4.3.0]
 
