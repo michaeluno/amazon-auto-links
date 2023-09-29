@@ -1,5 +1,8 @@
 # Change Log
 
+#### 5.3.3 - 09/16/2023
+- Fixed a bug that option section names were missing in the auto-insert editing page.
+
 #### 5.3.2 - 09/02/2023
 - Fixed a bug that legacy option values of PA-API keys were referred if existed even after saving empty PA-API keys.
 - Fixed non-sanitized user inputs.
