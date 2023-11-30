@@ -52,7 +52,7 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
             if ( ! $iPostID ) {
                 return;
             }
-            $_bNoProducts     = empty( $_aFoundASINs );
+            $_bNoProducts     = empty( $aFoundASINs );
             $_sNoItemsMessage = __( 'Product not found.', 'amazon-auto-links' );
             $_sFoundItems     = get_post_meta( $iPostID, '_found_items', true );
 
