@@ -12,7 +12,7 @@
  *
  * @since 5.0.0
  */
-class AmazonAutoLinks_Unit_PAAPIItemLookUp_Event_Filter_ProductsSorter extends AmazonAutoLinks_Unit_UnitType_Common_Event_Filter_ProductsFetcher_Base {
+class AmazonAutoLinks_Unit_PAAPIItemLookUp_Event_Filter_ProductsSorter extends AmazonAutoLinks_Unit_PAAPISearch_Event_Filter_ProductsFormatter {
 
     /**
      * @var string
@@ -30,9 +30,9 @@ class AmazonAutoLinks_Unit_PAAPIItemLookUp_Event_Filter_ProductsSorter extends A
     /**
      * @param  array $aProducts
      * @return array
-     * @since  5.0.0
+     * @since  5.3.5
      */
-    protected function _getItemsFromSource( $aProducts ) {
+    protected function _getItemsFormatted( $aProducts ) {
         $_oSorter   = new AmazonAutoLinks_Unit_Output_Sort(
             $aProducts,
             $this->oUnitOutput->oUnitOption->get( array( '_sort' ), 'raw' )
