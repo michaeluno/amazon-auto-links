@@ -627,7 +627,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
     protected function _shouldUsePAAPI() {
         $_sLocale     = ( string ) $this->oUnitOption->get( 'country' );
         $_bAPIKeysSet = $this->oOption->isPAAPIKeySet( $_sLocale );
-        return $this->___shouldUsePAAPI( $_sLocale, $_bAPIKeysSet );
+        return $this->___isPAAPIRequired( $_sLocale, $_bAPIKeysSet );
         // @deprecated
         // return apply_filters( 'aal_filter_use_paapi5_' . $this->sUnitType, $_bUsePAAPI, $_sLocale, $_bAPIKeysSet ); // [5.3.5+]
     }
@@ -635,7 +635,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
          * @since  5.3.5
          * @return boolean
          */
-        private function ___shouldUsePAAPI( $sLocale, $bAPIKeysSet ) {
+        private function ___isPAAPIRequired( $sLocale, $bAPIKeysSet ) {
             if ( ! in_array( $sLocale, AmazonAutoLinks_Locales::getLocalesWithAdWidgetAPISupport(), true ) ) {
                 return $bAPIKeysSet;
             }
