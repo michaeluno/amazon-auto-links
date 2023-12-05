@@ -1,5 +1,9 @@
 # Change Log
 
+#### 5.3.4 - 09/29/2023
+- Fixed an issue that products for the shortcode with the `asin` argument was not sorted properly.
+- Optimized the delay of AJAX unit loading.
+
 #### 5.3.3 - 09/16/2023
 - Fixed a bug that option section names were missing in the auto-insert editing page.
 
