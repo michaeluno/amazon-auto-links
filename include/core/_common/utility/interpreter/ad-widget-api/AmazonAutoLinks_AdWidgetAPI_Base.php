@@ -32,12 +32,19 @@ class AmazonAutoLinks_AdWidgetAPI_Base extends AmazonAutoLinks_PluginUtility {
     public $aHTTPArguments = array();
 
     /**
+     * @var integer
+     * @since 5.3.6
+     */
+    public $iMaxAttempts   = 30;
+
+    /**
      * Sets up properties and hooks.
      */
     public function __construct( $sLocale, $iCacheDuration=86400, array $aHTTPArguments=array() ) {
         $this->oLocale        = new AmazonAutoLinks_Locale( $sLocale );
         $this->iCacheDuration = $iCacheDuration;
         $this->aHTTPArguments = $aHTTPArguments;
+        $this->iMaxAttempts   = apply_filters( 'aal_filter_max_attempts_of_sitestripe_api_requests', $this->iMaxAttempts );
     }
 
     /**
@@ -55,8 +62,7 @@ class AmazonAutoLinks_AdWidgetAPI_Base extends AmazonAutoLinks_PluginUtility {
         // [5.3.6+] Sometimes, the API returns an empty response with the status code 200. If that happens, retry
         $_sHTTPBody = '';
         $_iAttempts = 0;
-        $_iMax      = 30;
-        While ( $_iAttempts <= $_iMax ) {
+        While ( $_iAttempts <= $this->iMaxAttempts ) {
             $_oHTTP      = new AmazonAutoLinks_HTTPClient( $sEndpoint, $this->iCacheDuration, $_aArguments, 'ad_widget_api' );
             $_sHTTPBody  = $_oHTTP->getBody();
             if ( 200 !== $_oHTTP->getStatusCode() || '' !== $_sHTTPBody ) {
