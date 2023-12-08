@@ -145,11 +145,16 @@ class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
          * @since  3.4.1
          */
         private function _loadHTML( $oDOM, $sHTML ) {
-            
-            $sHTML = function_exists( 'mb_convert_encoding' )
-                ? mb_convert_encoding( $sHTML, 'HTML-ENTITIES', $this->sCharEncoding )
-                : $sHTML;
-            
+
+            // @deprecated in PHP 8.2
+            // $sHTML = function_exists( 'mb_convert_encoding' )
+            //     ? mb_convert_encoding( $sHTML, 'HTML-ENTITIES', $this->sCharEncoding )
+            //     : $sHTML;
+
+            // Alternative to mb_convert_encoding( $sHTML, 'HTML-ENTITIES', $this->sCharEncoding )
+            // @see https://stackoverflow.com/a/11978382
+            $sHTML = htmlspecialchars_decode( utf8_decode( htmlentities( $sHTML, ENT_COMPAT, $this->sCharEncoding, false ) ) );
+
             if ( $this->bLoadHTMLFix ) {
                 $oDOM->loadHTML( 
                     $sHTML,     // subject HTML contents to parse
