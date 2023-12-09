@@ -44,7 +44,7 @@ class AmazonAutoLinks_AdWidgetAPI_Base extends AmazonAutoLinks_PluginUtility {
         $this->oLocale        = new AmazonAutoLinks_Locale( $sLocale );
         $this->iCacheDuration = $iCacheDuration;
         $this->aHTTPArguments = $aHTTPArguments;
-        $this->iMaxAttempts   = apply_filters( 'aal_filter_max_attempts_of_sitestripe_api_requests', $this->iMaxAttempts );
+        $this->iMaxAttempts   = ( integer ) apply_filters( 'aal_filter_max_attempts_of_sitestripe_api_requests', $this->iMaxAttempts );
     }
 
     /**
