@@ -1,5 +1,9 @@
 # Change Log
 
+#### 5.3.5 - 12/05/2023
+- Fixed a bug that the Sort option of URL and PA-API Item Look-up units did not work.
+- Fixed a bug that the `Found Products` option field of URL units was always "No product found".
+
 #### 5.3.4 - 09/29/2023
 - Fixed an issue that products for the shortcode with the `asin` argument was not sorted properly.
 - Optimized the delay of AJAX unit loading.
