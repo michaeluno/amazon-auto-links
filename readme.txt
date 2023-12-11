@@ -4,9 +4,9 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon affiliate, amazon associate, amazon affiliates, amazon associates, amazon ads, automation, ads, advertisement, affiliate, affiliates, marketing, monetization, monetize, revenues, revenue, income, widget, widgets
 Requires at least:  3.4
 Requires PHP:       5.2.4
-Tested up to:       6.2.0
+Tested up to:       6.4.2
 Requires MySQL:     5.0.3
-Stable tag:         5.3.5
+Stable tag:         5.3.6
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -381,9 +381,8 @@ You can check if your keys are valid with [Scratchpad](https://webservices.amazo
 
 == Changelog ==
 
-#### 5.3.5 - 12/05/2023
-- Fixed a bug that the Sort option of URL and PA-API Item Look-up units did not work.
-- Fixed a bug that the `Found Products` option field of URL units was always "No product found".
+#### 5.3.6 - 12/10/2023
+- Fix an issue that search sometimes failed resulting in no products.
 
 #### Old Log
 For old change logs, see [here](https://github.com/michaeluno/amazon-auto-links/blob/master/changelog.md).
