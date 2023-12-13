@@ -776,7 +776,7 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
          *  - 0 (string number) - disconnected (error occurred in tests)
          */
         $_bnStatus = $this->get( array( 'associates', $sLocale, 'paapi', 'status' ) );
-        if ( strlen( $_bnStatus ) ) {
+        if ( strlen( ( string ) $_bnStatus ) ) {
             return ( boolean ) $_bnStatus;
         }
         // For backward-compatibility with below 4.5.0
