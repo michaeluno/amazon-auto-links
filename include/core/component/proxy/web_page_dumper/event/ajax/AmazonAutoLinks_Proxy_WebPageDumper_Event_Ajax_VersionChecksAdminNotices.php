@@ -48,7 +48,7 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Event_Ajax_VersionChecksAdminNotices e
             $_iNow        = time();
             foreach( $_aList as $_sURL ) {
                 $_aVersion     = $this->getElementAsArray( $_aVersions, array( $_sURL ) );
-                $_sVersion     = $this->getElement( $_aVersion, 'version' );
+                $_sVersion     = ( string ) $this->getElement( $_aVersion, 'version' );
                 $_iLastChecked = ( integer ) $this->getElement( $_aVersion, 'checked' );
                 if ( $_iLastChecked && version_compare( $_sRequired, $_sVersion, '>' ) ) {
                     $_aToNotify[ $_sURL ] = $_sVersion;
