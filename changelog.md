@@ -1,5 +1,8 @@
 # Change Log
 
+#### 5.3.6 - 12/10/2023
+- Fixed an issue that search sometimes failed resulting in no products.
+
 #### 5.3.5 - 12/05/2023
 - Fixed a bug that the Sort option of URL and PA-API Item Look-up units did not work.
 - Fixed a bug that the `Found Products` option field of URL units was always "No product found".
