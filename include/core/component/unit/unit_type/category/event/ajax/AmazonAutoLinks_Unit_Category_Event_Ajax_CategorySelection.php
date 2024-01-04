@@ -220,7 +220,7 @@ class AmazonAutoLinks_Unit_Category_Event_Ajax_CategorySelection extends AmazonA
                 ? $_sCategoryListURL
                 : $_oLocale->getBestSellersURL();
 
-            $_sQuery = parse_url( $_sCategoryListURL, PHP_URL_QUERY );
+            $_sQuery = ( string ) parse_url( $_sCategoryListURL, PHP_URL_QUERY );
             parse_str( $_sQuery, $_aQuery );
             $_sHref  = $this->getElement( $_aQuery, array( 'href' ) );
 
