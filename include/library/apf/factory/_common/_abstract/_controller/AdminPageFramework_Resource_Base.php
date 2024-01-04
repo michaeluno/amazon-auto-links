@@ -1,9 +1,9 @@
 <?php
 /*
- * Admin Page Framework v3.9.1b05 by Michael Uno
+ * Admin Page Framework v3.9.2b01 by Michael Uno
  * Compiled with Admin Page Framework Compiler <https://github.com/michaeluno/amazon-auto-links-compiler>
  * <https://en.michaeluno.jp/amazon-auto-links>
- * Copyright (c) 2013-2022, Michael Uno; Licensed under MIT <https://opensource.org/licenses/MIT>
+ * Copyright (c) 2013-2023, Michael Uno; Licensed under MIT <https://opensource.org/licenses/MIT>
  */
 
 abstract class AmazonAutoLinks_AdminPageFramework_Resource_Base extends AmazonAutoLinks_AdminPageFramework_FrameworkUtility {
@@ -110,14 +110,15 @@ abstract class AmazonAutoLinks_AdminPageFramework_Resource_Base extends AmazonAu
     protected function _printClassSpecificStyles($sIDPrefix)
     {
         $_oCaller = $this->oProp->oCaller;
-        echo $this->_getClassSpecificStyleTag($_oCaller, $sIDPrefix);
-        echo $this->_getClassSpecificIEStyleTag($_oCaller, $sIDPrefix);
+        echo $this->___getClassSpecificStyleTag($_oCaller, $sIDPrefix);
+        echo $this->___getClassSpecificIEStyleTag($_oCaller, $sIDPrefix);
         $this->oProp->sStyle = '';
         $this->oProp->sStyleIE = '';
     }
-    private function _getClassSpecificStyleTag($_oCaller, $sIDPrefix)
+    private function ___getClassSpecificStyleTag($_oCaller, $sIDPrefix)
     {
-        static $_iCallCount = 0;
+        static $_aCallCounts = array();
+        $_aCallCounts[ $this->oProp->sClassName ] = isset($_aCallCounts[ $this->oProp->sClassName ]) ? $_aCallCounts[ $this->oProp->sClassName ] : 0;
         $_sFilterName = "style_{$this->oProp->sClassName}";
         if ($this->hasBeenCalled('FILTER: ' . $_sFilterName)) {
             return '';
@@ -128,13 +129,14 @@ abstract class AmazonAutoLinks_AdminPageFramework_Resource_Base extends AmazonAu
         if (! $_sStyle) {
             return '';
         }
-        $_iCallCount++;
-        $_sID = strtolower("{$sIDPrefix}-" . $this->oProp->sClassName . "_{$_iCallCount}");
+        $_aCallCounts[ $this->oProp->sClassName ]++;
+        $_sID = strtolower("{$sIDPrefix}-" . $this->oProp->sClassName . "_{$_aCallCounts[ $this->oProp->sClassName ]}");
         return "<style type='text/css' id='" . esc_attr($_sID) . "'>" . $_sStyle . "</style>";
     }
-    private function _getClassSpecificIEStyleTag($_oCaller, $sIDPrefix)
+    private function ___getClassSpecificIEStyleTag($_oCaller, $sIDPrefix)
     {
-        static $_iCallCountIE = 1;
+        static $_aCallCounts = array();
+        $_aCallCounts[ $this->oProp->sClassName ] = isset($_aCallCounts[ $this->oProp->sClassName ]) ? $_aCallCounts[ $this->oProp->sClassName ] : 0;
         $_sFilterName = "style_ie_{$this->oProp->sClassName}";
         if ($this->hasBeenCalled('FILTER: ' . $_sFilterName)) {
             return '';
@@ -145,13 +147,14 @@ abstract class AmazonAutoLinks_AdminPageFramework_Resource_Base extends AmazonAu
         if (! $_sStyleIE) {
             return '';
         }
-        $_iCallCountIE++;
-        $_sID = strtolower("{$sIDPrefix}-ie-{$this->oProp->sClassName}_{$_iCallCountIE}");
+        $_aCallCounts[ $this->oProp->sClassName ]++;
+        $_sID = strtolower("{$sIDPrefix}-ie-{$this->oProp->sClassName}_{$_aCallCounts[ $this->oProp->sClassName ]}");
         return "<!--[if IE]><style type='text/css' id='" . esc_attr($_sID) . "'>" . $_sStyleIE . "</style><![endif]-->";
     }
     protected function _printClassSpecificScripts($sIDPrefix)
     {
-        static $_iCallCount = 1;
+        static $_aCallCounts = array();
+        $_aCallCounts[ $this->oProp->sClassName ] = isset($_aCallCounts[ $this->oProp->sClassName ]) ? $_aCallCounts[ $this->oProp->sClassName ] : 0;
         $_sFilterName = "script_{$this->oProp->sClassName}";
         if ($this->hasBeenCalled('FILTER: ' . $_sFilterName)) {
             return '';
@@ -161,8 +164,8 @@ abstract class AmazonAutoLinks_AdminPageFramework_Resource_Base extends AmazonAu
         if (! $_sScript) {
             return '';
         }
-        $_iCallCount++;
-        $_sID = strtolower("{$sIDPrefix}-{$this->oProp->sClassName}_{$_iCallCount}");
+        $_aCallCounts[ $this->oProp->sClassName ]++;
+        $_sID = strtolower("{$sIDPrefix}-{$this->oProp->sClassName}_{$_aCallCounts[ $this->oProp->sClassName ]}");
         echo "<script type='text/javascript' id='" . esc_attr($_sID) . "'>" . '/* <![CDATA[ */' . $_sScript . '/* ]]> */' . "</script>";
         $this->oProp->sScript = '';
     }
@@ -172,7 +175,8 @@ abstract class AmazonAutoLinks_AdminPageFramework_Resource_Base extends AmazonAu
         if (! $_oCaller->isInThePage()) {
             return;
         }
-        $this->_printCommonStyles('amazon-auto-links-style-common', get_class());
+        $_sSelfClassName = function_exists('get_called_class') ? get_called_class() : get_class();
+        $this->_printCommonStyles('amazon-auto-links-style-common', $_sSelfClassName);
         $this->_printClassSpecificStyles($this->_sClassSelector_Style . '-' . $this->oProp->sStructureType);
     }
     public function _replyToAddScript()
@@ -181,7 +185,8 @@ abstract class AmazonAutoLinks_AdminPageFramework_Resource_Base extends AmazonAu
         if (! $_oCaller->isInThePage()) {
             return;
         }
-        $this->_printCommonScripts('amazon-auto-links-script-common', get_class());
+        $_sSelfClassName = function_exists('get_called_class') ? get_called_class() : get_class();
+        $this->_printCommonScripts('amazon-auto-links-script-common', $_sSelfClassName);
         $this->_printClassSpecificScripts($this->_sClassSelector_Script . '-' . $this->oProp->sStructureType);
     }
     protected function _enqueueSRC($aEnqueueItem)

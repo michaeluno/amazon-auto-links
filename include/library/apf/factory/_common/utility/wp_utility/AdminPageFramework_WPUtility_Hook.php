@@ -1,9 +1,9 @@
 <?php
 /*
- * Admin Page Framework v3.9.1b05 by Michael Uno
+ * Admin Page Framework v3.9.2b01 by Michael Uno
  * Compiled with Admin Page Framework Compiler <https://github.com/michaeluno/amazon-auto-links-compiler>
  * <https://en.michaeluno.jp/amazon-auto-links>
- * Copyright (c) 2013-2022, Michael Uno; Licensed under MIT <https://opensource.org/licenses/MIT>
+ * Copyright (c) 2013-2023, Michael Uno; Licensed under MIT <https://opensource.org/licenses/MIT>
  */
 
 class AmazonAutoLinks_AdminPageFramework_WPUtility_Hook extends AmazonAutoLinks_AdminPageFramework_WPUtility_Page {
@@ -26,14 +26,14 @@ class AmazonAutoLinks_AdminPageFramework_WPUtility_Hook extends AmazonAutoLinks_
     public static function addAndDoActions()
     {
         $aArgs = func_get_args();
-        $oCallerObject = $aArgs[ 0 ];
         $aActionHooks = $aArgs[ 1 ];
+        $_sSelfClassName = function_exists('get_called_class') ? get_called_class() : get_class();
         foreach (( array ) $aActionHooks as $sActionHook) {
             if (! $sActionHook) {
                 continue;
             }
             $aArgs[ 1 ] = $sActionHook;
-            call_user_func_array(array( get_class(), 'addAndDoAction' ), $aArgs);
+            call_user_func_array(array( $_sSelfClassName, 'addAndDoAction' ), $aArgs);
         }
     }
     public static function addAndDoAction()
@@ -57,13 +57,14 @@ class AmazonAutoLinks_AdminPageFramework_WPUtility_Hook extends AmazonAutoLinks_
         $_aArgs = func_get_args();
         $_aFilters = $_aArgs[ 1 ];
         $_vInput = $_aArgs[ 2 ];
+        $_sSelfClassName = function_exists('get_called_class') ? get_called_class() : get_class();
         foreach (( array ) $_aFilters as $_sFilter) {
             if (! $_sFilter) {
                 continue;
             }
             $_aArgs[ 1 ] = $_sFilter;
             $_aArgs[ 2 ] = $_vInput;
-            $_vInput = call_user_func_array(array( get_class(), 'addAndApplyFilter' ), $_aArgs);
+            $_vInput = call_user_func_array(array( $_sSelfClassName, 'addAndApplyFilter' ), $_aArgs);
         }
         return $_vInput;
     }

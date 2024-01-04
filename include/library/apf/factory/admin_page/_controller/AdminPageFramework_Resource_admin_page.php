@@ -1,20 +1,20 @@
 <?php
 /*
- * Admin Page Framework v3.9.1b05 by Michael Uno
+ * Admin Page Framework v3.9.2b01 by Michael Uno
  * Compiled with Admin Page Framework Compiler <https://github.com/michaeluno/amazon-auto-links-compiler>
  * <https://en.michaeluno.jp/amazon-auto-links>
- * Copyright (c) 2013-2022, Michael Uno; Licensed under MIT <https://opensource.org/licenses/MIT>
+ * Copyright (c) 2013-2023, Michael Uno; Licensed under MIT <https://opensource.org/licenses/MIT>
  */
 
 class AmazonAutoLinks_AdminPageFramework_Resource_admin_page extends AmazonAutoLinks_AdminPageFramework_Resource_Base {
     protected function _printClassSpecificStyles($sIDPrefix)
     {
-        static $_bLoaded = false;
-        if ($_bLoaded) {
+        static $_aLoaded = array();
+        if (isset($_aLoaded[ $this->oProp->sClassName ])) {
             parent::_printClassSpecificStyles($sIDPrefix);
             return;
         }
-        $_bLoaded = true;
+        $_aLoaded[ $this->oProp->sClassName ] = true;
         $_oCaller = $this->oProp->oCaller;
         $_sPageSlug = $this->_getCurrentPageSlugForFilter();
         $_sTabSlug = $this->_getCurrentTabSlugForFilter($_sPageSlug);
@@ -38,12 +38,12 @@ class AmazonAutoLinks_AdminPageFramework_Resource_admin_page extends AmazonAutoL
     }
     protected function _printClassSpecificScripts($sIDPrefix)
     {
-        static $_bLoaded = false;
-        if ($_bLoaded) {
+        static $_aLoaded = array();
+        if (isset($_aLoaded[ $this->oProp->sClassName ])) {
             parent::_printClassSpecificScripts($sIDPrefix);
             return;
         }
-        $_bLoaded = true;
+        $_aLoaded[ $this->oProp->sClassName ] = true;
         $_oCaller = $this->oProp->oCaller;
         $_sPageSlug = $this->_getCurrentPageSlugForFilter();
         $_sTabSlug = $this->_getCurrentTabSlugForFilter($_sPageSlug);

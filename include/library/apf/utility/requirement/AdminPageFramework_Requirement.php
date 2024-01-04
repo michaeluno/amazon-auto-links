@@ -1,9 +1,9 @@
 <?php
 /*
- * Admin Page Framework v3.9.1b05 by Michael Uno
+ * Admin Page Framework v3.9.2b01 by Michael Uno
  * Compiled with Admin Page Framework Compiler <https://github.com/michaeluno/amazon-auto-links-compiler>
  * <https://en.michaeluno.jp/amazon-auto-links>
- * Copyright (c) 2013-2022, Michael Uno; Licensed under MIT <https://opensource.org/licenses/MIT>
+ * Copyright (c) 2013-2023, Michael Uno; Licensed under MIT <https://opensource.org/licenses/MIT>
  */
 
 class AmazonAutoLinks_AdminPageFramework_Requirement {
@@ -54,7 +54,7 @@ class AmazonAutoLinks_AdminPageFramework_Requirement {
     private function _checkMySQLVersion($sMySQLVersion)
     {
         global $wpdb;
-        $_sInstalledMySQLVersion = isset($wpdb->use_mysqli) && $wpdb->use_mysqli ? @mysqli_get_server_info($wpdb->dbh) : @mysql_get_server_info();
+        $_sInstalledMySQLVersion = isset($wpdb->use_mysqli) && $wpdb->use_mysqli ? @mysqli_get_server_info($wpdb->dbh) : (function_exists('mysql_get_server_info') ? @mysql_get_server_info() : '');
         return $_sInstalledMySQLVersion ? version_compare($_sInstalledMySQLVersion, $sMySQLVersion, ">=") : true;
     }
     private function _checkClasses($aClasses)

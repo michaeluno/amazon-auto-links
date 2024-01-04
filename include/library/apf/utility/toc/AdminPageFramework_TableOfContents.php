@@ -1,12 +1,15 @@
 <?php
 /*
- * Admin Page Framework v3.9.1b05 by Michael Uno
+ * Admin Page Framework v3.9.2b01 by Michael Uno
  * Compiled with Admin Page Framework Compiler <https://github.com/michaeluno/amazon-auto-links-compiler>
  * <https://en.michaeluno.jp/amazon-auto-links>
- * Copyright (c) 2013-2022, Michael Uno; Licensed under MIT <https://opensource.org/licenses/MIT>
+ * Copyright (c) 2013-2023, Michael Uno; Licensed under MIT <https://opensource.org/licenses/MIT>
  */
 
 class AmazonAutoLinks_AdminPageFramework_TableOfContents {
+    public $sTitle = '';
+    public $sHTML = '';
+    public $iDepth = 0;
     public function __construct($sHTML, $iDepth=4, $sTitle='')
     {
         $this->sTitle = $sTitle;
@@ -36,11 +39,11 @@ class AmazonAutoLinks_AdminPageFramework_TableOfContents {
         return '<div class="toc">' . $this->sTitle . '<ul>' . implode(PHP_EOL, $_aOutput) . '</ul>' . '</div>';
     }
     protected $_aMatches = array();
+    protected $_iCount = -1;
     public function _replyToInsertNamedElement($aMatches)
     {
-        static $_icount = -1;
-        $_icount++;
+        $this->_iCount++;
         $this->_aMatches[] = $aMatches[ 0 ];
-        return "<span class='toc_header_link' id='toc_{$_icount}'></span>" . PHP_EOL . $aMatches[ 0 ];
+        return "<span class='toc_header_link' id='toc_{$this->_iCount}'></span>" . PHP_EOL . $aMatches[ 0 ];
     }
 }
