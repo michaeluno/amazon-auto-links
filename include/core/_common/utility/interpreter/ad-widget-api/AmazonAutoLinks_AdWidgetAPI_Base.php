@@ -32,12 +32,19 @@ class AmazonAutoLinks_AdWidgetAPI_Base extends AmazonAutoLinks_PluginUtility {
     public $aHTTPArguments = array();
 
     /**
+     * @var integer
+     * @since 5.3.6
+     */
+    public $iMaxAttempts   = 30;
+
+    /**
      * Sets up properties and hooks.
      */
     public function __construct( $sLocale, $iCacheDuration=86400, array $aHTTPArguments=array() ) {
         $this->oLocale        = new AmazonAutoLinks_Locale( $sLocale );
         $this->iCacheDuration = $iCacheDuration;
         $this->aHTTPArguments = $aHTTPArguments;
+        $this->iMaxAttempts   = ( integer ) apply_filters( 'aal_filter_max_attempts_of_sitestripe_api_requests', $this->iMaxAttempts );
     }
 
     /**
@@ -46,12 +53,28 @@ class AmazonAutoLinks_AdWidgetAPI_Base extends AmazonAutoLinks_PluginUtility {
      * @since  4.6.9
      */
     public function getResponse( $sEndpoint ) {
+
         $_aArguments = $this->aHTTPArguments + array(
             'user-agent' => 'WordPress/' . $GLOBALS[ 'wp_version' ],
             'timeout'    => 29,
         );
-        $_oHTTP      = new AmazonAutoLinks_HTTPClient( $sEndpoint, $this->iCacheDuration, $_aArguments, 'ad_widget_api' );
-        return $_oHTTP->getBody();
+
+        // [5.3.6+] Sometimes, the API returns an empty response with the status code 200. If that happens, retry
+        $_sHTTPBody = '';
+        $_iAttempts = 0;
+        While ( $_iAttempts <= $this->iMaxAttempts ) {
+            $_oHTTP      = new AmazonAutoLinks_HTTPClient( $sEndpoint, $this->iCacheDuration, $_aArguments, 'ad_widget_api' );
+            $_sHTTPBody  = $_oHTTP->getBody();
+            if ( 200 !== $_oHTTP->getStatusCode() || '' !== $_sHTTPBody ) {
+                break;
+            }
+            $_iAttempts++;
+            $_aArguments[ 'renew_cache' ] = true;
+            usleep( 500 );
+        }
+
+        return $_sHTTPBody;
+
     }
 
     /**
@@ -69,6 +92,9 @@ class AmazonAutoLinks_AdWidgetAPI_Base extends AmazonAutoLinks_PluginUtility {
         preg_match( "/[^(]*\((.*)\)/", $sJSONP, $_aMatches );
         $_sJSONJS   = isset( $_aMatches[ 1 ] ) ? $_aMatches[ 1 ] : '';
 
+        // Sanitize the text which prevents the below code from converting it
+        $_sJSONJS   = self::___getJSONPSanitized( $_sJSONJS );
+
         // The JSON syntax is still JS based. Enclose keys with double quotes
         // @see https://stackoverflow.com/a/40326949
         // (?<!\\\)" <-- this avoids matching \" which is escaped double quotes
@@ -77,5 +103,22 @@ class AmazonAutoLinks_AdWidgetAPI_Base extends AmazonAutoLinks_PluginUtility {
         return json_decode( $_sJSON, true );
 
     }
+
+        /**
+         * @param  $sRawJSONP
+         * @return string
+         * @since  5.3.6
+         */
+        static private function ___getJSONPSanitized( $sRawJSONP ) {
+
+            // When the endpoint omits the InstanceId parameter, JavaScript code is included in the JSON element in the response
+            // e.g. ..." } ], MarketPlace: "DE", InstanceId: "$toolsFactory.first($params.get("InstanceId"))"})
+            return str_replace(
+                ', InstanceId: "$toolsFactory.first($params.get("InstanceId"))"',
+                '',
+                $sRawJSONP
+            );
+
+        }
 
 }

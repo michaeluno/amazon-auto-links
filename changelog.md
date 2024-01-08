@@ -1,5 +1,19 @@
 # Change Log
 
+#### 5.3.6 - 12/10/2023
+- Fixed an issue that search sometimes failed resulting in no products.
+
+#### 5.3.5 - 12/05/2023
+- Fixed a bug that the Sort option of URL and PA-API Item Look-up units did not work.
+- Fixed a bug that the `Found Products` option field of URL units was always "No product found".
+
+#### 5.3.4 - 09/29/2023
+- Fixed an issue that products for the shortcode with the `asin` argument was not sorted properly.
+- Optimized the delay of AJAX unit loading.
+
+#### 5.3.3 - 09/16/2023
+- Fixed a bug that option section names were missing in the auto-insert editing page.
+
 #### 5.3.2 - 09/02/2023
 - Fixed a bug that legacy option values of PA-API keys were referred if existed even after saving empty PA-API keys.
 - Fixed non-sanitized user inputs.

@@ -625,79 +625,91 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
      * @since  5.0.0
      */
     protected function _shouldUsePAAPI() {
-
-        $_sLocale            = ( string ) $this->oUnitOption->get( 'country' );
-        $_bAPIKeysSet        = $this->oOption->isPAAPIKeySet( $_sLocale );
-        if ( ! in_array( $_sLocale, AmazonAutoLinks_Locales::getLocalesWithAdWidgetAPISupport(), true ) ) {
-            return $_bAPIKeysSet;
-        }
-        // If the user wants to display products with non-default currency or language, use PA-API
-        if ( ! $this->___hasDefaultCurrencyOption( $_sLocale ) ) {
-            return $_bAPIKeysSet;
-        }
-        if ( ! $this->___hasDefaultLanguageOption( $_sLocale ) ) {
-            return $_bAPIKeysSet;
-        }
-        // If the sort option is given and it is not the default one, use PA-API
-        if ( $this->___hasNonDefaultSortOption() ) {
-            return $_bAPIKeysSet;
-        }
-        if ( $this->___hasAdvancedSearchOptions() ) {
-            return $_bAPIKeysSet;
-        }
-        return false;
-
+        $_sLocale     = ( string ) $this->oUnitOption->get( 'country' );
+        $_bAPIKeysSet = $this->oOption->isPAAPIKeySet( $_sLocale );
+        $_bUsePAAPI   = $this->___isPAAPIRequired( $_sLocale, $_bAPIKeysSet );
+        return apply_filters( 'aal_filter_use_paapi', $_bUsePAAPI, $_sLocale, $_bAPIKeysSet ); // [5.3.5+]
     }
         /**
-         * @param  string  $sLocale
+         * @since  5.3.5
          * @return boolean
-         * @since  5.0.0
          */
-        private function ___hasDefaultCurrencyOption( $sLocale ) {
-            $_sCurrencyDefault = AmazonAutoLinks_PAAPI50___Locales::getDefaultCurrencyByLocale( $sLocale );
-            $_sCurrency        = $this->oUnitOption->get( array( 'preferred_currency' ), $_sCurrencyDefault );
-            return $_sCurrencyDefault === $_sCurrency;
+        private function ___isPAAPIRequired( $sLocale, $bAPIKeysSet ) {
+
+            return true;
+
+            /* @deprecated 5.3.7 On Jan 1, 2024, The SiteStripe API ended so PA-API is the only way at the moment.
+            if ( ! in_array( $sLocale, AmazonAutoLinks_Locales::getLocalesWithAdWidgetAPISupport(), true ) ) {
+                return $bAPIKeysSet;
+            }
+            // If the user wants to display products with non-default currency or language, use PA-API
+            if ( ! $this->___hasDefaultCurrencyOption( $sLocale ) ) {
+                return $bAPIKeysSet;
+            }
+            if ( ! $this->___hasDefaultLanguageOption( $sLocale ) ) {
+                return $bAPIKeysSet;
+            }
+            // If the sort option is given and it is not the default one, use PA-API
+            if ( $this->___hasNonDefaultSortOption() ) {
+                return $bAPIKeysSet;
+            }
+            if ( $this->___hasAdvancedSearchOptions() ) {
+                return $bAPIKeysSet;
+            }
+            return false;
+            */
+
         }
-        /**
-         * @param  string  $sLocale
-         * @return boolean
-         * @since  5.0.0
-         */
-        private function ___hasDefaultLanguageOption( $sLocale ) {
-            $_sLanguageDefault = AmazonAutoLinks_PAAPI50___Locales::getDefaultLanguageByLocale( $sLocale );
-            $_sLanguage        = $this->oUnitOption->get( array( 'language' ), $_sLanguageDefault );
-            return $_sLanguageDefault === $_sLanguage;
-        }
-        /**
-         * @return boolean
-         * @since  5.0.0
-         */
-        private function ___hasNonDefaultSortOption() {
-            $_sSort = $this->oUnitOption->get( 'Sort' );
-            return $_sSort && ! in_array( $_sSort, array( 'Relevance', 'raw' ) );
-        }
-        /**
-         * @return boolean Whether the unit arguments contain advanced search options which require PA-API.
-         * @since  5.0.0
-         */
-        private function ___hasAdvancedSearchOptions() {
-            $_aAdvancedArgumentKeys = array(
-                // The value doesn't matter as only the keys are compared
-                // 'SearchIndex'       => true, // @deprecated 5.0.2 Ad-widget can accept this parameter with the same values as PA-API
-                'BrowseNode'        => true,
-                'Availability'      => true,
-                'Condition'         => true,
-                'MaximumPrice'      => true,
-                'MinimumPrice'      => true,
-                'MinPercentageOff'  => true,
-                'MerchantId'        => true,
-                'MinReviewsRating'  => true,
-                'DeliveryFlags'     => true,
-            );
-            $_aAdvancedArguments   = array_intersect_key( $this->oUnitOption->get(), $_aAdvancedArgumentKeys );
-            $_aAdvancedDefaults    = array_intersect_key( $this->oUnitOption->aDefault, $_aAdvancedArgumentKeys );
-            $_aNonDefaults         = array_diff_assoc( $_aAdvancedArguments, $_aAdvancedDefaults );
-            return ! empty( $_aNonDefaults );
-        }
+            /**
+             * @param  string  $sLocale
+             * @return boolean
+             * @since  5.0.0
+             */
+            private function ___hasDefaultCurrencyOption( $sLocale ) {
+                $_sCurrencyDefault = AmazonAutoLinks_PAAPI50___Locales::getDefaultCurrencyByLocale( $sLocale );
+                $_sCurrency        = $this->oUnitOption->get( array( 'preferred_currency' ), $_sCurrencyDefault );
+                return $_sCurrencyDefault === $_sCurrency;
+            }
+            /**
+             * @param  string  $sLocale
+             * @return boolean
+             * @since  5.0.0
+             */
+            private function ___hasDefaultLanguageOption( $sLocale ) {
+                $_sLanguageDefault = AmazonAutoLinks_PAAPI50___Locales::getDefaultLanguageByLocale( $sLocale );
+                $_sLanguage        = $this->oUnitOption->get( array( 'language' ), $_sLanguageDefault );
+                return $_sLanguageDefault === $_sLanguage;
+            }
+            /**
+             * @return boolean
+             * @since  5.0.0
+             */
+            private function ___hasNonDefaultSortOption() {
+                $_sSort = $this->oUnitOption->get( 'Sort' );
+                return $_sSort && ! in_array( $_sSort, array( 'Relevance', 'raw' ) );
+            }
+            /**
+             * @return boolean Whether the unit arguments contain advanced search options which require PA-API.
+             * @since  5.0.0
+             */
+            private function ___hasAdvancedSearchOptions() {
+                $_aAdvancedArgumentKeys = array(
+                    // The value doesn't matter as only the keys are compared
+                    // 'SearchIndex'       => true, // @deprecated 5.0.2 Ad-widget can accept this parameter with the same values as PA-API
+                    'BrowseNode'        => true,
+                    'Availability'      => true,
+                    'Condition'         => true,
+                    'MaximumPrice'      => true,
+                    'MinimumPrice'      => true,
+                    'MinPercentageOff'  => true,
+                    'MerchantId'        => true,
+                    'MinReviewsRating'  => true,
+                    'DeliveryFlags'     => true,
+                );
+                $_aAdvancedArguments   = array_intersect_key( $this->oUnitOption->get(), $_aAdvancedArgumentKeys );
+                $_aAdvancedDefaults    = array_intersect_key( $this->oUnitOption->aDefault, $_aAdvancedArgumentKeys );
+                $_aNonDefaults         = array_diff_assoc( $_aAdvancedArguments, $_aAdvancedDefaults );
+                return ! empty( $_aNonDefaults );
+            }
 
 }

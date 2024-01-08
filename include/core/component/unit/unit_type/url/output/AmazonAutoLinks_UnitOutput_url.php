@@ -52,7 +52,7 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
             if ( ! $iPostID ) {
                 return;
             }
-            $_bNoProducts     = empty( $_aFoundASINs );
+            $_bNoProducts     = empty( $aFoundASINs );
             $_sNoItemsMessage = __( 'Product not found.', 'amazon-auto-links' );
             $_sFoundItems     = get_post_meta( $iPostID, '_found_items', true );
 
@@ -80,8 +80,9 @@ class AmazonAutoLinks_UnitOutput_url extends AmazonAutoLinks_UnitOutput_item_loo
          */
         private function ___getOutputByAdWidgetSearch( array $aASINs ) {
             $_aUnitOptions = $this->oUnitOption->get();
+            $_aUnitOptions[ 'sort' ] = $this->oUnitOption->get( array( '_sort' ), 'raw' );  // 5.3.5 the `ad_widget_search` type stores the sort value in the `sort` argument.
             $_aUnitOptions[ 'asin' ] = implode( ',', $aASINs );
-            $_oUnitOutput = new AmazonAutoLinks_UnitOutput_ad_widget_search( $_aUnitOptions );
+            $_oUnitOutput  = new AmazonAutoLinks_UnitOutput_ad_widget_search( $_aUnitOptions );
             return $_oUnitOutput->get();
         }
 

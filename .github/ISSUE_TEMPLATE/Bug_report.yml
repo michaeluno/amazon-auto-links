@@ -1,6 +1,6 @@
 name: Bug report
 description: Report a bug with Admin Page Framework
-labels: ["bug"]
+labels: ["unconfirmed"]
 body:
     - type: markdown
       attributes:

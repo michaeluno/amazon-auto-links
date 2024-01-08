@@ -143,7 +143,7 @@ class AmazonAutoLinks_AdWidgetAPI_Search extends AmazonAutoLinks_AdWidgetAPI_Bas
             'Keywords'       => $this->___getKeywordsFormatted( $asKeywords ),
             'SearchIndex'    => 'All',
             'multipageStart' => 0,
-            'InstanceId'     => 0,
+            // 'InstanceId'     => 0, // @deprecated 5.3.6 by not specifying it, it reduces the chance of getting empty responses
             'TemplateId'     => 'MobileSearchResults',
             'ServiceVersion' => '20070822',
             'MarketPlace'    => $this->oLocale->getCountryCode(),
