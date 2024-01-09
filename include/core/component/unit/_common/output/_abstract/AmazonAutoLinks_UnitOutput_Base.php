@@ -636,7 +636,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
          */
         private function ___isPAAPIRequired( $sLocale, $bAPIKeysSet ) {
 
-            return true;
+            return true; // [5.3.7] PA-API is required due to the deprecation of SiteStripe
 
             /* @deprecated 5.3.7 On Jan 1, 2024, The SiteStripe API ended so PA-API is the only way at the moment.
             if ( ! in_array( $sLocale, AmazonAutoLinks_Locales::getLocalesWithAdWidgetAPISupport(), true ) ) {
