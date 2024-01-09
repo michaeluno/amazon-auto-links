@@ -295,6 +295,11 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
             );
             $aTemplate[ 'dir_path' ]          = wp_normalize_path( realpath( untrailingslashit( $aTemplate[ 'dir_path' ] ) ) );
 
+            // @see https://wordpress.org/support/topic/open_basedir-restriction-error-3/
+            if ( empty( $aTemplate[ 'dir_path' ] ) ) {
+                return false;
+            }
+
             // Check required files. Consider the possibility that the user may directly delete the template files/folders.
             $_aRequiredFiles = array(
                 $aTemplate[ 'dir_path' ] . '/' . 'style.css',
