@@ -80,6 +80,12 @@ class AmazonAutoLinks_UnitOption_item_lookup extends AmazonAutoLinks_UnitOption_
      */
     protected function _getUnitOptionsFormatted( array $aUnitOptions, array $aDefaults, array $aRawOptions ) {
         $aUnitOptions = $this->_getShortcodeArgumentKeysSanitized( $aUnitOptions, self::$aShortcodeArgumentKeys );
+
+        // 5.3.8 When redirected from an ad_widget_search unit, the `Keywords` argument may contain ASINs. This is when multiple ASINs are passed to the Keywords argument
+        if ( empty( $aUnitOptions[ 'ASIN' ] ) && ! empty( $aUnitOptions[ 'Keywords' ] ) ) {
+            $aUnitOptions[ 'ASIN' ] = $aUnitOptions[ 'Keywords' ];
+        }
+
         $aUnitOptions = $this->___getShortcodeArgumentsConverted( $aUnitOptions );
         $aUnitOptions = parent::_getUnitOptionsFormatted( $aUnitOptions, $aDefaults, $aRawOptions );
         $aUnitOptions[ 'Operation' ]      = 'GetItems';
