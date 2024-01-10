@@ -233,6 +233,9 @@ For the category unit type, yes. But for the search and contextual unit types, n
 = Is this plugin Amazon Auto Links? =
 Yes, that is the former name of this plugin and it is now Auto Amazon Links.
 
+= Do ad-block browser add-ons block the outputs of this plugin? =
+Unfortunately, some ad-block browser add-ons do that. To work around it, either rename the plugin installation directory, `amazon-auto-links` to something else or install from the [GitHub repository](https://github.com/michaeluno/amazon-auto-links) using the [Git Updater](https://github.com/afragen/git-updater) plugin.
+
 == Other Notes ==
 
 = Shortcode and Function Parameters =
