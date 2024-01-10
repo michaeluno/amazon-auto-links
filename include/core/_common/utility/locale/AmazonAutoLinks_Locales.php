@@ -149,16 +149,19 @@ class AmazonAutoLinks_Locales {
      * @return string[]|AmazonAutoLinks_Locale_Base[] Holding locale slugs/objects that support the ad widget API.
      */
     static public function getLocalesWithAdWidgetAPISupport( $bReturnObject=false ) {
-        $_aSupportedLocales = array();
-        foreach( self::getLocaleObjects() as $_oLocale ) {
-            if ( ! $_oLocale->sAdSystemServer ) {
-                continue;
-            }
-            $_aSupportedLocales[] = $bReturnObject
-                ? $_oLocale
-                : $_oLocale->sSlug;
-        }
-        return $_aSupportedLocales;
+        return array();
+
+        // @deprecated 5.3.9 SiteStripe has gone
+        // $_aSupportedLocales = array();
+        // foreach( self::getLocaleObjects() as $_oLocale ) {
+        //     if ( ! $_oLocale->sAdSystemServer ) {
+        //         continue;
+        //     }
+        //     $_aSupportedLocales[] = $bReturnObject
+        //         ? $_oLocale
+        //         : $_oLocale->sSlug;
+        // }
+        // return $_aSupportedLocales;
     }
 
     /**
