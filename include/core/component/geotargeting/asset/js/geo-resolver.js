@@ -1,6 +1,6 @@
 /**
  * @name Geo-resolver
- * @version 1.0.1
+ * @version 1.1.0
  */
 (function($){
 
@@ -199,7 +199,8 @@
             }
             // Add-to-cart Button links
             if ( -1 !== this.href.indexOf( 'aws/cart/add.html' ) ) {
-                this.href = this.href.replace( /^(https?:\/\/)(www\.amazon\..+?)(\W.+)/, '$1' + _oLocale.domain + '$3');
+                this.href = this.href.replace( /^(https?:\/\/)(www\.amazon\..+?)(\W.+)/, '$1' + _oLocale.domain + '$3' );
+                this.href = this.href.replace( /(?<=AssociateTag=)(.+-\d{2}?)(?=\W)/, _oLocale.associateID );
                 _aModified.push( this.href );
                 return true;
             }
