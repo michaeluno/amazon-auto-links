@@ -1,5 +1,11 @@
 # Change Log
 
+#### 5.3.8 - 01/10/2024
+- Fixed an issue that multiple ASINs as a search keyword were not showing products
+
+#### 5.3.7 - 01/05/2024
+- Changed Search, Contextual, and URL units to require PA-API due to the end of SiteStripe
+
 #### 5.3.6 - 12/10/2023
 - Fixed an issue that search sometimes failed resulting in no products.
 
