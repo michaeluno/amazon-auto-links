@@ -6,7 +6,7 @@
  * http://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2021 Michael Uno
  * @name Image Preview Tooltip
- * @version 1.0.4
+ * @version 1.0.5
  */
 (function ( $ ) {
 
@@ -60,7 +60,7 @@
         pointerWidth: parseInt( _maxSize ),
         pointerHeight: parseInt( _maxSize ),
         content: function () {
-          return "<a href='" + $( this ).data( 'href' ) + "' target='_blank'><img src='" + $( this ).data( 'largeSrc' ) + "' /></a>";
+          return "<a href='" + $( this ).data( 'href' ) + "' target='_blank'><img src='" + $( this ).data( 'largeSrc' ) + "' alt='thumbnail' /></a>";
         },
         position: {
           edge: 'bottom',
@@ -100,6 +100,7 @@
         }
         $( _self ).aalPointer( 'open' );
       };
+      img.alt = '';
       img.src = _srcImg;  // set the image
 
       // Handle toolitip closing. aalPointer:close is a custom event for this tooltip.
