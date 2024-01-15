@@ -19,8 +19,8 @@ class AmazonAutoLinks_Geotargeting_Resource extends AmazonAutoLinks_Geotargeting
      * Sets up properties and hooks.
      */
     public function __construct() {
-        add_action( 'wp_enqueue_scripts', array( $this, 'replyToLoadResources' ) );
-        add_action( 'enqueue_embed_scripts', array( $this, 'replyToLoadResources' ) );
+        add_action( 'wp_enqueue_scripts', array( $this, 'replyToLoadResources' ), 100 ); // must be loaded after product-image-preview.js as it adds dynamic elements
+        add_action( 'enqueue_embed_scripts', array( $this, 'replyToLoadResources' ), 100 );
     }
 
     public function replyToLoadResources() {
