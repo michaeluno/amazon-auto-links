@@ -22,6 +22,12 @@
     initialize( $( event.target ).find( '.amazon-auto-links-product-image img[data-large-src]' ) );
   } );
 
+  /**
+   * Dynamically adds the `data-href` and `data-large-src` attributes to the main thumbnails
+   *
+   * The format of the main <img> thumbnail tag is defined by the user in the Item Format option. So adding attributes needs to be done dynamically.
+   * @param target
+   */
   function setMainThumbnailDataAttributes( target ) {
     $( target ).find( '.amazon-product-thumbnail-container[data-large-src]' ).each( function () {
       $( this ).find( '.amazon-product-thumbnail img' ).attr( 'data-large-src', $( this ).attr( 'data-large-src' ) )
