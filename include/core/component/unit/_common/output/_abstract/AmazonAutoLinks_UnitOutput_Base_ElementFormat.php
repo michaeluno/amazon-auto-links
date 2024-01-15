@@ -315,7 +315,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base_ElementFormat extends AmazonAutoL
         $_bPopupImage  = ( boolean ) $this->oUnitOption->get( 'pop_up_images' );
         $_sAttributes  = "class='amazon-product-thumbnail-container'";
         $_sAttributes .= $_bPopupImage
-            ? " data-href='{$_sProductUL}' data-large-src={$_sLImageURL}"
+            ? " data-href='{$_sProductUL}' data-large-src='{$_sLImageURL}'"
             : "";
         return "<div {$_sAttributes}>"
             . str_replace(
