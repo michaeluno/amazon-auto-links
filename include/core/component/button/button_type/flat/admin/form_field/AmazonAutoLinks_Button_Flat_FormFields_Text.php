@@ -103,7 +103,7 @@ class AmazonAutoLinks_Button_Flat_FormFields_Text extends AmazonAutoLinks_FormFi
                         'label_min_width' => '140',
                         'label'             => array(
                             'all'   => __( 'All', 'amazon-auto-links' ),
-                            'each'  => __( 'Each', 'amazon-auto-links'),
+                            'each'  => __( 'Each', 'amazon-auto-links' ),
                         ),
                         'selectors'     => array(
                             'all'   => '.text-margin-all',

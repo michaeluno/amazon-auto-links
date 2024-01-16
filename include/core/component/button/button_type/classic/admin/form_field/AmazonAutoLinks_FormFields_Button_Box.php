@@ -32,7 +32,7 @@ class AmazonAutoLinks_FormFields_Button_Box extends AmazonAutoLinks_FormFields_B
                 'title'         => __( 'Box Shadow Switch', 'amazon-auto-links' ),
                 'label'         => array(
                     '.box_shadow_on'  => __( 'On', 'amazon-auto-links' ),
-                    '.box_shadow_off' => __( 'Off', 'amazon-auto-links'),
+                    '.box_shadow_off' => __( 'Off', 'amazon-auto-links' ),
                 ),
                 'attributes'    => array(
                     '.box_shadow_on'    => array(
@@ -66,7 +66,7 @@ class AmazonAutoLinks_FormFields_Button_Box extends AmazonAutoLinks_FormFields_B
                 'title'         => __( 'Individual Padding', 'amazon-auto-links' ),
                 'label'         => array(
                     '.individual_padding_on'  => __( 'On', 'amazon-auto-links' ),
-                    '.individual_padding_off' => __( 'Off', 'amazon-auto-links'),
+                    '.individual_padding_off' => __( 'Off', 'amazon-auto-links' ),
                 ),
                 'attributes'    => array(
                     '.individual_padding_on'  => array(
