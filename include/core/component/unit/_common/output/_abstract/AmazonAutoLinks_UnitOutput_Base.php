@@ -282,7 +282,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         $_bHasPreviousError = $this->___hasPreviousUnitError( $_iUnitID );
 
         $_sTemplatePath     = $this->___getTemplatePath();
-        $_aProducts         = apply_filters( 'aal_filter_products', $this->fetch(), array(), $this );   // 3.7.0+ Allows found-item-count class to parse the retrieved products.
+        $_aProducts         = ( array ) apply_filters( 'aal_filter_products', $this->fetch(), array(), $this );   // 3.7.0+ Allows found-item-count class to parse the retrieved products.
 
         $_aArguments        = $this->oUnitOption->get();   // the unit option can be modified while fetching so set the variable right before calling the template
         try {
@@ -543,7 +543,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
      * @return string The found error message. An empty string if no error is found.
      * @param  array  $aProducts
      */
-    protected function _getError( $aProducts ) {
+    protected function _getError( array $aProducts ) {
         $this->___setErrors( $aProducts );
         $_sErrors = trim( implode( ' ', $this->aErrors ) );
         if ( ! $_sErrors ) {
