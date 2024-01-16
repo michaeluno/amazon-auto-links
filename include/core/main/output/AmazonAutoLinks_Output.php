@@ -84,7 +84,9 @@ class AmazonAutoLinks_Output extends AmazonAutoLinks_WPUtility {
         $_sOutput = $this->___getOutput();
         return $this->___isWithoutOuterContainer()
             ? $_sOutput
-            : "<div class='amazon-auto-links'>" . $_sOutput . "</div>";
+            : "<div class='" . esc_attr( ( string ) apply_filters( 'aal_filter_plugin_slug_output', 'amazon-auto-links' ) ) . "'>"  // [5.3.10] filter
+                    . $_sOutput
+                . "</div>";
 
     }
         /**

@@ -634,7 +634,7 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
             private function ___getTemplateContainerDirs() {
                 $_aTemplateContainerDirs    = array();
                 $_aTemplateContainerDirs[]  = AmazonAutoLinks_Registry::$sDirPath . '/' . 'template';
-                $_aTemplateContainerDirs[]  = get_stylesheet_directory() . '/' . 'amazon-auto-links';
+                $_aTemplateContainerDirs[]  = get_stylesheet_directory() . '/' . ( string ) apply_filters( 'aal_filter_plugin_slug_autoload_template_directory', 'amazon-auto-links' ); // [5.3.10] filter
                 $_aTemplateContainerDirs    = apply_filters( 'aal_filter_template_container_directories', $_aTemplateContainerDirs );
                 $_aTemplateContainerDirs    = array_filter( $_aTemplateContainerDirs );    // drop elements of empty values.
                 return array_unique( $_aTemplateContainerDirs );
