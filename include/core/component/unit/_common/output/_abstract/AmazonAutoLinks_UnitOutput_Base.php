@@ -282,9 +282,16 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         $_bHasPreviousError = $this->___hasPreviousUnitError( $_iUnitID );
 
         $_sTemplatePath     = $this->___getTemplatePath();
-        $_aProducts         = ( array ) apply_filters( 'aal_filter_products', $this->fetch(), array(), $this );   // 3.7.0+ Allows found-item-count class to parse the retrieved products.
 
+        /**
+         * @sicne 3.7.0  Allows found-item-count class to parse the retrieved products.
+         * @param array  the fetched and formatted products array
+         * @param array  the request URLs
+         * @param array  the unit output object
+         */
+        $_aProducts         = ( array ) apply_filters( 'aal_filter_products', $this->fetch(), array(), $this );
         $_aArguments        = $this->oUnitOption->get();   // the unit option can be modified while fetching so set the variable right before calling the template
+
         try {
 
             $_sError     = $this->_getError( $_aProducts );
