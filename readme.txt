@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       6.4.2
 Requires MySQL:     5.0.3
-Stable tag:         5.3.9
+Stable tag:         5.3.10
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -384,10 +384,10 @@ You can check if your keys are valid with [Scratchpad](https://webservices.amazo
 
 == Changelog ==
 
-#### 5.3.9 - 01/12/2024
-- Fixed a bug that Associate tags of cart buttons were not converted for Geo-targeting
-- Fixed unnecessary background routines
-- Fixed missing `alt` attributes in some `<img>` elements
+#### 5.3.9 - 01/29/2024
+- Fixed a bug that thumbnail URLs were not converted for Geo-targeting.
+- Fixed a bug that an error message, "The Associate tag is not set," appeared when it is already set.
+- Fixed a bug that locales were not listed for Search units, started from v5.3.9
 
 #### Old Log
 For old change logs, see [here](https://github.com/michaeluno/amazon-auto-links/blob/master/changelog.md).

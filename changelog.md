@@ -1,5 +1,10 @@
 # Change Log
 
+#### 5.3.9 - 01/12/2024
+- Fixed a bug that Associate tags of cart buttons were not converted for Geo-targeting
+- Fixed unnecessary background routines
+- Fixed missing `alt` attributes in some `<img>` elements
+
 #### 5.3.8 - 01/10/2024
 - Fixed an issue that multiple ASINs as a search keyword were not showing products
 
