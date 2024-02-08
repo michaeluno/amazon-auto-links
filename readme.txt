@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       6.4.2
 Requires MySQL:     5.0.3
-Stable tag:         5.3.7
+Stable tag:         5.3.10
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -233,6 +233,20 @@ For the category unit type, yes. But for the search and contextual unit types, n
 = Is this plugin Amazon Auto Links? =
 Yes, that is the former name of this plugin and it is now Auto Amazon Links.
 
+= Do ad-block browser add-ons block the outputs of this plugin? =
+Unfortunately, some ad-block browser add-ons do that. To work around it, either rename the plugin installation directory, `amazon-auto-links` to something else or install from the [GitHub repository](https://github.com/michaeluno/amazon-auto-links) using the [Git Updater](https://github.com/afragen/git-updater) plugin.
+
+Then add the following code in the [functions.php](https://developer.wordpress.org/themes/basics/theme-functions/#what-is-functions-php) file.
+
+`
+add_filter( 'aal_filter_plugin_slug_output', 'func_aal_filter_plugin_slug_output' );
+add_filter( 'aal_filter_plugin_slug_oembed', 'func_aal_filter_plugin_slug_output' );
+function func_aal_filter_plugin_slug_output( $slug ) {
+     return 'aal';
+}
+`
+
+
 == Other Notes ==
 
 = Shortcode and Function Parameters =
@@ -381,8 +395,10 @@ You can check if your keys are valid with [Scratchpad](https://webservices.amazo
 
 == Changelog ==
 
-#### 5.3.7 - 01/05/2024
-- Changed Search, Contextual, and URL units to require PA-API due to the end of SiteStripe
+#### 5.3.10 - 01/29/2024
+- Fixed a bug that thumbnail URLs were not converted for Geo-targeting.
+- Fixed a bug that an error message, "The Associate tag is not set," appeared when it is already set.
+- Fixed a bug that locales were not listed for Search units, started from v5.3.9
 
 #### Old Log
 For old change logs, see [here](https://github.com/michaeluno/amazon-auto-links/blob/master/changelog.md).

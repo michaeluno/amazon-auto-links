@@ -38,7 +38,7 @@ class AmazonAutoLinks_CustomOEmbed_Provider {
 
         $_sEndpointURL = add_query_arg(
             array(
-                'oembed'   => 'amazon-auto-links',
+                'oembed'   => ( string ) apply_filters( 'aal_filter_plugin_slug_oembed', 'amazon-auto-links' ), // [5.3.10] filter
                 'endpoint' => true,
                 'format'   => 'xml', // json or xml
             ),

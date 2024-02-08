@@ -318,7 +318,30 @@ class AmazonAutoLinks_PluginUtility extends AmazonAutoLinks_WPUtility {
             ? array_unique( $_aMatches[ 0 ] )
             : array();
     }
-    
+
+    /**
+     * @param  string  $sText
+     * @return boolean
+     * @sicne  5.3.8
+     * @see    https://stackoverflow.com/a/12827734
+     * @deprecated 5.3.8 Unused
+     */
+    // static public function isASIN( $sText ) {
+    //     $_sNeedle = '/^\s*(B\d{2}[A-Z\d]{7}|\d{9}[X\d])\s*$/';
+    //     return 1 === preg_match( $_sNeedle, $sText, $_aMatches );
+    // }
+
+    /**
+     * @param  string  $sText
+     * @return boolean
+     * @sicne  5.3.8
+     */
+    static public function isASINOrISBN( $sText ) {
+        $sText = str_replace( '-', '', $sText );
+        $_sNeedle = '/^[A-Z0-9]{10,13}$/'; // lose match - 10 to 13 upper-cased alpha-numeric characters
+        return 1 === preg_match( $_sNeedle, $sText, $_aMatches );
+    }
+
     /**
      * Removes expired items in the set plugin custom database tables.
      * @since 3.4.0

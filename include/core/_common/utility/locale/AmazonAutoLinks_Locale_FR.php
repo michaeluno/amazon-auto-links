@@ -42,6 +42,13 @@ class AmazonAutoLinks_Locale_FR extends AmazonAutoLinks_Locale_EuropeanUnion {
     public $sFlagImg = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAYCAYAAACbU/80AAAAjUlEQVRIS2N01pktzszMvIeBgUEHiHECm6T/+KQx5JQrc/GqZ2RguMLAyOjC6KY/7zIhy0EmUdsBIDNBjgA5AOw1BeEQvC7u38ZJUgh8UFXCq/7A27dg+VEHjIbAaAiMhsBoCIyGwGgIjIbAaAgMihAYsEYpsEl4nhHULGdiZt4HbKFq0bNZDrackdETAIE6sTNLga3zAAAAAElFTkSuQmCC';
 
     /**
+     * Whether the marketplace site requires visitors to accept cookies
+     * @var boolean
+     * @sicne 5.3.9
+     */
+    public $bPrefForm = true;
+
+    /**
      * @return string The country name.
      * @since  4.5.0
      */

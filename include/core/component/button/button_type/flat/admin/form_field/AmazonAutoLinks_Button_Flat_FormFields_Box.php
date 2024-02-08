@@ -33,7 +33,7 @@ class AmazonAutoLinks_Button_Flat_FormFields_Box extends AmazonAutoLinks_Button_
                 'title'         => __( 'Padding', 'amazon-auto-links' ),
                 'label'         => array(
                     'all'   => __( 'All', 'amazon-auto-links' ),
-                    'each'  => __( 'Each', 'amazon-auto-links'),
+                    'each'  => __( 'Each', 'amazon-auto-links' ),
                 ),
                 'selectors'     => array(
                     'all'   => '.padding-all',

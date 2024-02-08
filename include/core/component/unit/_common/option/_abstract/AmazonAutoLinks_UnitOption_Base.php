@@ -223,7 +223,10 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
             $aUnitOptions[ 'country' ] = strtoupper( $aUnitOptions[ 'country' ] );
 
             /// If the given locale is the same as the unit default locale, leave it to the unit defaults.
-            if ( $aUnitOptions[ 'country' ] === $this->getElement( $aDefaults, array( 'country' ) ) ) {
+            if (
+                $aUnitOptions[ 'country' ] === $this->getElement( $aDefaults, array( 'country' ) )
+                && $this->getElement( $aUnitOptions, 'associate_id' ) // [5.3.10] there is a case that associate tag is missing -> not set in the Default tab
+            ) {
                 return $aUnitOptions;
             }
 

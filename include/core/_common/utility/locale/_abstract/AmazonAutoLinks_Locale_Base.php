@@ -81,6 +81,13 @@ abstract class AmazonAutoLinks_Locale_Base extends AmazonAutoLinks_PluginUtility
      */
     public $sAdSystemServer = '';
 
+    /**
+     * Whether the marketplace site requires visitors to accept cookies
+     * @var boolean
+     * @sicne 5.3.9
+     */
+    public $bPrefForm = false;
+
     // Methods to override.
 
     /**

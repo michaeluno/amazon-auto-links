@@ -16,7 +16,8 @@ class AmazonAutoLinks_FormFields_AdWidgetSearchUnit_Main extends AmazonAutoLinks
      */    
     public function get( $sFieldIDPrefix='' ) {
         $_aSupportedLocales = AmazonAutoLinks_Locales::getLocalesWithAdWidgetAPISupport();
-        $_aLabels           = $this->___getLocaleLabels( $_aSupportedLocales );
+        $_aLabels           = $this->___getLocaleLabels( $_aSupportedLocales )
+            + $this->getPAAPILocaleFieldLabels(); // @5.3.10 Ad-widget (Stripe) API supported countries no longer exist so PA-API supported countries must be loaded
         return array(
             array(
                 'field_id'      => $sFieldIDPrefix . 'unit_type',

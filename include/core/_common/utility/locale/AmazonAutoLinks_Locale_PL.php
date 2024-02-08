@@ -43,6 +43,13 @@ class AmazonAutoLinks_Locale_PL extends AmazonAutoLinks_Locale_Base {
     public $sFlagImg = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAYCAYAAACbU/80AAAAlUlEQVRIS2PcuO+I+u07D/d/+/5DkoGOgIuT47mqirwjY8+spc/obTnMnyBHMDZNnPsfJFCcHkdH/zMw9M5cBLZv1AGjITAaAqMhMPAhMJmBAVwSeqlK07Uk3Hb7KaQkHHXAaAiMhsBoCAx4CMxkZnr26+8/uraIYUUuOzPTE8aNvLzqL759PQB0hAQ9y2KQ5eJc3C4AGv2GItpRdZwAAAAASUVORK5CYII=';
 
     /**
+     * Whether the marketplace site requires visitors to accept cookies
+     * @var boolean
+     * @sicne 5.3.9
+     */
+    public $bPrefForm = true;
+
+    /**
      * Uses the image of the US locale as the image is not available for the locale number, `48`.
      * @var string
      * @since 4.7.8

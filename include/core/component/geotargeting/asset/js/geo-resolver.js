@@ -1,6 +1,6 @@
 /**
  * @name Geo-resolver
- * @version 1.0.1
+ * @version 1.1.1
  */
 (function($){
 
@@ -174,6 +174,7 @@
 
           });
 
+
         var _aUnmodified = [];
         var _aModified = [];
         _oHrefs.each( function( index ) {
@@ -185,8 +186,13 @@
                     ? _oLocale.searchURL + _match[ 1 ]
                     : this.href;
                 _aModified.push( this.href );
+
+                // Enlarged thumbnail links inserted in the `data-href` attribute
+                $( this ).children( 'img[data-href]' ).attr( 'data-href', _oLocale.searchURL + _match[ 1 ] )
+
                 return true;
             }
+
             // The plugin link style
             var _regexPattern = sQueryKey + '\=(.+?)&locale\=(.+)';
             var _regex = new RegExp( _regexPattern );
@@ -197,9 +203,11 @@
                 _aModified.push( this.href );
                 return true;
             }
+
             // Add-to-cart Button links
             if ( -1 !== this.href.indexOf( 'aws/cart/add.html' ) ) {
-                this.href = this.href.replace( /^(https?:\/\/)(www\.amazon\..+?)(\W.+)/, '$1' + _oLocale.domain + '$3');
+                this.href = this.href.replace( /^(https?:\/\/)(www\.amazon\..+?)(\W.+)/, '$1' + _oLocale.domain + '$3' );
+                this.href = this.href.replace( /(?<=AssociateTag=)(.+-\d{2}?)(?=\W)/, _oLocale.associateID );
                 _aModified.push( this.href );
                 return true;
             }

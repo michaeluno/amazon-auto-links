@@ -282,9 +282,16 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
         $_bHasPreviousError = $this->___hasPreviousUnitError( $_iUnitID );
 
         $_sTemplatePath     = $this->___getTemplatePath();
-        $_aProducts         = apply_filters( 'aal_filter_products', $this->fetch(), array(), $this );   // 3.7.0+ Allows found-item-count class to parse the retrieved products.
 
+        /**
+         * @sicne 3.7.0  Allows found-item-count class to parse the retrieved products.
+         * @param array  the fetched and formatted products array
+         * @param array  the request URLs
+         * @param array  the unit output object
+         */
+        $_aProducts         = ( array ) apply_filters( 'aal_filter_products', $this->fetch(), array(), $this );
         $_aArguments        = $this->oUnitOption->get();   // the unit option can be modified while fetching so set the variable right before calling the template
+
         try {
 
             $_sError     = $this->_getError( $_aProducts );
@@ -543,7 +550,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
      * @return string The found error message. An empty string if no error is found.
      * @param  array  $aProducts
      */
-    protected function _getError( $aProducts ) {
+    protected function _getError( array $aProducts ) {
         $this->___setErrors( $aProducts );
         $_sErrors = trim( implode( ' ', $this->aErrors ) );
         if ( ! $_sErrors ) {
@@ -636,7 +643,7 @@ abstract class AmazonAutoLinks_UnitOutput_Base extends AmazonAutoLinks_UnitOutpu
          */
         private function ___isPAAPIRequired( $sLocale, $bAPIKeysSet ) {
 
-            return true;
+            return true; // [5.3.7] PA-API is required due to the deprecation of SiteStripe
 
             /* @deprecated 5.3.7 On Jan 1, 2024, The SiteStripe API ended so PA-API is the only way at the moment.
             if ( ! in_array( $sLocale, AmazonAutoLinks_Locales::getLocalesWithAdWidgetAPISupport(), true ) ) {

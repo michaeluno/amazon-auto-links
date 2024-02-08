@@ -43,7 +43,7 @@ class AmazonAutoLinks_UnitOutput_ad_widget_search extends AmazonAutoLinks_UnitOu
          * @since  5.0.0
          */
         private function ___getOutputByPAAPI() {
-            $_sUnitType   = $this->___getPAAPIUnitTypeFromArguments( $this->oUnitOption->aRawOptions );
+            $_sUnitType   = $this->___getPAAPIUnitTypeFromArguments( $this->oUnitOption->aRawOptions, $this->oUnitOption->aUnitOptions );
             $_sClass      = "AmazonAutoLinks_UnitOutput_" . $_sUnitType;
             $_oUnitOutput = new $_sClass( $this->oUnitOption->aRawOptions );
             return $_oUnitOutput->get();
@@ -53,11 +53,27 @@ class AmazonAutoLinks_UnitOutput_ad_widget_search extends AmazonAutoLinks_UnitOu
              * @return string
              * @sicne  5.0.0
              */
-            private function ___getPAAPIUnitTypeFromArguments( array $aRawArguments ) {
-                if ( isset( $aRawArguments[ 'asin' ] ) ) {
+            private function ___getPAAPIUnitTypeFromArguments( array $aRawArguments, array $aUnitOptions ) {
+                if ( isset( $aRawArguments[ 'asin' ] ) ) { // from shortcode, this argument is set
+                    return 'item_lookup';
+                }
+                if ( $this->___isKeywordAllASINs( $aUnitOptions[ 'Keywords' ] ) ) {
                     return 'item_lookup';
                 }
                 return 'search';
             }
+                /**
+                 * @param  string|array $asKeywords
+                 * @return boolean
+                 * @sicne  5.3.8
+                 */
+                private function ___isKeywordAllASINs( $asKeywords ) {
+                    foreach( $this->getStringIntoArray( $asKeywords, ',' ) as $_sKeyword ) {
+                        if ( ! $this->isASINOrISBN( $_sKeyword ) ) {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
 
 }

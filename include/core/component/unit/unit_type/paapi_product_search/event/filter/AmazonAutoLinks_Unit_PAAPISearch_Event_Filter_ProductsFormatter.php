@@ -115,7 +115,7 @@ class AmazonAutoLinks_Unit_PAAPISearch_Event_Filter_ProductsFormatter extends Am
                     if ( false !== strpos( $_oException->getMessage(), '(product filter)' ) ) {
                         $this->oUnitOutput->aBlockedASINs[ $_aItem[ 'ASIN' ] ] = $_aItem[ 'ASIN' ];
                     }
-                    continue;   // skip
+                    continue; // skip
                 }
 
                 $_aASINLocaleCurLang = "{$_aProduct[ 'ASIN' ]}|{$_sLocale}|{$_sCurrency}|{$_sLanguage}";
@@ -205,6 +205,9 @@ class AmazonAutoLinks_Unit_PAAPISearch_Event_Filter_ProductsFormatter extends Am
                 if ( ! is_array( $aItem ) ) {
                     throw new Exception( 'The product element must be an array.' );
                 }
+                if ( isset( $aItem[ 'Message' ], $aItem[ 'Code' ] ) && ! isset( $aItem[ 'ASIN' ] ) ) {
+                    throw new Exception( $aItem[ 'Code' ] . ': ' . $aItem[ 'Message' ] );
+                }
                 return $aItem + self::$aStructure_Product;
             }
 
@@ -226,6 +229,9 @@ class AmazonAutoLinks_Unit_PAAPISearch_Event_Filter_ProductsFormatter extends Am
             private function ___checkProductBlocked( $sASIN, $sTitleRaw, $sDescription ) {
                 if ( $this->oUnitOutput->isWhiteListed( $sASIN, $sTitleRaw, $sDescription ) ) {
                     return;
+                }
+                if ( empty( $sASIN ) ) {
+                    throw new Exception( 'The ASIN is empty' );
                 }
                 if ( $this->oUnitOutput->isASINBlocked( $sASIN ) ) {
                     throw new Exception( '(product filter) The product ASIN is black-listed: ' . $sASIN );

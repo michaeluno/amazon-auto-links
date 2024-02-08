@@ -77,7 +77,7 @@ class AmazonAutoLinks_UnitOutput_embed extends AmazonAutoLinks_UnitOutput_catego
      * @since  4.2.2
      * @deprecated 5.0.0
      */
-    protected function _getError( $aProducts ) {
+    protected function _getError( array $aProducts ) {
 
         if ( $this->bNonProductURL && ! empty( $this->aErrors ) ) {
             $_sErrors = implode( ' ', $this->aErrors );

@@ -25,7 +25,7 @@ class AmazonAutoLinks_Registry_Base {
     const AUTHOR       = 'miunosoft (Michael Uno)';
     const AUTHOR_URI   = 'https://en.michaeluno.jp/';
     const PLUGIN_URI   = 'https://en.michaeluno.jp/auto-amazon-links';
-    const COPYRIGHT    = 'Copyright (c) 2013-2022, Michael Uno';
+    const COPYRIGHT    = 'Copyright (c) 2013-2024, Michael Uno';
     const LICENSE      = 'GPL v2 or later';
     const CONTRIBUTORS = '';
  
@@ -41,7 +41,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * 
  * To use the class, first call the setUp() method, which sets up the necessary properties.
  * 
- * @copyright Copyright (c) 2013-2022, Michael Uno
+ * @copyright Copyright (c) 2013-2024, Michael Uno
  * @authorurl http://michaeluno.jp
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     2.0.0
