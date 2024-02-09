@@ -103,7 +103,7 @@ class AmazonAutoLinks_AALBSupport_Shortcode_amazon_link extends AmazonAutoLinks_
         unset( $aArguments[ 'text' ] );
 
         // Drop empty string and null.
-        $aArguments = array_filter( $aArguments, 'strlen' );
+        $aArguments = array_filter( $aArguments, array( $this, 'isNotEmptyStringNorNull' ) );
         return apply_filters( 'aal_filter_output', '', $aArguments );
 
     }    

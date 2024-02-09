@@ -248,7 +248,7 @@ class AmazonAutoLinks_VersatileFileManager {
 
         if ( file_exists( $this->_sFilePath ) ) {
             // Update the modification time - passing null or 0 value erases the timestamp set to the file. So dropping null but 0 is accepted for the user to intentionally erase the value.
-            $_aParams = array_filter( array( $this->_sFilePath, $inTime, $inAccessTime ), 'strlen' );
+            $_aParams = array_filter( array( $this->_sFilePath, ( string ) $inTime, ( string ) $inAccessTime ), 'strlen' );
             return call_user_func_array( 'touch', $_aParams );
         }
 

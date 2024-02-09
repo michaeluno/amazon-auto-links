@@ -47,7 +47,7 @@ class AmazonAutoLinks_UnitOutput___ElementFormatter_DiscountPercentage extends A
         if ( ! $_bSet ) {
             return null;
         }
-        $_aCompare  = array_filter( array( $_insLowestNew, $_insDiscounted ), 'strlen' ); // applying 'strlen' will drop null and empty strings
+        $_aCompare  = array_filter( array( $_insLowestNew, $_insDiscounted ), array( $this, 'isNotEmptyStringNorNull' ) ); // drop null and empty strings
         $_iLowest   = empty( $_aCompare )
             ? $_iPrice
             : ( integer ) min( $_aCompare );
