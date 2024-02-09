@@ -26,6 +26,7 @@ class AmazonAutoLinks_PAAPI50___Locales extends AmazonAutoLinks_PluginUtility {
             'CA', 'FR', 'DE', 'IT', 'JP', 'UK',
             'ES', 'US', 'IN', 'BR', 'MX', 'AU', 'TR',
             'AE', 'SG', 'NL', 'SA', 'SE', 'PL',
+            'BE', 'EG'
         );
     }
 

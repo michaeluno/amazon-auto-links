@@ -128,25 +128,27 @@ final class AmazonAutoLinks_Registry extends AmazonAutoLinks_Registry_Base {
 
         // 4.4.0
         'paapi_request_counter' => array(
-            'AE'    => 'aal_paapi_request_count_log_ae',
             'AU'    => 'aal_paapi_request_count_log_au',
+            'BE'    => 'aal_paapi_request_count_log_be',
             'BR'    => 'aal_paapi_request_count_log_br',
             'CA'    => 'aal_paapi_request_count_log_ca',
-            'DE'    => 'aal_paapi_request_count_log_de',
-            'ES'    => 'aal_paapi_request_count_log_es',
+            'EG'    => 'aal_paapi_request_count_log_eg',
             'FR'    => 'aal_paapi_request_count_log_fr',
+            'DE'    => 'aal_paapi_request_count_log_de',
             'IN'    => 'aal_paapi_request_count_log_in',
             'IT'    => 'aal_paapi_request_count_log_it',
             'JP'    => 'aal_paapi_request_count_log_jp',
             'MX'    => 'aal_paapi_request_count_log_mx',
             'NL'    => 'aal_paapi_request_count_log_nl',
             'PL'    => 'aal_paapi_request_count_log_pl',
-            'SA'    => 'aal_paapi_request_count_log_sa',
             'SG'    => 'aal_paapi_request_count_log_sg',
+            'SA'    => 'aal_paapi_request_count_log_sa',
+            'ES'    => 'aal_paapi_request_count_log_es',
+            'SE'    => 'aal_paapi_request_count_log_se',
             'TR'    => 'aal_paapi_request_count_log_tr',
+            'AE'    => 'aal_paapi_request_count_log_ae',
             'US'    => 'aal_paapi_request_count_log_us',
             'UK'    => 'aal_paapi_request_count_log_uk',
-            'SE'    => 'aal_paapi_request_count_log_se',
         ),
 
         // Legacy option keys - not used and should be deleted on uninstall.

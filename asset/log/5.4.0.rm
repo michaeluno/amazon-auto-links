@@ -1,3 +1,4 @@
 - Added the `Site Title`, `URL Query`, and `Post Meta` option items for the `Criteria` Contextual unit option.
 - Added the `Concatenate` Contextual unit option.
+- Added the locales of Belgium and Egypt.
 - Refined the internal workings of AJAX unit loading by using REST API instead of `admin-ajax.php`.
