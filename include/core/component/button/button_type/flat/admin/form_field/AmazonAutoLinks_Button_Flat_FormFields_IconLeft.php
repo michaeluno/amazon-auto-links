@@ -297,7 +297,7 @@ class AmazonAutoLinks_Button_Flat_FormFields_IconLeft extends AmazonAutoLinks_Fo
                     'hidden'            => true,
                     'label'             => array(
                         'all'   => __( 'All', 'amazon-auto-links' ),
-                        'each'  => __( 'Each', 'amazon-auto-links'),
+                        'each'  => __( 'Each', 'amazon-auto-links' ),
                     ),
                     'selectors'     => array(
                         'all'   => '.icon-size-all-'  . $sSuffix ,
@@ -410,7 +410,7 @@ class AmazonAutoLinks_Button_Flat_FormFields_IconLeft extends AmazonAutoLinks_Fo
                     'hidden'            => true,
                     'label'             => array(
                         'all'   => __( 'All', 'amazon-auto-links' ),
-                        'each'  => __( 'Each', 'amazon-auto-links'),
+                        'each'  => __( 'Each', 'amazon-auto-links' ),
                     ),
                     'selectors'     => array(
                         'all'   => '.padding-all-' . $sSuffix ,
@@ -515,7 +515,7 @@ class AmazonAutoLinks_Button_Flat_FormFields_IconLeft extends AmazonAutoLinks_Fo
                     'hidden'            => true,
                     'label'             => array(
                         'all'   => __( 'All', 'amazon-auto-links' ),
-                        'each'  => __( 'Each', 'amazon-auto-links'),
+                        'each'  => __( 'Each', 'amazon-auto-links' ),
                     ),
                     'selectors'     => array(
                         'all'   => '.margin-all-' . $sSuffix ,

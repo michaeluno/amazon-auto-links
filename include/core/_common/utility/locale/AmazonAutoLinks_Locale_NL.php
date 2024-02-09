@@ -44,6 +44,13 @@ class AmazonAutoLinks_Locale_NL extends AmazonAutoLinks_Locale_Base {
     public $sFlagImg = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAYCAYAAACbU/80AAAAoElEQVRIS2OcwMAg/p+Bdc9/BgYdBjoCRgaGK4wMv10Y+xlYL9Pbcpg/wY7oY2AF2s/A4CfES0f/MzBsevcZbN+oA0ZDYOBDoGni3P/sbGwMOYkRdM0FvTMXQXLBqANGQ2A0BAY8BEQs28C1oZKmJV3LgXvXj0PKgVEHjIbAgIeAqGXbQDZKzzOKmbeK/2Ni3AfMEVr0zIfAFvF5xn//PQFO/XiCv4AWHQAAAABJRU5ErkJggg==';
 
     /**
+     * Whether the marketplace site requires visitors to accept cookies
+     * @var boolean
+     * @sicne 5.3.9
+     */
+    public $bPrefForm = true;
+
+    /**
      * @return string The country name.
      * @since  4.5.0
      */

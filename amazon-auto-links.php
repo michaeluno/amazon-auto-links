@@ -5,7 +5,7 @@
  * Description:       Formerly, Amazon Auto Links. The plugin generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  * Author:            Michael Uno (miunosoft)
  * Author URI:        https://michaeluno.jp
- * Version:           5.3.6
+ * Version:           5.3.10
  * Text Domain:       amazon-auto-links
  * Domain Path:       /language
  * GitHub Plugin URI: https://github.com/michaeluno/amazon-auto-links
@@ -18,14 +18,14 @@
  * @since 3     Changed the name from `AmazonAutoLinks_Commons_Base`
  */
 class AmazonAutoLinks_Registry_Base {
-    const VERSION      = '5.3.6';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
+    const VERSION      = '5.3.10';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
     const NAME         = 'Auto Amazon Links';
     const DESCRIPTION  = 'Formerly, Amazon Auto Links. The plugin generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.';
     const URI          = 'https://en.michaeluno.jp/amazon-auto-links';
     const AUTHOR       = 'miunosoft (Michael Uno)';
     const AUTHOR_URI   = 'https://en.michaeluno.jp/';
     const PLUGIN_URI   = 'https://en.michaeluno.jp/auto-amazon-links';
-    const COPYRIGHT    = 'Copyright (c) 2013-2022, Michael Uno';
+    const COPYRIGHT    = 'Copyright (c) 2013-2024, Michael Uno';
     const LICENSE      = 'GPL v2 or later';
     const CONTRIBUTORS = '';
  
@@ -41,7 +41,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * 
  * To use the class, first call the setUp() method, which sets up the necessary properties.
  * 
- * @copyright Copyright (c) 2013-2022, Michael Uno
+ * @copyright Copyright (c) 2013-2024, Michael Uno
  * @authorurl http://michaeluno.jp
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     2.0.0

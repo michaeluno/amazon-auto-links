@@ -34,7 +34,12 @@ class AmazonAutoLinks_Unit_UnitType_AdminPages_ad_widget_search extends AmazonAu
      * @since  5.0.0
      */
     public function load() {
+
+        // [5.3.7] Now PA-API is required as the SiteStripe API became unavailable as of Jan 4, 2024
+        AmazonAutoLinks_Unit_Admin_Utility::checkAPIKeys( $this );
+
         AmazonAutoLinks_Unit_Admin_Utility::checkAssociatesIDAndPAAPIKeys( $this );
+
     }
 
 }

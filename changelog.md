@@ -1,5 +1,19 @@
 # Change Log
 
+#### 5.3.9 - 01/12/2024
+- Fixed a bug that Associate tags of cart buttons were not converted for Geo-targeting
+- Fixed unnecessary background routines
+- Fixed missing `alt` attributes in some `<img>` elements
+
+#### 5.3.8 - 01/10/2024
+- Fixed an issue that multiple ASINs as a search keyword were not showing products
+
+#### 5.3.7 - 01/05/2024
+- Changed Search, Contextual, and URL units to require PA-API due to the end of SiteStripe
+
+#### 5.3.6 - 12/10/2023
+- Fixed an issue that search sometimes failed resulting in no products.
+
 #### 5.3.5 - 12/05/2023
 - Fixed a bug that the Sort option of URL and PA-API Item Look-up units did not work.
 - Fixed a bug that the `Found Products` option field of URL units was always "No product found".

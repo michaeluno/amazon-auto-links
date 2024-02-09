@@ -295,6 +295,11 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
             );
             $aTemplate[ 'dir_path' ]          = wp_normalize_path( realpath( untrailingslashit( $aTemplate[ 'dir_path' ] ) ) );
 
+            // @see https://wordpress.org/support/topic/open_basedir-restriction-error-3/
+            if ( empty( $aTemplate[ 'dir_path' ] ) ) {
+                return false;
+            }
+
             // Check required files. Consider the possibility that the user may directly delete the template files/folders.
             $_aRequiredFiles = array(
                 $aTemplate[ 'dir_path' ] . '/' . 'style.css',
@@ -629,7 +634,7 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
             private function ___getTemplateContainerDirs() {
                 $_aTemplateContainerDirs    = array();
                 $_aTemplateContainerDirs[]  = AmazonAutoLinks_Registry::$sDirPath . '/' . 'template';
-                $_aTemplateContainerDirs[]  = get_stylesheet_directory() . '/' . 'amazon-auto-links';
+                $_aTemplateContainerDirs[]  = get_stylesheet_directory() . '/' . ( string ) apply_filters( 'aal_filter_plugin_slug_autoload_template_directory', 'amazon-auto-links' ); // [5.3.10] filter
                 $_aTemplateContainerDirs    = apply_filters( 'aal_filter_template_container_directories', $_aTemplateContainerDirs );
                 $_aTemplateContainerDirs    = array_filter( $_aTemplateContainerDirs );    // drop elements of empty values.
                 return array_unique( $_aTemplateContainerDirs );

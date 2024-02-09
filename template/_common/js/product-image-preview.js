@@ -6,7 +6,7 @@
  * http://en.michaeluno.jp/amazon-auto-links/
  * Copyright (c) 2013-2021 Michael Uno
  * @name Image Preview Tooltip
- * @version 1.0.4
+ * @version 1.0.5
  */
 (function ( $ ) {
 
@@ -22,6 +22,12 @@
     initialize( $( event.target ).find( '.amazon-auto-links-product-image img[data-large-src]' ) );
   } );
 
+  /**
+   * Dynamically adds the `data-href` and `data-large-src` attributes to the main thumbnails
+   *
+   * The format of the main <img> thumbnail tag is defined by the user in the Item Format option. So adding attributes needs to be done dynamically.
+   * @param target
+   */
   function setMainThumbnailDataAttributes( target ) {
     $( target ).find( '.amazon-product-thumbnail-container[data-large-src]' ).each( function () {
       $( this ).find( '.amazon-product-thumbnail img' ).attr( 'data-large-src', $( this ).attr( 'data-large-src' ) )
@@ -60,7 +66,7 @@
         pointerWidth: parseInt( _maxSize ),
         pointerHeight: parseInt( _maxSize ),
         content: function () {
-          return "<a href='" + $( this ).data( 'href' ) + "' target='_blank'><img src='" + $( this ).data( 'largeSrc' ) + "' /></a>";
+          return "<a href='" + $( this ).data( 'href' ) + "' target='_blank'><img src='" + $( this ).data( 'largeSrc' ) + "' alt='thumbnail' /></a>";
         },
         position: {
           edge: 'bottom',
@@ -100,6 +106,7 @@
         }
         $( _self ).aalPointer( 'open' );
       };
+      img.alt = '';
       img.src = _srcImg;  // set the image
 
       // Handle toolitip closing. aalPointer:close is a custom event for this tooltip.

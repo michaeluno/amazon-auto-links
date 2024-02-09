@@ -149,6 +149,10 @@ class AmazonAutoLinks_Locale_AmazonCookies extends AmazonAutoLinks_PluginUtility
              */
             private function ___getMarketPlacePrefFormCookies( array $aCookies, &$sSessionID, &$sURL ) {
 
+                if ( ! $this->oLocale->bPrefForm ) {
+                    return array();
+                }
+
                 $sURL        = $this->oLocale->getMarketPlaceURL( '/cookieprefs?ref_=portal_banner_all' );
                 $_oHTTP      = new AmazonAutoLinks_HTTPClient(
                     $sURL,
