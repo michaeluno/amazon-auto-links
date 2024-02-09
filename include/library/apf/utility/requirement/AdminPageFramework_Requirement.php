@@ -9,6 +9,7 @@
 class AmazonAutoLinks_AdminPageFramework_Requirement {
     private $_aRequirements = array();
     public $aWarnings = array();
+    private $_sScriptName = '';
     private $_aDefaultRequirements = array( 'php' => array( 'version' => '5.2.4', 'error' => 'The plugin requires the PHP version %1$s or higher.', ), 'wordpress' => array( 'version' => '3.3', 'error' => 'The plugin requires the WordPress version %1$s or higher.', ), 'mysql' => array( 'version' => '5.0', 'error' => 'The plugin requires the MySQL version %1$s or higher.', ), 'functions' => array( ), 'classes' => array( ), 'constants' => array( ), 'files' => array( ), );
     public function __construct(array $aRequirements=array(), $sScriptName='')
     {

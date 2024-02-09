@@ -4,7 +4,7 @@
  * Compiled with Admin Page Framework Compiler <https://github.com/michaeluno/admin-page-framework-compiler>
  * <https://en.michaeluno.jp/admin-page-framework>
  * Copyright (c) 2013-2023, Michael Uno; Licensed under MIT <https://opensource.org/licenses/MIT>
- * Compiled on 2023-12-08
+ * Compiled on 2024-02-09
  * Included Components: Admin Pages, Custom Post Types, Post Meta Boxes, Page Meta Boxes, Widgets, Utilities
  * Custom Field Types: Date, Date Range, Date-time, Date-time Range, Time, Time Range, Revealer, Select2
  */

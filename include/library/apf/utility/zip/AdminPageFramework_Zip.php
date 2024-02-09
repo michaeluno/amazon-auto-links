@@ -130,7 +130,7 @@ class AmazonAutoLinks_AdminPageFramework_Zip {
         }
         $oZip->addEmptyDir(ltrim($sInsidePath, '/'));
     }
-    private function ___addFromString(ZipArchive $oZip, $sInsidePath, $sSourceContents='', array $aCallbacks=array(), $sSourceFilePath)
+    private function ___addFromString(ZipArchive $oZip, $sInsidePath, $sSourceContents='', array $aCallbacks=array(), $sSourceFilePath='')
     {
         $sInsidePath = $this->___getFilteredArchivePath($sInsidePath, $aCallbacks[ 'file_name' ]);
         if (! strlen($sInsidePath)) {
