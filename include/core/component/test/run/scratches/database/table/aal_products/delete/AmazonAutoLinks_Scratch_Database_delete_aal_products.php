@@ -24,7 +24,7 @@ class AmazonAutoLinks_Scratch_Database_delete_aal_products extends AmazonAutoLin
         if ( empty( $_aProductIDs ) ) {
             throw new Exception( 'Set a product IDs in the arguments field.' );
         }
-        $_aProductIDs = array_filter( $_aProductIDs, 'strlen' );
+        $_aProductIDs = array_filter( $_aProductIDs, array( $this, 'isNotEmptyStringNorNull' ) );
         $_sInProducts = "('" . implode( "','", $_aProductIDs ) . "')";
         $_oTable = new AmazonAutoLinks_DatabaseTable_aal_products;
         return $_oTable->getVariable(

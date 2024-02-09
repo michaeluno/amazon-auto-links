@@ -90,7 +90,7 @@ class AmazonAutoLinks_PhpZonSupport_Shortcode_phpzon extends AmazonAutoLinks_WPU
         }
 
         // Drop empty string and null.
-        $aArguments = array_filter( $aArguments, 'strlen' );
+        $aArguments = array_filter( $aArguments, array( $this, 'isNotEmptyStringNorNull' ) );
         return apply_filters( 'aal_filter_output', '', $aArguments );
 
     }    
