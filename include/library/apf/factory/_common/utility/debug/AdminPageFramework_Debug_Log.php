@@ -1,22 +1,23 @@
 <?php
 /*
- * Admin Page Framework v3.9.1b05 by Michael Uno
+ * Admin Page Framework v3.9.2b01 by Michael Uno
  * Compiled with Admin Page Framework Compiler <https://github.com/michaeluno/amazon-auto-links-compiler>
  * <https://en.michaeluno.jp/amazon-auto-links>
- * Copyright (c) 2013-2022, Michael Uno; Licensed under MIT <https://opensource.org/licenses/MIT>
+ * Copyright (c) 2013-2023, Michael Uno; Licensed under MIT <https://opensource.org/licenses/MIT>
  */
 
 class AmazonAutoLinks_AdminPageFramework_Debug_Log extends AmazonAutoLinks_AdminPageFramework_Debug_Base {
     protected static function _log($mValue, $sFilePath=null, $bStackTrace=false, $iTrace=0, $iStringLengthLimit=99999, $iArrayDepthLimit=50)
     {
-        static $_fPreviousTimeStamp = 0;
+        static $_aPreviousTimestamps = array();
         $_oCallerInfo = debug_backtrace();
         $_sCallerFunction = self::___getCallerFunctionName($_oCallerInfo, $iTrace);
         $_sCallerClass = self::___getCallerClassName($_oCallerInfo, $iTrace);
+        $_aPreviousTimestamps[ $_sCallerClass ] = isset($_aPreviousTimestamps[ $_sCallerClass ]) ? $_aPreviousTimestamps[ $_sCallerClass ] : 0;
         $_fCurrentTimeStamp = microtime(true);
-        $_sLogContent = self::___getLogContents($mValue, $_fCurrentTimeStamp, $_fPreviousTimeStamp, $_sCallerClass, $_sCallerFunction, $iStringLengthLimit, $iArrayDepthLimit) . ($bStackTrace ? self::getStackTrace($iTrace + 1) : '') . PHP_EOL;
+        $_sLogContent = self::___getLogContents($mValue, $_fCurrentTimeStamp, $_aPreviousTimestamps[ $_sCallerClass ], $_sCallerClass, $_sCallerFunction, $iStringLengthLimit, $iArrayDepthLimit) . ($bStackTrace ? self::getStackTrace($iTrace + 1) : '') . PHP_EOL;
         file_put_contents(self::___getLogFilePath($sFilePath, $_sCallerClass), $_sLogContent, FILE_APPEND);
-        $_fPreviousTimeStamp = $_fCurrentTimeStamp;
+        $_aPreviousTimestamps[ $_sCallerClass ] = $_fCurrentTimeStamp;
     }
     private static function ___getLogContents($mValue, $_fCurrentTimeStamp, $_fPreviousTimeStamp, $_sCallerClass, $_sCallerFunction, $iStringLengthLimit, $iArrayDepthLimit)
     {
@@ -40,7 +41,8 @@ class AmazonAutoLinks_AdminPageFramework_Debug_Log extends AmazonAutoLinks_Admin
         if ($_bFileExists) {
             return $bsFilePathOrName;
         }
-        $_sClassBaseName = $sCallerClass ? basename($sCallerClass) : basename(get_class());
+        $_sSelfClassName = function_exists('get_called_class') ? get_called_class() : get_class();
+        $_sClassBaseName = $sCallerClass ? basename($sCallerClass) : basename($_sSelfClassName);
         return $_sWPContentDir . $_sClassBaseName . '_' . date("Ymd") . '.log';
     }
     private static function ___createFile($sFilePath)
@@ -58,7 +60,7 @@ class AmazonAutoLinks_AdminPageFramework_Debug_Log extends AmazonAutoLinks_Admin
     {
         $_nNow = $fCurrentTimeStamp + (self::___getSiteGMTOffset() * 60 * 60);
         $_nMicroseconds = str_pad(round(($_nNow - floor($_nNow)) * 10000), 4, '0');
-        $_aOutput = array( date("Y/m/d H:i:s", $_nNow) . '.' . $_nMicroseconds, self::___getFormattedElapsedTime($nElapsed), self::___getPageLoadID(), self::getFrameworkVersion(), $sCallerClass . '::' . $sCallerFunction, current_filter(), self::getCurrentURL(), );
+        $_aOutput = array( date("Y/m/d H:i:s", ( integer ) $_nNow) . '.' . $_nMicroseconds, self::___getFormattedElapsedTime($nElapsed), self::___getPageLoadID(), self::getFrameworkVersion(), $sCallerClass . '::' . $sCallerFunction, current_filter(), self::getCurrentURL(), );
         return implode(' ', $_aOutput);
     }
     private static function ___getSiteGMTOffset()

@@ -1,9 +1,9 @@
 <?php
 /*
- * Admin Page Framework v3.9.1b05 by Michael Uno
+ * Admin Page Framework v3.9.2b01 by Michael Uno
  * Compiled with Admin Page Framework Compiler <https://github.com/michaeluno/amazon-auto-links-compiler>
  * <https://en.michaeluno.jp/amazon-auto-links>
- * Copyright (c) 2013-2022, Michael Uno; Licensed under MIT <https://opensource.org/licenses/MIT>
+ * Copyright (c) 2013-2023, Michael Uno; Licensed under MIT <https://opensource.org/licenses/MIT>
  */
 
 class AmazonAutoLinks_AdminPageFramework_Property_admin_page extends AmazonAutoLinks_AdminPageFramework_Property_Base {
@@ -133,23 +133,23 @@ class AmazonAutoLinks_AdminPageFramework_Property_admin_page extends AmazonAutoL
     {
         return $this->sCapability;
     }
+    private $___sCurrentPageSlugFromAdded;
     public function getCurrentPageSlugIfAdded()
     {
-        static $_nsCurrentPageSlugFromAddedOnes;
-        if ($this->hasBeenCalled(__METHOD__)) {
-            return $_nsCurrentPageSlugFromAddedOnes;
+        if ($this->hasBeenCalled($this->sClassName . '::' . __METHOD__)) {
+            return $this->___sCurrentPageSlugFromAdded;
         }
         $_nsCurrentPageSlug = $this->getElement($this->aQuery, 'page', null);
-        $_nsCurrentPageSlugFromAddedOnes = $this->getElement($this->aPages, array( $_nsCurrentPageSlug, 'page_slug' ));
-        return $_nsCurrentPageSlugFromAddedOnes;
+        $this->___sCurrentPageSlugFromAdded = $this->getElement($this->aPages, array( $_nsCurrentPageSlug, 'page_slug' ));
+        return $this->___sCurrentPageSlugFromAdded;
     }
+    private $___sCurrentTabSlugFromAdded;
     public function getCurrentInPageTabSlugIfAdded()
     {
-        static $_nsCurrentTabSlugFromAddedOnes;
-        if ($this->hasBeenCalled(__METHOD__)) {
-            return $_nsCurrentTabSlugFromAddedOnes;
+        if ($this->hasBeenCalled($this->sClassName . '::' . __METHOD__)) {
+            return $this->___sCurrentTabSlugFromAdded;
         }
-        $_nsCurrentTabSlugFromAddedOnes = $this->getElement($this->aInPageTabs, array( $this->getCurrentPageSlugIfAdded(), $this->getCurrentTabSlug(), 'tab_slug' ));
-        return $_nsCurrentTabSlugFromAddedOnes;
+        $this->___sCurrentTabSlugFromAdded = $this->getElement($this->aInPageTabs, array( $this->getCurrentPageSlugIfAdded(), $this->getCurrentTabSlug(), 'tab_slug' ));
+        return $this->___sCurrentTabSlugFromAdded;
     }
 }

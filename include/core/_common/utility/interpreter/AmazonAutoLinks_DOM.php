@@ -145,11 +145,28 @@ class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
          * @since  3.4.1
          */
         private function _loadHTML( $oDOM, $sHTML ) {
-            
-            $sHTML = function_exists( 'mb_convert_encoding' )
-                ? mb_convert_encoding( $sHTML, 'HTML-ENTITIES', $this->sCharEncoding )
-                : $sHTML;
-            
+
+            // @deprecated in PHP 8.2
+            // $sHTML = function_exists( 'mb_convert_encoding' )
+            //     ? mb_convert_encoding( $sHTML, 'HTML-ENTITIES', $this->sCharEncoding )
+            //     : $sHTML;
+            //
+            // Alternative to mb_convert_encoding( $sHTML, 'HTML-ENTITIES', $this->sCharEncoding )
+            // @see https://stackoverflow.com/a/11978382
+            // @deprecated utf8_decode() is also deprecated in PHP 8.2 and will be removed in PHP 9.0
+            // $sHTML = htmlspecialchars_decode( utf8_decode( htmlentities( $sHTML, ENT_COMPAT, $this->sCharEncoding, false ) ) );
+
+            // [5.3.8] An alternative to htmlspecialchars_decode( utf8_decode( htmlentities( $sHTML, ENT_COMPAT, $this->sCharEncoding, false ) ) )
+            // @test
+            // @todo It is not certain what flags should be used ENT_NOQUOTES or ENT_COMPAT
+            $sHTML = mb_encode_numericentity(
+                htmlspecialchars_decode(
+                    htmlentities( $sHTML, ENT_NOQUOTES, $this->sCharEncoding, false ),
+                    ENT_NOQUOTES
+                ), array( 0x80, 0x10FFFF, 0, ~0 ),
+                $this->sCharEncoding
+            );
+
             if ( $this->bLoadHTMLFix ) {
                 $oDOM->loadHTML( 
                     $sHTML,     // subject HTML contents to parse

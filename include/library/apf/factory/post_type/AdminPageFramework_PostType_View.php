@@ -1,9 +1,9 @@
 <?php
 /*
- * Admin Page Framework v3.9.1b05 by Michael Uno
+ * Admin Page Framework v3.9.2b01 by Michael Uno
  * Compiled with Admin Page Framework Compiler <https://github.com/michaeluno/amazon-auto-links-compiler>
  * <https://en.michaeluno.jp/amazon-auto-links>
- * Copyright (c) 2013-2022, Michael Uno; Licensed under MIT <https://opensource.org/licenses/MIT>
+ * Copyright (c) 2013-2023, Michael Uno; Licensed under MIT <https://opensource.org/licenses/MIT>
  */
 
 abstract class AmazonAutoLinks_AdminPageFramework_PostType_View extends AmazonAutoLinks_AdminPageFramework_PostType_Model {
@@ -41,7 +41,7 @@ abstract class AmazonAutoLinks_AdminPageFramework_PostType_View extends AmazonAu
                 continue;
             }
             if ('post-new.php?post_type=' . $sPostTypeSlug === $_aSubMenu[ 2 ]) {
-                unset($GLOBALS[ 'submenu' ][ $sMenuKey ][ $_iIndex ]);
+                $this->oUtil->unsetDimensionalArrayElement($GLOBALS[ 'submenu' ], array( $sMenuKey, $_iIndex ));
                 break;
             }
         }

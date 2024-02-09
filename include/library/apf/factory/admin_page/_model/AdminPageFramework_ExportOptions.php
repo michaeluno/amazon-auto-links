@@ -1,9 +1,9 @@
 <?php
 /*
- * Admin Page Framework v3.9.1b05 by Michael Uno
+ * Admin Page Framework v3.9.2b01 by Michael Uno
  * Compiled with Admin Page Framework Compiler <https://github.com/michaeluno/amazon-auto-links-compiler>
  * <https://en.michaeluno.jp/amazon-auto-links>
- * Copyright (c) 2013-2022, Michael Uno; Licensed under MIT <https://opensource.org/licenses/MIT>
+ * Copyright (c) 2013-2023, Michael Uno; Licensed under MIT <https://opensource.org/licenses/MIT>
  */
 
 class AmazonAutoLinks_AdminPageFramework_ExportOptions extends AmazonAutoLinks_AdminPageFramework_CustomSubmitFields {
@@ -57,8 +57,6 @@ class AmazonAutoLinks_AdminPageFramework_ExportOptions extends AmazonAutoLinks_A
     }
     private function _outputDataByType($vData, $sFormatType)
     {
-        switch (strtolower($sFormatType)) { case 'text': if (in_array(gettype($vData), array( 'array', 'object' ))) {
-            echo AmazonAutoLinks_AdminPageFramework_Debug::get($vData, null, false);
-        } echo $vData; return; case 'json': echo json_encode(( array ) $vData); return ; case 'array': default: echo serialize(( array ) $vData); return; }
+        switch (strtolower($sFormatType)) { case 'text': echo in_array(gettype($vData), array( 'array', 'object' ), true) ? AmazonAutoLinks_AdminPageFramework_Debug::get($vData, null, false) : $vData; return; case 'json': echo json_encode(( array ) $vData); return ; case 'array': default: echo serialize(( array ) $vData); return; }
     }
 }

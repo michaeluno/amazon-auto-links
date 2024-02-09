@@ -1,9 +1,9 @@
 <?php
 /*
- * Admin Page Framework v3.9.1b05 by Michael Uno
+ * Admin Page Framework v3.9.2b01 by Michael Uno
  * Compiled with Admin Page Framework Compiler <https://github.com/michaeluno/amazon-auto-links-compiler>
  * <https://en.michaeluno.jp/amazon-auto-links>
- * Copyright (c) 2013-2022, Michael Uno; Licensed under MIT <https://opensource.org/licenses/MIT>
+ * Copyright (c) 2013-2023, Michael Uno; Licensed under MIT <https://opensource.org/licenses/MIT>
  */
 
 class AmazonAutoLinks_AdminPageFramework_Form_View___FieldTitle extends AmazonAutoLinks_AdminPageFramework_Form_Utility {
@@ -34,7 +34,7 @@ class AmazonAutoLinks_AdminPageFramework_Form_View___FieldTitle extends AmazonAu
         }
         $_oInputTagIDGenerator = new AmazonAutoLinks_AdminPageFramework_Form_View___Generate_FieldInputID($aField, 0);
         $_aLabelAttributes = array( 'class' => $this->getClassAttribute('amazon-auto-links-field-title', $this->aClassSelectors), 'for' => $_oInputTagIDGenerator->get(), );
-        $_sOutput .= $aField[ 'title' ] ? "<label " . $this->getAttributes($_aLabelAttributes) . "'>" . "<a id='{$aField[ 'field_id' ]}'></a>" . "<span title='" . esc_attr(strip_tags(is_array($aField[ 'description' ]) ? implode('&#10;', $aField[ 'description' ]) : $aField[ 'description' ])) . "'>" . $aField[ 'title' ] . $this->_getTitleColon($aField) . "</span>" . $this->___getToolTip($aField[ 'tip' ], $aField[ 'field_id' ]) . "</label>" : '';
+        $_sOutput .= $aField[ 'title' ] ? "<label " . $this->getAttributes($_aLabelAttributes) . "'>" . "<a id='{$aField[ 'field_id' ]}'></a>" . "<span title='" . esc_attr(strip_tags(is_array($aField[ 'description' ]) ? implode('&#10;', $aField[ 'description' ]) : (is_string($aField[ 'description' ]) ? $aField[ 'description' ] : ''))) . "'>" . $aField[ 'title' ] . $this->_getTitleColon($aField) . "</span>" . $this->___getToolTip($aField[ 'tip' ], $aField[ 'field_id' ]) . "</label>" : '';
         $_sOutput .= $this->_getFieldOutputsInFieldTitleAreaFromNestedFields($aField);
         return $_sOutput;
     }

@@ -1,9 +1,9 @@
 <?php
 /*
- * Admin Page Framework v3.9.1b05 by Michael Uno
+ * Admin Page Framework v3.9.2b01 by Michael Uno
  * Compiled with Admin Page Framework Compiler <https://github.com/michaeluno/amazon-auto-links-compiler>
  * <https://en.michaeluno.jp/amazon-auto-links>
- * Copyright (c) 2013-2022, Michael Uno; Licensed under MIT <https://opensource.org/licenses/MIT>
+ * Copyright (c) 2013-2023, Michael Uno; Licensed under MIT <https://opensource.org/licenses/MIT>
  */
 
 abstract class AmazonAutoLinks_AdminPageFramework_Property_Base extends AmazonAutoLinks_AdminPageFramework_FrameworkUtility {
@@ -50,6 +50,7 @@ abstract class AmazonAutoLinks_AdminPageFramework_Property_Base extends AmazonAu
     public $bShowDebugInfo = true;
     public $aQuery = array();
     public $bAutoloadMinifiedResource = true;
+    public $bEnableForm = false;
     public function __construct($oCaller, $sCallerPath, $sClassName, $sCapability, $sTextDomain, $sStructureType)
     {
         $this->___setProperties($oCaller, $sCallerPath, $sClassName, $sCapability, $sTextDomain, $sStructureType);
@@ -75,14 +76,14 @@ abstract class AmazonAutoLinks_AdminPageFramework_Property_Base extends AmazonAu
     private function ___getReferrer()
     {
         self::$___sCacheReferrer = isset(self::$___sCacheReferrer) ? self::$___sCacheReferrer : wp_get_referer();
-        return self::$___sCacheReferrer;
+        return ( string ) self::$___sCacheReferrer;
     }
     private function ___getURLQuery()
     {
         if (! $this->bIsAdminAjax) {
             return $this->getHTTPQueryGET(array(), array());
         }
-        parse_str(parse_url($this->___getReferrer(), PHP_URL_QUERY), $_aQuery);
+        parse_str(( string ) parse_url($this->___getReferrer(), PHP_URL_QUERY), $_aQuery);
         return $this->getHTTPQueryGET(array(), array()) + $_aQuery;
     }
     private function ___setGlobals()

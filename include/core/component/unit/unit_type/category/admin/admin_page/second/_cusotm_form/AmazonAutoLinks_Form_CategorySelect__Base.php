@@ -14,6 +14,10 @@
  */
 abstract class AmazonAutoLinks_Form_CategorySelect__Base extends AmazonAutoLinks_Form_CategorySelect__Utility {
 
+    public $sCharEncoding = '';
+
+    public $oDOM;
+
     /**
      * Sets up basic properties.
      */

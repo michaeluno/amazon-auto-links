@@ -776,7 +776,7 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
          *  - 0 (string number) - disconnected (error occurred in tests)
          */
         $_bnStatus = $this->get( array( 'associates', $sLocale, 'paapi', 'status' ) );
-        if ( strlen( $_bnStatus ) ) {
+        if ( strlen( ( string ) $_bnStatus ) ) {
             return ( boolean ) $_bnStatus;
         }
         // For backward-compatibility with below 4.5.0
@@ -922,7 +922,7 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
          * @remark For backward compatibility for v4.6.18 or below.
          */
         private function ___getAllowedHTMLTagsLegacy() {
-            $_aOldAllowedHTMLTags = $this->getStringIntoArray( str_replace( PHP_EOL, ',', $this->get( 'form_options', 'allowed_html_tags' ) ), ',' );
+            $_aOldAllowedHTMLTags = $this->getStringIntoArray( str_replace( PHP_EOL, ',', $this->get( array( 'form_options', 'allowed_html_tags' ), '' ) ), ',' );
             return array_fill_keys( $_aOldAllowedHTMLTags, $this->getAllowedHTMLAttributesLegacy() );
         }
             /**
@@ -935,7 +935,7 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
                 if ( isset( $_aCache ) ) {
                     return $_aCache;
                 }
-                $_sAttributes        = str_replace( PHP_EOL, ',', $this->get( 'form_options', 'allowed_attributes' ) );
+                $_sAttributes        = str_replace( PHP_EOL, ',', $this->get( array( 'form_options', 'allowed_attributes' ), '' ) );
                 $_aAllowedAttributes = $this->getKSESHTMLAttributes( $_sAttributes );
                 $_aCache             = $_aAllowedAttributes;
                 return $_aAllowedAttributes;

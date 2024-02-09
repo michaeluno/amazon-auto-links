@@ -1,9 +1,9 @@
 <?php
 /*
- * Admin Page Framework v3.9.1b05 by Michael Uno
+ * Admin Page Framework v3.9.2b01 by Michael Uno
  * Compiled with Admin Page Framework Compiler <https://github.com/michaeluno/amazon-auto-links-compiler>
  * <https://en.michaeluno.jp/amazon-auto-links>
- * Copyright (c) 2013-2022, Michael Uno; Licensed under MIT <https://opensource.org/licenses/MIT>
+ * Copyright (c) 2013-2023, Michael Uno; Licensed under MIT <https://opensource.org/licenses/MIT>
  */
 
 class AmazonAutoLinks_AdminPageFramework_Link_admin_page extends AmazonAutoLinks_AdminPageFramework_Link_Base {
@@ -34,14 +34,14 @@ class AmazonAutoLinks_AdminPageFramework_Link_admin_page extends AmazonAutoLinks
         $this->_addFilterHook_PluginTitleActionLink();
     }
     protected $_sFilterSuffix_PluginActionLinks = 'plugin_action_links_';
+    private $___sPluginBaseName;
     private function _addFilterHook_PluginTitleActionLink()
     {
-        static $_sPluginBaseName;
-        if (isset($_sPluginBaseName)) {
+        if (isset($this->___sPluginBaseName)) {
             return;
         }
-        $_sPluginBaseName = plugin_basename($this->oProp->aScriptInfo[ 'sPath' ]);
-        add_filter($this->_sFilterSuffix_PluginActionLinks . $_sPluginBaseName, array( $this, '_replyToAddPluginActionLinks' ));
+        $this->___sPluginBaseName = plugin_basename($this->oProp->aScriptInfo[ 'sPath' ]);
+        add_filter($this->_sFilterSuffix_PluginActionLinks . $this->___sPluginBaseName, array( $this, '_replyToAddPluginActionLinks' ));
     }
     public function _replyToAddInfoInFooterLeft($sLinkHTML='')
     {
