@@ -234,7 +234,16 @@ For the category unit type, yes. But for the search and contextual unit types, n
 Yes, that is the former name of this plugin and it is now Auto Amazon Links.
 
 = Do ad-block browser add-ons block the outputs of this plugin? =
-Unfortunately, some ad-block browser add-ons do that. To work around it, either rename the plugin installation directory, `amazon-auto-links` to something else or install from the [GitHub repository](https://github.com/michaeluno/amazon-auto-links) using the [Git Updater](https://github.com/afragen/git-updater) plugin.
+Unfortunately, some ad-block browser add-ons do that. To work around it, either rename the plugin installation directory, `amazon-auto-links` to something else which should be unique and not include the string of `amazon-auto-links` such as `xyz` or install from the [GitHub repository](https://github.com/michaeluno/amazon-auto-links) using the [Git Updater](https://github.com/afragen/git-updater) plugin.
+
+Changed directory name:
+  - **Good**:
+    - xyz
+    - foobar
+    - own-made-up-name
+  - **Bad**:
+    - amazon-auto-links-2
+    - amazon-auto-links2
 
 Then add the following code in the [functions.php](https://developer.wordpress.org/themes/basics/theme-functions/#what-is-functions-php) file.
 
@@ -246,6 +255,7 @@ function func_aal_filter_plugin_slug_output( $slug ) {
 }
 `
 
+Please be aware that if the plugin installation directory name is changed, the automatic updates will not function. If you need automatic updates, go with the Git Updater solution.
 
 == Other Notes ==
 
