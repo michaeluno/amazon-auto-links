@@ -376,11 +376,11 @@ class AmazonAutoLinks_TemplateOption extends AmazonAutoLinks_Option_Base {
                 $aTemplate = $aTemplate + self::$aStructure_Template_Legacy;
                 $aTemplate[ 'strDirPath' ] = $aTemplate[ 'strDirPath' ]    // check if it's not missing
                     ? $aTemplate[ 'strDirPath' ]
-                    : dirname( $aTemplate[ 'strCSSPath' ] );
+                    : dirname( ( string ) $aTemplate[ 'strCSSPath' ] );
 
                 $aTemplate[ 'strTemplatePath' ] = $aTemplate[ 'strTemplatePath' ]    // check if it's not missing
                     ? $aTemplate[ 'strTemplatePath' ]
-                    : dirname( $aTemplate[ 'strCSSPath' ] ) . '/' . 'template.php';
+                    : dirname( ( string ) $aTemplate[ 'strCSSPath' ] ) . '/' . 'template.php';
 
                 return $aTemplate;
 

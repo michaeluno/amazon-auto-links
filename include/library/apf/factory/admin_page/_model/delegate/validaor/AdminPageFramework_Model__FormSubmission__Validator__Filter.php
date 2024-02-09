@@ -1,9 +1,9 @@
 <?php
 /*
- * Admin Page Framework v3.9.1b05 by Michael Uno
+ * Admin Page Framework v3.9.2b01 by Michael Uno
  * Compiled with Admin Page Framework Compiler <https://github.com/michaeluno/amazon-auto-links-compiler>
  * <https://en.michaeluno.jp/amazon-auto-links>
- * Copyright (c) 2013-2022, Michael Uno; Licensed under MIT <https://opensource.org/licenses/MIT>
+ * Copyright (c) 2013-2023, Michael Uno; Licensed under MIT <https://opensource.org/licenses/MIT>
  */
 
 class AmazonAutoLinks_AdminPageFramework_Model__FormSubmission__Validator__Filter extends AmazonAutoLinks_AdminPageFramework_Model__FormSubmission_Base {
@@ -42,7 +42,7 @@ class AmazonAutoLinks_AdminPageFramework_Model__FormSubmission__Validator__Filte
         $this->_setSettingNoticeAfterValidation(empty($_aInput));
         $this->oFactory->setLastInputs($aRawInputs);
         add_filter("options_update_status_{$this->oFactory->oProp->sClassName}", array( $this, '_replyToSetStatus' ));
-        $_oException = new Exception('aReturn');
+        $_oException = new AmazonAutoLinks_AdminPageFramework_Model___Exception_FormValidation('aReturn');
         $_oException->aReturn = $_aInput;
         throw $_oException;
     }

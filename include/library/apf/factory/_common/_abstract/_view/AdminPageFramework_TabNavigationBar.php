@@ -1,9 +1,9 @@
 <?php
 /*
- * Admin Page Framework v3.9.1b05 by Michael Uno
+ * Admin Page Framework v3.9.2b01 by Michael Uno
  * Compiled with Admin Page Framework Compiler <https://github.com/michaeluno/amazon-auto-links-compiler>
  * <https://en.michaeluno.jp/amazon-auto-links>
- * Copyright (c) 2013-2022, Michael Uno; Licensed under MIT <https://opensource.org/licenses/MIT>
+ * Copyright (c) 2013-2023, Michael Uno; Licensed under MIT <https://opensource.org/licenses/MIT>
  */
 
 class AmazonAutoLinks_AdminPageFramework_TabNavigationBar extends AmazonAutoLinks_AdminPageFramework_FrameworkUtility {
@@ -12,6 +12,7 @@ class AmazonAutoLinks_AdminPageFramework_TabNavigationBar extends AmazonAutoLink
     public $aAttributes = array( 'class' => 'nav-tab-wrapper', );
     public $aTab = array( 'slug' => null, 'title' => null, 'href' => null, 'disabled' => null, 'class' => null, 'attributes' => array(), );
     public $aCallbacks = array( 'format' => null, 'arguments' => array(), );
+    public $aActiveSlugs = array();
     public function __construct(array $aTabs, $asActiveTabSlugs, $sTabTag='h2', $aAttributes=array( 'class' => 'nav-tab-wrapper', ), $aCallbacks=array())
     {
         $this->aCallbacks = $aCallbacks + array( 'format' => null, 'arguments' => null, );

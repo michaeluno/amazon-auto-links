@@ -341,5 +341,19 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_FileSystem {
             ? ( integer ) ini_get( 'max_execution_time' )
             : ( integer ) $iDefault;
     }
-    
+
+    /**
+     * Checks if a value is neither an empty string nor null.
+     *
+     * This is used with `array_filter()` to drop those entries.
+     *
+     * @param  mixed   $mValue
+     * @return boolean
+     * @since  5.3.11
+     */
+    static public function isNotEmptyStringNorNull( $mValue ) {
+        return null !== $mValue && '' !== $mValue;
+    }
+
+
 }

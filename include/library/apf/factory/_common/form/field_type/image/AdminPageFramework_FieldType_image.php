@@ -1,9 +1,9 @@
 <?php
 /*
- * Admin Page Framework v3.9.1b05 by Michael Uno
+ * Admin Page Framework v3.9.2b01 by Michael Uno
  * Compiled with Admin Page Framework Compiler <https://github.com/michaeluno/amazon-auto-links-compiler>
  * <https://en.michaeluno.jp/amazon-auto-links>
- * Copyright (c) 2013-2022, Michael Uno; Licensed under MIT <https://opensource.org/licenses/MIT>
+ * Copyright (c) 2013-2023, Michael Uno; Licensed under MIT <https://opensource.org/licenses/MIT>
  */
 
 class AmazonAutoLinks_AdminPageFramework_FieldType_image extends AmazonAutoLinks_AdminPageFramework_FieldType {
@@ -69,7 +69,7 @@ class AmazonAutoLinks_AdminPageFramework_FieldType_image extends AmazonAutoLinks
         if (! $aField[ 'show_preview' ]) {
             return '';
         }
-        $sImageURL = esc_url($this->getResolvedSRC($sImageURL, true));
+        $sImageURL = esc_url(( string ) $this->getResolvedSRC($sImageURL, true));
         return "<div " . $this->getAttributes(array( 'id' => "image_preview_container_{$aField[ 'input_id' ]}", 'class' => 'image_preview ' . $this->getElement($aPreviewAttributes, 'class', ''), 'style' => $this->getAOrB($sImageURL, '', "display: none; ") . $this->getElement($aPreviewAttributes, 'style', ''), ) + $aPreviewAttributes) . ">" . "<img src='{$sImageURL}' " . "id='image_preview_{$aField[ 'input_id' ]}' " . "/>" . "</div>";
     }
     protected function _getUploaderButtonScript($sInputID, $abRepeatable, $bExternalSource, array $aButtonAttributes)

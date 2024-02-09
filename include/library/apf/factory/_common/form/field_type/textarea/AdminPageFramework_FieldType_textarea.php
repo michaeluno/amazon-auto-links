@@ -1,9 +1,9 @@
 <?php
 /*
- * Admin Page Framework v3.9.1b05 by Michael Uno
+ * Admin Page Framework v3.9.2b01 by Michael Uno
  * Compiled with Admin Page Framework Compiler <https://github.com/michaeluno/amazon-auto-links-compiler>
  * <https://en.michaeluno.jp/amazon-auto-links>
- * Copyright (c) 2013-2022, Michael Uno; Licensed under MIT <https://opensource.org/licenses/MIT>
+ * Copyright (c) 2013-2023, Michael Uno; Licensed under MIT <https://opensource.org/licenses/MIT>
  */
 
 class AmazonAutoLinks_AdminPageFramework_FieldType_textarea extends AmazonAutoLinks_AdminPageFramework_FieldType {
@@ -35,12 +35,12 @@ class AmazonAutoLinks_AdminPageFramework_FieldType_textarea extends AmazonAutoLi
     }
     private function _getEditor($aField)
     {
-        unset($aField[ 'attributes' ][ 'value' ]);
+        $this->unsetDimensionalArrayElement($aField, array( 'attributes', 'value' ));
         if (empty($aField[ 'rich' ]) || ! $this->isTinyMCESupported()) {
-            return "<textarea " . $this->getAttributes($aField[ 'attributes' ]) . " >" . esc_textarea($aField[ 'value' ]) . "</textarea>";
+            return "<textarea " . $this->getAttributes($aField[ 'attributes' ]) . " >" . esc_textarea(( string ) $aField[ 'value' ]) . "</textarea>";
         }
         ob_start();
-        wp_editor($aField[ 'value' ], $aField[ 'attributes' ][ 'id' ], $this->uniteArrays(( array ) $aField[ 'rich' ], array( 'wpautop' => true, 'media_buttons' => true, 'textarea_name' => $aField[ 'attributes' ][ 'name' ], 'textarea_rows' => $aField[ 'attributes' ][ 'rows' ], 'tabindex' => '', 'tabfocus_elements' => ':prev,:next', 'editor_css' => '', 'editor_class' => $aField[ 'attributes' ][ 'class' ], 'teeny' => false, 'dfw' => false, 'tinymce' => true, 'quicktags' => true )));
+        wp_editor(( string ) $aField[ 'value' ], $aField[ 'attributes' ][ 'id' ], $this->uniteArrays(( array ) $aField[ 'rich' ], array( 'wpautop' => true, 'media_buttons' => true, 'textarea_name' => $aField[ 'attributes' ][ 'name' ], 'textarea_rows' => $aField[ 'attributes' ][ 'rows' ], 'tabindex' => '', 'tabfocus_elements' => ':prev,:next', 'editor_css' => '', 'editor_class' => $aField[ 'attributes' ][ 'class' ], 'teeny' => false, 'dfw' => false, 'tinymce' => true, 'quicktags' => true )));
         $_sContent = ob_get_contents();
         ob_end_clean();
         return $_sContent . "<input type='hidden' class='amazon-auto-links-textarea-data-input' data-tinymce-textarea='" . esc_attr($aField[ 'attributes' ][ 'id' ]) . "' />";

@@ -86,7 +86,7 @@ class AmazonAutoLinks_Unit_PAAPISearch_Event_Filter_ProductsFormatter extends Am
                     $_sTitle        = $this->oUnitOutput->getTitleSanitized( $_sTitleRaw, $this->oUnitOutput->oUnitOption->get( 'title_length' ) );
                     $_sThumbnailURL = $this->___getThumbnailURL( $_aItem );
                     $_sProductURL   = $this->oUnitOutput->getProductLinkURLFormatted(
-                        rawurldecode( $_aItem[ 'DetailPageURL' ] ),
+                        rawurldecode( ( string ) $_aItem[ 'DetailPageURL' ] ),
                         $_aItem[ 'ASIN' ],
                         $this->oUnitOutput->oUnitOption->get( 'language' ),
                         $this->oUnitOutput->oUnitOption->get( 'preferred_currency' )

@@ -132,10 +132,11 @@ class AmazonAutoLinks_ContextualUnit_SearchKeyword extends AmazonAutoLinks_Plugi
         private function ___getSearchKeywordsByCriteria( array $aCriteria ) {
             $_aKeywords  = array();
             foreach( $this->___getFormattedCriteriaArray( $aCriteria ) as $_sCriteriaKey ) {
+                if ( ! method_exists( $this, '___getSearchKeywordsByType_' . $_sCriteriaKey ) ) {
+                    continue;
+                }
                 $_aKeywords = array_merge(
-                    call_user_func(
-                        array( $this, '___getSearchKeywordsByType_' . $_sCriteriaKey )
-                    ),
+                    call_user_func(  array( $this, '___getSearchKeywordsByType_' . $_sCriteriaKey ) ),
                     $_aKeywords
                 );
             }

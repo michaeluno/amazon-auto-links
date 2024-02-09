@@ -6,5 +6,6 @@
  * Copyright (c) 2013-2023, Michael Uno; Licensed under MIT <https://opensource.org/licenses/MIT>
  */
 
-abstract class AmazonAutoLinks_AdminPageFramework_PageMetaBox_View extends AmazonAutoLinks_AdminPageFramework_PageMetaBox_Model
-{}
+class AmazonAutoLinks_AdminPageFramework_Model___Exception_FormValidation extends Exception {
+    public $aReturn = array();
+}

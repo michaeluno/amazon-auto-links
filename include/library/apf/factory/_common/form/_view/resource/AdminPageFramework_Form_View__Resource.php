@@ -1,9 +1,9 @@
 <?php
 /*
- * Admin Page Framework v3.9.1b05 by Michael Uno
+ * Admin Page Framework v3.9.2b01 by Michael Uno
  * Compiled with Admin Page Framework Compiler <https://github.com/michaeluno/amazon-auto-links-compiler>
  * <https://en.michaeluno.jp/amazon-auto-links>
- * Copyright (c) 2013-2022, Michael Uno; Licensed under MIT <https://opensource.org/licenses/MIT>
+ * Copyright (c) 2013-2023, Michael Uno; Licensed under MIT <https://opensource.org/licenses/MIT>
  */
 
 class AmazonAutoLinks_AdminPageFramework_Form_View__Resource extends AmazonAutoLinks_AdminPageFramework_FrameworkUtility {
@@ -89,13 +89,15 @@ class AmazonAutoLinks_AdminPageFramework_Form_View__Resource extends AmazonAutoL
     }
     private function ___getFormattedEnqueueScript($asEnqueue)
     {
-        static $_iCallCount = 1;
-        $_aEnqueueItem = $this->getAsArray($asEnqueue) + array( 'handle_id' => 'amazon-auto-links-script-form-' . $this->oForm->aArguments[ 'caller_id' ] . '_' . $_iCallCount, 'src' => null, 'dependencies' => null, 'version' => null, 'in_footer' => false, 'translation' => null, 'conditional' => null, 'translation_var' => null, );
+        static $_aCallCounts = array();
+        $_sClassName = $this->oForm->aArguments[ 'caller_id' ];
+        $_aCallCounts[ $_sClassName ] = isset($_aCallCounts[ $_sClassName ]) ? $_aCallCounts[ $_sClassName ] : 1;
+        $_aEnqueueItem = $this->getAsArray($asEnqueue) + array( 'handle_id' => 'amazon-auto-links-script-form-' . $this->oForm->aArguments[ 'caller_id' ] . '_' . $_aCallCounts[ $_sClassName ], 'src' => null, 'dependencies' => null, 'version' => null, 'in_footer' => false, 'translation' => null, 'conditional' => null, 'translation_var' => null, );
         if (is_string($asEnqueue)) {
             $_aEnqueueItem[ 'src' ] = $asEnqueue;
         }
         $_aEnqueueItem[ 'src' ] = $this->___getSRCFormatted($_aEnqueueItem);
-        $_iCallCount++;
+        $_aCallCounts[ $_sClassName ]++;
         return $_aEnqueueItem;
     }
     public function _replyToEnqueueStyles()
@@ -131,18 +133,20 @@ class AmazonAutoLinks_AdminPageFramework_Form_View__Resource extends AmazonAutoL
     }
     private function ___getFormattedEnqueueStyle($asEnqueue)
     {
-        static $_iCallCount = 1;
-        $_aEnqueueItem = $this->getAsArray($asEnqueue) + array( 'handle_id' => 'amazon-auto-links-style-form-' . $this->oForm->aArguments[ 'caller_id' ] . '_' . $_iCallCount, 'src' => null, 'dependencies' => null, 'version' => null, 'media' => null, 'conditional' => null, 'rtl' => null, 'suffix' => null, 'alt' => null, 'title' => null, );
+        static $_aCallCounts = array();
+        $_sClassName = $this->oForm->aArguments[ 'caller_id' ];
+        $_aCallCounts[ $_sClassName ] = isset($_aCallCounts[ $_sClassName ]) ? $_aCallCounts[ $_sClassName ] : 1;
+        $_aEnqueueItem = $this->getAsArray($asEnqueue) + array( 'handle_id' => 'amazon-auto-links-style-form-' . $_sClassName . '_' . $_aCallCounts[ $_sClassName ], 'src' => null, 'dependencies' => null, 'version' => null, 'media' => null, 'conditional' => null, 'rtl' => null, 'suffix' => null, 'alt' => null, 'title' => null, );
         if (is_string($asEnqueue)) {
             $_aEnqueueItem[ 'src' ] = $asEnqueue;
         }
         $_aEnqueueItem[ 'src' ] = $this->___getSRCFormatted($_aEnqueueItem);
-        $_iCallCount++;
+        $_aCallCounts[ $_sClassName ]++;
         return $_aEnqueueItem;
     }
     private function ___getSRCFormatted(array $aEnqueueItem)
     {
-        $_sSRCRaw = wp_normalize_path($aEnqueueItem[ 'src' ]);
+        $_sSRCRaw = wp_normalize_path(( string ) $aEnqueueItem[ 'src' ]);
         $_sSRC = $this->getResolvedSRC($_sSRCRaw);
         if (! $this->oForm->aArguments[ 'autoload_min_resource' ]) {
             return $_sSRC;

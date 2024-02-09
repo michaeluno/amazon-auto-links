@@ -240,13 +240,13 @@ class AmazonAutoLinks_Proxy_WebPageDumper_Admin_Section extends AmazonAutoLinks_
         }
         $_sList         = $_oToolOption->get( $this->sSectionID, 'list' );
         $_aItems        = explode( PHP_EOL, $_sList );
-        $_sRequired     = AmazonAutoLinks_Proxy_WebPageDumper_Loader::REQUIRED_VERSION;
+        $_sRequired     =  AmazonAutoLinks_Proxy_WebPageDumper_Loader::REQUIRED_VERSION;
         $_aInsufficient = array();
         foreach( $_aVersions as $_sURL => $_aVersion ) {
             if ( ! in_array( $_sURL, $_aItems, true ) ) {
                 continue;
             }
-            $_sVersion = $this->getElement( $_aVersion, 'version' );
+            $_sVersion = ( string ) $this->getElement( $_aVersion, 'version' );
             if ( version_compare( $_sVersion, $_sRequired, '>=' ) ) {
                 continue;
             }

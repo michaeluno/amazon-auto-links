@@ -1,9 +1,9 @@
 <?php
 /*
- * Admin Page Framework v3.9.1b05 by Michael Uno
+ * Admin Page Framework v3.9.2b01 by Michael Uno
  * Compiled with Admin Page Framework Compiler <https://github.com/michaeluno/amazon-auto-links-compiler>
  * <https://en.michaeluno.jp/amazon-auto-links>
- * Copyright (c) 2013-2022, Michael Uno; Licensed under MIT <https://opensource.org/licenses/MIT>
+ * Copyright (c) 2013-2023, Michael Uno; Licensed under MIT <https://opensource.org/licenses/MIT>
  */
 
 abstract class AmazonAutoLinks_AdminPageFramework_Controller_Page extends AmazonAutoLinks_AdminPageFramework_View_Page {
@@ -13,15 +13,15 @@ abstract class AmazonAutoLinks_AdminPageFramework_Controller_Page extends Amazon
             $this->addInPageTab($asTab);
         }
     }
+    private $___sTargetPageSlug;
     public function addInPageTab($asInPageTab)
     {
-        static $__sTargetPageSlug;
         if (! is_array($asInPageTab)) {
-            $__sTargetPageSlug = is_string($asInPageTab) ? $asInPageTab : $__sTargetPageSlug;
+            $this->___sTargetPageSlug = is_string($asInPageTab) ? $asInPageTab : $this->___sTargetPageSlug;
             return;
         }
-        $aInPageTab = $asInPageTab + array( 'page_slug' => $__sTargetPageSlug, 'tab_slug' => null, 'order' => null, );
-        $__sTargetPageSlug = $aInPageTab[ 'page_slug' ];
+        $aInPageTab = $asInPageTab + array( 'page_slug' => $this->___sTargetPageSlug, 'tab_slug' => null, 'order' => null, );
+        $this->___sTargetPageSlug = $aInPageTab[ 'page_slug' ];
         if (! isset($aInPageTab[ 'page_slug' ], $aInPageTab[ 'tab_slug' ])) {
             return;
         }
