@@ -1,1 +1,0 @@
-- Fixed a bug that empty product caches were created, started since v5.2.2.

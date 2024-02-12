@@ -1,2 +1,0 @@
-- Fixed a bug that legacy option values of PA-API keys were referred if existed even after saving empty PA-API keys.
-- Fixed non-sanitized user inputs.

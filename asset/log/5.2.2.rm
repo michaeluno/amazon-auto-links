@@ -1,2 +1,0 @@
-- Optimized the method of renewing caches in the background.
-- Fixed a bug that caused a PHP notice of an undefined index occurred in the background.

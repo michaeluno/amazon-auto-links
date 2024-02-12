@@ -1,5 +1,10 @@
 # Change Log
 
+#### 5.3.10 - 01/29/2024
+- Fixed a bug that thumbnail URLs were not converted for Geo-targeting.
+- Fixed a bug that an error message, "The Associate tag is not set," appeared when it is already set.
+- Fixed a bug that locales were not listed for Search units, started from v5.3.9
+
 #### 5.3.9 - 01/12/2024
 - Fixed a bug that Associate tags of cart buttons were not converted for Geo-targeting
 - Fixed unnecessary background routines

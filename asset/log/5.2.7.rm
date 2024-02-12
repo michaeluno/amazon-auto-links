@@ -1,1 +1,0 @@
-- Fixed a bug that the `aal_filter_output_products` filter hook introduced in v5.2.6 did not function.

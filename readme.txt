@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       6.4.2
 Requires MySQL:     5.0.3
-Stable tag:         5.3.10
+Stable tag:         5.4.0
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -405,10 +405,12 @@ You can check if your keys are valid with [Scratchpad](https://webservices.amazo
 
 == Changelog ==
 
-#### 5.3.10 - 01/29/2024
-- Fixed a bug that thumbnail URLs were not converted for Geo-targeting.
-- Fixed a bug that an error message, "The Associate tag is not set," appeared when it is already set.
-- Fixed a bug that locales were not listed for Search units, started from v5.3.9
+#### 5.4. - 02/12/2024
+- Added the `Site Title`, `URL Query`, and `Post Meta` option items for the `Criteria` Contextual unit option.
+- Added the `Concatenate` Contextual unit option.
+- Added the locales of Belgium and Egypt.
+- Refined the internal workings of AJAX unit loading by using REST API instead of `admin-ajax.php`.
+- Fixed some incompatibility issues with PHP 8.0, 8.1, and 8.2.
 
 #### Old Log
 For old change logs, see [here](https://github.com/michaeluno/amazon-auto-links/blob/master/changelog.md).
