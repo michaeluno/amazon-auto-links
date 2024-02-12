@@ -349,7 +349,7 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_FileSystem {
      *
      * @param  mixed   $mValue
      * @return boolean
-     * @since  5.3.11
+     * @since  5.4.0
      */
     static public function isNotEmptyStringNorNull( $mValue ) {
         return null !== $mValue && '' !== $mValue;
