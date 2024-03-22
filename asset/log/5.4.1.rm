@@ -1,0 +1,1 @@
+- Fixed an issue with PHP servers without the `mb_string` extension, started in v5.4.0.

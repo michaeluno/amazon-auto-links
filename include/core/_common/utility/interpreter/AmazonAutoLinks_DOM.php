@@ -157,15 +157,14 @@ class AmazonAutoLinks_DOM extends AmazonAutoLinks_WPUtility {
             // $sHTML = htmlspecialchars_decode( utf8_decode( htmlentities( $sHTML, ENT_COMPAT, $this->sCharEncoding, false ) ) );
 
             // [5.3.8] An alternative to htmlspecialchars_decode( utf8_decode( htmlentities( $sHTML, ENT_COMPAT, $this->sCharEncoding, false ) ) )
-            // @test
             // @todo It is not certain what flags should be used ENT_NOQUOTES or ENT_COMPAT
-            $sHTML = mb_encode_numericentity(
-                htmlspecialchars_decode(
-                    htmlentities( $sHTML, ENT_NOQUOTES, $this->sCharEncoding, false ),
-                    ENT_NOQUOTES
-                ), array( 0x80, 0x10FFFF, 0, ~0 ),
-                $this->sCharEncoding
+            $sHTML = htmlspecialchars_decode(
+                htmlentities( $sHTML, ENT_NOQUOTES, $this->sCharEncoding, false ),
+                ENT_NOQUOTES
             );
+            $sHTML = function_exists( 'mb_encode_numericentity' )
+                ? mb_encode_numericentity( $sHTML, array( 0x80, 0x10FFFF, 0, ~0 ), $this->sCharEncoding )
+                : $sHTML;
 
             if ( $this->bLoadHTMLFix ) {
                 $oDOM->loadHTML( 
