@@ -6,7 +6,7 @@ Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       6.4.2
 Requires MySQL:     5.0.3
-Stable tag:         5.4.0
+Stable tag:         5.4.1
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -405,12 +405,8 @@ You can check if your keys are valid with [Scratchpad](https://webservices.amazo
 
 == Changelog ==
 
-#### 5.4. - 02/12/2024
-- Added the `Site Title`, `URL Query`, and `Post Meta` option items for the `Criteria` Contextual unit option.
-- Added the `Concatenate` Contextual unit option.
-- Added the locales of Belgium and Egypt.
-- Refined the internal workings of AJAX unit loading by using REST API instead of `admin-ajax.php`.
-- Fixed some incompatibility issues with PHP 8.0, 8.1, and 8.2.
+#### 5.4.1 - 03/27/2024
+- Fixed an issue with PHP servers without the `mb_string` extension, started in v5.4.0.
 
 #### Old Log
 For old change logs, see [here](https://github.com/michaeluno/amazon-auto-links/blob/master/changelog.md).

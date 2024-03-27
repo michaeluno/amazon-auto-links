@@ -1,5 +1,12 @@
 # Change Log
 
+#### 5.4.0 - 02/12/2024
+- Added the `Site Title`, `URL Query`, and `Post Meta` option items for the `Criteria` Contextual unit option.
+- Added the `Concatenate` Contextual unit option.
+- Added the locales of Belgium and Egypt.
+- Refined the internal workings of AJAX unit loading by using REST API instead of `admin-ajax.php`.
+- Fixed some incompatibility issues with PHP 8.0, 8.1, and 8.2.
+
 #### 5.3.10 - 01/29/2024
 - Fixed a bug that thumbnail URLs were not converted for Geo-targeting.
 - Fixed a bug that an error message, "The Associate tag is not set," appeared when it is already set.
