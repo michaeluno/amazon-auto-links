@@ -1,7 +1,7 @@
 ﻿=== Auto Amazon Links - Amazon Associates Affiliate Plugin ===
 Contributors:       Michael Uno, miunosoft
 Donate link:        http://en.michaeluno.jp/donate
-Tags:               amazon, amazon affiliate, amazon associate, amazon affiliates, amazon associates, amazon ads, automation, ads, advertisement, affiliate, affiliates, marketing, monetization, monetize, revenues, revenue, income, widget, widgets
+Tags:               amazon, amazon associates, affiliate, advertisement, monetize
 Requires at least:  3.4
 Requires PHP:       5.2.4
 Tested up to:       6.4.2
