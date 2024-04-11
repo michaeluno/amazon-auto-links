@@ -345,23 +345,40 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
                  * @param  array $aCache
                  * @return false|string
                  * @since  5.1.0
+                 * @sicne  5.4.1 Using a try-catch block to avoid the PHP warning to be logged when calling `gzuncompress()`.
                  */
                 private function ___getCacheUncompressed( $aCache ) {
+
                     if ( ! function_exists( 'gzuncompress' ) ) {
                         return false;
                     }
-                    $_bsCompressed = @gzuncompress( $this->getElement( $aCache, array( 'data', 'body' ), '' ) );    // returns string|false
+
+                    // Use a try-catch block to avoid the PHP warning to be logged when calling `@gzuncompress()`.
+                    Try {
+
+                        $_bsUncompressed = @gzuncompress( $this->getElement( $aCache, array( 'data', 'body' ), '' ) );    // returns string|false
+                        if ( false === $_bsUncompressed ) {
+                            throw new Exception( 'gzuncompress failed' );
+                        }
+
+                    } Catch ( Exception $_oException ) {
+
+                        return false;
+
+                    }
+
                     /**
                      * Remove the last PHP error caused by above gzuncompress().
                      * If gzuncompress() fails, it leaves a last error and affects the rendered outputs in the back-end adding the 'php-error' class attribute to the sidebar element.
                      * @see wp-admin/admin-header.php
+                     * @deprecated 5.4.2 as using Try-catch solves this
                      */
-                    if ( false === $_bsCompressed ) {
-                        if ( function_exists( 'error_clear_last' ) ) {
-                            error_clear_last();
-                        }
-                    }
-                    return $_bsCompressed;
+                    // if ( false === $_bsUncompressed ) {
+                    //     if ( function_exists( 'error_clear_last' ) ) {
+                    //         error_clear_last();
+                    //     }
+                    // }
+                    return $_bsUncompressed;
                 }
 
             /**
