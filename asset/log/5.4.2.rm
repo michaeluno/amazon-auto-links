@@ -1,1 +1,1 @@
-- Fixed the PHP warning, "gzuncompress(): data error"
+- Added a method to avoid the PHP warning, "gzuncompress(): data error"

@@ -1,5 +1,8 @@
 # Change Log
 
+#### 5.4.1 - 03/27/2024
+- Fixed an issue with PHP servers without the `mb_string` extension, started in v5.4.0.
+
 #### 5.4.0 - 02/12/2024
 - Added the `Site Title`, `URL Query`, and `Post Meta` option items for the `Criteria` Contextual unit option.
 - Added the `Concatenate` Contextual unit option.

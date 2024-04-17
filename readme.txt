@@ -4,9 +4,9 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               amazon, amazon associates, affiliate, advertisement, monetize
 Requires at least:  3.4
 Requires PHP:       5.2.4
-Tested up to:       6.4.2
+Tested up to:       6.5.2
 Requires MySQL:     5.0.3
-Stable tag:         5.4.1
+Stable tag:         5.4.2
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -405,8 +405,8 @@ You can check if your keys are valid with [Scratchpad](https://webservices.amazo
 
 == Changelog ==
 
-#### 5.4.1 - 03/27/2024
-- Fixed an issue with PHP servers without the `mb_string` extension, started in v5.4.0.
+#### 5.4.2 - 04/17/2024
+- Added a method to avoid the PHP warning, "gzuncompress(): data error"
 
 #### Old Log
 For old change logs, see [here](https://github.com/michaeluno/amazon-auto-links/blob/master/changelog.md).
