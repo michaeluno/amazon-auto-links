@@ -250,6 +250,11 @@ class AmazonAutoLinks_Unit_Category_Event_Filter_ProductsFetcher extends AmazonA
                 $_aLocaleCodes = AmazonAutoLinks_Locales::getLocales();
                 $_aProducts    = array();
                 foreach( $aHTMLs as $_sURL => $_sHTML ) {
+                    // [5.4.3] There is a report of a bug saying "Uncaught ValueError: DOMDocument::loadHTML(): Argument #1 ($source) must not be empty",
+                    // caused by instantiating the below `AmazonAutoLinks_ScraperDOM_BestsellerProducts` class.
+                    if ( empty( $_sHTML ) ) {
+                        continue;
+                    }
                     $_sModifiedDate   = $this->getElement( $this->oUnitOutput->aModifiedDates, $_sURL );
                     $_oProductScraper = new AmazonAutoLinks_ScraperDOM_BestsellerProducts( $_sHTML );
                     $_aFoundProducts  = $_oProductScraper->get( $sAssociateID, $sSiteDomain );
