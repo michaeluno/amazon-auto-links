@@ -36,6 +36,8 @@ class AmazonAutoLinks_HelpAdminPage_Help_About extends AmazonAutoLinks_AdminPage
      */
     protected function _loadTab( $oAdminPage ) {
 
+        $_oOption = AmazonAutoLinks_Option::getInstance();
+
         $_aDisabled = array(
             'Current Time' => '', 'Admin Page Framework' => '', 'WordPress'     => '',
             'PHP'          => '', 'Server'               => '', 'PHP Error Log' => '',
@@ -105,19 +107,25 @@ class AmazonAutoLinks_HelpAdminPage_Help_About extends AmazonAutoLinks_AdminPage
                     'style' => 'height: 300px;',
                 ),
             ),
-            // array(
-            //     'title'     => __( 'Server Information', 'amazon-auto-links' ),
-            //     'field_id'  => 'server_information',
-            //     'type'      => 'system',
-            //     'data'      => array(
-            //           // 'Current Time' => '', 'Admin Page Framework' => '', 'WordPress' => '',
-            //           // 'PHP' => '', 'Server' => '', 'PHP Error Log' => '',
-            //           // 'MySQL' => '', 'MySQL Error Log' => '', 'Browser' => '',
-            //     ),
-            //     'attributes' => array(
-            //         'style' => 'height: 300px;',
-            //     ),
-            // ),
+            // 5.4.3 To know whether the PHP `mbstring` extension is enabled is very important
+             $_oOption->isDebug( 'back_end' )
+                ? array(
+                    'title'      => __( 'Server', 'amazon-auto-links' ),
+                    'field_id'   => 'server_info',
+                    'type'       => 'system',
+                    'data'      => array(
+                          'Current Time' => '', 'Admin Page Framework' => '', 'WordPress' => '',
+                          // 'PHP' => '',
+                          // 'Server' => '',
+                          // 'PHP Error Log' => '',
+                          // 'MySQL' => '', 'MySQL Error Log' => '',
+                          'Browser' => '',
+                    ),
+                    'attributes' => array(
+                        'style' => 'height: 300px;',
+                    )
+                )
+                : array(),
             array()
         );
     }

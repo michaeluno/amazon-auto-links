@@ -1,1 +1,2 @@
 - Fixed a PHP critical error saying "Uncaught ValueError: DOMDocument::loadHTML(): Argument #1 ($source) must not be empty."
+- Added the **Server** section in the **About** tab of the **Help** page. 
