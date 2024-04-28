@@ -1,3 +1,4 @@
+- Fixed a bug that the `sort` shortcode argument did not take effect when used with the `asin` argument.
 - Fixed a PHP critical error saying "Uncaught ValueError: DOMDocument::loadHTML(): Argument #1 ($source) must not be empty."
 - Added the **Server** section in the **About** tab of the **Help** page. 
 - Added the ability to automatically update the default options of Country and Associate ID when the options of the Associates section are updated. 

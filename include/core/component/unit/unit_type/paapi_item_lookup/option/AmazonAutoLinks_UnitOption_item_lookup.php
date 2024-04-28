@@ -103,6 +103,14 @@ class AmazonAutoLinks_UnitOption_item_lookup extends AmazonAutoLinks_UnitOption_
             $_aASINs = $this->getStringIntoArray( $aUnitOptions[ 'ASIN' ], ',' );
             $aUnitOptions[ 'ItemId' ]         = implode( ',', $_aASINs );
             $aUnitOptions[ '_allowed_ASINs' ] = $_aASINs;
+
+            // 5.4.3 the user might set the 'sort' argument
+            if ( isset( $aUnitOptions[ 'Sort' ] ) ) {
+                $aUnitOptions[ '_sort' ] = $aUnitOptions[ 'Sort' ];
+            }
+            if ( isset( $aUnitOptions[ 'sort' ] ) ) {
+                $aUnitOptions[ '_sort' ] = $aUnitOptions[ 'sort' ];
+            }
             return $aUnitOptions;
         }
         /**
