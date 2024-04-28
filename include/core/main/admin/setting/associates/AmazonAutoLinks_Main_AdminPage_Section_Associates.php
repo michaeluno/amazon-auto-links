@@ -322,6 +322,12 @@ class AmazonAutoLinks_Main_AdminPage_Section_Associates extends AmazonAutoLinks_
         }
 
     /**
+     * @var array
+     * @since 5.4.3
+     */
+    private $___aInputs = array();
+
+    /**
      * Validates the submitted form data.
      *
      * @param  array $aInputs
@@ -332,7 +338,32 @@ class AmazonAutoLinks_Main_AdminPage_Section_Associates extends AmazonAutoLinks_
      * @since  4.5.0
      */
     public function validate( $aInputs, $aOldInputs, $oAdminPage, $aSubmitInfo ) {
+
+        // When this code is reached, it means that the options of the Associates section was updated.
+        // Now, we need to update the Associates ID and Country values of the Default section, based on the passed values here.
+
+        $this->___aInputs = $aInputs;
+        add_filter( "validation_" . AmazonAutoLinks_Registry::$aAdminPages[ 'main' ], array( $this, 'replyToValidatePageSettings' ), 100, 4 );
+
         return $aInputs;
+
+    }
+
+    /**
+     * @param  array $aInputs
+     * @param  array $aOldInputs
+     * @param  AmazonAutoLinks_AdminPageFramework $oAdminPage
+     * @param  array $aSubmitInfo
+     * @return array
+     * @sicne  5.4.3
+     */
+    public function replyToValidatePageSettings( $aInputs, $aOldInputs, $oAdminPage, $aSubmitInfo ){
+
+        $_sLocale = $this->getElement( $this->___aInputs, 'locale' );
+        $this->setMultiDimensionalArray( $aInputs, array( 'unit_default', 'country' ), $_sLocale );
+        $this->setMultiDimensionalArray( $aInputs, array( 'unit_default', 'associate_id' ), $this->getElement( $this->___aInputs, array( $_sLocale,  'associate_id' ) ) );
+        return $aInputs;
+
     }
 
 }
