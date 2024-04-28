@@ -61,6 +61,7 @@ class AmazonAutoLinks_HelpAdminPage_Help_About extends AmazonAutoLinks_AdminPage
                 'attributes' => array(
                     'style' => 'height: 300px;',
                 ),
+                'if'         => $_oOption->isDebug( 'back_end' )
             ),
             array(
                 'title'      => __( 'General Options', 'amazon-auto-links' ),
@@ -70,6 +71,7 @@ class AmazonAutoLinks_HelpAdminPage_Help_About extends AmazonAutoLinks_AdminPage
                 'attributes' => array(
                     'style' => 'height: 300px;',
                 ),
+                'if'         => $_oOption->isDebug( 'back_end' )
             ),
             array(
                 'title'      => __( 'Tools Options', 'amazon-auto-links' ),
@@ -79,54 +81,56 @@ class AmazonAutoLinks_HelpAdminPage_Help_About extends AmazonAutoLinks_AdminPage
                 'attributes' => array(
                     'style' => 'height: 300px;',
                 ),
+                'if'         => $_oOption->isDebug( 'back_end' )
             ),
             array(
-                'title'     => __( 'Template Options', 'amazon-auto-links' ),
-                'field_id'  => 'template_options',
-                'type'      => 'system',
-                'data'      => $this->getAsArray( get_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'template' ], array() ) ) + $_aDisabled,
+                'title'      => __( 'Template Options', 'amazon-auto-links' ),
+                'field_id'   => 'template_options',
+                'type'       => 'system',
+                'data'       => $this->getAsArray( get_option( AmazonAutoLinks_Registry::$aOptionKeys[ 'template' ], array() ) ) + $_aDisabled,
                 'attributes' => array(
                     'style' => 'height: 300px;',
                 ),
+                'if'         => $_oOption->isDebug( 'back_end' )
             ),
             array(
-                'title'     => __( 'File Permissions', 'amazon-auto-links' ),
-                'field_id'  => 'file_permissions',
-                'type'      => 'system',
-                'data'      => AmazonAutoLinks_SiteInformation::getFilePermissions() + $_aDisabled,
+                'title'      => __( 'File Permissions', 'amazon-auto-links' ),
+                'field_id'   => 'file_permissions',
+                'type'       => 'system',
+                'data'       => AmazonAutoLinks_SiteInformation::getFilePermissions() + $_aDisabled,
                 'attributes' => array(
                     'style' => 'height: 300px;',
                 ),
+                'if'         => $_oOption->isDebug( 'back_end' )
             ),
             array(
-                'title'     => __( 'Paths', 'amazon-auto-links' ) . ' & ' . __( 'URLs', 'amazon-auto-links' ),
-                'field_id'  => 'paths',
-                'type'      => 'system',
-                'data'      => AmazonAutoLinks_SiteInformation::getPathsAndURLs() + $_aDisabled,
+                'title'      => __( 'Paths', 'amazon-auto-links' ) . ' & ' . __( 'URLs', 'amazon-auto-links' ),
+                'field_id'   => 'paths',
+                'type'       => 'system',
+                'data'       => AmazonAutoLinks_SiteInformation::getPathsAndURLs() + $_aDisabled,
                 'attributes' => array(
                     'style' => 'height: 300px;',
                 ),
+                'if'         => $_oOption->isDebug( 'back_end' )
             ),
             // 5.4.3 To know whether the PHP `mbstring` extension is enabled is very important
-             $_oOption->isDebug( 'back_end' )
-                ? array(
-                    'title'      => __( 'Server', 'amazon-auto-links' ),
-                    'field_id'   => 'server_info',
-                    'type'       => 'system',
-                    'data'      => array(
-                          'Current Time' => '', 'Admin Page Framework' => '', 'WordPress' => '',
-                          // 'PHP' => '',
-                          // 'Server' => '',
-                          // 'PHP Error Log' => '',
-                          // 'MySQL' => '', 'MySQL Error Log' => '',
-                          'Browser' => '',
-                    ),
-                    'attributes' => array(
-                        'style' => 'height: 300px;',
-                    )
-                )
-                : array(),
-            array()
+            array(
+                'title'      => __( 'Server', 'amazon-auto-links' ),
+                'field_id'   => 'server_info',
+                'type'       => 'system',
+                'data'      => array(
+                      'Current Time' => '', 'Admin Page Framework' => '', 'WordPress' => '',
+                      // 'PHP' => '',
+                      // 'Server' => '',
+                      // 'PHP Error Log' => '',
+                      // 'MySQL' => '', 'MySQL Error Log' => '',
+                      'Browser' => '',
+                ),
+                'attributes' => array(
+                    'style' => 'height: 300px;',
+                ),
+                'if'         => $_oOption->isDebug( 'back_end' )
+            ),
         );
     }
 
