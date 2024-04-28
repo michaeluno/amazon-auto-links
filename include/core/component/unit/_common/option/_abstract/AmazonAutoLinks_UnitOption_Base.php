@@ -231,14 +231,21 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
             }
 
             /// Use the value set in the Associates section.
-            $aUnitOptions[ 'associate_id' ]         = empty( $aUnitOptions[ 'associate_id' ] )
-                ? $oOption->getAssociateID( $aUnitOptions[ 'country' ] )
-                : $aUnitOptions[ 'associate_id' ];
-            $aUnitOptions[ 'language' ]             = $oOption->get( 'associates', $aUnitOptions[ 'country' ], 'paapi', 'language' );
-            $aUnitOptions[ 'preferred_currency' ]   = $oOption->get( 'associates', $aUnitOptions[ 'country' ], 'paapi', 'currency' );
+            $this->___setAssociatesFromAssociatesOptionSection( $aUnitOptions, $oOption );
             return $aUnitOptions;
 
         }
+            /**
+             * @since 5.4.3
+             */
+            private function ___setAssociatesFromAssociatesOptionSection( &$aUnitOptions, AmazonAutoLinks_Option $oOption ) {
+                $aUnitOptions[ 'associate_id' ]         = empty( $aUnitOptions[ 'associate_id' ] )
+                    ? $oOption->getAssociateID( $aUnitOptions[ 'country' ] )
+                    : $aUnitOptions[ 'associate_id' ];
+                $aUnitOptions[ 'language' ]             = $oOption->get( 'associates', $aUnitOptions[ 'country' ], 'paapi', 'language' );
+                $aUnitOptions[ 'preferred_currency' ]   = $oOption->get( 'associates', $aUnitOptions[ 'country' ], 'paapi', 'currency' );
+            }
+
         /**
          * Extracts the Output Formats unit option from the unit options array.
          * @since   4.0.4
