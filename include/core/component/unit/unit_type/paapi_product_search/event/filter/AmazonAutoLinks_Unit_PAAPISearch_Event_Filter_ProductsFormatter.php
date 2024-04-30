@@ -129,7 +129,7 @@ class AmazonAutoLinks_Unit_PAAPISearch_Event_Filter_ProductsFormatter extends Am
                 $_aProducts[]    = $_aProduct;
 
                 // Max Number of Items
-                if ( count( $_aProducts ) >= $_iCount ) {
+                if ( count( $_aProducts ) >= $_iCount && ! $this->oUnitOutput->oUnitOption->get( '_ignore_count' ) ) {
                     break;
                 }
 

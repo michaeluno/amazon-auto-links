@@ -360,6 +360,9 @@ class AmazonAutoLinks_Option extends AmazonAutoLinks_Option_Base {
             'pop_up_images'                 => true,
 
             '_no_rendering'                 => false,   // [5.2.6+] Skips applying template
+
+            '_ignore_count'                 => false,   // [5.4.3] When this is true, the count parameter will not take effect
+
         )
         
     );
