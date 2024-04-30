@@ -94,7 +94,7 @@ class AmazonAutoLinks_UnitOption_Base extends AmazonAutoLinks_WPUtility {
         $this->aUnitOptions    = $iUnitID
             ? $aUnitOptions 
                 + array( 'id' => $iUnitID ) 
-                + $this->getPostMeta( $iUnitID, '', $_oOption->get( 'unit_default' ) )
+                + array_filter( $this->getPostMeta( $iUnitID, '', $this->aDefault ), array( $this, 'isNotEmptyStringNorNull' ) )
             : $aUnitOptions;
         $this->aUnitOptions    = $this->_getUnitOptionsFormatted( $this->aUnitOptions, $this->aDefault, $this->aRawOptions );
 
