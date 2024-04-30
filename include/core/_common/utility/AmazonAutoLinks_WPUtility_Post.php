@@ -163,6 +163,8 @@ class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Path {
             $_mValue = get_post_meta( $iPostID, $sKey, true );
             remove_filter( 'default_post_metadata', array( __CLASS__, 'replyToSetMetaDefaultValue' ), 10 );
 
+            self::$___aDefaults_getPostMeta = array(); // 5.4.3 moved from `replyToSetMetaDefaultValue()`
+
             self::setObjectCache( __METHOD__ . $iPostID . '_' . $sKey, $_mValue );
             return $_mValue;
         }
@@ -213,7 +215,7 @@ class AmazonAutoLinks_WPUtility_Post extends AmazonAutoLinks_WPUtility_Path {
             if ( isset( self::$___aDefaults_getPostMeta[ $sMetaKey ] ) ) {
                 return self::$___aDefaults_getPostMeta[ $sMetaKey ];
             }
-            self::$___aDefaults_getPostMeta = array();
+            // self::$___aDefaults_getPostMeta = array(); // @deprecated 5.4.3 Causes a bug
             return $mValue;
         }
 
