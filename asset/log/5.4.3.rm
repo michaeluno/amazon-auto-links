@@ -3,3 +3,4 @@
 - Added the **Server** section in the **About** tab of the **Help** page. 
 - Added the ability to automatically update the default options of Country and Associate ID when the options of the Associates section are updated. 
 - Changed to show some About details only when the Debug Mode with back-end is enabled 
+- Fixed a PHP warning saying "Deprecated: preg_replace(): Passing null to parameter #3" in PHP 8.2

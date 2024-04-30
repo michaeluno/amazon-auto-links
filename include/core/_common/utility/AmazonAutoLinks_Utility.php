@@ -103,7 +103,7 @@ class AmazonAutoLinks_Utility extends AmazonAutoLinks_Utility_FileSystem {
      * @return string
      */
     static public function getSubDomainFromHostName( $sHost ) {
-        return preg_replace("/^.*?\.(\w+(\.\w+)+)$/i",'$1', $sHost );
+        return preg_replace("/^.*?\.(\w+(\.\w+)+)$/i",'$1', ( string ) $sHost );
     }
 
     /**
