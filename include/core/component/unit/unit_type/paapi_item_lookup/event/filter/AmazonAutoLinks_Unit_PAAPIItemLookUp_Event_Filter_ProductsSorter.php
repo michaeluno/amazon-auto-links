@@ -37,7 +37,8 @@ class AmazonAutoLinks_Unit_PAAPIItemLookUp_Event_Filter_ProductsSorter extends A
             $aProducts,
             $this->oUnitOutput->oUnitOption->get( array( '_sort' ), 'raw' )
         );
-        return $_oSorter->get();
+        // [5.4.3] The Item Look-up unit type needs to truncate the products array after applying the sort order
+        return array_slice( $_oSorter->get(), 0, $this->oUnitOutput->oUnitOption->get( 'count' ) ); // truncate items
     }
 
 }

@@ -45,6 +45,8 @@ class AmazonAutoLinks_UnitOption_item_lookup extends AmazonAutoLinks_UnitOption_
 
         'product_title'  => null,   // 4.0.0+ (string) Alter the product title.
 
+        '_ignore_count'  => true,   // [5.4.3] Fetch all the items anyway to apply the sort order later. Be careful that the URL unit type extends this unit type but URL units don't need this
+
     );
 
     /**

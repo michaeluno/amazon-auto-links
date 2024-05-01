@@ -22,7 +22,8 @@ class AmazonAutoLinks_UnitOption_scratchpad_payload extends AmazonAutoLinks_Unit
      * @remark      Accessed from the base class constructor to construct a default option array.
      */
     static public $aStructure_Default = array(
-        'payload'             => '',   // (string) payload json
+        'payload'            => '',   // (string) payload json
+        '_ignore_count'      => false,   // (boolean) [5.4.3] Override the value of the Item Look-up unit type
     );
 
 }

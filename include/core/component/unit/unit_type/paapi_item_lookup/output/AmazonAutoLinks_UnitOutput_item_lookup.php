@@ -40,7 +40,8 @@ class AmazonAutoLinks_UnitOutput_item_lookup extends AmazonAutoLinks_UnitOutput_
             $this->oOption->getPAAPIAccessKey( $_sLocale ),
             $this->oOption->getPAAPISecretKey( $_sLocale )
         );
-        return $_oPAAPIRequest->getPAAPIResponse( $iCount );
+
+        return $_oPAAPIRequest->getPAAPIResponse( $this->oUnitOption->get( '_ignore_count' ) ? -1 : $iCount );
 
     }
 

@@ -24,10 +24,11 @@ class AmazonAutoLinks_UnitOption_url extends AmazonAutoLinks_UnitOption_item_loo
      * @remark Accessed from the base class constructor to construct a default option array.
      */    
     static public $aStructure_Default = array(
-        'urls'               => '',  // (string|array)
-        'search_per_keyword' => false, // [4.4.0] Changed it to false to save API calls.
-        '_found_items'       => '',  // (string)
-        '_sort'              => 'raw',  // [3.2.1] (string)
+        'urls'               => '',      // (string|array)
+        'search_per_keyword' => false,   // [4.4.0] Changed it to false to save API calls.
+        '_found_items'       => '',      // (string)
+        '_sort'              => 'raw',   // [3.2.1] (string)
+        '_ignore_count'      => false,   // (boolean) [5.4.3] Override the value of the Item Look-up unit type
     );
     
     /**

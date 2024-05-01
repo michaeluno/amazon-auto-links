@@ -37,11 +37,9 @@ class AmazonAutoLinks_Unit_PAAPIItemLookUp_Event_Filter_ProductsFormatter extend
     /**
      * @param  array $aProducts
      * @return array
-     * @since  5.0.0
-     * @todo not implemented yet
+     * @since  5.4.3
      */
     // protected function _getItemsFormatted( $aProducts ) {
-    //     return $aProducts;
     // }
 
 }
