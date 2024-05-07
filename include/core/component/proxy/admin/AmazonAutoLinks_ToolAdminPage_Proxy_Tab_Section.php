@@ -73,7 +73,7 @@ class AmazonAutoLinks_ToolAdminPage_Proxy_Tab_Section extends AmazonAutoLinks_Ad
                 ),
                 'description'     => array(
                     __( 'Enter proxy addresses one per line. Accepts up to 10000 items at a maximum.', 'amazon-auto-links' ),
-                    sprintf( __( 'The format: <code>%1$s</code>', 'amazon-auto-links' ), '{scheme}://{username}:{password}@{ip address}:{port number}' ),
+                    sprintf( __( 'The format: <code>%1$s</code>', 'amazon-auto-links' ), '{scheme}://{user name}:{password}@{ip address or host name}:{port number}' ),
                 ),
             ),
             array(
