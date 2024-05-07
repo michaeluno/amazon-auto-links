@@ -76,7 +76,7 @@ class AmazonAutoLinks_Shadow {
      * @return  boolean
      */    
     static private function ___isBackground() {
-        $_sKey = 'aal_' . md5( get_class() );
+        $_sKey = 'aal_' . md5( __CLASS__ );
         return isset( $_COOKIE[ $_sKey ] );
     }
 
@@ -99,7 +99,7 @@ class AmazonAutoLinks_Shadow {
      */
     static private function ___handleCronTasks( array $aActionHooks ) {
 
-        $_sTransientName = 'aal_' . md5( get_class() );
+        $_sTransientName = 'aal_' . md5( __CLASS__ );
         $_aFlags         = AmazonAutoLinks_WPUtility::getTransientWithoutCacheAsArray( $_sTransientName ) + array(
             '_called'    => 0, '_locked'    => 0,
         );
@@ -127,7 +127,7 @@ class AmazonAutoLinks_Shadow {
         /**
          * Performs the plugin-specific scheduled tasks in the background.
          *
-         * This should only be called when the "aal_{ md5( get_class() ) }" transient is present.
+         * This should only be called when the "aal_{ md5( __CLASS__ ) }" transient is present.
          *
          * @since 1.0.0
          * @param array $aWPCronTasks
@@ -255,7 +255,7 @@ class AmazonAutoLinks_Shadow {
             }
 
             // Retrieve the plugin scheduled tasks array.
-            $_sTransientName = 'aal_' . md5( get_class() );
+            $_sTransientName = 'aal_' . md5( __CLASS__ );
             $_aFlags         = AmazonAutoLinks_WPUtility::getTransientWithoutCacheAsArray( $_sTransientName ) + array(
                 '_called' => 0,
             );
