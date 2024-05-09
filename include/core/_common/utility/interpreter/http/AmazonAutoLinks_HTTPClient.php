@@ -545,12 +545,16 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
                 curl_setopt( $_oCurl, CURLOPT_ENCODING, 'identity' );
 
                 if ( $_bProxySet ) {
-
+                    /**
+                     * @see AmazonAutoLinks_Proxy_Utility::getProxyArguments()
+                     */
                     $_aProxy = $_aProxy + array(
                         'host'      => null,
                         'port'      => null,
                         'username'  => null,
                         'password'  => null,
+                        'ip'        => null,
+                        'scheme'    => null,
                     );
                     curl_setopt( $_oCurl, CURLOPT_PROXYTYPE, CURLPROXY_HTTP );
                     curl_setopt( $_oCurl, CURLOPT_PROXY, $_aProxy[ 'host' ] );
@@ -562,7 +566,6 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
                         curl_setopt( $_oCurl, CURLOPT_PROXYAUTH, CURLAUTH_ANY );
                         curl_setopt( $_oCurl, CURLOPT_PROXYUSERPWD, $_aProxy[ 'username' ] . ':' . $_aProxy[ 'password' ] );
                     }
-
                 }
 
                 switch( $sMethod ) {
@@ -587,15 +590,18 @@ class AmazonAutoLinks_HTTPClient extends AmazonAutoLinks_PluginUtility {
                 curl_close( $_oCurl );
 
                 // Error handling
+                $_sHost = $_aProxy[ 'raw' ] !== $_aProxy[ 'host' ]
+                    ? $_aProxy[ 'raw' ] . ' (' . $_aProxy[ 'host' ] . ')'
+                    : $_aProxy[ 'raw' ];
                 if ( ! $_bsResponse ) {
                     $_aErrorData = array( 'url' => $sURL ) + $_aProxy;
                     $_sHTTPCode  = $_sHTTPCode ? $_sHTTPCode : 'CURL_CONNECTION_FAILURE';
-                    return new WP_Error( $_sHTTPCode, sprintf( 'The cURL connection failed with a proxy: %1$s.', $_aProxy[ 'raw' ] ), $_aErrorData );
+                    return new WP_Error( $_sHTTPCode, sprintf( 'The cURL connection failed with a proxy: %1$s.', $_sHost ), $_aErrorData );
                 }
                 $_iResponseCode   = ( integer ) $_sHTTPCode;
                 if ( $_iResponseCode >= 400 ) {
                     $_aErrorData = array( 'url' => $sURL ) + $_aProxy;
-                    return new WP_Error( $_iResponseCode, sprintf( 'The cURL response returned an error with a proxy: %1$s.', $_aProxy[ 'raw' ] ), $_aErrorData );
+                    return new WP_Error( $_iResponseCode, sprintf( 'The cURL response returned an error with a proxy: %1$s.', $_sHost ), $_aErrorData );
                 }
 
                 // Format the response to be compatible with wp_remote_get().

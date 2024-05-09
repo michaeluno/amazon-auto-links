@@ -37,20 +37,11 @@ class AmazonAutoLinks_Proxy_Event_Action_UnusableProxy extends AmazonAutoLinks_P
          * @since   4.2.0
          */
         public function replyToCaptureUnusableProxies( array $aArguments ) {
-
-            $_sHost  = $this->getElement( $aArguments,  array( 'proxy', 'host' ), '' );
-            $_sPort  = $this->getElement( $aArguments,  array( 'proxy', 'port' ),  '' );
-            $_sUser  = $this->getElement( $aArguments,  array( 'proxy', 'username' ),  '' );
-            $_sPass  = $this->getElement( $aArguments,  array( 'proxy', 'password' ),  '' );
-
-            // scheme://username:password@host:port
-            $_sUserPass = ( $_sUser && $_sPass ) ? $_sUser . ':' . $_sPass . '@': '';
-            $_sEntry    = $_sUserPass . $_sHost . ':' . $_sPort;
+            $_sEntry = $this->getElement( $aArguments,  array( 'proxy', 'raw' ),  '' );
             $this->___aUnusableProxies[ $_sEntry ] = $_sEntry;  // prevent duplicates by setting the value in key
             if ( 1 === count( $this->___aUnusableProxies ) ) {
                 add_action( 'shutdown', array( $this, 'replyToSaveUnusableProxies' ) );
             }
-
         }
 
     /**
@@ -68,8 +59,8 @@ class AmazonAutoLinks_Proxy_Event_Action_UnusableProxy extends AmazonAutoLinks_P
 
         foreach( $this->___aUnusableProxies as $_sProxy ) {
 
-            $_aUnusables[]  = $_sProxy;
-            $_biIndex       = array_search( $_sProxy, $_aProxies );
+            $_aUnusables[] = $_sProxy;
+            $_biIndex      = array_search( $_sProxy, $_aProxies );
             if ( false === $_biIndex ) {
                 continue;
             }

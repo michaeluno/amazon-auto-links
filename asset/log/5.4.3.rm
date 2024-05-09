@@ -6,3 +6,4 @@
 - Fixed a PHP warning saying "Deprecated: preg_replace(): Passing null to parameter #3" in PHP 8.2.
 - Changed the timing of applying the sort order of PA-API Item-Lookup units.
 - Added the ability to accept host names for HTTP proxies
+- Fixed the broken format in the unusable HTTP proxy list 

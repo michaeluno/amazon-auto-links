@@ -23,9 +23,12 @@ class AmazonAutoLinks_Proxy_Utility extends AmazonAutoLinks_PluginUtility {
     static public function getProxyArguments( $sProxy ) {
 
         $_aProxy = parse_url( $sProxy );
+        $_sIP    = self::getIPFromHostName( $_aProxy[ 'host' ] );
         return array(
+            'scheme'   => $_aProxy[ 'scheme' ],
+            'ip'       => $_sIP,
             'host'     => isset( $_aProxy[ 'scheme' ] )
-                ? $_aProxy[ 'scheme' ] . '://' . self::getIPFromHostName( $_aProxy[ 'host' ] ) // cURL does not accept domain names
+                ? $_aProxy[ 'scheme' ] . '://' . $_sIP  // cURL does not accept domain names
                 : $_aProxy[ 'host' ],
             'port'     => $_aProxy[ 'port' ],
             'username' => isset( $_aProxy[ 'user' ] ) ? $_aProxy[ 'user' ] : null,
