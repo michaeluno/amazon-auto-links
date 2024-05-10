@@ -34,14 +34,24 @@ class AmazonAutoLinks_Proxy_Event_Action_UnusableProxy extends AmazonAutoLinks_P
          *
          * The stored proxies will be saved at shutdown.
          * @param array $aArguments
-         * @since   4.2.0
+         * @since 4.2.0
          */
         public function replyToCaptureUnusableProxies( array $aArguments ) {
+
+            /**
+             * Allows the user to disable the updates of the list of unusable proxies.
+             * @since 5.4.3
+             */
+            if ( ! ( boolean ) apply_filters( 'aal_filter_http_request_proxy_update_unusable', true ) ) {
+                return;
+            }
+
             $_sEntry = $this->getElement( $aArguments,  array( 'proxy', 'raw' ),  '' );
             $this->___aUnusableProxies[ $_sEntry ] = $_sEntry;  // prevent duplicates by setting the value in key
             if ( 1 === count( $this->___aUnusableProxies ) ) {
                 add_action( 'shutdown', array( $this, 'replyToSaveUnusableProxies' ) );
             }
+
         }
 
     /**
