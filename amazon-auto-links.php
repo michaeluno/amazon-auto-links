@@ -5,7 +5,7 @@
  * Description:       Formerly, Amazon Auto Links. The plugin generates links of Amazon products just coming out today. You just pick categories and they appear even in JavaScript disabled browsers.
  * Author:            Michael Uno (miunosoft)
  * Author URI:        https://michaeluno.jp
- * Version:           5.4.3b04
+ * Version:           5.4.3b05
  * Text Domain:       amazon-auto-links
  * Domain Path:       /language
  * GitHub Plugin URI: https://github.com/michaeluno/amazon-auto-links
