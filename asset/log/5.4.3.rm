@@ -7,3 +7,4 @@
 - Changed the timing of applying the sort order of PA-API Item-Lookup units.
 - Added the ability to accept host names for HTTP proxies
 - Fixed the broken format in the unusable HTTP proxy list 
+- Fixed a bug that the `aal_filter_plugin_slug_oembed` filter hook did not function

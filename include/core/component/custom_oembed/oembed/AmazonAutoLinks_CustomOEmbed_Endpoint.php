@@ -45,12 +45,13 @@ class AmazonAutoLinks_CustomOEmbed_Endpoint {
         $_oOption           = AmazonAutoLinks_Option::getInstance();
         $_sNonce            = wp_create_nonce( 'aal_custom_oembed' );
         $_sProviderSiteURL  = $_oOption->get( array( 'custom_oembed', 'external_provider' ), '' );
+        $_sEmbedSlug        = ( string ) apply_filters( 'aal_filter_plugin_slug_oembed', 'amazon-auto-links' );
         $_sProviderEndpoint = filter_var( $_sProviderSiteURL, FILTER_VALIDATE_URL )
-            ? untrailingslashit( $_sProviderSiteURL ) . '/amazon-auto-links/embed/'
-            : untrailingslashit( site_url() ) . '/amazon-auto-links/embed/'; // using a custom non-existent url so when the plugin is deactivated, the iframe displays the 404 embedded page.
+            ? untrailingslashit( $_sProviderSiteURL ) . '/' . $_sEmbedSlug . '/embed/'
+            : untrailingslashit( site_url() ) . '/' . $_sEmbedSlug . '/embed/'; // using a custom non-existent url so when the plugin is deactivated, the iframe displays the 404 embedded page.
         $_sIFrameURL        = add_query_arg(
             array(
-                'embed'  => ( string ) apply_filters( 'aal_filter_plugin_slug_oembed', 'amazon-auto-links' ),    // usually the value is 1 for normal oEmbed posts but here we use a custom value to differentiate the request to process own custom outputs // [5.3.10] filter
+                'embed'  => $_sEmbedSlug,    // usually the value is 1 for normal oEmbed posts but here we use a custom value to differentiate the request to process own custom outputs // [5.3.10] filter
                 // 'url' => ... the key is reserved by the core for oEmbed discovery routine and when used, it causes recursive requests.
                 'uri'    => urlencode( AmazonAutoLinks_PluginUtility::getURLSanitized( $_GET[ 'url' ] ) ),  // sanitization done
             ),
