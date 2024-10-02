@@ -8,3 +8,4 @@
 - Added the ability to accept host names for HTTP proxies
 - Fixed the broken format in the unusable HTTP proxy list 
 - Fixed a bug that the `aal_filter_plugin_slug_oembed` filter hook did not function
+- Fixed raw strings to be sanitized

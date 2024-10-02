@@ -144,7 +144,7 @@ class AmazonAutoLinks_AdminPage_Tab_HTTPRequest extends AmazonAutoLinks_AdminPag
             );
             return "<div class='go-back'>"
                     . "<span class='dashicons dashicons-arrow-left-alt small-icon'></span>"
-                    . "<a href='{$_sProductsPageURL}'>"
+                    . "<a href='" . esc_url( $_sProductsPageURL ) . "'>"
                         . __( 'Go Back', 'amazon-auto-links' )
                     . "</a>"
                 . "</div>";
