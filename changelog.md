@@ -1,5 +1,8 @@
 # Change Log
 
+#### 5.4.2 - 04/17/2024
+- Added a method to avoid the PHP warning, "gzuncompress(): data error"
+
 #### 5.4.1 - 03/27/2024
 - Fixed an issue with PHP servers without the `mb_string` extension, started in v5.4.0.
 
