@@ -50,7 +50,12 @@ class AmazonAutoLinks_AdminPage_Tab_HTTPRequest extends AmazonAutoLinks_AdminPag
     }
         private function ___getCacheDataTable( array $aCache, $sNonce ) {
 
-            $_aData         = $aCache[ 'data' ];
+            $_aData         = $this->getElementAsArray( $aCache, array( 'data' ) ) + array(
+                'body' => '',
+                'headers' => array(),
+                'cookies' => array(),
+            );
+            $aCache[ 'name' ] = isset( $aCache[ 'name' ] ) ? $aCache[ 'name' ] : '';
 
             if ( is_wp_error( $_aData ) ) {
                 return $this->getTableOfArray(
